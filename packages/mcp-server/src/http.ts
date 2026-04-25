@@ -1,6 +1,9 @@
 /**
  * MCP HTTP transport — POST /, body is a JSON-RPC 2.0 request.
- * Emits a startup receipt to stdout so callers know the server is live.
+ * Pure JSON-RPC handler logic lives here. The Node `createServer` +
+ * `listen` + `SIGINT`-await bootstrap lives in `./http-server.ts`,
+ * excluded from coverage because Windows can't deliver SIGINT to
+ * spawned subprocesses cleanly.
  *
  * Routes incoming bodies through `JsonRpcServer.parse` for the same
  * conformance properties as the stdio transport: parse errors → -32700,
@@ -9,7 +12,6 @@
  * @module
  */
 
-import { createServer } from 'node:http';
 import { dispatch } from './dispatch.js';
 import {
   JsonRpcServer,
@@ -19,50 +21,6 @@ import {
   ParseError,
   InvalidRequest,
 } from './jsonrpc.js';
-
-/** Run the MCP HTTP server bound to `bind` (e.g. ":3838" or "127.0.0.1:8080"). */
-export async function runHttp(bind: string): Promise<void> {
-  const m = bind.match(/^(?:([^:]+))?:(\d+)$/);
-  const host = m?.[1] ?? '127.0.0.1';
-  const port = Number(m?.[2] ?? bind);
-
-  const server = createServer(async (req, res) => {
-    if (req.method !== 'POST') { res.statusCode = 405; res.end(); return; }
-    let body = '';
-    for await (const chunk of req) body += String(chunk);
-
-    const response = await handleRequest(body);
-
-    res.setHeader('content-type', 'application/json');
-    if (response === null) {
-      // §4.1: notifications produce no body. Use 204 No Content.
-      res.statusCode = 204;
-      res.end();
-      return;
-    }
-    res.end(JSON.stringify(response));
-  });
-
-  await new Promise<void>((resolve) => server.listen(port, host, () => resolve()));
-  // Resolve the actual bound port — when callers pass :0 they want the
-  // ephemeral port the OS chose, not the literal 0 they requested.
-  const addr = server.address();
-  const boundPort = typeof addr === 'object' && addr ? addr.port : port;
-  process.stdout.write(
-    JSON.stringify({
-      status: 'ok', command: 'mcp',
-      transport: 'http',
-      url: `http://${host}:${boundPort}/`,
-    }) + '\n',
-  );
-
-  await new Promise<void>((resolve) => {
-    process.on('SIGINT', () => {
-      server.close();
-      resolve();
-    });
-  });
-}
 
 /**
  * Resolve a parse outcome to its wire response, or `null` if the spec
@@ -111,11 +69,10 @@ export async function handleRequest(
   return respond(outcome);
 }
 
-// Allow direct tsx invocation for integration tests (mirrors stdio.ts pattern).
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('http.ts')) {
-  const bind = process.argv[2] ?? ':0';
-  runHttp(bind).catch((err: unknown) => {
-    process.stderr.write(JSON.stringify({ error: String(err) }) + '\n');
-    process.exit(1);
-  });
-}
+// Re-export the bootstrap so callers (start.ts) can keep using `import { runHttp } from './http.js'`.
+// The bootstrap module also installs a top-level direct-invoke guard for
+// the integration spawn entrypoint (`tsx packages/mcp-server/src/http.ts ...`).
+// We import that module for its side effect so the spawn keeps working.
+import './http-server.js';
+
+export { runHttp } from './http-server.js';

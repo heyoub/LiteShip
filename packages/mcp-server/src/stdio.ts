@@ -8,6 +8,7 @@
  */
 
 import { createInterface } from 'node:readline/promises';
+import type { Readable, Writable } from 'node:stream';
 import { handleRequest } from './http.js';
 
 /**
@@ -26,21 +27,28 @@ export async function processLine(line: string): Promise<string | null> {
   return JSON.stringify(response);
 }
 
-/** Run the MCP stdio loop until stdin closes. */
-export async function runStdio(): Promise<void> {
-  const rl = createInterface({ input: process.stdin });
+/**
+ * Run the MCP stdio loop until the input stream closes. Defaults to
+ * `process.stdin` / `process.stdout` so the production CLI bootstrap
+ * stays a one-liner (`runStdio()`); tests inject a pre-populated
+ * Readable + a sink Writable to exercise the full read-line-write loop
+ * without spawning a child process.
+ */
+export async function runStdio(
+  input: Readable = process.stdin,
+  output: Writable = process.stdout,
+): Promise<void> {
+  const rl = createInterface({ input });
   for await (const line of rl) {
     const wire = await processLine(line);
     if (wire !== null) {
-      process.stdout.write(wire + '\n');
+      output.write(wire + '\n');
     }
   }
 }
 
-// Allow direct tsx invocation for integration tests.
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('stdio.ts')) {
-  runStdio().catch((err: unknown) => {
-    process.stderr.write(JSON.stringify({ error: String(err) }) + '\n');
-    process.exit(1);
-  });
-}
+// Side-effect import installs the tsx direct-invoke guard so the integration
+// spawn (`tsx packages/mcp-server/src/stdio.ts`) keeps working. Bootstrap
+// lives in `./stdio-server.ts` because Windows-spawn coverage can't be
+// merged back through c8 ignore (source-mapped TS line numbers don't match).
+import './stdio-server.js';

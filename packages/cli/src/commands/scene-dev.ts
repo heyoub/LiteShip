@@ -33,12 +33,20 @@ async function loadStartDevServer(): Promise<StartDevServerFn> {
   return mod.startDevServer;
 }
 
-/** Execute the scene dev command. */
-export async function sceneDev(scenePath: string): Promise<number> {
+/**
+ * Boot the dev server, emit the receipt, and return the live handle.
+ * Split out from {@link sceneDev} so unit tests can exercise the
+ * input-validation + receipt-emission paths without entering the
+ * SIGINT-await loop (which can't be cleanly unit-tested on Windows).
+ */
+export async function sceneDevSetup(scenePath: string): Promise<
+  | { kind: 'ok'; handle: { url: string; close(): Promise<void> } }
+  | { kind: 'error'; exit: number }
+> {
   const abs = resolve(scenePath);
   if (!existsSync(abs)) {
     emitError('scene.dev', `scene not found: ${scenePath}`);
-    return 1;
+    return { kind: 'error', exit: 1 };
   }
   const startDevServer = await loadStartDevServer();
   const srv = await startDevServer(abs);
@@ -49,6 +57,14 @@ export async function sceneDev(scenePath: string): Promise<number> {
     url: srv.url,
     scenePath: abs,
   });
+  return { kind: 'ok', handle: srv };
+}
+
+/** Execute the scene dev command. */
+export async function sceneDev(scenePath: string): Promise<number> {
+  const setup = await sceneDevSetup(scenePath);
+  if (setup.kind === 'error') return setup.exit;
+  const srv = setup.handle;
   return new Promise<number>((resolvePromise) => {
     process.on('SIGINT', () => {
       srv.close().finally(() => resolvePromise(0));

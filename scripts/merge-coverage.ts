@@ -161,8 +161,18 @@ const runtimeFiles = fg
 const coveredFiles = new Set(coverageMap.files().map((file) => file.replace(/\\/g, '/')));
 const missingRuntimeFiles = runtimeFiles.filter((file) => !coveredFiles.has(file));
 
+// Build a set of explicitly-excluded files so we can skip them when walking
+// the coverage map below. fast-glob with `ignore: coverageExclude` drops them
+// from the runtime check; this set drops them from per-package totals and the
+// zero-coverage drift guard so excluded runtime modules (subprocess-only
+// bootstraps) don't poison the merged report.
+const runtimeFilesSet = new Set(runtimeFiles);
+
 for (const file of coverageMap.files()) {
   const normalized = file.replace(/\\/g, '/');
+  // Files matched by an exclude pattern shouldn't contribute to package totals
+  // or trip the zero-coverage drift guard.
+  if (!runtimeFilesSet.has(normalized)) continue;
   const relativePath = normalized.replace(/^.*?packages\//, 'packages/');
   const packageMatch = normalized.match(/packages\/([^/]+)\/src\//);
   const packageName = packageMatch?.[1] ?? 'other';

@@ -8,7 +8,7 @@
  * Mirrors the integration-level captureCli pattern so coverage data flows
  * into the parent test process (no subprocess hop).
  */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
 import { existsSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import {
@@ -87,6 +87,8 @@ describe('capsule commands', () => {
     if (existsSync(MANIFEST_PATH)) {
       savedManifest = readFileSync(MANIFEST_PATH, 'utf8');
     }
+  });
+  beforeEach(() => {
     mkdirSync(dirname(MANIFEST_PATH), { recursive: true });
     writeFileSync(MANIFEST_PATH, JSON.stringify(FIXTURE_MANIFEST), 'utf8');
   });
