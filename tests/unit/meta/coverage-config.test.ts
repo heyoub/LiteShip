@@ -22,7 +22,11 @@ const REPO_ROOT = resolve(import.meta.dirname, '..', '..', '..');
 
 describe('coverage config drift guard', () => {
   it('coverageExclude has expected size (no silent additions)', () => {
-    expect(coverageExclude).toHaveLength(11);
+    // 11 baseline + 6 subprocess-only bootstrap modules added in Task 19:
+    // bin.ts, http-server.ts, stdio-server.ts, processor.ts, processor-bootstrap.ts,
+    // dev/player.ts. Each replaces a c8 ignore that couldn't be honored across
+    // the tsx → v8 → istanbul source-map merge chain.
+    expect(coverageExclude).toHaveLength(17);
   });
 
   it('merge-coverage.ts PACKAGE_THRESHOLD_OVERRIDES are pinned', () => {
