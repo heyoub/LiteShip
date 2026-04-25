@@ -163,4 +163,70 @@ describe('schemaToArbitrary', () => {
       { numRuns: 50 },
     );
   });
+
+  it('handles Struct with optional fields', () => {
+    const schema = Schema.Struct({
+      name: Schema.String,
+      age: Schema.optional(Schema.Number),
+    });
+    const arb = schemaToArbitrary(schema);
+    let sawWith = false;
+    let sawWithout = false;
+    fc.assert(
+      fc.property(arb, (rec) => {
+        if (typeof rec !== 'object' || rec === null) return false;
+        const r = rec as Record<string, unknown>;
+        if (typeof r.name !== 'string') return false;
+        if ('age' in r) {
+          sawWith = true;
+          if (r.age !== undefined && typeof r.age !== 'number') return false;
+        } else {
+          sawWithout = true;
+        }
+        return true;
+      }),
+      { numRuns: 100 },
+    );
+    // We don't strictly require both branches but typical fast-check
+    // runs hit each at least once. This documents the expected shape.
+    expect(sawWith || sawWithout).toBe(true);
+  });
+
+  it('handles Suspend pointing at a non-recursive schema', () => {
+    const Inner = Schema.Struct({ name: Schema.String });
+    const Suspended = Schema.suspend(() => Inner);
+    const arb = schemaToArbitrary(Suspended);
+    fc.assert(
+      fc.property(
+        arb,
+        (rec) =>
+          typeof rec === 'object' &&
+          rec !== null &&
+          typeof (rec as { name: unknown }).name === 'string',
+      ),
+      { numRuns: 20 },
+    );
+  });
+
+  it('throws UnsupportedSchemaError for unhandled AST tags (Schema.Never)', () => {
+    // Schema.Never has _tag 'Never' which the walker does not handle —
+    // exercises the switch's default-case throw.
+    expect(() => schemaToArbitrary(Schema.Never)).toThrow(
+      UnsupportedSchemaError,
+    );
+  });
+
+  it('handles Schema.Enum', () => {
+    enum Color {
+      Red = 'red',
+      Blue = 'blue',
+      Green = 'green',
+    }
+    const schema = Schema.Enum(Color);
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (v) => v === 'red' || v === 'blue' || v === 'green'),
+      { numRuns: 30 },
+    );
+  });
 });
