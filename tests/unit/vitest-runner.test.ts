@@ -63,4 +63,28 @@ describe('VitestRunner', () => {
     expect(vitestRunnerCapsule.invariants.map((i) => i.name)).toContain('shell-disabled');
     expect(vitestRunnerCapsule.invariants.map((i) => i.name)).toContain('exit-code-propagated');
   });
+
+  it('vitestRunnerCapsule invariants validate canonical input/output and reject malformed', () => {
+    const inv = new Map(vitestRunnerCapsule.invariants.map((i) => [i.name, i]));
+    const goodInput = { testFiles: ['a.ts', 'b.ts'] };
+    const goodOutput = { exitCode: 0, testFiles: ['a.ts', 'b.ts'], stderrTail: '' };
+
+    // shell-disabled is structurally true.
+    expect(inv.get('shell-disabled')!.check(goodInput, goodOutput)).toBe(true);
+
+    // exit-code-propagated: number → ok, string → fail.
+    expect(inv.get('exit-code-propagated')!.check(goodInput, goodOutput)).toBe(true);
+    expect(
+      inv.get('exit-code-propagated')!.check(goodInput, { ...goodOutput, exitCode: 'oops' as unknown as number }),
+    ).toBe(false);
+
+    // test-files-echoed: same files in same order → ok; reordered → fail; trimmed → fail.
+    expect(inv.get('test-files-echoed')!.check(goodInput, goodOutput)).toBe(true);
+    expect(
+      inv.get('test-files-echoed')!.check(goodInput, { ...goodOutput, testFiles: ['b.ts', 'a.ts'] }),
+    ).toBe(false);
+    expect(
+      inv.get('test-files-echoed')!.check(goodInput, { ...goodOutput, testFiles: ['a.ts'] }),
+    ).toBe(false);
+  });
 });
