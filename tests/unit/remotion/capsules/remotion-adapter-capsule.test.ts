@@ -18,4 +18,27 @@ describe('remotionAdapterCapsule', () => {
   it('has at least one invariant', () => {
     expect(remotionAdapterCapsule.invariants.length).toBeGreaterThan(0);
   });
+
+  it('frame-count-matches-totalFrames invariant validates contiguous frame indices', () => {
+    const inv = remotionAdapterCapsule.invariants.find(
+      (i) => i.name === 'frame-count-matches-totalFrames',
+    );
+    expect(inv).toBeDefined();
+    // Contiguous: ok.
+    expect(
+      inv!.check(undefined, [
+        { frame: 0 }, { frame: 1 }, { frame: 2 },
+      ]),
+    ).toBe(true);
+    // Non-contiguous: fail.
+    expect(
+      inv!.check(undefined, [
+        { frame: 0 }, { frame: 2 }, { frame: 1 },
+      ]),
+    ).toBe(false);
+    // Non-array: fail.
+    expect(inv!.check(undefined, { not: 'an array' })).toBe(false);
+    // Empty array is trivially contiguous.
+    expect(inv!.check(undefined, [])).toBe(true);
+  });
 });

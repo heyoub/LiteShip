@@ -71,4 +71,27 @@ describe('SyncSystem (world-query path)', () => {
     });
     await Effect.runPromise(Effect.scoped(program));
   });
+
+  it('skips Beat entities whose Beat component is missing or has a non-numeric timeMs', async () => {
+    // Forces the L48-49 / L51 guard branches: a Beat-tagged entity with
+    // an unrelated component shape, plus another with a non-numeric
+    // timeMs, must not contaminate the time-line. The system should
+    // still produce the correct decay against the one valid beat.
+    const program = Effect.gen(function* () {
+      const world = yield* World.make();
+      yield* world.spawn({ SyncAnchor: { anchor: 'bed', mode: 'beat' } });
+      // Entity spawned via the queryable id 'Beat' but with no Beat field.
+      yield* world.spawn({ Beat: undefined as unknown as Record<string, unknown> });
+      // Entity with a Beat object whose timeMs is the wrong type.
+      yield* world.spawn({ Beat: { kind: 'beat', timeMs: 'oops', strength: 1 } });
+      // One real beat at t=500ms.
+      yield* world.spawn({ Beat: { kind: 'beat', timeMs: 500, strength: 1 } });
+      yield* world.addSystem(SyncSystem(30, 60));
+      yield* world.tick();
+      const fx = yield* world.query('SyncAnchor');
+      const intensity = fx[0]?.components.get('_intensity');
+      expect(intensity as number).toBeCloseTo(1, 2);
+    });
+    await Effect.runPromise(Effect.scoped(program));
+  });
 });

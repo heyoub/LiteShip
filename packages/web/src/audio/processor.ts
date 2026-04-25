@@ -107,6 +107,8 @@ registerProcessor('av-sync-processor', AVSyncProcessor);
  * ```
  */
 export async function createAudioProcessor(context: AudioContext, bridge: AVBridge.Shape): Promise<AudioProcessor> {
+  // reason: AudioWorkletProcessor + AudioWorkletNode only exist inside an AudioWorklet realm; jsdom can't load them, so this factory has no in-process test path. Exercised live by the browser stream-stress E2E.
+  /* c8 ignore start */
   const blob = new Blob([PROCESSOR_SOURCE], { type: 'application/javascript' });
   const url = URL.createObjectURL(blob);
 
@@ -144,3 +146,4 @@ export async function createAudioProcessor(context: AudioContext, bridge: AVBrid
     },
   };
 }
+/* c8 ignore stop */

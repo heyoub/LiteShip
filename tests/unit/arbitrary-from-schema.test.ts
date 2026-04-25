@@ -229,4 +229,50 @@ describe('schemaToArbitrary', () => {
       { numRuns: 30 },
     );
   });
+
+  it('handles Schema.BigInt by producing bigint values', () => {
+    const arb = schemaToArbitrary(Schema.BigInt);
+    fc.assert(
+      fc.property(arb, (v) => typeof v === 'bigint'),
+      { numRuns: 20 },
+    );
+  });
+
+  it('handles Schema.Null', () => {
+    const arb = schemaToArbitrary(Schema.Null);
+    fc.assert(
+      fc.property(arb, (v) => v === null),
+      { numRuns: 5 },
+    );
+  });
+
+  it('handles Schema.Undefined', () => {
+    const arb = schemaToArbitrary(Schema.Undefined);
+    fc.assert(
+      fc.property(arb, (v) => v === undefined),
+      { numRuns: 5 },
+    );
+  });
+
+  it('handles Schema.Void', () => {
+    const arb = schemaToArbitrary(Schema.Void);
+    fc.assert(
+      fc.property(arb, (v) => v === undefined),
+      { numRuns: 5 },
+    );
+  });
+
+  it('handles a fixed Tuple', () => {
+    const schema = Schema.Tuple([Schema.String, Schema.Number]);
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (v) =>
+        Array.isArray(v) &&
+        v.length === 2 &&
+        typeof v[0] === 'string' &&
+        typeof v[1] === 'number'
+      ),
+      { numRuns: 20 },
+    );
+  });
 });

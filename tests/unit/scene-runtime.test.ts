@@ -192,4 +192,24 @@ describe('SceneRuntime', () => {
       await handle.release();
     }
   });
+
+  it('sceneRuntimeCapsule invariants accept canonical output and reject malformed shapes', () => {
+    const allCanonical = sceneRuntimeCapsule.invariants.find(
+      (i) => i.name === 'all-canonical-systems-registered',
+    );
+    const nonNeg = sceneRuntimeCapsule.invariants.find(
+      (i) => i.name === 'entity-spawn-count-non-negative',
+    );
+    expect(allCanonical).toBeDefined();
+    expect(nonNeg).toBeDefined();
+
+    expect(allCanonical!.check({}, { systemsRegistered: 6, entitySpawnCount: 4 })).toBe(true);
+    expect(allCanonical!.check({}, { systemsRegistered: 5, entitySpawnCount: 4 })).toBe(false);
+    expect(allCanonical!.check({}, {})).toBe(false);
+
+    expect(nonNeg!.check({}, { systemsRegistered: 6, entitySpawnCount: 0 })).toBe(true);
+    expect(nonNeg!.check({}, { systemsRegistered: 6, entitySpawnCount: 4 })).toBe(true);
+    expect(nonNeg!.check({}, { systemsRegistered: 6, entitySpawnCount: -1 })).toBe(false);
+    expect(nonNeg!.check({}, { systemsRegistered: 6 })).toBe(false);
+  });
 });

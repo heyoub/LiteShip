@@ -31,8 +31,7 @@ export async function runHttp(bind: string): Promise<void> {
     let body = '';
     for await (const chunk of req) body += String(chunk);
 
-    const outcome = JsonRpcServer.parse(body);
-    const response = await respond(outcome);
+    const response = await handleRequest(body);
 
     res.setHeader('content-type', 'application/json');
     if (response === null) {
@@ -68,8 +67,12 @@ export async function runHttp(bind: string): Promise<void> {
 /**
  * Resolve a parse outcome to its wire response, or `null` if the spec
  * requires no response (notification, or pure-notification batch).
+ *
+ * Exported so unit tests can exercise every branch without spinning up a
+ * real HTTP server (Windows can't deliver SIGINT to subprocess for the
+ * full integration path).
  */
-async function respond(
+export async function respond(
   outcome: ParseOutcome,
 ): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
   switch (outcome.kind) {
@@ -93,6 +96,19 @@ async function respond(
       return responses.length > 0 ? responses : null;
     }
   }
+}
+
+/**
+ * Pure wire handler — accepts a JSON-RPC body string, returns the response
+ * envelope (or null for notification-only batches). Drives the HTTP server's
+ * request path; extracted so unit tests cover every parse-outcome branch
+ * without spawning a server process.
+ */
+export async function handleRequest(
+  body: string,
+): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
+  const outcome = JsonRpcServer.parse(body);
+  return respond(outcome);
 }
 
 // Allow direct tsx invocation for integration tests (mirrors stdio.ts pattern).
