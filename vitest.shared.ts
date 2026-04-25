@@ -61,5 +61,4 @@ export const nodeTestInclude = [
   'tests/component/**/*.test.ts',
   'tests/regression/**/*.test.ts',
   'tests/generated/**/*.test.ts',
-  'tests/scratch/**/*.test.ts',
 ];
