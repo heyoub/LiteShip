@@ -207,6 +207,7 @@ export const jsonRpcServerCapsule = defineCapsule({
       message: 'well-formed messages without an id field must classify as notifications (§4.1)',
     },
   ],
+  run: (input: string): { kind: string } => _parse(input),
 });
 
 // ---------- Namespace surface (ADR-0001) ----------
