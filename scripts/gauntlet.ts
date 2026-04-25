@@ -150,8 +150,13 @@ async function main() {
     await run('bench:reality', 'pnpm run bench:reality');
     await run('package:smoke', 'pnpm run package:smoke');
 
-    // ── Phase 5: Node coverage + wait for browser + merge ──────────────
-    await run('coverage:node', 'pnpm run coverage:node');
+    // ── Phase 5: Node coverage (tracked) + wait for browser + merge ────
+    // coverage:node:tracked sets NODE_V8_COVERAGE so spawn-helper subprocesses
+    // emit raw v8 dumps into coverage/subprocess-raw. merge-subprocess-v8
+    // then converts via v8-to-istanbul and unions into coverage/node/coverage-final.json
+    // before merge-coverage.ts gates the merged report.
+    await run('coverage:wipe-subprocess', 'rimraf coverage/subprocess-raw');
+    await run('coverage:node:tracked', 'pnpm run coverage:node:tracked');
 
     console.log(`\n  [background] Waiting for browser coverage to finish...`);
     const browserWaitStart = Date.now();
@@ -166,6 +171,7 @@ async function main() {
       console.log(`  [background] Browser coverage was already done — zero wait!`);
     }
 
+    await run('merge-subprocess-v8', 'tsx scripts/merge-subprocess-v8.ts');
     await run('coverage:merge', 'tsx scripts/merge-coverage.ts');
 
     // ── Phase 6: Reports + gates ───────────────────────────────────────
