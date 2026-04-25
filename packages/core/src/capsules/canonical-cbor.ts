@@ -37,10 +37,13 @@ export const canonicalCborCapsule = defineCapsule({
         }
         const keys = Object.keys(input as Record<string, unknown>);
         if (keys.length < 2) return true;
-        const reversed: Record<string, unknown> = {};
-        for (const k of [...keys].reverse()) {
-          reversed[k] = (input as Record<string, unknown>)[k];
-        }
+        // Use Object.fromEntries to build the reversed copy so dangerous keys
+        // like '__proto__' become own properties (not prototype assignments).
+        // Mutating `reversed[k] = ...` would set the prototype for k === '__proto__'
+        // and silently produce a different object shape than the input had.
+        const reversed = Object.fromEntries(
+          [...keys].reverse().map((k) => [k, (input as Record<string, unknown>)[k]] as const),
+        );
         const reencoded = CanonicalCbor.encode(reversed);
         if (reencoded.length !== output.length) return false;
         for (let i = 0; i < output.length; i++) {
