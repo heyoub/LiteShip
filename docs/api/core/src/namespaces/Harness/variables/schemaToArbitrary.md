@@ -8,7 +8,7 @@
 
 > `const` **schemaToArbitrary**: \<`T`\>(`schema`) => `Arbitrary`\<`T`\> = `_schemaToArbitrary`
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:167](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L167)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:291](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L291)
 
 Convenience top-level export — most call sites use this directly.
 

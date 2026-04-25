@@ -8,7 +8,7 @@
 
 > `const` **ArbitraryFromSchema**: `object`
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:162](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L162)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:286](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L286)
 
 Public namespace for the arbitrary-from-schema walker.
 

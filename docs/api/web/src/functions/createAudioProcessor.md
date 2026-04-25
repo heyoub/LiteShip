@@ -8,7 +8,7 @@
 
 > **createAudioProcessor**(`context`, `bridge`): `Promise`\<[`AudioProcessor`](../interfaces/AudioProcessor.md)\>
 
-Defined in: [web/src/audio/processor.ts:109](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L109)
+Defined in: [web/src/audio/processor-bootstrap.ts:70](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor-bootstrap.ts#L70)
 
 Register the inline AV-sync worklet module against `context` and mint
 a connected [AudioProcessor](../interfaces/AudioProcessor.md). Resolves once the worklet module
@@ -33,12 +33,3 @@ Shared AV bridge the worklet will mutate 128 samples
 ## Returns
 
 `Promise`\<[`AudioProcessor`](../interfaces/AudioProcessor.md)\>
-
-## Example
-
-```ts
-const bridge = AVBridge.create();
-const proc = await createAudioProcessor(audioCtx, bridge);
-proc.node.connect(audioCtx.destination);
-proc.start();
-```

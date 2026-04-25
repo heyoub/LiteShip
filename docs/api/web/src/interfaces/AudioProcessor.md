@@ -6,7 +6,7 @@
 
 # Interface: AudioProcessor
 
-Defined in: [web/src/audio/processor.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L27)
+Defined in: [web/src/audio/processor.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L33)
 
 Host-side surface of the AV-sync AudioWorklet processor.
 
@@ -21,7 +21,7 @@ sample-accurate clock.
 
 > `readonly` **bridge**: `AVBridgeShape`
 
-Defined in: [web/src/audio/processor.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L31)
+Defined in: [web/src/audio/processor.ts:37](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L37)
 
 Shared AV bridge advanced 128 samples per worklet render quantum.
 
@@ -31,7 +31,7 @@ Shared AV bridge advanced 128 samples per worklet render quantum.
 
 > `readonly` **node**: `AudioWorkletNode`
 
-Defined in: [web/src/audio/processor.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L29)
+Defined in: [web/src/audio/processor.ts:35](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L35)
 
 The underlying `AudioWorkletNode`. Connect into the graph directly.
 
@@ -41,7 +41,7 @@ The underlying `AudioWorkletNode`. Connect into the graph directly.
 
 > **dispose**(): `void`
 
-Defined in: [web/src/audio/processor.ts:37](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L37)
+Defined in: [web/src/audio/processor.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L43)
 
 Stop, disconnect, and release the worklet node.
 
@@ -55,7 +55,7 @@ Stop, disconnect, and release the worklet node.
 
 > **start**(): `void`
 
-Defined in: [web/src/audio/processor.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L33)
+Defined in: [web/src/audio/processor.ts:39](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L39)
 
 Begin advancing the bridge's sample counter.
 
@@ -69,7 +69,7 @@ Begin advancing the bridge's sample counter.
 
 > **stop**(): `void`
 
-Defined in: [web/src/audio/processor.ts:35](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L35)
+Defined in: [web/src/audio/processor.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/audio/processor.ts#L41)
 
 Pause advancement without tearing down the node.
 

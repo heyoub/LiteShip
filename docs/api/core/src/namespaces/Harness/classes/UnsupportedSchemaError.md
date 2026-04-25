@@ -6,7 +6,7 @@
 
 # Class: UnsupportedSchemaError
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L27)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L29)
 
 Error thrown when an AST node has no supported arbitrary mapping.
 
@@ -20,7 +20,7 @@ Error thrown when an AST node has no supported arbitrary mapping.
 
 > **new UnsupportedSchemaError**(`nodeTag`, `hint?`): `UnsupportedSchemaError`
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L30)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L32)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [core/src/harness/arbitrary-from-schema.ts:30](https://github.com/Th
 
 > `readonly` **\_tag**: `"UnsupportedSchemaError"` = `'UnsupportedSchemaError'`
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L28)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L30)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [core/src/harness/arbitrary-from-schema.ts:28](https://github.com/Th
 
 > `readonly` **nodeTag**: `string`
 
-Defined in: [core/src/harness/arbitrary-from-schema.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L29)
+Defined in: [core/src/harness/arbitrary-from-schema.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/harness/arbitrary-from-schema.ts#L31)
