@@ -1,0 +1,31 @@
+/** @czap/mcp-server — thin MCP server over czap's capsule factory dispatch. */
+
+export { start } from './start.js';
+export type { StartOpts } from './start.js';
+export { listTools, dispatchToolCall, dispatch } from './dispatch.js';
+export type { McpToolCall, McpToolResult } from './dispatch.js';
+export { runStdio } from './stdio.js';
+export { runHttp } from './http.js';
+
+// JSON-RPC 2.0 kernel — reusable beyond MCP.
+export {
+  JsonRpcServer,
+  jsonRpcServerCapsule,
+  parse,
+  errorResponse,
+  successResponse,
+  ParseError,
+  InvalidRequest,
+  MethodNotFound,
+  InvalidParams,
+  InternalError,
+} from './jsonrpc.js';
+export type {
+  JsonRpcId,
+  JsonRpcRequest,
+  JsonRpcNotification,
+  JsonRpcResponse,
+  JsonRpcSuccess,
+  JsonRpcErrorResponse,
+  ParseOutcome,
+} from './jsonrpc.js';

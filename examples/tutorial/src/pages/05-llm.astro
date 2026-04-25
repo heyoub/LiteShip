@@ -1,0 +1,519 @@
+---
+/**
+ * Tutorial 05 -- LLM Streaming
+ *
+ * The client:llm directive streams tokens from a Large Language Model
+ * endpoint into the DOM. It builds on the same SSE transport as
+ * client:stream but adds LLM-specific features:
+ *
+ *   - Token-by-token append mode (streaming text as it arrives)
+ *   - Morph mode (structured HTML updates from the model)
+ *   - Tool call support (function calling with start/delta/end lifecycle)
+ *   - ABR quality tiers (adapt rendering complexity to device capability)
+ *
+ * In this tutorial you will:
+ *   1. Understand the client:llm directive and its data attributes
+ *   2. Learn the LLM SSE message protocol (text, tool-call-*, done, error)
+ *   3. See how ABR quality tiers gate rendering complexity
+ *   4. Handle LLM lifecycle events
+ *   5. Understand the relationship between LLM streaming and generative UI
+ */
+
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="LLM Streaming">
+
+  <!-- ============================================================
+       STEP 1: What is LLM Streaming?
+       ============================================================
+
+       LLM responses arrive as a stream of tokens, not a single
+       response. Rather than waiting for the full response and then
+       rendering it, czap streams tokens into the DOM as they arrive.
+
+       This is "generative UI" -- the UI is being generated in real
+       time by the model. czap treats this as an adaptive media
+       stream, similar to how video adapts quality to bandwidth.
+
+       The client:llm directive:
+         1. Opens an EventSource to the LLM endpoint
+         2. Parses incoming token chunks
+         3. Appends text to the DOM (or morphs structured HTML)
+         4. Respects the device's quality tier (ABR)
+         5. Dispatches lifecycle events for each phase
+  -->
+
+  <h1>05 -- LLM Streaming</h1>
+
+  <p>
+    The <code>client:llm</code> directive streams tokens from an LLM
+    endpoint into the DOM. It treats LLM output as adaptive media --
+    adjusting rendering complexity based on the device's capability tier.
+  </p>
+
+  <div class="note">
+    <strong>Key idea:</strong> czap's generative UI pipeline treats LLM
+    streaming the same way video streaming treats bandwidth. A powerful
+    device gets rich, interactive rendering. A constrained device gets
+    clean text. The content is the same; the presentation adapts.
+  </div>
+
+  <!-- ============================================================
+       STEP 2: The Markup
+
+       To enable LLM streaming on an element:
+
+       data-czap-llm-url="/api/chat"
+         The SSE endpoint that streams LLM tokens.
+
+       client:llm
+         The Astro client directive registered by @czap/astro.
+
+       Optional attributes:
+
+       data-czap-llm-mode="append" (default) or "morph"
+         - "append": tokens are appended as text nodes (streaming text)
+         - "morph": tokens are accumulated and set as innerHTML
+                    (for structured HTML output from the model)
+
+       data-czap-llm-target=".output"
+         CSS selector for the child element to stream into. If
+         omitted, tokens stream into the directive element itself.
+  -->
+
+  <h2>The Markup</h2>
+
+  <pre><code>&lt;!-- Append mode: tokens stream in as text, character by character --&gt;
+&lt;div
+  data-czap-llm-url="/api/chat"
+  data-czap-llm-mode="append"
+  client:llm
+&gt;
+  &lt;p class="placeholder"&gt;Thinking...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Morph mode: accumulated tokens become innerHTML (for HTML output) --&gt;
+&lt;div
+  data-czap-llm-url="/api/chat"
+  data-czap-llm-mode="morph"
+  data-czap-llm-target=".output"
+  client:llm
+&gt;
+  &lt;div class="output"&gt;Generating...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+  <!-- ============================================================
+       STEP 3: The LLM SSE Protocol
+
+       The server sends JSON messages over SSE, similar to
+       client:stream but with LLM-specific message types:
+
+       "text"
+         A chunk of text from the model. The directive appends it
+         (in append mode) or accumulates it (in morph mode).
+         Example: { "type": "text", "content": "Hello, " }
+
+       "tool-call-start"
+         The model is starting a tool/function call.
+         Example: { "type": "tool-call-start", "toolName": "search" }
+
+       "tool-call-delta"
+         Partial tool call arguments (streamed JSON).
+         Example: { "type": "tool-call-delta", "toolArgs": "{\"query\":" }
+
+       "tool-call-end"
+         Tool call is complete. The directive fires czap:llm-tool-end
+         with the parsed arguments.
+         Example: { "type": "tool-call-end" }
+
+       "done"
+         The model finished generating. Connection closes.
+         Example: { "type": "done" }
+
+       "error"
+         An error occurred. Connection closes.
+         Example: { "type": "error", "content": "Rate limit exceeded" }
+
+       The directive also handles plain text SSE messages (when the
+       data field is not valid JSON, it's treated as a text chunk).
+       This means it works with simple LLM proxies that just forward
+       raw token text.
+  -->
+
+  <h2>The LLM Protocol</h2>
+
+  <p>
+    Your LLM endpoint sends JSON messages over SSE. The directive
+    understands these message types:
+  </p>
+
+  <pre><code>// Server-side: stream LLM tokens (Node.js example)
+res.writeHead(200, {'{'}&br;
+  'Content-Type': 'text/event-stream',
+  'Cache-Control': 'no-cache',
+  'Connection': 'keep-alive',
+{'}'});
+
+// Stream text tokens as they arrive from the model
+for await (const token of llmStream) {'{'}&br;
+  res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+    type: 'text',
+    content: token
+  {'}'}){'}'}\\n\\n`);
+{'}'}
+
+// Signal completion
+res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+  type: 'done'
+{'}'}){'}'}\\n\\n`);
+res.end();</code></pre>
+
+  <h3>Tool Calls</h3>
+
+  <p>
+    When the model invokes a tool (function calling), the directive
+    buffers the arguments and fires lifecycle events:
+  </p>
+
+  <pre><code>// Server sends tool call lifecycle messages:
+data: {'{'}"type":"tool-call-start","toolName":"searchDocs"{'}'}
+
+// Arguments stream in chunks (partial JSON):
+data: {'{'}"type":"tool-call-delta","toolArgs":"{\"query\": \"czap bound"{'}'}
+data: {'{'}"type":"tool-call-delta","toolArgs":"aries\"}"{'}'}
+
+// Tool call complete -- directive parses accumulated JSON
+// and fires czap:llm-tool-end with { name, args }:
+data: {'{'}"type":"tool-call-end"{'}'}</code></pre>
+
+  <!-- ============================================================
+       STEP 4: ABR Quality Tiers
+
+       ABR = Adaptive Bitrate Rendering. The czap detect script
+       evaluates the device's capabilities and assigns a tier:
+
+         "static"      -- Very constrained device. No LLM content rendered.
+         "styled"      -- Plain text, minimal styling.
+         "reactive"    -- Styled text with transitions. Default for most devices.
+         "interactive" -- Full interactivity, animations, rich rendering.
+
+       The client:llm directive reads data-czap-tier from <html>
+       and gates rendering accordingly:
+
+         - In "static" tier: text from the LLM is NOT rendered at
+           all (the element stays in its skeleton/placeholder state).
+           This prevents overwhelming very constrained devices.
+
+         - In all other tiers: text is streamed normally.
+
+       Your CSS can further adapt based on the tier to control how
+       richly the streamed content is presented.
+  -->
+
+  <h2>ABR Quality Tiers</h2>
+
+  <p>
+    The directive reads <code>data-czap-tier</code> from <code>&lt;html&gt;</code>
+    (set by the detect script) to adapt rendering complexity:
+  </p>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <h3>static</h3>
+      <p>
+        LLM content is <strong>not rendered</strong>. The placeholder
+        stays visible. This protects very constrained devices (low
+        memory, few cores) from being overwhelmed by streaming DOM updates.
+      </p>
+    </div>
+    <div class="tier-card">
+      <h3>styled</h3>
+      <p>
+        Plain text output, minimal styling. No animations or transitions.
+        Content streams in but the presentation is deliberately simple.
+      </p>
+    </div>
+    <div class="tier-card">
+      <h3>reactive</h3>
+      <p>
+        Styled output with CSS transitions. The default tier for most
+        devices. Smooth token-by-token appearance.
+      </p>
+    </div>
+    <div class="tier-card">
+      <h3>interactive</h3>
+      <p>
+        Full rendering: animations, interactive elements, rich formatting.
+        For powerful devices with plenty of headroom.
+      </p>
+    </div>
+  </div>
+
+  <pre><code>/* Tier-aware CSS for LLM output containers: */
+[data-czap-tier="static"] .llm-output {'{'}&br;
+  /* Don't show streaming content on static-tier devices */
+  display: none;
+{'}'}
+
+[data-czap-tier="styled"] .llm-output {'{'}&br;
+  /* Simple text, no animations */
+  animation: none;
+{'}'}
+
+[data-czap-tier="reactive"] .llm-output {'{'}&br;
+  /* Smooth fade-in for each token batch */
+  animation: czap-fade 0.15s ease-out;
+{'}'}
+
+[data-czap-tier="interactive"] .llm-output {'{'}&br;
+  /* Rich rendering with typing cursor animation */
+  animation: czap-type 0.05s steps(1);
+{'}'}</code></pre>
+
+  <div class="note">
+    <strong>Adaptive Bitrate Rendering:</strong> Just as video streaming
+    adjusts quality to bandwidth, czap adjusts UI complexity to device
+    capability. The LLM generates the same content; the rendering pipeline
+    adapts the presentation. A flagship phone gets typing animations. A
+    budget device gets clean text. Both get the information.
+  </div>
+
+  <!-- ============================================================
+       STEP 5: Live Demo
+
+       This demo element has client:llm pointed at /api/chat.
+       Since there's no actual LLM server running in this tutorial,
+       it shows placeholder content. The lifecycle event listener
+       below updates the status text when events fire.
+  -->
+
+  <h2>Live Demo</h2>
+
+  <p>
+    The element below is wired to <code>/api/chat</code>. In a real app,
+    LLM tokens would stream in character by character. Here it shows
+    fallback content since no LLM endpoint is running.
+  </p>
+
+  <!-- --------------------------------------------------------
+       The LLM streaming container.
+
+       data-czap-llm-url: points to the LLM SSE endpoint.
+       data-czap-llm-mode: "append" streams text as text nodes;
+                           "morph" accumulates into innerHTML.
+       data-czap-llm-target: optional CSS selector for the
+                             child element to receive tokens.
+
+       When the directive hydrates, it:
+         1. Opens new EventSource("/api/chat")
+         2. Checks data-czap-tier (skips rendering in "static" tier)
+         3. On "text" chunks: appends text nodes (append mode)
+         4. On "tool-call-*": buffers args, dispatches events
+         5. On "done": fires czap:llm-done, closes connection
+  -------------------------------------------------------- -->
+  <div
+    class="llm-target"
+    id="llm-demo"
+    data-czap-llm-url="/api/chat"
+    data-czap-llm-mode="append"
+  >
+    <p class="llm-status">Waiting for LLM stream...</p>
+    <div class="llm-output">
+      <!-- In append mode, tokens appear here as text nodes -->
+      <span class="placeholder-text">
+        Connect a real LLM endpoint at <code>/api/chat</code> to see
+        tokens stream in here.
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STEP 6: Lifecycle Events
+
+       The directive dispatches custom events at each phase of the
+       LLM streaming lifecycle:
+
+       czap:llm-start       -- EventSource opened successfully
+       czap:llm-token       -- each text chunk arrived
+                               detail: { text, accumulated }
+       czap:llm-tool-start  -- model began a tool/function call
+                               detail: { name }
+       czap:llm-tool-end    -- tool call complete, args parsed
+                               detail: { name, args }
+       czap:llm-done        -- generation finished
+                               detail: { accumulated }
+       czap:llm-error       -- error or connection failure
+                               detail: { message | reason }
+
+       These events let you build UI around the streaming process:
+       show a spinner on start, update a token counter on each token,
+       render tool call results, show a "copy" button on done.
+  -->
+
+  <h2>Lifecycle Events</h2>
+
+  <pre><code>const el = document.querySelector('[data-czap-llm-url]');
+
+el.addEventListener('czap:llm-start', () =&gt; {'{'}&br;
+  console.log('LLM generation started');
+{'}'});
+
+el.addEventListener('czap:llm-token', (e) =&gt; {'{'}&br;
+  // e.detail.text -- the new token(s) in this chunk
+  // e.detail.accumulated -- all tokens received so far
+  console.log('Token:', e.detail.text);
+{'}'});
+
+el.addEventListener('czap:llm-tool-start', (e) =&gt; {'{'}&br;
+  console.log('Tool call started:', e.detail.name);
+{'}'});
+
+el.addEventListener('czap:llm-tool-end', (e) =&gt; {'{'}&br;
+  // e.detail.args is the parsed JSON from accumulated deltas
+  console.log('Tool result:', e.detail.name, e.detail.args);
+{'}'});
+
+el.addEventListener('czap:llm-done', (e) =&gt; {'{'}&br;
+  console.log('Complete. Full text:', e.detail.accumulated);
+{'}'});
+
+el.addEventListener('czap:llm-error', (e) =&gt; {'{'}&br;
+  console.log('Error:', e.detail.message ?? e.detail.reason);
+{'}'});</code></pre>
+
+  <!-- ============================================================
+       Demo script: listens for lifecycle events and updates
+       the status text in the demo element above.
+  -->
+
+  <script>
+    const demo = document.getElementById('llm-demo');
+    const status = demo?.querySelector('.llm-status');
+
+    demo?.addEventListener('czap:llm-start', () => {
+      if (status) status.textContent = 'LLM connected -- streaming tokens...';
+    });
+
+    demo?.addEventListener('czap:llm-done', () => {
+      if (status) status.textContent = 'Generation complete.';
+    });
+
+    demo?.addEventListener('czap:llm-error', () => {
+      if (status) status.textContent = 'LLM unavailable (no endpoint running for this demo).';
+    });
+  </script>
+
+  <!-- ============================================================
+       STEP 7: Generative UI Pipeline
+
+       The LLM directive is part of czap's broader "generative UI"
+       pipeline. The full picture:
+
+       1. LLM generates tokens (text or structured output)
+       2. client:llm streams them into the DOM
+       3. ABR quality tiers gate rendering complexity
+       4. Boundaries adapt layout based on device state
+       5. Themes style everything coherently
+       6. The compositor manages animation budgets
+
+       Each piece is independent but they compose naturally:
+         - An LLM response renders inside a boundary-aware container
+         - The ABR tier affects how rich the LLM output looks
+         - Theme tokens style the LLM output
+         - The compositor ensures streaming doesn't blow the frame budget
+  -->
+
+  <h2>The Bigger Picture: Generative UI</h2>
+
+  <p>
+    The LLM directive is one piece of czap's generative UI pipeline:
+  </p>
+
+  <ol>
+    <li><strong>LLM generates tokens</strong> -- text or structured output from the model</li>
+    <li><strong>client:llm streams them</strong> -- tokens appear in the DOM as they arrive</li>
+    <li><strong>ABR tiers gate rendering</strong> -- complexity adapts to device capability</li>
+    <li><strong>Boundaries adapt layout</strong> -- viewport/device signals control structure</li>
+    <li><strong>Themes style coherently</strong> -- light/dark, brand variants apply consistently</li>
+    <li><strong>The compositor manages budgets</strong> -- animation frames stay within budget</li>
+  </ol>
+
+  <p>
+    Together, these systems treat LLM output as adaptive media: the same
+    content, rendered at the quality level the device can sustain smoothly.
+  </p>
+
+  <h2>What You Learned</h2>
+
+  <ul>
+    <li><code>client:llm</code> streams LLM tokens into a DOM element via SSE.</li>
+    <li><code>data-czap-llm-url</code> points to the LLM streaming endpoint.</li>
+    <li>Append mode streams text as text nodes; morph mode accumulates HTML.</li>
+    <li>Tool calls have a start/delta/end lifecycle with buffered argument parsing.</li>
+    <li>ABR quality tiers adapt rendering -- <code>static</code> tier suppresses rendering entirely.</li>
+    <li>Lifecycle events (<code>czap:llm-*</code>) let you build UI around the streaming process.</li>
+    <li>The LLM directive composes with boundaries, themes, and the compositor.</li>
+  </ul>
+
+  <div class="note">
+    <strong>Congratulations!</strong> You have completed the czap tutorial.
+    You now understand the five core concepts: boundaries, tokens, themes,
+    server streaming, and LLM streaming. Each is independent, but they
+    compose into a coherent adaptive rendering pipeline.
+  </div>
+
+</Base>
+
+<style>
+  .llm-target {
+    padding: 1.5rem;
+    border: 2px dashed #4f46e5;
+    border-radius: 8px;
+    margin: 1rem 0 2rem;
+    min-height: 120px;
+    background: #fafafe;
+  }
+
+  .llm-status {
+    color: #4f46e5;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .llm-output {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .placeholder-text {
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .tier-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .tier-card h3 {
+    color: #4f46e5;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-card p {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+  }
+</style>

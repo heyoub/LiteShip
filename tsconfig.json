@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false
+  },
+  "exclude": ["tests", "node_modules", "examples", "scripts"],
+  "files": [],
+  "references": [
+    { "path": "./packages/_spine" },
+    { "path": "./packages/core" },
+    { "path": "./packages/quantizer" },
+    { "path": "./packages/compiler" },
+    { "path": "./packages/web" },
+    { "path": "./packages/detect" },
+    { "path": "./packages/edge" },
+    { "path": "./packages/worker" },
+    { "path": "./packages/vite" },
+    { "path": "./packages/astro" },
+    { "path": "./packages/remotion" },
+    { "path": "./packages/scene" },
+    { "path": "./packages/assets" },
+    { "path": "./packages/cli" },
+    { "path": "./packages/mcp-server" }
+  ]
+}

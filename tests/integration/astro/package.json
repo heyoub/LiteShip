@@ -1,0 +1,9 @@
+{
+  "name": "czap-astro-integration-test",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "astro": "^6.0.0",
+    "@czap/astro": "workspace:*"
+  }
+}

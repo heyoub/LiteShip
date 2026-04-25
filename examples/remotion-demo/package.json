@@ -1,0 +1,25 @@
+{
+  "name": "czap-remotion-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "tsx render.ts"
+  },
+  "dependencies": {
+    "@czap/core": "file:../../packages/core",
+    "@czap/quantizer": "file:../../packages/quantizer",
+    "@czap/remotion": "file:../../packages/remotion",
+    "effect": "4.0.0-beta.32",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/renderer": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/react": "^19.0.0"
+  }
+}

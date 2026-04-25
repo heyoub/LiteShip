@@ -1,0 +1,318 @@
+---
+/**
+ * Tutorial 02 -- Design Tokens
+ *
+ * Tokens are named design values (colors, spacing, radii, etc.) that
+ * vary across "axes" -- dimensions like theme, density, contrast, or
+ * motion preference. czap compiles tokens to CSS custom properties,
+ * so they participate in the cascade naturally.
+ *
+ * In this tutorial you will:
+ *   1. See how Token.make() creates a content-addressed token definition
+ *   2. Understand axes and how they control token resolution
+ *   3. Learn about the @token CSS block (compiled by @czap/vite)
+ *   4. See tokens rendered as CSS custom properties in a live demo
+ */
+
+import Base from '../layouts/Base.astro';
+import { gapSm, gapMd, gapLg } from '../tokens/spacing.tokens.js';
+---
+
+<Base title="Design Tokens">
+
+  <!-- ============================================================
+       STEP 1: What is a Token?
+       ============================================================
+
+       A token is a named design value with variants along axes.
+       Unlike simple CSS custom properties, tokens are:
+
+         - Content-addressed (change the definition, hash changes)
+         - Multi-axis (one token can vary by theme AND density)
+         - Resolvable anywhere (server, client, build time, tests)
+         - Compilable to multiple targets (CSS, GLSL, WGSL, ARIA)
+
+       The simplest token has one axis with two variants.
+  -->
+
+  <h1>02 -- Design Tokens</h1>
+
+  <p>
+    A <strong>token</strong> is a named design value that varies across
+    one or more axes. An axis is any dimension of variation: theme,
+    density, contrast, motion preference, or even a custom axis you define.
+  </p>
+
+  <div class="note">
+    <strong>Key idea:</strong> Tokens are not just CSS variables. They're
+    structured data that czap compiles <em>into</em> CSS variables (among
+    other targets). The token definition is the source of truth; the CSS
+    custom property is a compiled output.
+  </div>
+
+  <!-- ============================================================
+       STEP 2: Defining Tokens
+
+       Here's the TypeScript definition from spacing.tokens.ts.
+       Each token has:
+         - name:     CSS property name (becomes --gap-sm, etc.)
+         - category: semantic grouping (spacing, color, typography...)
+         - axes:     which dimensions this token varies along
+         - values:   a map of axis values to design values
+         - fallback: default when no axis matches
+  -->
+
+  <h2>Defining Tokens</h2>
+
+  <pre><code>import {'{'} Token {'}'} from '@czap/core';
+
+export const gapSm = Token.make({'{'}&br;
+  name: 'gap-sm',
+  category: 'spacing',
+  axes: ['density'] as const,
+  values: {'{'}&br;
+    default: '0.5rem',   // Standard spacing
+    compact: '0.25rem',  // Tighter for dense layouts
+  {'}'},
+  fallback: '0.5rem',
+{'}'});
+
+export const gapMd = Token.make({'{'}&br;
+  name: 'gap-md',
+  category: 'spacing',
+  axes: ['density'] as const,
+  values: {'{'}&br;
+    default: '1rem',
+    compact: '0.5rem',
+  {'}'},
+  fallback: '1rem',
+{'}'});
+
+export const gapLg = Token.make({'{'}&br;
+  name: 'gap-lg',
+  category: 'spacing',
+  axes: ['density'] as const,
+  values: {'{'}&br;
+    default: '2rem',
+    compact: '1rem',
+  {'}'},
+  fallback: '2rem',
+{'}'});</code></pre>
+
+  <!-- ============================================================
+       STEP 3: How Tokens Become CSS
+
+       The @czap/vite plugin transforms @token CSS blocks at build
+       time. When you write:
+
+         @token {
+           gap: var(--gap-md);
+         }
+
+       The Vite plugin resolves --gap-md against the token registry,
+       applies the current axis values, and emits the resolved CSS
+       custom property.
+
+       At runtime, the tokens land as standard CSS custom properties
+       on the element or :root. You use them like any other custom
+       property: var(--gap-md).
+  -->
+
+  <h2>Tokens as CSS Custom Properties</h2>
+
+  <p>
+    czap compiles each token to a CSS custom property. The property name
+    is derived from the token's <code>name</code> field, prefixed with
+    <code>--</code>:
+  </p>
+
+  <pre><code>/* After compilation, your CSS can reference tokens directly: */
+.card {'{'}&br;
+  padding: var(--gap-md);     /* 1rem in default density    */
+  gap: var(--gap-sm);         /* 0.5rem in default density  */
+  margin-bottom: var(--gap-lg); /* 2rem in default density  */
+{'}'}
+
+/* The @token CSS block (processed by @czap/vite) declares which
+   tokens a component uses. This enables tree-shaking and
+   ahead-of-time resolution: */
+
+@token {'{'}&br;
+  --gap-sm: spacing;
+  --gap-md: spacing;
+  --gap-lg: spacing;
+{'}'}</code></pre>
+
+  <div class="note">
+    <strong>Why @token blocks?</strong> They serve as explicit declarations
+    of token dependencies. The Vite plugin uses them to: (1) resolve tokens
+    at build time, (2) tree-shake unused tokens, and (3) generate
+    optimized CSS with only the tokens a component actually uses.
+  </div>
+
+  <!-- ============================================================
+       STEP 4: Live Demo
+
+       This demo shows the three spacing tokens applied to a set of
+       cards. The CSS custom properties are set inline here for
+       demonstration, but in a real app the @czap/vite plugin would
+       inject them automatically from your token definitions.
+
+       Try inspecting the elements in DevTools -- you'll see the
+       --gap-sm, --gap-md, --gap-lg custom properties.
+  -->
+
+  <h2>Live Demo</h2>
+
+  <p>
+    The cards below use the spacing tokens as CSS custom properties.
+    Inspect them in DevTools to see <code>--gap-sm</code>,
+    <code>--gap-md</code>, and <code>--gap-lg</code> in action.
+  </p>
+
+  <!-- We set the token values as inline custom properties here for
+       the tutorial. In production, the @czap/vite plugin resolves
+       them from your token definitions at build time. -->
+  <div
+    class="token-demo"
+    style={`--gap-sm: ${gapSm.fallback}; --gap-md: ${gapMd.fallback}; --gap-lg: ${gapLg.fallback};`}
+  >
+    <div class="token-card">
+      <h3>--gap-sm</h3>
+      <p>Padding uses <code>var(--gap-sm)</code></p>
+      <div class="swatch" style="padding: var(--gap-sm); background: #eef2ff;">
+        {String(gapSm.fallback)} (default density)
+      </div>
+    </div>
+
+    <div class="token-card">
+      <h3>--gap-md</h3>
+      <p>Padding uses <code>var(--gap-md)</code></p>
+      <div class="swatch" style="padding: var(--gap-md); background: #eef2ff;">
+        {String(gapMd.fallback)} (default density)
+      </div>
+    </div>
+
+    <div class="token-card">
+      <h3>--gap-lg</h3>
+      <p>Padding uses <code>var(--gap-lg)</code></p>
+      <div class="swatch" style="padding: var(--gap-lg); background: #eef2ff;">
+        {String(gapLg.fallback)} (default density)
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STEP 5: Content Addressing
+
+       Every token gets a unique content address (FNV-1a hash) based
+       on its name, category, axes, and values. If you change any
+       part of the definition, the hash changes, which means:
+
+         - CDN caches invalidate automatically
+         - Hot module replacement knows exactly what changed
+         - Diffing tools can detect token drift between branches
+  -->
+
+  <h2>Content Addressing</h2>
+
+  <p>
+    Each token has a content address -- an FNV-1a hash of its definition.
+    Here are the IDs for our spacing tokens:
+  </p>
+
+  <ul>
+    <li><code>gap-sm</code>: <code>{gapSm.id}</code></li>
+    <li><code>gap-md</code>: <code>{gapMd.id}</code></li>
+    <li><code>gap-lg</code>: <code>{gapLg.id}</code></li>
+  </ul>
+
+  <p>
+    Change a value and the hash changes. This makes cache invalidation
+    automatic -- no version bumps, no manual purging.
+  </p>
+
+  <!-- ============================================================
+       STEP 6: Multi-Axis Tokens
+
+       Tokens can vary along multiple axes simultaneously. A color
+       token might vary by both theme (light/dark) and contrast
+       (normal/high). The resolution algorithm sorts axes
+       alphabetically and builds a compound lookup key.
+  -->
+
+  <h2>Multi-Axis Tokens</h2>
+
+  <pre><code>// A token that varies by BOTH theme and contrast:
+const textColor = Token.make({'{'}&br;
+  name: 'text-primary',
+  category: 'color',
+  axes: ['theme', 'contrast'] as const,
+  values: {'{'}&br;
+    'light:normal': '#1a1a2e',
+    'light:high':   '#000000',
+    'dark:normal':  '#e0e0ff',
+    'dark:high':    '#ffffff',
+  {'}'},
+  fallback: '#1a1a2e',
+{'}'});</code></pre>
+
+  <p>
+    The axes are sorted alphabetically and joined with <code>:</code> to
+    form compound lookup keys. This means <code>contrast:normal</code> +
+    <code>theme:light</code> resolves to the key <code>"light:normal"</code>.
+  </p>
+
+  <!-- ============================================================
+       STEP 7: What's Next
+  -->
+
+  <h2>What You Learned</h2>
+
+  <ul>
+    <li><code>Token.make()</code> creates a content-addressed token definition.</li>
+    <li>Tokens vary across axes (theme, density, contrast, etc.).</li>
+    <li>czap compiles tokens to CSS custom properties via <code>@token</code> blocks.</li>
+    <li>Content addressing means automatic cache invalidation on change.</li>
+    <li>Multi-axis tokens use sorted, colon-joined compound keys.</li>
+  </ul>
+
+  <p>
+    <strong>Next:</strong> <a href="/03-themes">03 -- Theme Switching</a> --
+    group tokens into coherent themes with light/dark variants.
+  </p>
+
+</Base>
+
+<style>
+  .token-demo {
+    display: flex;
+    gap: var(--gap-md, 1rem);
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .token-card {
+    flex: 1;
+    min-width: 180px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .token-card h3 {
+    color: #4f46e5;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .swatch {
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: #4f46e5;
+    margin-top: 0.75rem;
+  }
+</style>

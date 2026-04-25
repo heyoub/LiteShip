@@ -1,0 +1,13 @@
+[**czap**](../../../../../README.md)
+
+***
+
+[czap](../../../../../README.md) / [edge/src](../../../README.md) / [ClientHints](../README.md) / Headers
+
+# Type Alias: Headers
+
+> **Headers** = [`ClientHintsHeaders`](../../../interfaces/ClientHintsHeaders.md)
+
+Defined in: [edge/src/client-hints.ts:337](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/client-hints.ts#L337)
+
+Alias for [ClientHintsHeaders](../../../interfaces/ClientHintsHeaders.md) — plain-object header bag shape.

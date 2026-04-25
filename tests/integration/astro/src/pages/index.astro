@@ -1,0 +1,19 @@
+---
+/**
+ * Minimal page to validate @czap/astro integration builds without errors.
+ * The detect script should be injected into <head> by the integration.
+ */
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>czap integration test</title>
+  </head>
+  <body>
+    <h1>czap integration test</h1>
+    <div data-czap-boundary='{"id":"test","input":"viewport.width","thresholds":[0,768,1280],"states":["compact","medium","full"]}'>
+      <p>Satellite boundary test element</p>
+    </div>
+  </body>
+</html>

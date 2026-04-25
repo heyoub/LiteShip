@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import { layout } from '../boundaries/layout.boundaries.ts';
+---
+
+<Base title="czap showcase -- worker compositor">
+  <header class="page-header">
+    <h1>Off-Thread Compositor</h1>
+    <p>
+      Boundary evaluation and composition run in a Web Worker via SPSC ring
+      buffer. The main thread stays free for input handling while the worker
+      resolves adaptive state at 60fps.
+    </p>
+  </header>
+
+  <section class="worker-demo">
+    <div
+      class="worker-container"
+      data-czap-boundary={JSON.stringify({
+        input: 'viewport.width',
+        at: [[0, 'mobile'], [768, 'tablet'], [1280, 'desktop']],
+        hysteresis: 40,
+      })}
+      client:worker
+    >
+      <div class="worker-panel">
+        <h2>Worker State</h2>
+        <div class="worker-status">
+          <div class="worker-status__row">
+            <span class="worker-status__label">Thread</span>
+            <span class="worker-status__value" data-czap-worker-thread>initializing</span>
+          </div>
+          <div class="worker-status__row">
+            <span class="worker-status__label">Boundary</span>
+            <span class="worker-status__value" data-czap-state>pending</span>
+          </div>
+          <div class="worker-status__row">
+            <span class="worker-status__label">Frame budget</span>
+            <span class="worker-status__value" data-czap-worker-budget>--</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="worker-viz">
+        <div class="worker-viz__bar" data-czap-worker-viz>
+          <div class="worker-viz__fill"></div>
+        </div>
+        <p class="worker-viz__caption">
+          Ring buffer utilization -- shows how much of the SPSC queue is in use
+          between the worker and main thread.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--czap-primary, #4f46e5);
+  }
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--czap-muted, #64748b);
+    max-width: 40rem;
+  }
+
+  .worker-demo {
+    margin: 2rem 0;
+  }
+
+  .worker-container {
+    border: 1px solid var(--czap-border, #e2e8f0);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 48rem) {
+    .worker-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .worker-panel h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--czap-primary, #4f46e5);
+    margin-bottom: 1rem;
+  }
+
+  .worker-status {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .worker-status__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--czap-border, #e2e8f0);
+  }
+
+  .worker-status__label {
+    font-size: 0.8125rem;
+    color: var(--czap-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .worker-status__value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--czap-text, #1e293b);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .worker-viz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .worker-viz__bar {
+    height: 2rem;
+    background: var(--czap-border, #e2e8f0);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .worker-viz__fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg,
+      var(--czap-secondary, #0d9488),
+      var(--czap-primary, #4f46e5)
+    );
+    border-radius: 0.5rem;
+    transition: width 0.1s ease-out;
+  }
+
+  .worker-viz__caption {
+    font-size: 0.8125rem;
+    color: var(--czap-muted, #64748b);
+    line-height: 1.4;
+  }
+</style>

@@ -1,0 +1,384 @@
+---
+/**
+ * Tutorial 04 -- Server Streaming
+ *
+ * The client:stream directive connects a DOM element to a Server-Sent
+ * Events (SSE) endpoint. When the server pushes messages, czap morphs
+ * the element's DOM -- preserving scroll position, focus, and form state.
+ *
+ * This is czap's alternative to full-page re-renders or complex
+ * WebSocket setups. The server sends structured JSON messages over SSE;
+ * the directive applies them as DOM patches.
+ *
+ * In this tutorial you will:
+ *   1. Understand the client:stream directive and its data attributes
+ *   2. Learn the SSE message protocol (patch, snapshot, signal, heartbeat)
+ *   3. See how DOM morphing preserves user state across updates
+ *   4. Learn about reconnection with exponential backoff
+ *   5. Handle stream lifecycle events (connected, morph, error)
+ */
+
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Server Streaming">
+
+  <!-- ============================================================
+       STEP 1: What is Server Streaming?
+       ============================================================
+
+       Traditional web apps re-render entire pages or use WebSockets
+       for real-time updates. czap takes a middle path:
+
+         1. Server sends SSE messages (simple HTTP, works everywhere)
+         2. Client receives structured JSON (type + data)
+         3. czap morphs the DOM (not innerHTML replace -- smart diff)
+         4. Scroll position, focus, and form state are preserved
+
+       This is particularly powerful for:
+         - Live dashboards
+         - Chat interfaces
+         - Collaborative editing
+         - Server-driven UI updates
+  -->
+
+  <h1>04 -- Server Streaming</h1>
+
+  <p>
+    The <code>client:stream</code> directive connects a DOM element to
+    a Server-Sent Events (SSE) endpoint. When the server pushes new
+    content, czap morphs the element's DOM while preserving scroll
+    position, focus, and form state.
+  </p>
+
+  <div class="note">
+    <strong>Key idea:</strong> SSE is simpler than WebSockets (plain HTTP,
+    automatic reconnection, works through proxies). czap adds smart DOM
+    morphing on top -- the server sends HTML patches, and the client applies
+    them without destroying user state.
+  </div>
+
+  <!-- ============================================================
+       STEP 2: The Markup
+
+       To enable streaming on an element, you need two things:
+
+       data-czap-stream-url="/api/feed"
+         The SSE endpoint URL. The directive opens an EventSource
+         to this URL when the element hydrates.
+
+       client:stream
+         The Astro client directive registered by @czap/astro.
+         It tells Astro to load the stream hydration script.
+
+       Optional attributes:
+
+       data-czap-stream-artifact="my-artifact"
+         Appended to the stream URL as a path segment. Useful when
+         one endpoint serves multiple artifacts.
+
+       data-czap-stream-morph="innerHTML" (default) or "outerHTML"
+         Controls whether patches replace the element's inner content
+         or the entire element including its wrapper.
+  -->
+
+  <h2>The Markup</h2>
+
+  <pre><code>&lt;div
+  data-czap-stream-url="/api/feed"
+  data-czap-stream-morph="innerHTML"
+  client:stream
+&gt;
+  &lt;p&gt;Loading...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+  <p>
+    That's it. The directive handles connection, parsing, morphing, and
+    reconnection automatically.
+  </p>
+
+  <!-- ============================================================
+       STEP 3: The SSE Message Protocol
+
+       The server sends JSON messages as SSE `data:` fields. Each
+       message has a `type` that tells the directive what to do:
+
+       "patch"
+         Replace the element's content with the HTML in `data`.
+         This is the most common message type.
+         Example: { "type": "patch", "data": "<p>Updated</p>" }
+
+       "snapshot"
+         Like patch, but wraps the HTML in a `{ html: "..." }` object.
+         Used for full-state snapshots (e.g., on reconnection).
+         Example: { "type": "snapshot", "data": { "html": "<div>...</div>" } }
+
+       "signal"
+         Dispatches a custom event (czap:signal) on the element.
+         Used for non-visual data (e.g., updating a counter, triggering
+         a boundary re-evaluation).
+         Example: { "type": "signal", "data": { "count": 42 } }
+
+       "heartbeat"
+         No-op. Keeps the connection alive through proxies/load balancers
+         that close idle connections.
+         Example: { "type": "heartbeat" }
+  -->
+
+  <h2>The SSE Protocol</h2>
+
+  <p>
+    Your server sends JSON messages over SSE. Each message has a
+    <code>type</code> field that tells the directive what to do:
+  </p>
+
+  <pre><code>// Server-side: send a patch (Node.js example)
+res.writeHead(200, {'{'}&br;
+  'Content-Type': 'text/event-stream',
+  'Cache-Control': 'no-cache',
+  'Connection': 'keep-alive',
+{'}'});
+
+// Send an HTML patch -- replaces element innerHTML
+res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+  type: 'patch',
+  data: '&lt;p&gt;Updated at ' + new Date().toISOString() + '&lt;/p&gt;'
+{'}'}){'}'}\\n\\n`);
+
+// Send a snapshot -- full-state replacement
+res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+  type: 'snapshot',
+  data: {'{'} html: '&lt;div&gt;Full state here&lt;/div&gt;' {'}'}
+{'}'}){'}'}\\n\\n`);
+
+// Send a signal -- non-visual data, fires czap:signal event
+res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+  type: 'signal',
+  data: {'{'} count: 42, status: 'active' {'}'}
+{'}'}){'}'}\\n\\n`);
+
+// Send a heartbeat -- keeps connection alive
+res.write(`data: ${'{'}&br;JSON.stringify({'{'}&br;
+  type: 'heartbeat'
+{'}'}){'}'}\\n\\n`);</code></pre>
+
+  <!-- ============================================================
+       STEP 4: Live Demo
+
+       This demo element has client:stream pointed at /api/feed.
+       Since there's no actual SSE server running in this tutorial,
+       it will show the initial content and dispatch a
+       czap:stream-disconnected event after the connection fails.
+
+       In a real app, your server would send patches and this
+       element's content would update in real time.
+  -->
+
+  <h2>Live Demo</h2>
+
+  <p>
+    The element below is wired to <code>/api/feed</code>. In a real app,
+    it would receive live patches. Here it shows the initial fallback
+    content (since no SSE server is running).
+  </p>
+
+  <!-- --------------------------------------------------------
+       The streaming container.
+
+       data-czap-stream-url: points to the SSE endpoint.
+       client:stream: activates the stream directive.
+
+       When the directive hydrates, it:
+         1. Opens new EventSource("/api/feed")
+         2. Listens for messages
+         3. On "patch" type: replaces innerHTML, preserving scroll/focus
+         4. On connection error: retries with exponential backoff
+            (1s, 2s, 4s, 8s, ... up to 30s, max 10 attempts)
+  -------------------------------------------------------- -->
+  <div
+    class="stream-target"
+    id="stream-demo"
+    data-czap-stream-url="/api/feed"
+  >
+    <!-- This initial content is what users see before the stream
+         connects (or if the connection fails). Always provide
+         meaningful fallback content. -->
+    <p class="stream-status">Waiting for server stream...</p>
+    <p>Connect a real SSE endpoint at <code>/api/feed</code> to see live updates.</p>
+  </div>
+
+  <!-- ============================================================
+       STEP 5: DOM Morphing Details
+
+       When a patch arrives, the directive:
+
+       1. Captures scroll positions of all scrollable descendants
+       2. Records which element has focus
+       3. Replaces innerHTML (or outerHTML) with the new HTML
+       4. Restores scroll positions on elements that survived the morph
+       5. Re-focuses the previously focused element (if still in DOM)
+       6. Dispatches czap:stream-morph event on the container
+
+       This means users typing in a form field inside the stream
+       container won't lose their cursor position. Lists with scroll
+       positions won't jump to the top. This is critical for
+       usability in real-time UIs.
+  -->
+
+  <h2>DOM Morphing Preserves State</h2>
+
+  <p>
+    When a patch arrives, czap does not just slam <code>innerHTML</code>.
+    It preserves user state:
+  </p>
+
+  <ol>
+    <li>Captures scroll positions of all scrollable descendants</li>
+    <li>Records which element currently has focus</li>
+    <li>Applies the HTML patch</li>
+    <li>Restores scroll positions on surviving elements</li>
+    <li>Re-focuses the previously focused element</li>
+    <li>Dispatches <code>czap:stream-morph</code> event</li>
+  </ol>
+
+  <div class="note">
+    <strong>Why this matters:</strong> In a chat UI, the user might be
+    scrolled up reading history while new messages arrive. Without scroll
+    preservation, every patch would jump them to the top. czap handles
+    this automatically.
+  </div>
+
+  <!-- ============================================================
+       STEP 6: Reconnection
+
+       The stream directive includes exponential backoff reconnection:
+
+         - Initial delay: 1 second
+         - Factor: 2x per attempt
+         - Jitter: +/- 25% (prevents thundering herd)
+         - Max delay: 30 seconds
+         - Max attempts: 10
+
+       After 10 failed attempts, it dispatches czap:stream-error
+       with reason "max-reconnect-attempts" and stops trying.
+
+       The directive also supports SSE lastEventId: if the server
+       includes an `id:` field in its messages, the directive sends
+       it back on reconnection so the server can resume from where
+       it left off.
+  -->
+
+  <h2>Automatic Reconnection</h2>
+
+  <pre><code>// Reconnection strategy (built into the directive):
+//   Attempt 1: ~1s    (1000ms +/- 25% jitter)
+//   Attempt 2: ~2s    (2000ms +/- 25% jitter)
+//   Attempt 3: ~4s    (4000ms +/- 25% jitter)
+//   ...
+//   Attempt 10: ~30s  (capped at maxDelay)
+//   After 10: gives up, fires czap:stream-error</code></pre>
+
+  <p>
+    The directive also tracks the SSE <code>lastEventId</code>. On
+    reconnection, it appends <code>?lastEventId=...</code> to the URL
+    so your server can resume from the last acknowledged message.
+  </p>
+
+  <!-- ============================================================
+       STEP 7: Lifecycle Events
+
+       The directive dispatches custom events on the container
+       element so you can react to stream lifecycle changes:
+
+       czap:stream-connected    -- EventSource opened successfully
+       czap:stream-morph        -- after a patch/snapshot is applied
+       czap:stream-disconnected -- connection closed (before retry)
+       czap:stream-error        -- max reconnection attempts exceeded
+       czap:signal              -- server sent a "signal" type message
+  -->
+
+  <h2>Lifecycle Events</h2>
+
+  <p>
+    Listen for these custom events on the stream container:
+  </p>
+
+  <pre><code>const el = document.querySelector('[data-czap-stream-url]');
+
+el.addEventListener('czap:stream-connected', () =&gt; {'{'}&br;
+  console.log('Stream connected');
+{'}'});
+
+el.addEventListener('czap:stream-morph', () =&gt; {'{'}&br;
+  console.log('DOM patched');
+{'}'});
+
+el.addEventListener('czap:stream-disconnected', () =&gt; {'{'}&br;
+  console.log('Disconnected, will retry...');
+{'}'});
+
+el.addEventListener('czap:stream-error', (e) =&gt; {'{'}&br;
+  console.log('Stream failed:', e.detail.reason);
+{'}'});
+
+el.addEventListener('czap:signal', (e) =&gt; {'{'}&br;
+  console.log('Signal received:', e.detail);
+{'}'});</code></pre>
+
+  <!-- ============================================================
+       STEP 8: Demo event listener
+
+       This script listens for stream lifecycle events and updates
+       the status text in the demo element.
+  -->
+
+  <script>
+    const demo = document.getElementById('stream-demo');
+    const status = demo?.querySelector('.stream-status');
+
+    demo?.addEventListener('czap:stream-connected', () => {
+      if (status) status.textContent = 'Stream connected -- receiving patches...';
+    });
+
+    demo?.addEventListener('czap:stream-disconnected', () => {
+      if (status) status.textContent = 'Disconnected. Reconnecting...';
+    });
+
+    demo?.addEventListener('czap:stream-error', () => {
+      if (status) status.textContent = 'Stream unavailable (no SSE server running for this demo).';
+    });
+  </script>
+
+  <h2>What You Learned</h2>
+
+  <ul>
+    <li><code>client:stream</code> connects an element to an SSE endpoint.</li>
+    <li><code>data-czap-stream-url</code> specifies the endpoint URL.</li>
+    <li>The server sends JSON messages: patch, snapshot, signal, heartbeat.</li>
+    <li>DOM morphing preserves scroll position, focus, and form state.</li>
+    <li>Exponential backoff reconnection with jitter handles network issues.</li>
+    <li>Lifecycle events let you react to connection state changes.</li>
+  </ul>
+
+  <p>
+    <strong>Next:</strong> <a href="/05-llm">05 -- LLM Streaming</a> --
+    stream LLM tokens into the DOM with adaptive quality tiers.
+  </p>
+
+</Base>
+
+<style>
+  .stream-target {
+    padding: 1.5rem;
+    border: 2px dashed #4f46e5;
+    border-radius: 8px;
+    margin: 1rem 0 2rem;
+    min-height: 100px;
+    background: #fafafe;
+  }
+
+  .stream-status {
+    color: #4f46e5;
+    font-weight: 600;
+  }
+</style>

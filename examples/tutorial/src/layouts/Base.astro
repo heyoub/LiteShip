@@ -1,0 +1,137 @@
+---
+/**
+ * Base layout -- minimal HTML shell shared by all tutorial pages.
+ *
+ * Provides:
+ *   - A <nav> linking to each tutorial step so you can navigate freely.
+ *   - A <slot /> where each page injects its content.
+ *   - Minimal global styles to keep the focus on czap concepts.
+ *
+ * The @czap/astro integration automatically injects its detect script
+ * into <head> (configured in astro.config.ts), so every page gets
+ * data-czap-tier, data-czap-scheme, and --czap-vw on the <html> element
+ * without any work here.
+ */
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | czap Tutorial</title>
+    <style>
+      /* ---------------------------------------------------------------
+         Global reset and base styles. Nothing czap-specific here --
+         just enough to make the tutorial readable.
+      --------------------------------------------------------------- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        color: #1a1a2e;
+        background: #fafafa;
+        padding: 0;
+      }
+
+      nav {
+        background: #1a1a2e;
+        padding: 1rem 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      nav a {
+        color: #e0e0ff;
+        text-decoration: none;
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: background 0.15s;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      nav .brand {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-right: 1rem;
+      }
+
+      main {
+        max-width: 52rem;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      pre {
+        background: #1a1a2e;
+        color: #e0e0ff;
+        padding: 1rem 1.25rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+      }
+
+      code {
+        font-family: 'SF Mono', 'Fira Code', monospace;
+      }
+
+      .note {
+        background: #eef2ff;
+        border-left: 4px solid #4f46e5;
+        padding: 1rem 1.25rem;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 1.5rem;
+        font-size: 0.925rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span class="brand">czap</span>
+      <a href="/01-boundary">01 Boundary</a>
+      <a href="/02-tokens">02 Tokens</a>
+      <a href="/03-themes">03 Themes</a>
+      <a href="/04-streaming">04 Streaming</a>
+      <a href="/05-llm">05 LLM</a>
+    </nav>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

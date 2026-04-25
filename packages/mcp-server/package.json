@@ -1,0 +1,22 @@
+{
+  "name": "@czap/mcp-server",
+  "version": "0.1.0",
+  "description": "Thin MCP server over czap's capsule factory dispatch",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "development": "./src/index.ts"
+    }
+  },
+  "files": ["dist", "src"],
+  "scripts": { "build": "tsc" },
+  "dependencies": {
+    "@czap/core": "workspace:*",
+    "@czap/cli": "workspace:*"
+  }
+}

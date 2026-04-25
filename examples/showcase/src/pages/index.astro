@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="czap showcase -- adaptive layout">
+  <section class="hero" data-czap="layout">
+    <h1 class="hero__title">Constraint-Based Adaptive Rendering</h1>
+    <p class="hero__subtitle">
+      Quantize continuous signals into discrete states.
+      Resize your browser to see boundaries in action.
+    </p>
+    <span class="hero__state-badge" data-czap-state></span>
+  </section>
+
+  <section class="cards" data-czap="layout">
+    <article class="card">
+      <h2>Boundaries</h2>
+      <p>Define quantization thresholds with hysteresis to prevent jitter at breakpoints.</p>
+    </article>
+    <article class="card">
+      <h2>Tokens</h2>
+      <p>Design tokens that vary across axes -- theme, density, contrast -- resolved at the edge.</p>
+    </article>
+    <article class="card">
+      <h2>Themes</h2>
+      <p>Coherent multi-variant token maps compiled to CSS custom properties.</p>
+    </article>
+    <article class="card">
+      <h2>Compiler</h2>
+      <p>Multi-target output: CSS, GLSL, WGSL, ARIA, AI, Tailwind from a single source of truth.</p>
+    </article>
+    <article class="card">
+      <h2>Streaming</h2>
+      <p>SSE-driven adaptive UI that morphs in real time as server events arrive.</p>
+    </article>
+    <article class="card">
+      <h2>LLM</h2>
+      <p>Generative UI pipeline treating LLM token streams as adaptive media.</p>
+    </article>
+  </section>
+</Base>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+
+  .hero__title {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--czap-primary, #4f46e5);
+  }
+
+  .hero__subtitle {
+    margin-top: 1rem;
+    color: var(--czap-muted, #64748b);
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .hero__state-badge {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--czap-primary, #4f46e5);
+    color: #ffffff;
+  }
+
+  /* ── Adaptive hero via @quantize ── */
+  @quantize layout {
+    mobile {
+      .hero__title { font-size: 1.75rem; }
+      .hero { padding: 2rem 1rem; }
+    }
+    tablet {
+      .hero__title { font-size: 2.5rem; }
+      .hero { padding: 3rem 1.5rem; }
+    }
+    desktop {
+      .hero__title { font-size: 3.5rem; }
+      .hero { padding: 5rem 2rem; }
+    }
+  }
+
+  /* ── Cards grid ── */
+  .cards {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+    border: 1px solid var(--czap-border, #e2e8f0);
+    border-radius: 0.75rem;
+    background: var(--czap-surface, #ffffff);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .card h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--czap-primary, #4f46e5);
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    color: var(--czap-muted, #64748b);
+    line-height: 1.5;
+  }
+
+  /* ── Adaptive cards grid via @quantize ── */
+  @quantize layout {
+    mobile {
+      .cards { grid-template-columns: 1fr; }
+    }
+    tablet {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    desktop {
+      .cards { grid-template-columns: repeat(3, 1fr); }
+    }
+  }
+</style>

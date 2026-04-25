@@ -1,0 +1,6 @@
+{
+  "name": "@czap/_spine",
+  "private": true,
+  "version": "0.1.0",
+  "types": "./index.d.ts"
+}

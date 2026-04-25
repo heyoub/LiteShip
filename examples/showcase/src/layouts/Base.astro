@@ -1,0 +1,152 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'czap showcase' } = Astro.props;
+---
+
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <style>
+      /* ── Token layer ── */
+      :root {
+        @token primary: var(--czap-primary, #4f46e5);
+        @token secondary: var(--czap-secondary, #0d9488);
+        @token surface: var(--czap-surface, #ffffff);
+        @token text: var(--czap-text, #1e293b);
+        @token muted: var(--czap-muted, #64748b);
+        @token border: var(--czap-border, #e2e8f0);
+      }
+
+      /* ── Theme layer ── */
+      @theme dark {
+        --czap-primary: #818cf8;
+        --czap-secondary: #2dd4bf;
+        --czap-surface: #0f172a;
+        --czap-text: #e2e8f0;
+        --czap-muted: #94a3b8;
+        --czap-border: #334155;
+      }
+
+      /* ── Reset + base ── */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+      }
+
+      body {
+        background: var(--czap-surface, #ffffff);
+        color: var(--czap-text, #1e293b);
+        min-height: 100dvh;
+      }
+
+      a {
+        color: var(--czap-primary, #4f46e5);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── Nav ── */
+      .czap-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--czap-border, #e2e8f0);
+        background: var(--czap-surface, #ffffff);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .czap-nav__brand {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--czap-primary, #4f46e5);
+        letter-spacing: -0.02em;
+      }
+
+      .czap-nav__links {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+
+      .czap-nav__links a {
+        font-size: 0.875rem;
+        color: var(--czap-muted, #64748b);
+        transition: color 0.15s;
+      }
+      .czap-nav__links a:hover {
+        color: var(--czap-primary, #4f46e5);
+        text-decoration: none;
+      }
+
+      .czap-nav__spacer {
+        flex: 1;
+      }
+
+      .czap-theme-toggle {
+        appearance: none;
+        border: 1px solid var(--czap-border, #e2e8f0);
+        background: var(--czap-surface, #ffffff);
+        color: var(--czap-text, #1e293b);
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.375rem;
+        font-size: 0.8125rem;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+      }
+      .czap-theme-toggle:hover {
+        background: var(--czap-primary, #4f46e5);
+        color: #ffffff;
+      }
+
+      /* ── Main ── */
+      .czap-main {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="czap-nav">
+      <span class="czap-nav__brand">czap</span>
+      <ul class="czap-nav__links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/stream">Stream</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/gpu">GPU</a></li>
+        <li><a href="/worker">Worker</a></li>
+      </ul>
+      <div class="czap-nav__spacer"></div>
+      <button class="czap-theme-toggle" id="theme-toggle">Toggle theme</button>
+    </nav>
+
+    <main class="czap-main">
+      <slot />
+    </main>
+
+    <script>
+      const btn = document.getElementById('theme-toggle');
+      btn?.addEventListener('click', () => {
+        const html = document.documentElement;
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+      });
+    </script>
+  </body>
+</html>

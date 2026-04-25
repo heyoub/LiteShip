@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="czap showcase -- GPU shaders">
+  <header class="page-header">
+    <h1>GPU-Driven Rendering</h1>
+    <p>
+      WebGL canvas and CSS driven by the same boundary. The cel shader
+      quantizes lighting into discrete bands, mirroring the adaptive state
+      system on the GPU.
+    </p>
+  </header>
+
+  <section class="gpu-demo" data-czap="layout">
+    <div class="gpu-canvas-wrap">
+      <canvas
+        class="gpu-canvas"
+        width="640"
+        height="400"
+        data-czap-shader-type="glsl"
+        data-czap-shader-src="/shaders/cel.frag"
+        client:gpu
+      ></canvas>
+    </div>
+
+    <div
+      class="gpu-satellite"
+      data-czap="layout"
+    >
+      <h2>Satellite Boundary</h2>
+      <p>
+        This panel is driven by the same <code>layout</code> boundary as the
+        shader canvas. When the viewport crosses a threshold, both the GLSL
+        uniform <code>u_state</code> and the CSS layout update simultaneously.
+      </p>
+      <div class="state-indicator">
+        <span class="state-dot"></span>
+        <span data-czap-state>detecting...</span>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--czap-primary, #4f46e5);
+  }
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--czap-muted, #64748b);
+    max-width: 40rem;
+  }
+
+  .gpu-demo {
+    margin: 2rem 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @quantize layout {
+    mobile {
+      .gpu-demo { grid-template-columns: 1fr; }
+      .gpu-canvas { width: 100%; height: auto; aspect-ratio: 16 / 10; }
+    }
+    tablet {
+      .gpu-demo { grid-template-columns: 1fr 1fr; }
+      .gpu-canvas { width: 100%; height: 280px; }
+    }
+    desktop {
+      .gpu-demo { grid-template-columns: 2fr 1fr; }
+      .gpu-canvas { width: 100%; height: 400px; }
+    }
+  }
+
+  .gpu-canvas-wrap {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--czap-border, #e2e8f0);
+  }
+
+  .gpu-canvas {
+    display: block;
+    background: #000;
+  }
+
+  .gpu-satellite {
+    padding: 1.5rem;
+    border: 1px solid var(--czap-border, #e2e8f0);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .gpu-satellite h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--czap-primary, #4f46e5);
+  }
+  .gpu-satellite p {
+    font-size: 0.875rem;
+    color: var(--czap-muted, #64748b);
+    line-height: 1.5;
+  }
+  .gpu-satellite code {
+    background: var(--czap-border, #e2e8f0);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+
+  .state-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--czap-text, #1e293b);
+  }
+
+  .state-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--czap-secondary, #0d9488);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+</style>

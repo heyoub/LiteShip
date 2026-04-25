@@ -1,0 +1,14 @@
+[**czap**](../../../README.md)
+
+***
+
+[czap](../../../README.md) / [core/src](../README.md) / RuntimePhase
+
+# Type Alias: RuntimePhase
+
+> **RuntimePhase** = `"compute-discrete"` \| `"compute-blend"` \| `"emit-css"` \| `"emit-glsl"` \| `"emit-aria"`
+
+Defined in: [core/src/runtime-coordinator.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/runtime-coordinator.ts#L23)
+
+Named stages of the runtime frame pass, in canonical topological order:
+discrete quantization first, then blend weights, then target emitters.

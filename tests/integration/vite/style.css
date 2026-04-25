@@ -1,0 +1,6 @@
+/* Plain CSS — no @token/@theme/@style/@quantize blocks.
+ * Proves the plugin's fast-path skip works (files without at-rules pass through). */
+#app {
+  font-family: system-ui, sans-serif;
+  padding: 2rem;
+}

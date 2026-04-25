@@ -1,0 +1,49 @@
+{
+  "name": "@czap/web",
+  "version": "0.1.0",
+  "description": "DOM runtime: morph, slots, SSE, physical state, capture",
+  "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "directory": "packages/web"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "type": "module",
+  "sideEffects": [
+    "./src/physical/capture.ts",
+    "./src/physical/capture.js",
+    "./dist/physical/capture.js"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "development": "./src/index.ts"
+    },
+    "./lite": {
+      "types": "./dist/lite.d.ts",
+      "import": "./dist/lite.js",
+      "development": "./src/lite.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@czap/core": "workspace:*",
+    "effect": "4.0.0-beta.32",
+    "mediabunny": "^1.39.2"
+  },
+  "peerDependencies": {
+    "effect": ">=4.0.0-beta.0"
+  }
+}

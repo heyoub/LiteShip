@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>czap WebCodecs Capture E2E</title>
+  </head>
+  <body>
+    <h1>czap WebCodecs Capture E2E Harness</h1>
+    <p id="status">Running...</p>
+    <video id="player" controls style="display: none; max-width: 640px"></video>
+    <script type="module" src="/capture-bundle.js"></script>
+    <script type="module">
+      // Wait for capture to complete and update UI
+      window.__capturePromise
+        .then(() => {
+          document.getElementById('status').textContent =
+            'Done -- ' + window.__captureResult.frames + ' frames captured';
+          const video = document.getElementById('player');
+          video.src = window.__captureResult.blobUrl;
+          video.style.display = 'block';
+        })
+        .catch((err) => {
+          document.getElementById('status').textContent = 'Error: ' + err;
+        });
+    </script>
+  </body>
+</html>

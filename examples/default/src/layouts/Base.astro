@@ -1,0 +1,50 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'czap starter' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <style>
+      @token {
+        --czap-font-size-sm;
+        --czap-font-size-md;
+        --czap-font-size-lg;
+        --czap-spacing-sm;
+        --czap-spacing-md;
+        --czap-spacing-lg;
+        --czap-color-text;
+        --czap-color-surface;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html {
+        font-family: system-ui, -apple-system, sans-serif;
+        color: var(--czap-color-text);
+        background: var(--czap-color-surface);
+        line-height: 1.6;
+      }
+
+      body {
+        min-height: 100dvh;
+        padding: var(--czap-spacing-md);
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

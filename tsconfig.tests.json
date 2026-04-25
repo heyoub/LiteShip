@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "noEmit": true,
+    "types": ["node"],
+    "paths": {
+      "@czap/core": ["./packages/core/src/index.ts"],
+      "@czap/quantizer": ["./packages/quantizer/src/index.ts"],
+      "@czap/compiler": ["./packages/compiler/src/index.ts"],
+      "@czap/web/lite": ["./packages/web/src/lite.ts"],
+      "@czap/web": ["./packages/web/src/index.ts"],
+      "@czap/detect": ["./packages/detect/src/index.ts"],
+      "@czap/vite/html-transform": ["./packages/vite/src/html-transform.ts"],
+      "@czap/vite": ["./packages/vite/src/index.ts"],
+      "@czap/astro/runtime": ["./packages/astro/src/runtime/index.ts"],
+      "@czap/astro": ["./packages/astro/src/index.ts"],
+      "@czap/remotion": ["./packages/remotion/src/index.ts"],
+      "@czap/scene": ["./packages/scene/src/index.ts"],
+      "@czap/assets": ["./packages/assets/src/index.ts"],
+      "@czap/cli": ["./packages/cli/src/index.ts"],
+      "@czap/mcp-server": ["./packages/mcp-server/src/index.ts"],
+      "@czap/edge": ["./packages/edge/src/index.ts"],
+      "@czap/worker": ["./packages/worker/src/index.ts"],
+      "@czap/_spine": ["./packages/_spine"]
+    }
+  },
+  // Scoped to tests that carry compile-time assertions (@ts-expect-error).
+  // The broader test tree has accumulated type-errors that are tolerated
+  // because tests/ was excluded from typecheck; expanding coverage is
+  // follow-up cleanup, not in scope for Spec 1.1.
+  "include": ["tests/unit/track-id.test.ts", "tests/unit/spawn-quoting-drift.test.ts"],
+  "exclude": ["node_modules", "**/dist/**"]
+}

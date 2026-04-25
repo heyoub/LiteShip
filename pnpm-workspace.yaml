@@ -1,0 +1,9 @@
+packages:
+  - 'packages/*'
+  - 'examples/*'
+  - 'tests/integration/astro'
+  - 'tests/integration/vite'
+allowBuilds:
+  esbuild: false
+  msgpackr-extract: false
+  sharp: false

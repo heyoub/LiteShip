@@ -1,0 +1,282 @@
+---
+/**
+ * Tutorial 01 -- Your First Boundary
+ *
+ * A "boundary" is the core primitive of czap. It quantizes a continuous
+ * signal (like viewport width) into discrete, named states (like "compact"
+ * and "wide"). This is fundamentally different from media queries:
+ *
+ *   - Media queries are CSS-only and can't be shared with JS or the server.
+ *   - Boundaries are data. They can be evaluated on the server (edge),
+ *     the client (satellite directive), or in tests (pure function).
+ *   - Boundaries are content-addressed: change the definition and the
+ *     hash changes, automatically invalidating caches.
+ *
+ * In this tutorial you will:
+ *   1. Import a boundary definition (viewport.boundaries.ts)
+ *   2. Serialize it onto a DOM element via data-czap-boundary
+ *   3. Use client:satellite to hydrate it (evaluate on resize)
+ *   4. Write CSS that targets data-czap-state="compact|wide"
+ */
+
+import Base from '../layouts/Base.astro';
+import { viewportBoundary } from '../boundaries/viewport.boundaries.js';
+
+// Serialize the boundary so the satellite directive can parse it on the
+// client. The directive reads this JSON, extracts thresholds + states,
+// and uses a ResizeObserver to keep data-czap-state up to date.
+const boundaryJson = JSON.stringify({
+  input: viewportBoundary.input,
+  thresholds: viewportBoundary.thresholds,
+  states: viewportBoundary.states,
+});
+---
+
+<Base title="Your First Boundary">
+
+  <!-- ============================================================
+       STEP 1: What is a Boundary?
+       ============================================================
+
+       A boundary is a pure data structure that maps a continuous
+       numeric signal to discrete named states. Think of it as a
+       lookup table:
+
+         viewport.width >= 0   --> "compact"
+         viewport.width >= 768 --> "wide"
+
+       The definition lives in src/boundaries/viewport.boundaries.ts.
+       It's just a call to Boundary.make() from @czap/core.
+  -->
+
+  <h1>01 -- Your First Boundary</h1>
+
+  <p>
+    A <strong>boundary</strong> is czap's core primitive. It quantizes a
+    continuous signal (viewport width, device memory, network speed) into
+    discrete named states. Unlike media queries, boundaries are portable
+    data -- they work on the server, the client, and in tests.
+  </p>
+
+  <div class="note">
+    <strong>Key idea:</strong> Boundaries separate the <em>decision</em>
+    (which state are we in?) from the <em>effect</em> (what does that state
+    look like?). The decision is data. The effect is CSS.
+  </div>
+
+  <!-- ============================================================
+       STEP 2: The Boundary Definition
+
+       This code block shows what the boundary looks like in TypeScript.
+       It's imported from src/boundaries/viewport.boundaries.ts.
+  -->
+
+  <h2>The Definition</h2>
+
+  <pre><code>import {'{'} Boundary {'}'} from '@czap/core';
+
+export const viewportBoundary = Boundary.make({'{'}&br;
+  input: 'viewport.width',
+  at: [
+    [0, 'compact'],   // 0px and up = compact
+    [768, 'wide'],    // 768px and up = wide
+  ],
+{'}'});</code></pre>
+
+  <p>
+    <code>Boundary.make()</code> returns an immutable, content-addressed
+    object. Its <code>id</code> is an FNV-1a hash of the definition --
+    change anything and the hash changes. This makes cache invalidation
+    automatic.
+  </p>
+
+  <!-- ============================================================
+       STEP 3: Wiring It Up in HTML
+
+       The key attributes on the container div:
+
+       data-czap="viewport"
+         Human-readable label. Not used by the runtime, but useful for
+         debugging ("which boundary is this element tracking?").
+
+       data-czap-boundary='{ ... }'
+         JSON-serialized boundary. The satellite directive parses this
+         to know which signal to watch and what states to evaluate.
+
+       data-czap-state="compact"
+         Initial state. Set server-side as a sensible default. The
+         satellite directive will update this on the client once it
+         reads the actual viewport width.
+
+       client:satellite
+         Astro client directive registered by @czap/astro. It tells
+         Astro to load the satellite hydration script, which:
+           1. Parses data-czap-boundary
+           2. Reads the signal (window.innerWidth)
+           3. Evaluates the boundary (binary search)
+           4. Sets data-czap-state to the matching state
+           5. Watches for resize via ResizeObserver
+  -->
+
+  <h2>Wiring It Up</h2>
+
+  <p>
+    To make a boundary live, attach three data attributes to a container
+    and add the <code>client:satellite</code> directive:
+  </p>
+
+  <pre><code>&lt;div
+  data-czap="viewport"
+  data-czap-boundary='{'{'}...boundary JSON...'{'}'}'
+  data-czap-state="compact"
+  client:satellite
+&gt;
+  ...content that adapts...
+&lt;/div&gt;</code></pre>
+
+  <!-- ============================================================
+       STEP 4: Live Demo
+
+       This is the actual live boundary. Resize your browser window
+       to see data-czap-state toggle between "compact" and "wide".
+
+       The CSS below targets:
+         [data-czap-state="compact"] .demo-card  --> stacked layout
+         [data-czap-state="wide"] .demo-card     --> side-by-side layout
+
+       No media queries. The satellite directive manages the state
+       attribute; CSS just reacts to it.
+  -->
+
+  <h2>Live Demo</h2>
+
+  <p>
+    Resize your browser window across the 768px threshold. Watch the
+    layout switch between stacked (compact) and side-by-side (wide).
+  </p>
+
+  <div
+    class="boundary-demo"
+    data-czap="viewport"
+    data-czap-boundary={boundaryJson}
+    data-czap-state="compact"
+  >
+    <!-- --------------------------------------------------------
+         These cards are the content that adapts. In compact state
+         they stack vertically. In wide state they sit side by side.
+         The transition is CSS-only -- the satellite directive just
+         flips the data-czap-state attribute.
+    -------------------------------------------------------- -->
+
+    <div class="demo-card">
+      <h3>Card A</h3>
+      <p>This card adapts to the viewport boundary state.</p>
+    </div>
+    <div class="demo-card">
+      <h3>Card B</h3>
+      <p>No media queries -- just data-czap-state and CSS.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STEP 5: Understanding the CSS
+
+       The CSS uses attribute selectors to target boundary states.
+       This is the "effect" side of the boundary/effect split.
+
+       [data-czap-state="compact"] targets the compact state.
+       [data-czap-state="wide"] targets the wide state.
+
+       The transition property smooths the layout change -- czap
+       encourages smooth state transitions rather than hard cuts.
+  -->
+
+  <h2>How the CSS Works</h2>
+
+  <pre><code>/* Compact: single-column stack */
+.boundary-demo[data-czap-state="compact"] {'{'}&br;
+  flex-direction: column;
+{'}'}
+
+/* Wide: two-column row */
+.boundary-demo[data-czap-state="wide"] {'{'}&br;
+  flex-direction: row;
+{'}'}</code></pre>
+
+  <div class="note">
+    <strong>Why not media queries?</strong> Media queries work, but they're
+    CSS-only. Boundaries can be evaluated anywhere: on the edge to pick the
+    right HTML variant, in a test to assert behavior, or in a design tool to
+    preview states. The same definition, everywhere.
+  </div>
+
+  <!-- ============================================================
+       STEP 6: What's Next
+
+       Now that you understand boundaries, the next tutorial
+       introduces design tokens -- named values that vary across
+       axes like theme and density.
+  -->
+
+  <h2>What You Learned</h2>
+
+  <ul>
+    <li><code>Boundary.make()</code> creates a content-addressed boundary definition.</li>
+    <li><code>data-czap-boundary</code> serializes the boundary for the client.</li>
+    <li><code>data-czap-state</code> holds the current evaluated state.</li>
+    <li><code>client:satellite</code> hydrates the boundary with live signal evaluation.</li>
+    <li>CSS attribute selectors target each state -- no JavaScript layout logic.</li>
+  </ul>
+
+  <p>
+    <strong>Next:</strong> <a href="/02-tokens">02 -- Design Tokens</a> --
+    learn how czap tokens become CSS custom properties.
+  </p>
+
+</Base>
+
+<!-- ================================================================
+     Scoped styles for this tutorial page.
+
+     The key pattern: use [data-czap-state="..."] attribute selectors
+     to apply different visual treatments per boundary state. The
+     satellite directive keeps data-czap-state in sync with the
+     actual viewport width.
+================================================================ -->
+
+<style>
+  .boundary-demo {
+    display: flex;
+    gap: 1rem;
+    transition: flex-direction 0.3s ease;
+    margin-bottom: 2rem;
+  }
+
+  /* Compact state: stack vertically */
+  .boundary-demo[data-czap-state="compact"] {
+    flex-direction: column;
+  }
+
+  /* Wide state: lay out horizontally */
+  .boundary-demo[data-czap-state="wide"] {
+    flex-direction: row;
+  }
+
+  .demo-card {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .demo-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .demo-card h3 {
+    margin-bottom: 0.5rem;
+    color: #4f46e5;
+  }
+</style>

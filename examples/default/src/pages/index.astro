@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base>
+  <header class="header">
+    <h1>czap starter</h1>
+    <p>Constraint-based adaptive rendering</p>
+  </header>
+
+  <main class="grid" data-czap="layout" client:satellite>
+    <article class="card">
+      <h2>Boundaries</h2>
+      <p>Define quantization points where your layout adapts.</p>
+    </article>
+    <article class="card">
+      <h2>Tokens</h2>
+      <p>Design values that vary across themes, density, and contrast.</p>
+    </article>
+    <article class="card">
+      <h2>Compile</h2>
+      <p>Output to CSS, GLSL, WGSL, ARIA, or AI targets.</p>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .header {
+    text-align: center;
+    padding: var(--czap-spacing-lg) 0;
+  }
+
+  .header h1 {
+    font-size: var(--czap-font-size-lg);
+    font-weight: 700;
+  }
+
+  .header p {
+    font-size: var(--czap-font-size-md);
+    opacity: 0.7;
+  }
+
+  .card {
+    padding: var(--czap-spacing-md);
+    border: 1px solid currentColor;
+    border-radius: 0.5rem;
+    opacity: 0.85;
+  }
+
+  .card h2 {
+    font-size: var(--czap-font-size-md);
+    margin-bottom: var(--czap-spacing-sm);
+  }
+
+  .card p {
+    font-size: var(--czap-font-size-sm);
+  }
+
+  @quantize layout {
+    mobile {
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--czap-spacing-sm);
+      }
+    }
+
+    tablet {
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--czap-spacing-md);
+      }
+    }
+
+    desktop {
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--czap-spacing-lg);
+      }
+    }
+  }
+</style>

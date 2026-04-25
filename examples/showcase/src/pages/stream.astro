@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="czap showcase -- SSE streaming">
+  <header class="page-header">
+    <h1>Streaming Adaptive UI</h1>
+    <p>
+      Server-Sent Events drive real-time morphing. The container below subscribes
+      to <code>/api/feed</code> and adaptively renders incoming events as they arrive.
+    </p>
+  </header>
+
+  <section class="stream-demo">
+    <div
+      class="stream-container"
+      data-czap-stream-url="/api/feed"
+      client:stream
+    >
+      <p class="stream-placeholder">Waiting for events from SSE feed...</p>
+    </div>
+  </section>
+
+  <section class="explanation">
+    <h2>How it works</h2>
+    <ol>
+      <li>The <code>data-czap-stream-url</code> attribute points to an SSE endpoint.</li>
+      <li>The <code>client:stream</code> directive hydrates the container with the czap SSE client.</li>
+      <li>Each event payload is morphed into the DOM using the czap morph algorithm -- minimal diffing, no full re-render.</li>
+      <li>Boundary state changes (e.g. viewport resize) are applied to streamed content in real time.</li>
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--czap-primary, #4f46e5);
+  }
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--czap-muted, #64748b);
+    max-width: 40rem;
+  }
+  .page-header code {
+    background: var(--czap-border, #e2e8f0);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+
+  .stream-demo {
+    margin: 2rem 0;
+  }
+
+  .stream-container {
+    min-height: 12rem;
+    border: 2px dashed var(--czap-border, #e2e8f0);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    background: color-mix(in srgb, var(--czap-surface, #ffffff) 95%, var(--czap-primary, #4f46e5));
+  }
+
+  .stream-placeholder {
+    color: var(--czap-muted, #64748b);
+    font-style: italic;
+  }
+
+  .explanation {
+    margin-top: 3rem;
+  }
+  .explanation h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .explanation ol {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--czap-muted, #64748b);
+    font-size: 0.9375rem;
+  }
+  .explanation code {
+    background: var(--czap-border, #e2e8f0);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+</style>

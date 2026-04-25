@@ -1,0 +1,88 @@
+{
+  "name": "@czap/astro",
+  "version": "0.1.0",
+  "description": "Astro 6 integration with adaptive directives",
+  "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "directory": "packages/astro"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "development": "./src/index.ts"
+    },
+    "./client-directives/satellite": {
+      "types": "./dist/client-directives/satellite.d.ts",
+      "import": "./dist/client-directives/satellite.js",
+      "development": "./src/client-directives/satellite.ts"
+    },
+    "./client-directives/stream": {
+      "types": "./dist/client-directives/stream.d.ts",
+      "import": "./dist/client-directives/stream.js",
+      "development": "./src/client-directives/stream.ts"
+    },
+    "./client-directives/llm": {
+      "types": "./dist/client-directives/llm.d.ts",
+      "import": "./dist/client-directives/llm.js",
+      "development": "./src/client-directives/llm.ts"
+    },
+    "./client-directives/worker": {
+      "types": "./dist/client-directives/worker.d.ts",
+      "import": "./dist/client-directives/worker.js",
+      "development": "./src/client-directives/worker.ts"
+    },
+    "./client-directives/gpu": {
+      "types": "./dist/client-directives/gpu.d.ts",
+      "import": "./dist/client-directives/gpu.js",
+      "development": "./src/client-directives/gpu.ts"
+    },
+    "./client-directives/wasm": {
+      "types": "./dist/client-directives/wasm.d.ts",
+      "import": "./dist/client-directives/wasm.js",
+      "development": "./src/client-directives/wasm.ts"
+    },
+    "./middleware": {
+      "types": "./dist/middleware.d.ts",
+      "import": "./dist/middleware.js",
+      "development": "./src/middleware.ts"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime/index.js",
+      "development": "./src/runtime/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@czap/core": "workspace:*",
+    "@czap/vite": "workspace:*",
+    "@czap/detect": "workspace:*",
+    "@czap/edge": "workspace:*",
+    "@czap/web": "workspace:*",
+    "@czap/worker": "workspace:*"
+  },
+  "peerDependencies": {
+    "astro": ">=6.0.0",
+    "effect": ">=4.0.0-beta.0"
+  },
+  "devDependencies": {
+    "astro": "^6.0.0",
+    "effect": "4.0.0-beta.32"
+  }
+}

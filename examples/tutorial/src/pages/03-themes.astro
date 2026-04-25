@@ -1,0 +1,413 @@
+---
+/**
+ * Tutorial 03 -- Theme Switching
+ *
+ * A Theme groups multiple tokens into a coherent set of variants.
+ * Instead of managing individual token axes, you switch one theme
+ * variant and all tokens update together.
+ *
+ * In this tutorial you will:
+ *   1. Define a theme with light and dark variants using Theme.make()
+ *   2. See how themes map to the data-theme attribute on <html>
+ *   3. Build a theme toggle button
+ *   4. Learn about @theme CSS blocks compiled by @czap/vite
+ *   5. Understand how themes compose with boundaries
+ */
+
+import Base from '../layouts/Base.astro';
+import { Theme } from '@czap/core';
+
+// Define a simple theme with light and dark variants.
+// Each key in `tokens` is a token name; each value is a map of
+// variant name to design value.
+const brandTheme = Theme.make({
+  name: 'brand',
+  variants: ['light', 'dark'] as const,
+  tokens: {
+    'bg':         { light: '#ffffff', dark: '#0f0f23' },
+    'bg-surface': { light: '#f8f9fa', dark: '#1a1a2e' },
+    'fg':         { light: '#1a1a2e', dark: '#e0e0ff' },
+    'fg-muted':   { light: '#6b7280', dark: '#9ca3af' },
+    'accent':     { light: '#4f46e5', dark: '#818cf8' },
+    'border':     { light: '#e2e8f0', dark: '#2d2d44' },
+  },
+  // Meta provides human-readable labels and the color-scheme mode
+  // for each variant. The mode is used by the compiler to set
+  // color-scheme on the root element.
+  meta: {
+    light: { label: 'Light', mode: 'light' },
+    dark:  { label: 'Dark',  mode: 'dark' },
+  },
+});
+
+// Resolve all token values for each variant. This is what the
+// compiler does at build time -- we do it here for demonstration.
+const lightTokens = Theme.tap(brandTheme, 'light');
+const darkTokens = Theme.tap(brandTheme, 'dark');
+---
+
+<Base title="Theme Switching">
+
+  <!-- ============================================================
+       STEP 1: What is a Theme?
+       ============================================================
+
+       A theme groups related tokens and provides named variants
+       (like "light" and "dark"). When you switch the variant, every
+       token in the group resolves to its new value simultaneously.
+
+       This is different from individual token axes:
+         - Token axes are fine-grained (one token varies independently)
+         - Themes are coarse-grained (all tokens switch together)
+
+       In practice, you use themes for the big mode switches (light/
+       dark, brand A/brand B) and token axes for orthogonal concerns
+       (density, contrast).
+  -->
+
+  <h1>03 -- Theme Switching</h1>
+
+  <p>
+    A <strong>theme</strong> groups tokens into coherent variants. Switch
+    one attribute and every color, spacing, and shadow value updates
+    together. Themes use <code>Theme.make()</code> from <code>@czap/core</code>.
+  </p>
+
+  <div class="note">
+    <strong>Key idea:</strong> Themes are the coarse switch (light/dark,
+    brand A/B). Token axes are the fine dials (density, contrast). They
+    compose orthogonally -- a "dark + compact + high-contrast" combination
+    is just three axis values resolved simultaneously.
+  </div>
+
+  <!-- ============================================================
+       STEP 2: Defining a Theme
+
+       Theme.make() takes:
+         - name:     identifier for the theme
+         - variants: the named modes (light, dark, etc.)
+         - tokens:   a map of token names to variant-keyed values
+         - meta:     optional labels and color-scheme modes
+
+       The result is content-addressed: change any token value and
+       the theme's id (FNV-1a hash) changes automatically.
+  -->
+
+  <h2>The Definition</h2>
+
+  <pre><code>import {'{'} Theme {'}'} from '@czap/core';
+
+const brandTheme = Theme.make({'{'}&br;
+  name: 'brand',
+  variants: ['light', 'dark'] as const,
+  tokens: {'{'}&br;
+    'bg':         {'{'} light: '#ffffff', dark: '#0f0f23' {'}'},
+    'bg-surface': {'{'} light: '#f8f9fa', dark: '#1a1a2e' {'}'},
+    'fg':         {'{'} light: '#1a1a2e', dark: '#e0e0ff' {'}'},
+    'fg-muted':   {'{'} light: '#6b7280', dark: '#9ca3af' {'}'},
+    'accent':     {'{'} light: '#4f46e5', dark: '#818cf8' {'}'},
+    'border':     {'{'} light: '#e2e8f0', dark: '#2d2d44' {'}'},
+  {'}'},
+{'}'});</code></pre>
+
+  <p>
+    <code>Theme.tap(theme, 'dark')</code> resolves all tokens for the
+    dark variant, returning a flat <code>Record&lt;string, unknown&gt;</code>:
+  </p>
+
+  <pre><code>Theme.tap(brandTheme, 'dark');
+// {'{'} bg: '#0f0f23', 'bg-surface': '#1a1a2e', fg: '#e0e0ff', ... {'}'}</code></pre>
+
+  <!-- ============================================================
+       STEP 3: The data-theme Attribute
+
+       The conventional way to activate a theme variant is the
+       data-theme attribute on <html> (or any ancestor element).
+
+       The @czap/vite plugin compiles @theme CSS blocks into
+       attribute selectors:
+
+         @theme light { --bg: #ffffff; --fg: #1a1a2e; }
+         @theme dark  { --bg: #0f0f23; --fg: #e0e0ff; }
+
+       Becomes:
+
+         [data-theme="light"] { --bg: #ffffff; --fg: #1a1a2e; }
+         [data-theme="dark"]  { --bg: #0f0f23; --fg: #e0e0ff; }
+
+       Switching data-theme triggers a full repaint via the cascade.
+       No JavaScript DOM manipulation needed beyond the attribute flip.
+  -->
+
+  <h2>The data-theme Attribute</h2>
+
+  <p>
+    Set <code>data-theme="light"</code> or <code>data-theme="dark"</code>
+    on any ancestor element. The @czap/vite plugin compiles
+    <code>@theme</code> CSS blocks into <code>[data-theme="..."]</code>
+    attribute selectors, so the cascade handles the rest.
+  </p>
+
+  <pre><code>/* Input (authored with @czap/vite): */
+@theme light {'{'}&br;
+  --bg: #ffffff;
+  --fg: #1a1a2e;
+{'}'}
+@theme dark {'{'}&br;
+  --bg: #0f0f23;
+  --fg: #e0e0ff;
+{'}'}
+
+/* Output (compiled to standard CSS): */
+[data-theme="light"] {'{'}&br;
+  --bg: #ffffff;
+  --fg: #1a1a2e;
+{'}'}
+[data-theme="dark"] {'{'}&br;
+  --bg: #0f0f23;
+  --fg: #e0e0ff;
+{'}'}</code></pre>
+
+  <!-- ============================================================
+       STEP 4: Live Demo with Theme Toggle
+
+       The demo below has a toggle button that flips data-theme on
+       a container element. The CSS custom properties update instantly
+       via the cascade -- no re-render, no FOUC.
+
+       The toggle script is minimal: read current data-theme, flip
+       it, write it back. czap encourages this pattern because it
+       keeps theme switching as a pure DOM attribute change.
+  -->
+
+  <h2>Live Demo</h2>
+
+  <p>
+    Click the toggle button to switch between light and dark themes.
+    The theme container uses <code>data-theme</code> to control which
+    set of CSS custom properties are active.
+  </p>
+
+  <!-- Theme toggle button. The inline script below handles the click. -->
+  <button class="theme-toggle" id="theme-toggle">
+    Toggle Dark Theme
+  </button>
+
+  <!-- --------------------------------------------------------
+       The theme container. data-theme starts as "light".
+
+       All child elements reference CSS custom properties (--bg,
+       --fg, etc.) that are defined in the <style> block below
+       using [data-theme="light"] and [data-theme="dark"] selectors.
+
+       When data-theme flips, the cascade resolves new values for
+       every custom property, and the browser repaints. No JS
+       needed beyond the attribute change.
+  -------------------------------------------------------- -->
+  <div class="theme-container" id="theme-container" data-theme="light">
+    <div class="theme-card">
+      <h3>Surface Card</h3>
+      <p>
+        Background: <code>var(--bg-surface)</code><br>
+        Text: <code>var(--fg)</code><br>
+        Accent: <code>var(--accent)</code>
+      </p>
+      <button class="accent-button">Accent Button</button>
+    </div>
+
+    <div class="theme-card">
+      <h3>Another Card</h3>
+      <p>
+        All colors come from theme tokens. Switch the theme and
+        every value updates through the CSS cascade.
+      </p>
+      <span class="muted-text">Muted text uses var(--fg-muted)</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STEP 5: The Toggle Script
+
+       This is intentionally simple. In a real app, you'd persist
+       the user's choice (localStorage, cookie for SSR) and respect
+       the system preference via prefers-color-scheme. The @czap/astro
+       detect script already reads color-scheme preference and sets
+       data-czap-scheme="dark|light" on <html>, which you can use
+       as the initial value.
+  -->
+
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const container = document.getElementById('theme-container');
+
+    btn?.addEventListener('click', () => {
+      // Read the current theme, flip it, write it back.
+      // That's all it takes -- the CSS cascade does the rest.
+      const current = container?.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      container?.setAttribute('data-theme', next);
+    });
+  </script>
+
+  <!-- ============================================================
+       STEP 6: Composing Themes with Boundaries
+
+       Themes and boundaries are orthogonal. You can have:
+
+         data-theme="dark" data-czap-state="compact"
+
+       The CSS targets both independently:
+
+         [data-theme="dark"] { --bg: #0f0f23; }
+         [data-czap-state="compact"] { flex-direction: column; }
+
+       Or you can combine them for specific overrides:
+
+         [data-theme="dark"][data-czap-state="compact"] {
+           --bg-surface: #1a1a2e;
+         }
+
+       This composability is why czap separates data from effects.
+  -->
+
+  <h2>Composing with Boundaries</h2>
+
+  <p>
+    Themes and boundaries are orthogonal. Combine them freely in CSS:
+  </p>
+
+  <pre><code>/* Independent targeting: */
+[data-theme="dark"]              {'{'} --bg: #0f0f23; {'}'}
+[data-czap-state="compact"]      {'{'} flex-direction: column; {'}'}
+
+/* Combined targeting for specific overrides: */
+[data-theme="dark"][data-czap-state="compact"] {'{'}&br;
+  --bg-surface: #1a1a3e;  /* slightly different in dark+compact */
+{'}'}</code></pre>
+
+  <!-- ============================================================
+       STEP 7: Content Address
+
+       Like tokens and boundaries, themes are content-addressed.
+       The theme id below is the FNV-1a hash of the entire definition.
+  -->
+
+  <h2>Content Addressing</h2>
+
+  <p>
+    The theme's content address: <code>{brandTheme.id}</code>
+  </p>
+
+  <p>
+    Change any token value and the hash changes, invalidating caches
+    everywhere the theme is referenced.
+  </p>
+
+  <h2>What You Learned</h2>
+
+  <ul>
+    <li><code>Theme.make()</code> groups tokens into named variants.</li>
+    <li><code>Theme.tap(theme, variant)</code> resolves all tokens for a variant.</li>
+    <li><code>data-theme</code> attribute controls the active variant via CSS cascade.</li>
+    <li><code>@theme</code> CSS blocks compile to <code>[data-theme]</code> selectors.</li>
+    <li>Themes compose orthogonally with boundaries -- they are independent axes.</li>
+  </ul>
+
+  <p>
+    <strong>Next:</strong> <a href="/04-streaming">04 -- Server Streaming</a> --
+    push live updates from the server via SSE and DOM morphing.
+  </p>
+
+</Base>
+
+<!-- ================================================================
+     Scoped styles for the theme demo.
+
+     The [data-theme] selectors define CSS custom properties for each
+     variant. Child elements reference these properties, so switching
+     data-theme triggers a cascade-driven repaint.
+================================================================ -->
+
+<style>
+  .theme-toggle {
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.925rem;
+    margin-bottom: 1.5rem;
+    transition: background 0.15s;
+  }
+
+  .theme-toggle:hover {
+    background: #4338ca;
+  }
+
+  /* Light theme tokens */
+  .theme-container[data-theme="light"] {
+    --bg: #ffffff;
+    --bg-surface: #f8f9fa;
+    --fg: #1a1a2e;
+    --fg-muted: #6b7280;
+    --accent: #4f46e5;
+    --border: #e2e8f0;
+  }
+
+  /* Dark theme tokens */
+  .theme-container[data-theme="dark"] {
+    --bg: #0f0f23;
+    --bg-surface: #1a1a2e;
+    --fg: #e0e0ff;
+    --fg-muted: #9ca3af;
+    --accent: #818cf8;
+    --border: #2d2d44;
+  }
+
+  .theme-container {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 2rem;
+  }
+
+  .theme-card {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg-surface);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .theme-card h3 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .accent-button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    transition: background 0.3s ease;
+  }
+
+  .muted-text {
+    color: var(--fg-muted);
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+  }
+</style>

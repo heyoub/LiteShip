@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>czap Stream Stress E2E</title>
+  </head>
+  <body>
+    <h1>czap Stream Stress Harness</h1>
+    <p id="status">Running...</p>
+    <section id="stream-root" data-czap-stream-url="/stream" data-czap-stream-morph="outerHTML">
+      <div data-czap-id="hero-copy">initial</div>
+    </section>
+    <script type="module" src="/stream-bundle.js"></script>
+    <script type="module">
+      window.__streamPromise
+        .then(() => {
+          document.getElementById('status').textContent =
+            'Done -- ' + window.__streamResult.morphCount + ' morphs, ' + window.__streamResult.reconnectCount + ' reconnects';
+        })
+        .catch((err) => {
+          document.getElementById('status').textContent = 'Error: ' + err;
+        });
+    </script>
+  </body>
+</html>

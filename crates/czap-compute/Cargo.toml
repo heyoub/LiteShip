@@ -1,0 +1,22 @@
+[package]
+name = "czap-compute"
+version = "0.1.0"
+edition = "2021"
+description = "Zero-alloc WASM compute kernels for czap render runtime"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[dependencies]
+libm = "0.2"
+
+[features]
+default = []
+simd = []           # Enable f32x4 SIMD when available

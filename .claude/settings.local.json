@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jq \"to_entries[] | select\\(.key | contains\\(\"\"processor.ts\"\"\\) or contains\\(\"\"webcodecs.ts\"\"\\) or contains\\(\"\"sse.ts\"\"\\) or contains\\(\"\"hints.ts\"\"\\) or contains\\(\"\"semantic-id.ts\"\"\\) or contains\\(\"\"addressing.ts\"\"\\) or contains\\(\"\"restore.ts\"\"\\) or contains\\(\"\"spsc-ring.ts\"\"\\) or contains\\(\"\"render-worker.ts\"\"\\)\\) | {file: .key, coverage: .value.summary}\" coverage/coverage-final.json)",
+      "Bash(grep -rn \"15\\\\.8\\\\|6\\\\.66\\\\|2\\\\.3\\\\|5\\\\.0\" /c/Users/<username>/.projects/czap/scripts/bench/ --include=*.ts)",
+      "Bash(pnpm run:*)",
+      "Bash(for pkg:*)",
+      "Bash(do sed:*)",
+      "Bash(cd:*)",
+      "Bash(sed -i \"s/.fx-styled/.czap-styled/g\" tests/unit/compiler-branch-coverage.test.ts)",
+      "Bash(sed -i \"s/.fx-card/.czap-card/g\" tests/unit/design-layer.test.ts)",
+      "Bash(sed -i \"s/.fx-card/.czap-card/g\" tests/unit/vite-runtime.test.ts)",
+      "Bash(grep -r \"\\\\.fx-\\\\|FxEnvironment\\\\|FX GLSL\" packages/*/src/)",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\(''''./packages/web/package.json''''\\).sideEffects\\)\\)\")",
+      "Bash(node -e \"console.log\\(require\\(''''./packages/core/package.json''''\\).files\\)\")",
+      "Bash(do echo:*)",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\(''./packages/$pkg/package.json''\\).files\\)\\)\")",
+      "Bash(do node -e \":*)",
+      "Bash(cp .claude/worktrees/agent-ac200a06/packages/web/src/security/runtime-url.ts packages/web/src/security/runtime-url.ts)",
+      "Bash(cp .claude/worktrees/agent-ac200a06/packages/astro/src/runtime/url-policy.ts packages/astro/src/runtime/url-policy.ts)",
+      "Bash(cp .claude/worktrees/agent-ac200a06/tests/regression/red-team-runtime.test.ts tests/regression/red-team-runtime.test.ts)",
+      "Bash(cp .claude/worktrees/agent-ac200a06/tests/unit/runtime-security-helpers.test.ts tests/unit/runtime-security-helpers.test.ts)",
+      "Bash(cp .claude/worktrees/agent-a37ba900/packages/core/src/cell.ts packages/core/src/cell.ts)",
+      "Bash(echo \"CzapEnv \\(should be >0\\)\")",
+      "Bash(echo \"czap-styled \\(should be >0\\)\")",
+      "Bash(echo \"czap URLs \\(should be >0\\)\")",
+      "Bash(find C:/Users/<username>/.projects/czap/.claude/worktrees -name *.ts)",
+      "Bash(grep -rc \"\\\\.fx-\\\\|FxEnvironment\\\\|FX GLSL\" packages/*/src/)",
+      "Bash(for id:*)",
+      "Bash(do f=C:/Users/<username>/AppData/Local/Temp/claude/C--Users-<username>--projects-czap/98819f70-50fa-4356-89b1-af1e15b94277/tasks/$id.output)",
+      "Read(//c/Users/<username>/.projects/czap/**)",
+      "Bash(python3 -c \"import sys,json; d=json.loads\\(sys.stdin.read\\(\\)\\); print\\(d.get\\(''''message'''',{}\\).get\\(''''stop_reason'''',''''running''''\\)\\)\")",
+      "Bash(grep -rn \"@ts-ignore\\\\|@ts-expect-error\\\\|eslint-disable\" packages/*/src/)",
+      "Bash(grep -rn \"as any\" packages/*/src/)",
+      "Bash(grep -rn \"as unknown\" packages/*/src/)",
+      "Bash(find C:Users<username>.projectsczap -name *composable*test* -o -name *test*composable*)"
+    ]
+  }
+}

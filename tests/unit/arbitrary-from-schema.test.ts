@@ -1,0 +1,129 @@
+/**
+ * Unit tests for `schemaToArbitrary` — verifies the Effect Schema AST
+ * walker produces fast-check arbitraries that yield values which decode
+ * cleanly back through the source schema.
+ *
+ * Coverage targets the same surface the harness depends on: scalars,
+ * literals, unions, structs, arrays, optional keys, and the unsupported
+ * fall-through error.
+ */
+import { describe, expect, it } from 'vitest';
+import { Effect, Schema } from 'effect';
+import * as fc from 'fast-check';
+import {
+  schemaToArbitrary,
+  UnsupportedSchemaError,
+} from '../../packages/core/src/harness/arbitrary-from-schema.js';
+
+/** Drive an arbitrary into a schema's decoder; assert every sample decodes. */
+function expectAllDecode<T>(
+  schema: Schema.Schema<T>,
+  arb: fc.Arbitrary<T>,
+  numRuns = 50,
+): void {
+  fc.assert(
+    fc.property(arb, (sample) => {
+      const exit = Effect.runSyncExit(
+        Schema.decodeUnknownEffect(schema)(sample as unknown),
+      );
+      return exit._tag === 'Success';
+    }),
+    { numRuns },
+  );
+}
+
+describe('schemaToArbitrary', () => {
+  it('handles String', () => {
+    const schema = Schema.String;
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('handles Number (as integer)', () => {
+    const schema = Schema.Number;
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('handles Boolean', () => {
+    const schema = Schema.Boolean;
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('handles Literal', () => {
+    const schema = Schema.Literal('active');
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (v) => v === 'active'),
+      { numRuns: 20 },
+    );
+  });
+
+  it('handles Union of literals', () => {
+    const schema = Schema.Union([
+      Schema.Literal('a'),
+      Schema.Literal('b'),
+      Schema.Literal('c'),
+    ]);
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (v) => v === 'a' || v === 'b' || v === 'c'),
+      { numRuns: 50 },
+    );
+  });
+
+  it('handles Struct with required fields', () => {
+    const schema = Schema.Struct({
+      name: Schema.String,
+      age: Schema.Number,
+      active: Schema.Boolean,
+    });
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('handles Array(T)', () => {
+    const schema = Schema.Array(Schema.String);
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('handles Unknown / Any via fc.anything', () => {
+    const schema = Schema.Unknown;
+    const arb = schemaToArbitrary(schema);
+    // Just smoke-test that arb produces values; Unknown decodes everything.
+    fc.assert(
+      fc.property(arb, () => true),
+      { numRuns: 20 },
+    );
+  });
+
+  it('handles a tagged union of structs (TokenEvent shape)', () => {
+    const schema = Schema.Union([
+      Schema.Struct({ _tag: Schema.Literal('push'), token: Schema.String }),
+      Schema.Struct({ _tag: Schema.Literal('flush') }),
+      Schema.Struct({ _tag: Schema.Literal('reset') }),
+    ]);
+    const arb = schemaToArbitrary(schema);
+    expectAllDecode(schema, arb);
+  });
+
+  it('throws UnsupportedSchemaError for Declaration nodes', () => {
+    // Schema.instanceOf produces a Declaration node which the walker rejects.
+    const schema = Schema.instanceOf(Uint8Array);
+    expect(() => schemaToArbitrary(schema)).toThrow(UnsupportedSchemaError);
+  });
+
+  it('throws UnsupportedSchemaError naming the unsupported node tag', () => {
+    const schema = Schema.instanceOf(Uint8Array);
+    let caught: unknown;
+    try {
+      schemaToArbitrary(schema);
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).toBeInstanceOf(UnsupportedSchemaError);
+    expect((caught as UnsupportedSchemaError).nodeTag).toBe('Declaration');
+  });
+});

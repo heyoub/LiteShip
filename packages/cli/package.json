@@ -1,0 +1,42 @@
+{
+  "name": "@czap/cli",
+  "version": "0.1.0",
+  "description": "czap CLI — AI-first JSON I/O with human-pretty TTY mode",
+  "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "directory": "packages/cli"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "type": "module",
+  "bin": { "czap": "./bin/czap.mjs" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "development": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "bin"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@czap/core": "workspace:*",
+    "@czap/scene": "workspace:*",
+    "@czap/assets": "workspace:*",
+    "@czap/mcp-server": "workspace:*"
+  },
+  "peerDependencies": {
+    "effect": "4.0.0-beta.32"
+  }
+}
