@@ -4,12 +4,14 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 describe('capsule-compile', () => {
-  // capsule:compile spins up a ts.Program for type-directed detection;
-  // 30s tolerates cold tsx startup + program creation under shared CI load.
+  // capsule:compile spins up a ts.Program for type-directed detection.
+  // 90s tolerates cold tsx startup + program creation under shared CI load
+  // AND v8-coverage instrumentation overhead during coverage:node:tracked
+  // runs (NODE_V8_COVERAGE inheritance roughly doubles tsc-host work).
   beforeAll(async () => {
     const r = await spawnArgv('pnpm', ['run', 'capsule:compile'], { stdio: 'inherit' });
     if (r.exitCode !== 0) throw new Error(`capsule:compile failed: ${r.stderrTail}`);
-  }, 30_000);
+  }, 90_000);
 
   it('writes reports/capsule-manifest.json listing every defineCapsule call', () => {
     const manifestPath = resolve('reports/capsule-manifest.json');
