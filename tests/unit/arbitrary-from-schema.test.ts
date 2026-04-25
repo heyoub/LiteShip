@@ -109,8 +109,9 @@ describe('schemaToArbitrary', () => {
     expectAllDecode(schema, arb);
   });
 
-  it('throws UnsupportedSchemaError for Declaration nodes', () => {
-    // Schema.instanceOf produces a Declaration node which the walker rejects.
+  it('throws UnsupportedSchemaError for unsupported Declaration nodes', () => {
+    // Schema.instanceOf(Uint8Array) is a Declaration whose probe fails;
+    // walker rejects it.
     const schema = Schema.instanceOf(Uint8Array);
     expect(() => schemaToArbitrary(schema)).toThrow(UnsupportedSchemaError);
   });
@@ -125,5 +126,41 @@ describe('schemaToArbitrary', () => {
     }
     expect(caught).toBeInstanceOf(UnsupportedSchemaError);
     expect((caught as UnsupportedSchemaError).nodeTag).toBe('Declaration');
+  });
+
+  it('handles NonEmptyString refinement (checks-based)', () => {
+    const schema = Schema.NonEmptyString;
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (s) => typeof s === 'string' && s.length > 0),
+      { numRuns: 50 },
+    );
+  });
+
+  it('handles String + minLength(3) refinement (checks-based)', () => {
+    const schema = Schema.String.check(Schema.isMinLength(3));
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (s) => typeof s === 'string' && s.length >= 3),
+      { numRuns: 50 },
+    );
+  });
+
+  it('handles Schema.instanceOf(Date) by producing Date instances', () => {
+    const schema = Schema.instanceOf(Date);
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (d) => d instanceof Date),
+      { numRuns: 10 },
+    );
+  });
+
+  it('handles NonEmptyArray (Arrays elements+rest shape)', () => {
+    const schema = Schema.NonEmptyArray(Schema.String);
+    const arb = schemaToArbitrary(schema);
+    fc.assert(
+      fc.property(arb, (a) => Array.isArray(a) && a.length >= 1),
+      { numRuns: 50 },
+    );
   });
 });
