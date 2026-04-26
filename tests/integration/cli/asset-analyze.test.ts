@@ -19,7 +19,7 @@ describe('czap asset analyze', () => {
     const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
     expect(receipt.projection).toBe('beat');
     expect(typeof receipt.markerCount).toBe('number');
-  }, 60000);
+  }, 120_000);
 
   it('exits 1 for unknown asset', async () => {
     const { exit } = await captureCli(() =>

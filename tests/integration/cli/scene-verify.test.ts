@@ -12,5 +12,5 @@ describe('czap scene verify', () => {
     const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
     expect(receipt.status).toBe('ok');
     expect(receipt.generatedTests).toBeGreaterThan(0);
-  }, 60000);
+  }, 120_000);
 });

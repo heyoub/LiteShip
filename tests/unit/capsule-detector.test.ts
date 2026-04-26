@@ -12,8 +12,9 @@ import { Config } from '@czap/core';
 
 // Each test creates a ts.Program (transitively loads workspace .ts files
 // + node_modules .d.ts), which can take >5s in the shared vitest worker
-// pool. Bump the per-test timeout so these don't flake under load.
-describe('detectCapsuleCalls', { timeout: 30_000 }, () => {
+// pool, and >25s under coverage:node:tracked when v8 instrumentation
+// adds overhead to the type checker. 90s leaves comfortable headroom.
+describe('detectCapsuleCalls', { timeout: 90_000 }, () => {
   it('detects direct defineCapsule calls (pureTransform arm)', () => {
     const calls = detectCapsuleCalls([
       resolve('packages/core/src/capsules/canonical-cbor.ts'),

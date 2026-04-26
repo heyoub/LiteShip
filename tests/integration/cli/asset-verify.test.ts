@@ -9,7 +9,7 @@ describe('czap asset verify', () => {
     if (r.exitCode !== 0) throw new Error(`capsule:compile failed: ${r.stderrTail}`);
     const { exit } = await captureCli(() => run(['asset', 'verify', 'intro-bed']));
     expect([0, 1]).toContain(exit);
-  }, 60000);
+  }, 120_000);
 
   it('exits 1 for unknown asset', async () => {
     const { exit } = await captureCli(() => run(['asset', 'verify', 'missing-asset-12345']));
