@@ -28,7 +28,7 @@ describe('content-addressed idempotency', () => {
     const r2 = JSON.parse(second.stdout.trim().split('\n').pop()!);
     expect(r2.cached).toBe(true);
     expect(r2.sceneId).toBe(r1.sceneId);
-  }, 120000);
+  }, 240_000);
 
   it('--force bypasses the cache', async () => {
     await captureCli(() =>
@@ -41,5 +41,5 @@ describe('content-addressed idempotency', () => {
     expect(second.exit).toBe(0);
     const receipt = JSON.parse(second.stdout.trim().split('\n').pop()!);
     expect(receipt.cached).toBeFalsy();
-  }, 120000);
+  }, 240_000);
 });

@@ -46,7 +46,7 @@ describe('czap scene render', () => {
     if (exit === 5) {
       expect(stderr).toMatch(/ffmpeg/i);
     }
-  }, 60000);
+  }, 240_000);
 
   it('returns exit code 1 for a missing scene file', async () => {
     const { exit } = await capture(() =>

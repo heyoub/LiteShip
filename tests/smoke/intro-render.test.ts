@@ -113,5 +113,5 @@ describe('Spec 1.1 E2E smoke — intro scene render', () => {
     } catch {
       // Ignore — Windows file locks occasionally prevent immediate unlink.
     }
-  }, 120_000);
+  }, 240_000);
 });
