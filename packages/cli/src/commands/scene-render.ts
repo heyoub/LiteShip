@@ -68,8 +68,15 @@ export async function sceneRender(scenePath: string, output: string, force = fal
   };
   const cached = tryReadCache(ctx);
   if (cached) {
-    emit({ ...(cached as Record<string, unknown>), cached: true });
-    return 0;
+    // Validate the cached output is still on disk. If the user deleted the
+    // mp4 between runs (test setup, manual cleanup, etc.), the cache is
+    // stale — fall through to a real render rather than emit a phantom
+    // success receipt for a file that doesn't exist.
+    const cachedOutput = (cached as { output?: unknown }).output;
+    if (typeof cachedOutput === 'string' && existsSync(cachedOutput)) {
+      emit({ ...(cached as Record<string, unknown>), cached: true });
+      return 0;
+    }
   }
 
   const mod = (await import(pathToFileURL(abs).href)) as Record<string, unknown>;

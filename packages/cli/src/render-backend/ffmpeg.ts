@@ -7,6 +7,7 @@
  */
 
 import { spawn } from 'node:child_process';
+import { statSync } from 'node:fs';
 import type { VideoFrameOutput } from '@czap/core';
 
 /** Options for `renderWithFfmpeg`. */
@@ -59,13 +60,30 @@ export async function renderWithFfmpeg(
     proc.stdin.end();
   }
 
+  // 'close' (not 'exit') waits for stdio streams to close AND on Windows
+  // gives the OS time to release file handles. ffmpeg writes the output mp4
+  // directly, so we still verify post-close that the file is actually on
+  // disk with non-zero size — ffmpeg has been observed exiting 0 without
+  // producing a file when libx264 disagrees with the input pipe in subtle
+  // ways. Better a typed error here than the caller trusting a phantom mp4.
   await new Promise<void>((resolveExit, rejectExit) => {
-    proc.on('exit', (code) => {
+    proc.on('close', (code) => {
       if (code === 0) resolveExit();
       else rejectExit(new Error(`ffmpeg exited with code ${code}: ${stderrBuf.slice(0, 500)}`));
     });
     proc.on('error', (err) => rejectExit(err));
   });
+
+  // Post-exit reality check: ffmpeg said 0, but did it actually write?
+  let size: number;
+  try {
+    size = statSync(opts.output).size;
+  } catch (err) {
+    throw new Error(`ffmpeg exited 0 but no output file at ${opts.output}: ${(err as Error).message}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+  }
+  if (size === 0) {
+    throw new Error(`ffmpeg exited 0 but wrote a 0-byte file at ${opts.output}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+  }
 
   return { frameCount, elapsedMs: Date.now() - start };
 }
