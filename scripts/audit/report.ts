@@ -2053,7 +2053,24 @@ function main(): void {
   const strikeBoardMarkdownPath = resolveReportPath(repoRoot, reportPaths.strikeBoardMarkdown);
   writeTextFile(jsonPath, JSON.stringify(report, null, 2));
   writeTextFile(markdownPath, renderCodebaseAuditMarkdown(report));
-  writeTextFile(fullTreeJsonPath, JSON.stringify(bundle.fullTreeAccounting, null, 2));
+  // The full tree walks every file on disk including node_modules and pnpm
+  // store mirrors, which on a fully-installed checkout exceeds 2M files. The
+  // entries array would balloon JSON.stringify past V8's max-string limit and
+  // crash the audit. Tests consume `summary.*` only; the markdown render
+  // already takes the first 40 entries as evidence. Truncate entries in the
+  // serialized JSON to a small sample with a note for human readers, and keep
+  // the in-memory bundle intact for the markdown render below.
+  const FULL_TREE_ENTRY_SAMPLE = 200;
+  const totalEntries = bundle.fullTreeAccounting.entries.length;
+  const fullTreeForJson =
+    totalEntries > FULL_TREE_ENTRY_SAMPLE
+      ? {
+          ...bundle.fullTreeAccounting,
+          entries: bundle.fullTreeAccounting.entries.slice(0, FULL_TREE_ENTRY_SAMPLE),
+          entriesNote: `Sample of ${FULL_TREE_ENTRY_SAMPLE} of ${totalEntries} entries. Full counts are in summary.countsByClassification.`,
+        }
+      : bundle.fullTreeAccounting;
+  writeTextFile(fullTreeJsonPath, JSON.stringify(fullTreeForJson, null, 2));
   writeTextFile(fullTreeMarkdownPath, renderFullTreeAccountingMarkdown(bundle.fullTreeAccounting));
   writeTextFile(protocolGapJsonPath, JSON.stringify(bundle.protocolGap, null, 2));
   writeTextFile(protocolGapMarkdownPath, renderProtocolGapMarkdown(bundle.protocolGap));

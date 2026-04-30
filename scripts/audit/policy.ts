@@ -170,7 +170,12 @@ export const hicpSectionTitles: Record<FullAuditSectionId, string> = {
 
 export const packageTopology: Record<string, PackagePolicy> = {
   '@czap/core': {
-    allowedInternalImports: [],
+    // @czap/_spine is the canonical type-only spine that core re-anchors
+    // its public types from (see packages/core/src/brands.ts and
+    // capsule.ts). It compiles to .d.ts only and sits above core in the
+    // dependency direction, so this is not a layering violation — it's the
+    // intended source of truth for shared brand and content-address types.
+    allowedInternalImports: ['@czap/_spine'],
     kind: 'core',
   },
   '@czap/quantizer': {
