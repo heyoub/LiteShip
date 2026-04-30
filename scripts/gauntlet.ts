@@ -14,7 +14,7 @@
  *   6. Reports + gates (serial)
  */
 
-import { spawn } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -24,34 +24,89 @@ interface StepResult {
   durationMs: number;
 }
 
+interface RunOptions {
+  /**
+   * Once this regex matches the child's piped stdout, the work is considered
+   * complete and a grace window opens for the child to exit on its own. If
+   * the child doesn't close before `gracePeriodMs` elapses, we tree-kill it.
+   * Used to defuse vitest browser's Chromium teardown hang on Windows: by the
+   * time the v8 coverage report header prints, the data is already on disk,
+   * so a watchdog reap after the marker is safe to treat as success.
+   */
+  doneMarker?: RegExp;
+  gracePeriodMs?: number;
+}
+
 const stepResults: StepResult[] = [];
 
-function run(label: string, command: string): Promise<void> {
+function killTree(pid: number): void {
+  try {
+    if (process.platform === 'win32') {
+      execSync(`taskkill /T /F /PID ${pid}`, { stdio: 'ignore' });
+    } else {
+      execSync(`kill -9 -${pid}`, { stdio: 'ignore' });
+    }
+  } catch {
+    // Already dead; nothing to do.
+  }
+}
+
+function run(label: string, command: string, opts: RunOptions = {}): Promise<void> {
   const start = Date.now();
-  return new Promise((resolve, reject) => {
+  const useDoneMarker = opts.doneMarker !== undefined;
+  return new Promise((resolveStep, rejectStep) => {
     console.log(`\n${'='.repeat(60)}`);
     console.log(`  ${label}`);
     console.log(`${'='.repeat(60)}\n`);
 
     const child = spawn(command, {
       shell: true,
-      stdio: 'inherit',
+      stdio: useDoneMarker ? ['inherit', 'pipe', 'inherit'] : 'inherit',
       cwd: ROOT,
       env: { ...process.env, FORCE_COLOR: '1' },
     });
 
+    let watchdog: NodeJS.Timeout | undefined;
+    let watchdogFired = false;
+    let markerSeen = false;
+
+    if (useDoneMarker && child.stdout) {
+      child.stdout.on('data', (chunk: Buffer) => {
+        process.stdout.write(chunk);
+        if (!markerSeen && opts.doneMarker!.test(chunk.toString('utf8'))) {
+          markerSeen = true;
+          const grace = opts.gracePeriodMs ?? 60_000;
+          watchdog = setTimeout(() => {
+            watchdogFired = true;
+            console.warn(
+              `\n[gauntlet] "${label}" did not exit within ${grace}ms after the completion marker. ` +
+                `Coverage data was already emitted to disk; tree-killing the child to unblock the next phase.`,
+            );
+            if (child.pid !== undefined) killTree(child.pid);
+          }, grace);
+        }
+      });
+    }
+
     child.on('close', (code) => {
+      if (watchdog) clearTimeout(watchdog);
       const durationMs = Date.now() - start;
       stepResults.push({ command: label, durationMs });
       if (code === 0) {
-        resolve();
+        resolveStep();
+      } else if (watchdogFired && markerSeen) {
+        console.log(
+          `[gauntlet] "${label}" reaped by watchdog after ${durationMs}ms; the completion marker fired before kill, so on-disk artifacts are valid — treating as success.`,
+        );
+        resolveStep();
       } else {
-        reject(new Error(`"${label}" failed with exit code ${code}`));
+        rejectStep(new Error(`"${label}" failed with exit code ${code}`));
       }
     });
 
     child.on('error', (err) => {
-      reject(new Error(`"${label}" spawn error: ${err.message}`));
+      if (watchdog) clearTimeout(watchdog);
+      rejectStep(new Error(`"${label}" spawn error: ${err.message}`));
     });
   });
 }
@@ -106,7 +161,14 @@ async function main() {
     // before merge-coverage.ts gates the merged report.
     await run('coverage:wipe-subprocess', 'rimraf coverage/subprocess-raw');
     await run('coverage:node:tracked', 'pnpm run coverage:node:tracked');
-    await run('coverage:browser', 'pnpm run coverage:browser');
+    // Vitest browser on Windows can hang during Chromium teardown after the v8
+    // coverage report has already been emitted. The doneMarker fires on the
+    // report header; the 90s grace lets the table finish printing, then we
+    // tree-kill any orphan Chromium so the gauntlet can advance.
+    await run('coverage:browser', 'pnpm run coverage:browser', {
+      doneMarker: /Coverage report from v8/,
+      gracePeriodMs: 90_000,
+    });
     await run('merge-subprocess-v8', 'tsx scripts/merge-subprocess-v8.ts');
     await run('coverage:merge', 'tsx scripts/merge-coverage.ts');
 
