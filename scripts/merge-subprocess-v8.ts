@@ -42,10 +42,24 @@ if (!existsSync(finalPath)) {
 const finalMap = createCoverageMap({});
 finalMap.merge(JSON.parse(readFileSync(finalPath, 'utf8')) as Record<string, unknown>);
 
+// In-process vitest v8 coverage and out-of-process v8-to-istanbul disagree
+// about what counts as a statement (different AST visitors), so merging the
+// two for the same file inflates the denominator (subprocess adds statement
+// IDs that weren't in the in-process map) without backfilling hits onto
+// those new IDs — which makes well-covered files *appear* to drop coverage.
+//
+// Subprocess coverage exists to fill in files that the in-process reporter
+// never sees: bootstrap shells like bin.ts / processor.ts / http-server.ts,
+// which are excluded from in-process coverage and only execute under spawn.
+// For files already present in coverage-final.json (covered in-process),
+// the in-process result is authoritative and subprocess data is discarded.
+const inProcessFiles = new Set(finalMap.files());
+
 const dumpFiles = readdirSync(dumpDir).filter((f) => f.startsWith('coverage-') && f.endsWith('.json'));
 console.log(`[merge-subprocess-v8] processing ${dumpFiles.length} v8 dump file(s) from ${dumpDir}`);
 
 let mergedCount = 0;
+let droppedInProcessHits = 0;
 
 for (const dumpName of dumpFiles) {
   const dumpPath = resolve(dumpDir, dumpName);
@@ -69,6 +83,11 @@ for (const dumpName of dumpFiles) {
     const excluded = coverageExclude.some((pat) => minimatch(relForGlob, pat));
     if (excluded) continue;
 
+    if (inProcessFiles.has(normalized)) {
+      droppedInProcessHits++;
+      continue;
+    }
+
     try {
       const converter = new V8ToIstanbul(pathToFileURL(normalized).href, 0);
       await converter.load();
@@ -83,6 +102,10 @@ for (const dumpName of dumpFiles) {
 
   finalMap.merge(subMap);
   mergedCount++;
+}
+
+if (droppedInProcessHits > 0) {
+  console.log(`[merge-subprocess-v8] dropped ${droppedInProcessHits} subprocess script entries already covered in-process`);
 }
 
 writeFileSync(finalPath, JSON.stringify(finalMap.toJSON(), null, 2));

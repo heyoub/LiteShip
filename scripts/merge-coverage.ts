@@ -124,7 +124,31 @@ const coverageMap = createCoverageMap({});
 coverageMap.merge(readCoverage(nodeCoveragePath));
 
 if (existsSync(browserCoveragePath)) {
-  coverageMap.merge(readCoverage(browserCoveragePath));
+  // Browser v8 (chromium + Vite transforms) and node v8 generate divergent
+  // statementMaps for the same source file (different statement-counting
+  // decisions), so unioning the two via CoverageMap.merge inflates the
+  // denominator without backfilling hits — making well-covered node files
+  // *appear* to drop coverage. Browser coverage exists to capture files that
+  // only execute in the browser runtime (capture/, morph/, slot/, …); for
+  // files already covered in-process by node tests the node result is
+  // authoritative, and browser data is filtered out before the merge.
+  const browserCoverage = readCoverage(browserCoveragePath);
+  const nodeFiles = new Set(coverageMap.files());
+  const browserFiltered: Record<string, unknown> = {};
+  let droppedShared = 0;
+  for (const [file, data] of Object.entries(browserCoverage)) {
+    if (nodeFiles.has(file)) {
+      droppedShared++;
+      continue;
+    }
+    browserFiltered[file] = data;
+  }
+  if (droppedShared > 0) {
+    console.log(
+      `[merge-coverage] dropped ${droppedShared} browser file entries already covered in-process to avoid statementMap-divergence corruption`,
+    );
+  }
+  coverageMap.merge(browserFiltered);
 }
 
 mkdirSync(coverageRoot, { recursive: true });
