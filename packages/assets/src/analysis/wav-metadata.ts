@@ -37,7 +37,10 @@ export function extractWavMetadata(bytes: ArrayBuffer): WavMetadata {
   const meta: { title?: string; artist?: string; bpm?: number } = {};
   const dec = new TextDecoder('utf-8');
   for (const chunk of walkRiff(bytes)) {
-    if (chunk.id !== 'LIST') continue;
+    // 'listType' is only present on the LIST variant of WavChunk; checking
+    // for it narrows the union without relying on `id` (which is `string`
+    // on the catch-all variant and doesn't discriminate cleanly).
+    if (!('listType' in chunk)) continue;
     if (chunk.listType !== 'INFO') continue;
     // Skip the first 4 bytes (already captured as listType). Walk
     // sub-chunks: [fourCC][uint32 size][size bytes text, null-padded].
@@ -77,7 +80,7 @@ const WavMetadataSchema = Schema.Struct({
 /** Build a WavMetadataProjection cachedProjection capsule for a named audio asset. */
 export function WavMetadataProjection(
   audioAssetId: string,
-): CapsuleDef<'cachedProjection', unknown, unknown, unknown> {
+): CapsuleDef<'cachedProjection', unknown, WavMetadata, unknown> {
   return defineCapsule({
     _kind: 'cachedProjection',
     name: `${audioAssetId}:wav-metadata`,

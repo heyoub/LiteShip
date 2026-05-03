@@ -19,7 +19,7 @@
  * @module
  */
 
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, resolve, relative } from 'node:path';
 import fastGlob from 'fast-glob';
 import {
@@ -304,7 +304,13 @@ async function main(): Promise<void> {
   };
 
   mkdirSync('reports', { recursive: true });
-  writeFileSync('reports/capsule-manifest.json', JSON.stringify(manifest, null, 2), 'utf8');
+  // Atomic write: stage to a per-process tmp file, then rename. Concurrent
+  // gauntlet test workers each spawn `pnpm run capsule:compile`; without
+  // this, a parallel reader can observe a truncated/partial manifest mid
+  // write and either parse-fail or read an entry-less file.
+  const tmpPath = `reports/capsule-manifest.json.${process.pid}.tmp`;
+  writeFileSync(tmpPath, JSON.stringify(manifest, null, 2), 'utf8');
+  renameSync(tmpPath, 'reports/capsule-manifest.json');
 
   console.log(JSON.stringify({ status: 'ok', capsuleCount: capsules.length }));
 }

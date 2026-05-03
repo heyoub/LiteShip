@@ -94,4 +94,54 @@ describe('withSpawned lifecycle', () => {
       },
     );
   });
+
+  // Regression: dispose() must reap descendants, not just the immediate child.
+  // On Windows, the immediate child is the cmd.exe launcher; if dispose() only
+  // calls child.kill() (TerminateProcess on the launcher), grandchildren keep
+  // running as orphans and hold ports — which is exactly how scene-dev tests
+  // were leaking Vite servers on 5173/5174 across gauntlet runs. On POSIX the
+  // signal can also fail to propagate past the immediate child, depending on
+  // its handlers. Either way: dispose must kill the tree.
+  it('dispose reaps the entire process tree, not just the immediate child', async () => {
+    let grandchildPid: number | undefined;
+    const isAlive = (pid: number): boolean => {
+      try {
+        process.kill(pid, 0);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    await withSpawned(
+      'node',
+      [
+        '-e',
+        // Spawn a long-lived grandchild, print its PID, then idle so the
+        // immediate child stays alive until dispose() reaps the tree.
+        "const cp = require('node:child_process');" +
+          "const g = cp.spawn(process.execPath, ['-e', 'setInterval(()=>{}, 1<<30)'], { stdio: 'ignore' });" +
+          "g.unref();" +
+          "process.stdout.write(JSON.stringify({ grandchild: g.pid }) + '\\n');" +
+          "setInterval(()=>{}, 1<<30);",
+      ],
+      async (handle) => {
+        for await (const line of handle.readline()) {
+          const t = line.trim();
+          if (!t.startsWith('{')) continue;
+          const data = JSON.parse(t) as { grandchild?: number };
+          if (typeof data.grandchild === 'number') {
+            grandchildPid = data.grandchild;
+            break;
+          }
+        }
+      },
+      { stdio: ['ignore', 'pipe', 'pipe'] },
+    );
+
+    expect(grandchildPid).toBeDefined();
+    // Brief grace for the kill to propagate across the tree.
+    await new Promise<void>((r) => setTimeout(r, 500));
+    expect(isAlive(grandchildPid!)).toBe(false);
+  }, 15_000);
 });

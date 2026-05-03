@@ -54,7 +54,7 @@ export function detectOnsets(
 /** Build an OnsetProjection cachedProjection capsule for a named audio asset. */
 export function OnsetProjection(
   audioAssetId: string,
-): CapsuleDef<'cachedProjection', unknown, unknown, unknown> {
+): CapsuleDef<'cachedProjection', unknown, readonly number[], unknown> {
   return defineCapsule({
     _kind: 'cachedProjection',
     name: `${audioAssetId}:onsets`,

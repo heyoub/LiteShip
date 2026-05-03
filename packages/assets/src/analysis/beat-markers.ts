@@ -75,7 +75,7 @@ const BeatMarkerSetSchema = Schema.Struct({
 /** Build a BeatMarkerProjection cachedProjection capsule for a named audio asset. */
 export function BeatMarkerProjection(
   audioAssetId: string,
-): CapsuleDef<'cachedProjection', unknown, unknown, unknown> {
+): CapsuleDef<'cachedProjection', unknown, BeatMarkerSet, unknown> {
   return defineCapsule({
     _kind: 'cachedProjection',
     name: `${audioAssetId}:beats`,

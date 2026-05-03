@@ -58,6 +58,6 @@ function guessContainer(bytes: ArrayBuffer): string {
 }
 
 function evalFrac(s: string): number {
-  const [n, d] = s.split('/').map(Number);
+  const [n = 0, d] = s.split('/').map(Number);
   return d ? n / d : n;
 }

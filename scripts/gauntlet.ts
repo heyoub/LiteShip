@@ -67,13 +67,44 @@ function run(label: string, command: string, opts: RunOptions = {}): Promise<voi
     });
 
     let watchdog: NodeJS.Timeout | undefined;
+    let postKill: NodeJS.Timeout | undefined;
     let watchdogFired = false;
     let markerSeen = false;
+    let settled = false;
+
+    const settle = (ok: boolean, code: number | null): void => {
+      if (settled) return;
+      settled = true;
+      if (watchdog) clearTimeout(watchdog);
+      if (postKill) clearTimeout(postKill);
+      const durationMs = Date.now() - start;
+      stepResults.push({ command: label, durationMs });
+      if (ok) {
+        if (watchdogFired && markerSeen) {
+          console.log(
+            `[gauntlet] "${label}" reaped by watchdog after ${durationMs}ms; the completion marker fired before kill, so on-disk artifacts are valid — treating as success.`,
+          );
+        }
+        resolveStep();
+      } else {
+        rejectStep(new Error(`"${label}" failed with exit code ${code}`));
+      }
+    };
 
     if (useDoneMarker && child.stdout) {
+      // Rolling tail buffer so the marker still matches when the target line
+      // arrives split across chunk boundaries (vitest browser on Windows
+      // routinely fragments "Coverage report from v8" mid-phrase). 4 KiB is
+      // far wider than any marker we use; capping prevents unbounded growth
+      // on long-running children.
+      let tail = '';
+      const TAIL_CAP = 4096;
       child.stdout.on('data', (chunk: Buffer) => {
         process.stdout.write(chunk);
-        if (!markerSeen && opts.doneMarker!.test(chunk.toString('utf8'))) {
+        if (markerSeen) return;
+        const text = chunk.toString('utf8');
+        tail = (tail + text).slice(-TAIL_CAP);
+        if (opts.doneMarker!.test(tail)) {
           markerSeen = true;
           const grace = opts.gracePeriodMs ?? 60_000;
           watchdog = setTimeout(() => {
@@ -83,29 +114,31 @@ function run(label: string, command: string, opts: RunOptions = {}): Promise<voi
                 `Coverage data was already emitted to disk; tree-killing the child to unblock the next phase.`,
             );
             if (child.pid !== undefined) killTree(child.pid);
+            // Chromium grandchildren can hold the inherited stdout handle
+            // past process exit on Windows, which keeps our pipe open and
+            // suppresses 'close'. Force settlement 5s after the tree-kill so
+            // an unkillable orphan can't deadlock the rest of the gauntlet.
+            postKill = setTimeout(() => settle(true, 0), 5_000);
           }, grace);
         }
       });
     }
 
     child.on('close', (code) => {
-      if (watchdog) clearTimeout(watchdog);
-      const durationMs = Date.now() - start;
-      stepResults.push({ command: label, durationMs });
       if (code === 0) {
-        resolveStep();
+        settle(true, code);
       } else if (watchdogFired && markerSeen) {
-        console.log(
-          `[gauntlet] "${label}" reaped by watchdog after ${durationMs}ms; the completion marker fired before kill, so on-disk artifacts are valid — treating as success.`,
-        );
-        resolveStep();
+        settle(true, code);
       } else {
-        rejectStep(new Error(`"${label}" failed with exit code ${code}`));
+        settle(false, code);
       }
     });
 
     child.on('error', (err) => {
+      if (settled) return;
+      settled = true;
       if (watchdog) clearTimeout(watchdog);
+      if (postKill) clearTimeout(postKill);
       rejectStep(new Error(`"${label}" spawn error: ${err.message}`));
     });
   });
@@ -151,6 +184,7 @@ async function main() {
     await run('test:redteam', 'pnpm run test:redteam');
     await run('bench', 'pnpm run bench');
     await run('bench:gate', 'pnpm run bench:gate');
+    await run('bench:trend', 'pnpm run bench:trend');
     await run('bench:reality', 'pnpm run bench:reality');
     await run('package:smoke', 'pnpm run package:smoke');
 

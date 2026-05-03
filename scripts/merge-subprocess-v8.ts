@@ -14,7 +14,7 @@
  * @module
  */
 
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import libCoverage from 'istanbul-lib-coverage';
@@ -60,10 +60,30 @@ console.log(`[merge-subprocess-v8] processing ${dumpFiles.length} v8 dump file(s
 
 let mergedCount = 0;
 let droppedInProcessHits = 0;
+let skippedMalformed = 0;
 
 for (const dumpName of dumpFiles) {
   const dumpPath = resolve(dumpDir, dumpName);
-  const dump = JSON.parse(readFileSync(dumpPath, 'utf8')) as { result: Array<{ url: string; functions: unknown[] }> };
+  // V8 dumps can be empty or truncated when the producing process is killed
+  // mid-write — by us (test cleanup tree-kill on Windows), by the OS (OOM,
+  // STATUS_ACCESS_VIOLATION), or by external tooling. A bad dump is missing
+  // data, not a build failure: skip it with a warning and continue. The
+  // 59-of-60 surviving dumps still produce a valid merged report.
+  const raw = readFileSync(dumpPath, 'utf8');
+  if (raw.length === 0) {
+    skippedMalformed++;
+    console.warn(`[merge-subprocess-v8] skipping empty dump ${dumpName} (process killed before flush)`);
+    continue;
+  }
+  let dump: { result: Array<{ url: string; functions: unknown[] }> };
+  try {
+    dump = JSON.parse(raw) as { result: Array<{ url: string; functions: unknown[] }> };
+  } catch (err) {
+    skippedMalformed++;
+    const reason = err instanceof Error ? err.message : String(err);
+    console.warn(`[merge-subprocess-v8] skipping malformed dump ${dumpName}: ${reason}`);
+    continue;
+  }
   if (!Array.isArray(dump.result)) continue;
 
   const subMap = createCoverageMap({});
@@ -110,3 +130,49 @@ if (droppedInProcessHits > 0) {
 
 writeFileSync(finalPath, JSON.stringify(finalMap.toJSON(), null, 2));
 console.log(`[merge-subprocess-v8] merged ${mergedCount} subprocess dump(s) into ${finalPath}`);
+
+// Skip rate is a structural metric: each skipped dump is a process that was
+// killed mid-write of its v8 coverage profile (typically by withSpawned's
+// dispose tree-kill on Windows where there's no graceful signal). A small
+// rate is normal; a high rate means we're losing meaningful coverage.
+//   - Per-run summary at coverage/subprocess-summary.json (last-run snapshot)
+//   - Append to coverage/subprocess-history.jsonl (append-only trend data)
+//   - WARN  if skipRate > 5% — visibility, no exit code change
+//   - FAIL  if skipRate > 50% — something is fundamentally broken
+const totalDumps = dumpFiles.length;
+const skipRate = totalDumps === 0 ? 0 : skippedMalformed / totalDumps;
+const summary = {
+  generatedAt: new Date().toISOString(),
+  totalDumps,
+  mergedCount,
+  skippedMalformed,
+  skipRate,
+};
+const summaryPath = resolve(repoRoot, 'coverage', 'subprocess-summary.json');
+writeFileSync(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
+const historyPath = resolve(repoRoot, 'coverage', 'subprocess-history.jsonl');
+appendFileSync(historyPath, `${JSON.stringify({ schemaVersion: 1, ...summary })}\n`);
+
+if (skippedMalformed > 0) {
+  const ratePct = (skipRate * 100).toFixed(1);
+  if (skipRate > 0.5) {
+    console.error(
+      `\n[merge-subprocess-v8] FAIL: skip rate ${ratePct}% (${skippedMalformed}/${totalDumps}) ` +
+        `exceeds the 50% structural-failure threshold. Coverage data is mostly missing. ` +
+        `Investigate the parent that's killing subprocesses before they can flush v8 dumps.`,
+    );
+    process.exit(1);
+  }
+  if (skipRate > 0.05) {
+    console.warn(
+      `\n[merge-subprocess-v8] WARN: skip rate ${ratePct}% (${skippedMalformed}/${totalDumps}) ` +
+        `is above the 5% advisory threshold. Coverage gaps will accumulate. ` +
+        `See coverage/subprocess-history.jsonl for the trend.`,
+    );
+  } else {
+    console.log(
+      `[merge-subprocess-v8] skipped ${skippedMalformed}/${totalDumps} dump(s) (${ratePct}%) — ` +
+        `within the 5% advisory threshold; tracked in coverage/subprocess-history.jsonl`,
+    );
+  }
+}

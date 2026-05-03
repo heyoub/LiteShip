@@ -40,7 +40,7 @@ export function computeWaveform(
 export function WaveformProjection(
   audioAssetId: string,
   opts: { bins: number },
-): CapsuleDef<'cachedProjection', unknown, unknown, unknown> {
+): CapsuleDef<'cachedProjection', unknown, readonly number[], unknown> {
   return defineCapsule({
     _kind: 'cachedProjection',
     name: `${audioAssetId}:waveform:${opts.bins}`,

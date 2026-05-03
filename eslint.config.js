@@ -198,7 +198,7 @@ export default tseslint.config(
     },
   },
   // Bans raw node:child_process imports outside the canonical spawn helper.
-  // All subprocess work goes through scripts/lib/spawn.ts so coverage
+  // All subprocess work goes through @czap/cli/src/lib/spawn.ts so coverage
   // capture (NODE_V8_COVERAGE inheritance) can never be silently broken
   // by an env override.
   //
@@ -214,6 +214,7 @@ export default tseslint.config(
     files: ['packages/**/*.ts', 'tests/**/*.ts', 'scripts/**/*.ts'],
     ignores: [
       // (1) Canonical helper + thin re-exports.
+      'packages/cli/src/lib/spawn.ts',
       'scripts/lib/spawn.ts',
       'scripts/support/pnpm-process.ts',
       'scripts/gauntlet.ts', // reason: gauntlet phase orchestration (predates this work, has its own drift guards)

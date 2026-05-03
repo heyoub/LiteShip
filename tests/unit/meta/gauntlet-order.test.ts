@@ -15,7 +15,7 @@ describe('gauntlet ordering', () => {
 
   test('serial gauntlet preserves the canonical sequential artifact order', () => {
     expect(packageJson.scripts['gauntlet:serial']).toBe(
-      'pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run docs:check && pnpm exec tsx scripts/check-invariants.ts && pnpm test && pnpm run test:vite && pnpm run test:astro && pnpm run test:tailwind && pnpm run test:e2e && pnpm run test:e2e:stress && pnpm run test:e2e:stream-stress && pnpm run test:flake && pnpm run test:redteam && pnpm run bench && pnpm run bench:gate && pnpm run bench:reality && pnpm run package:smoke && pnpm run coverage:merge && pnpm run report:runtime-seams && pnpm run audit && pnpm run report:satellite-scan && pnpm run feedback:verify && pnpm run runtime:gate && pnpm run flex:verify',
+      'pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run docs:check && pnpm exec tsx scripts/check-invariants.ts && pnpm test && pnpm run test:vite && pnpm run test:astro && pnpm run test:tailwind && pnpm run test:e2e && pnpm run test:e2e:stress && pnpm run test:e2e:stream-stress && pnpm run test:flake && pnpm run test:redteam && pnpm run bench && pnpm run bench:gate && pnpm run bench:trend && pnpm run bench:reality && pnpm run package:smoke && pnpm run coverage:merge && pnpm run report:runtime-seams && pnpm run audit && pnpm run report:satellite-scan && pnpm run feedback:verify && pnpm run runtime:gate && pnpm run flex:verify',
     );
   });
 

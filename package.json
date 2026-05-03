@@ -8,7 +8,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "tsc --build packages/core packages/quantizer packages/compiler packages/web packages/detect packages/edge packages/worker packages/vite packages/astro packages/remotion",
+    "build": "tsc --build packages/core packages/quantizer packages/compiler packages/web packages/detect packages/edge packages/worker packages/vite packages/astro packages/remotion packages/scene packages/assets packages/cli packages/mcp-server",
     "typecheck": "tsc --noEmit -p tsconfig.json && pnpm run typecheck:scripts && pnpm run typecheck:tests",
     "typecheck:scripts": "tsc --project tsconfig.scripts.json",
     "typecheck:tests": "tsc --project tsconfig.tests.json",
@@ -39,6 +39,7 @@
     "coverage:unit": "vitest run --config vitest.config.ts --coverage tests/unit/",
     "coverage:smoke": "vitest run --config vitest.config.ts --coverage tests/smoke/",
     "bench:gate": "pnpm run build && tsx scripts/bench-gate.ts",
+    "bench:trend": "tsx scripts/bench-trend.ts",
     "bench:reality": "pnpm run build && tsx scripts/bench-reality.ts",
     "bench": "pnpm run build && tsx tests/bench/core.bench.ts && tsx tests/bench/compiler.bench.ts && tsx tests/bench/video.bench.ts && tsx tests/bench/self-measure.bench.ts && tsx tests/bench/directive.bench.ts",
     "capsule:compile": "pnpm exec tsx scripts/capsule-compile.ts",
@@ -53,7 +54,7 @@
     "test:tailwind": "pnpm exec tsx scripts/test-tailwind.ts",
     "package:smoke": "pnpm run build && pnpm exec tsx scripts/package-smoke.ts",
     "gauntlet:full": "tsx scripts/gauntlet.ts",
-    "gauntlet:serial": "pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run docs:check && pnpm exec tsx scripts/check-invariants.ts && pnpm test && pnpm run test:vite && pnpm run test:astro && pnpm run test:tailwind && pnpm run test:e2e && pnpm run test:e2e:stress && pnpm run test:e2e:stream-stress && pnpm run test:flake && pnpm run test:redteam && pnpm run bench && pnpm run bench:gate && pnpm run bench:reality && pnpm run package:smoke && pnpm run coverage:merge && pnpm run report:runtime-seams && pnpm run audit && pnpm run report:satellite-scan && pnpm run feedback:verify && pnpm run runtime:gate && pnpm run flex:verify",
+    "gauntlet:serial": "pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run docs:check && pnpm exec tsx scripts/check-invariants.ts && pnpm test && pnpm run test:vite && pnpm run test:astro && pnpm run test:tailwind && pnpm run test:e2e && pnpm run test:e2e:stress && pnpm run test:e2e:stream-stress && pnpm run test:flake && pnpm run test:redteam && pnpm run bench && pnpm run bench:gate && pnpm run bench:trend && pnpm run bench:reality && pnpm run package:smoke && pnpm run coverage:merge && pnpm run report:runtime-seams && pnpm run audit && pnpm run report:satellite-scan && pnpm run feedback:verify && pnpm run runtime:gate && pnpm run flex:verify",
     "demo:remotion": "pnpm run --filter remotion-demo render",
     "docs:build": "pnpm exec typedoc",
     "docs:check": "pnpm exec tsx scripts/docs-check.ts",

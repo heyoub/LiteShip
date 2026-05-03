@@ -14,15 +14,16 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "composite": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@czap/_spine": ["../_spine/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"],
   "references": [
-    { "path": "../_spine" },
     { "path": "../core" },
     { "path": "../scene" },
-    { "path": "../assets" },
-    { "path": "../mcp-server" }
+    { "path": "../assets" }
   ]
 }

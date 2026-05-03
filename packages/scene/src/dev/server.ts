@@ -8,8 +8,10 @@
  */
 
 import { createServer, type ViteDevServer } from 'vite';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tmpdir } from 'node:os';
+import { randomBytes } from 'node:crypto';
 
 /** Handle returned from `startDevServer` — exposes the live URL + a close hook. */
 export interface DevServerHandle {
@@ -20,8 +22,17 @@ export interface DevServerHandle {
 /** Start the scene-dev Vite server bound to `scenePath`. */
 export async function startDevServer(scenePath: string): Promise<DevServerHandle> {
   const here = dirname(fileURLToPath(import.meta.url));
+  // Per-instance cacheDir: when multiple dev servers boot concurrently (e.g.
+  // vitest forks running scene-dev tests in parallel), the default
+  // node_modules/.vite/ cache is shared and the racing dep-scans trip
+  // "The server is being restarted or closed. Request is outdated" in
+  // rolldown's dep-scan plugin. Isolating each instance to its own cache
+  // dir eliminates the race; cost is a one-time scan per process, which is
+  // negligible for the player.html entry.
+  const cacheDir = join(tmpdir(), `czap-scene-dev-${process.pid}-${randomBytes(4).toString('hex')}`);
   const server: ViteDevServer = await createServer({
     root: here,
+    cacheDir,
     server: { port: 0 },
     plugins: [
       {

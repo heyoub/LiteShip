@@ -1,3 +1,4 @@
+import { appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { repoRoot } from '../vitest.shared.js';
 import { ensureArtifactContext } from './artifact-context.js';
@@ -113,6 +114,8 @@ async function main(): Promise<void> {
       }
     : null;
 
+  const canarySummaries = benchConfig.canaryTaskNames.map(summarizeTask);
+
   writeTextFile(
     resolve(artifactDir, 'directive-gate.json'),
     JSON.stringify(
@@ -127,7 +130,7 @@ async function main(): Promise<void> {
         benchConfig,
         summary,
         workerGateDecision,
-        canaries: benchConfig.canaryTaskNames.map(summarizeTask),
+        canaries: canarySummaries,
         workerStartupAudit,
         workerStartupSplit,
         llmRuntimeSteadySignals,
@@ -138,6 +141,31 @@ async function main(): Promise<void> {
       2,
     ),
   );
+
+  // Append a one-line summary to benchmarks/history.jsonl so bench:trend can
+  // gate on rolling-median drift across runs. The directive-gate.json above
+  // is overwritten every run; this jsonl is append-only history. Source +
+  // environment fingerprints let the trend script dedupe runs that reused
+  // cached replicates (i.e. no real new measurement).
+  const historyEntry = {
+    schemaVersion: 1,
+    generatedAt: new Date().toISOString(),
+    gauntletRunId: context.gauntletRunId,
+    sourceFingerprint: context.sourceFingerprint,
+    environmentFingerprint: context.environmentFingerprint,
+    replicateSource: source,
+    canaries: canarySummaries.map((c) => ({
+      name: c.name,
+      medianMeanNs: c.medianMeanNs,
+      medianP99Ns: c.medianP99Ns,
+    })),
+    pairs: pairResults.map((p) => ({
+      label: p.label,
+      gate: p.gate,
+      medianOverhead: p.medianOverhead,
+    })),
+  };
+  appendFileSync(resolve(artifactDir, 'history.jsonl'), `${JSON.stringify(historyEntry)}\n`);
 
   console.log('\n=== BENCH GATE: Directive Overhead Check ===\n');
 

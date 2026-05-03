@@ -1,13 +1,12 @@
 /**
  * Production CLI subprocess re-exports.
  *
- * The implementation lives at scripts/lib/spawn.ts to give every spawn site
- * in the codebase (cli, scripts, tests) a single canonical owner. This file
- * re-exports the production-relevant surface so existing imports stay
- * unchanged.
+ * The canonical implementation lives at ./lib/spawn.ts so it's part of the
+ * cli's tsc --build (rootDir) tree. scripts/lib/spawn.ts is a thin shim
+ * pointing at the same file so existing test/script imports keep working.
  *
  * @module
  */
 
-export { spawnArgv, quoteWindowsArg } from '../../../scripts/lib/spawn.js';
-export type { SpawnArgvOpts, SpawnResult } from '../../../scripts/lib/spawn.js';
+export { spawnArgv, quoteWindowsArg } from './lib/spawn.js';
+export type { SpawnArgvOpts, SpawnResult } from './lib/spawn.js';

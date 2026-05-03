@@ -24,6 +24,14 @@ import fg from 'fast-glob';
 interface CheckResult {
   pass: boolean;
   detail: string;
+  /**
+   * Captured subprocess output to surface when the check fails. Without this,
+   * a failing `sh()` invocation reports only its `pass: false` and we lose
+   * the actual error — invisible flakes inside gauntlet:full are debuggable
+   * only by re-running the check standalone, which often masks load-induced
+   * failures.
+   */
+  failOutput?: string;
 }
 
 interface Check {
@@ -180,7 +188,11 @@ const checks: Check[] = [
     check: () => {
       const r = sh('pnpm test');
       // pnpm test outputs the count; just rely on exit status here.
-      return { pass: r.ok, detail: r.ok ? 'pnpm test passed' : 'pnpm test FAILED' };
+      return {
+        pass: r.ok,
+        detail: r.ok ? 'pnpm test passed' : 'pnpm test FAILED',
+        failOutput: r.ok ? undefined : r.out,
+      };
     },
   },
 
@@ -388,7 +400,16 @@ for (const c of checks) {
   const r = c.check();
   const tag = r.pass ? 'PASS' : 'FAIL';
   console.log(`  [${tag}] ${c.dim.padEnd(22)} ${r.detail}`);
-  if (!r.pass) anyFail = true;
+  if (!r.pass) {
+    anyFail = true;
+    // Surface the captured subprocess output on failure so the actual error
+    // is visible when this runs inside gauntlet:full (which discards stdout
+    // by default). Cap the tail so a long log doesn't drown the report.
+    if (r.failOutput && r.failOutput.length > 0) {
+      const tail = r.failOutput.length > 4000 ? `…[truncated]\n${r.failOutput.slice(-4000)}` : r.failOutput;
+      console.log(`\n  --- ${c.dim} captured output ---\n${tail}\n  --- end captured output ---\n`);
+    }
+  }
 }
 
 console.log('');
