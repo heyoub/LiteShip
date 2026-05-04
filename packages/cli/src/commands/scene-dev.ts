@@ -25,7 +25,7 @@ async function loadStartDevServer(): Promise<StartDevServerFn> {
   const serverSrcPath = resolve(here, '../../../scene/src/dev/server.ts');
   if (existsSync(serverSrcPath)) {
     // tsx / dev mode: source is present, import it directly as a file URL
-    const mod = (await import(pathToFileURL(serverSrcPath).href)) as { startDevServer: StartDevServerFn };
+    const mod = (await import(/* @vite-ignore */ pathToFileURL(serverSrcPath).href)) as { startDevServer: StartDevServerFn };
     return mod.startDevServer;
   }
   // Compiled mode: import from dist via package specifier

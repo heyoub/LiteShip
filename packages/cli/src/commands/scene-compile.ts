@@ -52,7 +52,7 @@ export async function sceneCompile(scenePath: string): Promise<number> {
     return 1;
   }
 
-  const mod = (await import(pathToFileURL(abs).href)) as SceneModule;
+  const mod = (await import(/* @vite-ignore */ pathToFileURL(abs).href)) as SceneModule;
 
   const cap = Object.values(mod).find(isCapsule);
   const contract = Object.values(mod).find(isContract);

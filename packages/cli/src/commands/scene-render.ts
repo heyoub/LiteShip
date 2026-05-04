@@ -79,7 +79,7 @@ export async function sceneRender(scenePath: string, output: string, force = fal
     }
   }
 
-  const mod = (await import(pathToFileURL(abs).href)) as Record<string, unknown>;
+  const mod = (await import(/* @vite-ignore */ pathToFileURL(abs).href)) as Record<string, unknown>;
   const cap = Object.values(mod).find(isCapsule);
   const contract = Object.values(mod).find(isContract);
   if (!cap || !contract) {

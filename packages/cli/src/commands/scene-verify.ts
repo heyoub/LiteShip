@@ -29,7 +29,7 @@ export async function sceneVerify(scenePath: string): Promise<number> {
     return 1;
   }
 
-  const mod = (await import(pathToFileURL(abs).href)) as Record<string, unknown>;
+  const mod = (await import(/* @vite-ignore */ pathToFileURL(abs).href)) as Record<string, unknown>;
   const cap = Object.values(mod).find(
     (v): v is { _kind: string; id: string; name: string } =>
       typeof v === 'object' && v !== null && '_kind' in v &&

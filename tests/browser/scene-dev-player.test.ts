@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { commands } from '@vitest/browser/context';
+import { commands } from 'vitest/browser';
 
 declare module 'vitest/internal/browser' {
   interface BrowserCommands {
