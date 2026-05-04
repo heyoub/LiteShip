@@ -55,7 +55,15 @@ function main(): Verdict {
   // Only run vitest if there are generated tests present.
   if (manifest.capsules.length > 0) {
     try {
-      execSync('pnpm exec vitest run tests/generated/', { stdio: 'inherit' });
+      // Route nested vitest stdout to *our* stderr so this script's stdout
+      // stays a single-line JSON receipt. Without this, vitest reporter
+      // output interleaves on stdout and the receipt is no longer the last
+      // line — which broke the capsule-verify integration test under nested
+      // pnpm test → flex:verify spawn chains (last line was vitest summary
+      // text, JSON.parse exploded with "Unexpected token '...'").
+      execSync('pnpm exec vitest run tests/generated/', {
+        stdio: ['ignore', process.stderr, process.stderr],
+      });
     } catch {
       return { status: 'failed', errors: ['generated tests failed'], capsuleCount: manifest.capsules.length };
     }

@@ -17,8 +17,15 @@ describe('capsule-verify', () => {
       },
       { stdio: ['ignore', 'pipe', 'pipe'] },
     );
-    const lastLine = lines.filter((l) => l.trim().length > 0).pop()!;
-    const receipt = JSON.parse(lastLine);
+    // Don't trust "last line is JSON" — pnpm/vitest can append reporter
+    // output past the script's console.log under nested spawn chains.
+    // Pick the last line that actually parses as a JSON object.
+    const receiptLine = lines
+      .map((line) => line.trim())
+      .filter((line) => line.startsWith('{') && line.endsWith('}'))
+      .pop();
+    expect(receiptLine, `no JSON receipt in stdout. lines=${JSON.stringify(lines)}`).toBeDefined();
+    const receipt = JSON.parse(receiptLine!);
     expect(receipt.status).toBe('ok');
   }, 90_000);
 });
