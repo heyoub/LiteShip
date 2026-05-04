@@ -26,6 +26,6 @@ describe('capsule-verify', () => {
       .pop();
     expect(receiptLine, `no JSON receipt in stdout. lines=${JSON.stringify(lines)}`).toBeDefined();
     const receipt = JSON.parse(receiptLine!);
-    expect(receipt.status).toBe('ok');
+    expect(receipt.status, `receipt: ${JSON.stringify(receipt)}`).toBe('ok');
   }, 90_000);
 });

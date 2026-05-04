@@ -19,28 +19,24 @@
  * @module
  */
 
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, resolve, relative } from 'node:path';
 
 /**
- * Atomic write that skips the filesystem entirely when on-disk content
- * already matches. Concurrent gauntlet test workers each spawn `pnpm run
- * capsule:compile`; under that load, every process generates identical
- * output for every target file. The skip-if-unchanged read makes the hot
- * path a pure read with no write contention, and the tmp+rename for the
- * cold path means readers never observe a partial view and writers can't
- * trip Windows EBUSY/EACCES on the shared destination.
+ * Atomic write via tmp file + rename. Concurrent gauntlet test workers
+ * each spawn `pnpm run capsule:compile`; tmp+rename means readers never
+ * observe a partial view and writers can't trip Windows EBUSY/EACCES on
+ * the shared destination.
+ *
+ * We deliberately re-write even when content is unchanged. capsule:verify
+ * uses `sourceAge > testAge` as its staleness signal, so the test file
+ * mtime must advance on every compile. A skip-if-unchanged optimization
+ * (an earlier version of this helper) caused stale-flagged failures
+ * inside flex:verify's nested pnpm test chain because the OUTER gauntlet
+ * capsule:compile wrote at minute 0, the INNER one at minute 21+ skipped,
+ * and any source mtime in between would falsely trip the staleness check.
  */
-function atomicWriteIfDiffers(targetPath: string, content: string): void {
-  if (existsSync(targetPath)) {
-    try {
-      if (readFileSync(targetPath, 'utf8') === content) return;
-    } catch {
-      // Read failed (likely another writer is mid-rename of the same target);
-      // fall through to write — our atomic rename will resolve to one of the
-      // identical-content writes, which is the correct final state.
-    }
-  }
+function atomicWrite(targetPath: string, content: string): void {
   // pid + hrtime keeps tmp paths unique across concurrent processes AND across
   // multiple writes from the same process within a single millisecond.
   const tmpPath = `${targetPath}.${process.pid}-${process.hrtime.bigint()}.tmp`;
@@ -283,8 +279,8 @@ async function main(): Promise<void> {
     const { testFile, benchFile } = dispatchHarness(d.kind, stub, harnessCtx);
 
     mkdirSync(dirname(testPath), { recursive: true });
-    atomicWriteIfDiffers(testPath, testFile);
-    atomicWriteIfDiffers(benchPath, benchFile);
+    atomicWrite(testPath, testFile);
+    atomicWrite(benchPath, benchFile);
 
     const sourceRel = relative(cwd, d.file).replace(/\\/g, '/');
     const testRel = relative(cwd, testPath).replace(/\\/g, '/');
@@ -330,13 +326,10 @@ async function main(): Promise<void> {
   };
 
   mkdirSync('reports', { recursive: true });
-  // Manifest carries `generatedAt` so the skip-if-unchanged shortcut never
-  // fires (every spawn produces a different timestamp); the atomic tmp+
-  // rename in atomicWriteIfDiffers is what protects this write under
-  // concurrent test workers. Generated test/bench files above DO hit the
-  // skip-if-unchanged path because their content is fully deterministic,
-  // which is where most of the contention reduction comes from.
-  atomicWriteIfDiffers(
+  // tmp+rename protects this write under concurrent test workers — manifest
+  // content always changes (generatedAt is a fresh ISO timestamp per spawn),
+  // so direct writeFileSync on the shared destination would race.
+  atomicWrite(
     'reports/capsule-manifest.json',
     JSON.stringify(manifest, null, 2),
   );
