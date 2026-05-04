@@ -10,7 +10,15 @@ describe('czap asset analyze', () => {
     // Task 5 registered WavMetadataProjection('intro-bed') alongside the
     // existing defineAsset entry, the manifest is guaranteed to contain
     // intro-bed — so a non-zero exit here is a real regression.
-    const r = await spawnArgv('pnpm', ['run', 'capsule:compile'], { stdio: 'ignore' });
+    // stdio array (not the string 'ignore') so spawnArgv can attach its
+    // stderr ring buffer — without this, r.stderrTail is always empty and
+    // a non-zero exit produces "capsule:compile failed: " with no detail,
+    // which is exactly the failure mode that surfaced during a flake.
+    const r = await spawnArgv(
+      'pnpm',
+      ['run', 'capsule:compile'],
+      { stdio: ['ignore', 'pipe', 'pipe'] },
+    );
     if (r.exitCode !== 0) throw new Error(`capsule:compile failed: ${r.stderrTail}`);
     const { exit, stdout } = await captureCli(() =>
       run(['asset', 'analyze', 'intro-bed', '--projection=beat']),
