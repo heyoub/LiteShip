@@ -26,7 +26,12 @@ describe('coverage config drift guard', () => {
     // bin.ts, http-server.ts, stdio-server.ts, processor.ts, processor-bootstrap.ts,
     // dev/player.ts. Each replaces a c8 ignore that couldn't be honored across
     // the tsx → v8 → istanbul source-map merge chain.
-    expect(coverageExclude).toHaveLength(17);
+    // + 2 unmeasurable-by-construction modules: scene/src/contract.ts (pure
+    // type declarations, erased by TS — 0/0/0/0 in the report) and
+    // cli/src/spawn-helpers.ts (re-export shim — `export {...} from './lib
+    // /spawn.js'` has no executable statements for v8 to track even though
+    // the targets are exercised via vitest-runner + spawn-quoting-drift).
+    expect(coverageExclude).toHaveLength(19);
   });
 
   it('merge-coverage.ts PACKAGE_THRESHOLD_OVERRIDES are pinned', () => {

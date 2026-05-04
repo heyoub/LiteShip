@@ -34,6 +34,16 @@ export async function startDevServer(scenePath: string): Promise<DevServerHandle
     root: here,
     cacheDir,
     server: { port: 0 },
+    // optimizeDeps.noDiscovery short-circuits Vite's async dep-scan (the
+    // discoverProjectDependencies path that walks player.html). Without it,
+    // server.listen() returns *while* a fire-and-forget scan is still walking
+    // imports; if the caller then calls server.close() — which every test
+    // and short-lived CLI invocation does — the scan's next resolveId() hits
+    // the closed plugin container and the unconditional logger.error path
+    // prints "The server is being restarted or closed. Request is outdated"
+    // to stderr. The dep-scan is cosmetic for player.html (modules are
+    // served on-demand anyway); disabling it removes the race entirely.
+    optimizeDeps: { noDiscovery: true, include: [] },
     plugins: [
       {
         name: 'czap-scene-watch',

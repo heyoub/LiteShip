@@ -50,6 +50,19 @@ export const coverageExclude = [
   'packages/web/src/lite.ts',
   'packages/web/src/types.ts',
   'packages/worker/src/compositor-types.ts',
+  // contract.ts is a pure type-declaration module (10 export type/interface,
+  // 0 runtime statements). TS erases it at build time so v8 has nothing to
+  // instrument; it shows 0/0/0/0 in the merged report and pollutes blind-spot
+  // signals with a non-issue. Excluded so the coverage report only counts
+  // files that *can* actually be measured.
+  'packages/scene/src/contract.ts',
+  // spawn-helpers.ts is a re-export shim — its only body is `export {...}
+  // from './lib/spawn.js'`. The actual implementation in cli/src/lib/spawn.ts
+  // is measured normally; v8 reports 0% on the shim because there are no
+  // executable statements to track (re-export declarations aren't tracked
+  // even when the re-export targets are exercised). Real consumers (vitest
+  // -runner, spawn-quoting-drift drift test) keep the shim load-bearing.
+  'packages/cli/src/spawn-helpers.ts',
 ];
 
 export const nodeTestInclude = [
