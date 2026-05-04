@@ -284,14 +284,25 @@ const checks: Check[] = [
   {
     dim: 'Release discipline',
     check: () => {
-      const feedback = sh('pnpm run feedback:verify');
       const docsCheck = sh('pnpm run docs:check');
 
-      // feedback:verify can fail solely on source-fingerprint mismatch when artifacts
-      // were produced against an earlier source tree. This happens both standalone
-      // (artifacts left over from a prior run) and inside the gauntlet (intermediate
-      // steps between the gauntlet's feedback:verify and flex:verify can re-touch the
-      // tree). It is non-blocking signal — every other integrity check still ran.
+      // Inside the gauntlet, the orchestrator runs feedback:verify itself one
+      // step before flex:verify (see tests/unit/meta/gauntlet-order.test.ts).
+      // Re-spawning it here would re-walk the tree minutes later and trip on
+      // benign source-fingerprint drift from intermediate phases — which is
+      // exactly the noise the previous "fingerprint-drift(non-blocking)"
+      // label was papering over. Trust the gauntlet's prior pass instead.
+      if (process.env.CZAP_GAUNTLET === '1') {
+        return {
+          pass: docsCheck.ok,
+          detail: `feedback-verify=trusted-from-gauntlet-phase docs-check=${docsCheck.ok}`,
+        };
+      }
+
+      // Standalone: re-run feedback:verify ourselves. Source-fingerprint-only
+      // failures are non-blocking (artifacts from a prior run, every integrity
+      // check still ran) — flag them but don't fail.
+      const feedback = sh('pnpm run feedback:verify');
       const fingerprintOnlyDrift =
         !feedback.ok && /source fingerprint does not match|source-fingerprint/.test(feedback.out);
 

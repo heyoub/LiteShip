@@ -86,7 +86,11 @@ describe('sceneDevSetup', () => {
   }, 30_000);
 
   it('sceneDev returns the missing-scene exit code without entering the SIGINT loop', async () => {
-    const exit = await sceneDev('does/not/exist.ts');
-    expect(exit).toBe(1);
+    // captureStdout to keep emitError's stderr write off the gauntlet log —
+    // without this the structured `scene not found` error event leaks past
+    // vitest's reporter and reads like an actual gauntlet failure to humans.
+    const { result, stderr } = await captureStdout(() => sceneDev('does/not/exist.ts'));
+    expect(result).toBe(1);
+    expect(stderr).toMatch(/scene not found/);
   });
 });

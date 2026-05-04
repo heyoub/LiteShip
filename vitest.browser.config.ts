@@ -15,14 +15,19 @@ const browserInstances = (coverageEnabled ? 'chromium' : process.env.CZAP_VITEST
   .map((browser) => ({ browser }));
 
 // Coverage reporters: the merge step consumes `json` (coverage-final.json).
-// `text` gives immediate console feedback. `html` + `lcov` produce large
-// on-disk trees that local feedback loops don't use -- only CI keeps them so
-// downstream tooling (PR artifact uploads, drill-down browsing) still has
-// them. Local runs drop to `text` + `json` to avoid the disk write overhead
+// We use `text-summary` (totals only) instead of `text` here because the
+// browser run only loads a fraction of the source tree — most files report
+// 0% during this phase, which prints a 200+ line table that looks
+// catastrophic to readers but is meaningless until the merge step folds in
+// the in-process Node coverage. The merge step (coverage:merge) prints the
+// real per-file table once. `html` + `lcov` produce large on-disk trees
+// that local feedback loops don't use -- only CI keeps them so downstream
+// tooling (PR artifact uploads, drill-down browsing) still has them. Local
+// runs drop to `text-summary` + `json` to avoid the disk write overhead
 // without losing any merge-critical data.
 const coverageReporters = isCI
-  ? (['text', 'html', 'lcov', 'json'] as const)
-  : (['text', 'json'] as const);
+  ? (['text-summary', 'html', 'lcov', 'json'] as const)
+  : (['text-summary', 'json'] as const);
 
 export default defineConfig({
   resolve: {

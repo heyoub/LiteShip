@@ -23,6 +23,19 @@ Current first-class support target:
 - Chromium + Firefox + WebKit for the shared runtime/browser matrix
 - Chromium-first capability coverage for WebCodecs capture and related browser-specific paths
 
+### PowerShell note: capturing gauntlet logs in UTF-8
+
+The gauntlet emits UTF-8 (vitest reporter glyphs, JSON receipts). PowerShell's
+`>` redirect writes UTF-16 LE by default and many viewers/grep tools then
+mis-render the unicode arrows (`↓`, `✓`) as `Γåô` / `Γ£ô` mojibake. Use
+`Out-File -Encoding utf8` (or run `chcp 65001` first) to capture clean logs:
+
+```powershell
+pnpm run gauntlet:full | Out-File -Encoding utf8 .log
+```
+
+Bash and PowerShell-on-Linux are unaffected.
+
 ## Security Defaults
 
 The runtime is now hardened around explicit trust boundaries instead of permissive defaults:

@@ -63,7 +63,11 @@ function run(label: string, command: string, opts: RunOptions = {}): Promise<voi
       shell: true,
       stdio: useDoneMarker ? ['inherit', 'pipe', 'inherit'] : 'inherit',
       cwd: ROOT,
-      env: { ...process.env, FORCE_COLOR: '1' },
+      // CZAP_GAUNTLET=1 lets downstream gates (e.g. flex-verify) detect that
+      // they're running mid-gauntlet so they can trust prior gauntlet phases
+      // (feedback:verify, capsule:verify, etc.) instead of re-spawning them
+      // and tripping on intermediate fingerprint drift.
+      env: { ...process.env, FORCE_COLOR: '1', CZAP_GAUNTLET: '1' },
     });
 
     let watchdog: NodeJS.Timeout | undefined;
