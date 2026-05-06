@@ -138,7 +138,7 @@ const checks: Check[] = [
       const adrs = readdirSync('docs/adr').filter((f) => f.endsWith('.md'));
       const required = [
         'README.md',
-        '0000-template.md',
+        '_template.md',
         '0001-namespace-pattern.md',
         '0002-zero-alloc.md',
         '0003-content-addressing.md',

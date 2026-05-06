@@ -21,4 +21,4 @@ ADRs are the source of truth for **why** — what decision was made and why it w
 
 ## Template
 
-See [0000-template.md](./0000-template.md) for the canonical ADR structure.
+See [_template.md](./_template.md) for the canonical ADR structure.
