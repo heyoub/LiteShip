@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Schema } from 'effect';
-import { defineCapsule, getCapsuleCatalog, resetCapsuleCatalog } from '@czap/core';
+import { defineCapsule, getCapsuleCatalog } from '@czap/core';
+import { resetCapsuleCatalog } from '@czap/core/testing';
 
 describe('defineCapsule', () => {
   beforeEach(() => resetCapsuleCatalog());

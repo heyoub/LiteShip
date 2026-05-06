@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Schema } from 'effect';
-import { defineCapsule, resetCapsuleCatalog, Harness } from '@czap/core';
+import { defineCapsule } from '@czap/core';
+import { resetCapsuleCatalog } from '@czap/core/testing';
+import * as Harness from '@czap/core/harness';
 
 describe('generatePureTransformHarness', () => {
   beforeEach(() => resetCapsuleCatalog());

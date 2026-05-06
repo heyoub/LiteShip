@@ -28,8 +28,10 @@ async function loadStartDevServer(): Promise<StartDevServerFn> {
     const mod = (await import(/* @vite-ignore */ pathToFileURL(serverSrcPath).href)) as { startDevServer: StartDevServerFn };
     return mod.startDevServer;
   }
-  // Compiled mode: import from dist via package specifier
-  const mod = (await import('@czap/scene')) as { startDevServer: StartDevServerFn };
+  // Compiled mode: import from dist via the dedicated /dev sub-path. The dev
+  // server is intentionally NOT on @czap/scene's main entry (it imports
+  // node:os/node:crypto/vite-server and would break browser/Worker bundlers).
+  const mod = (await import('@czap/scene/dev')) as { startDevServer: StartDevServerFn };
   return mod.startDevServer;
 }
 

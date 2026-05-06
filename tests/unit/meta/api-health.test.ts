@@ -166,8 +166,9 @@ const API_REGISTRY: Record<string, { methods: string[]; values?: string[] }> = {
   // ── Canonical CBOR (RFC 8949 §4.2.1) ─────────────────────────────
   CanonicalCbor: { methods: ['encode'] },
 
-  // ── Harness templates ─────────────────────────────────────────────
-  Harness: { methods: ['generatePureTransform', 'generateReceiptedMutation', 'generateStateMachine', 'generateSiteAdapter', 'generatePolicyGate', 'generateCachedProjection', 'generateSceneComposition'] },
+  // Harness lives at `@czap/core/harness` sub-path — intentionally NOT in
+  // the main entry to keep fast-check + code-gen surface out of every
+  // consumer's bundle. Verified separately below.
 };
 
 // ── Standalone function exports ─────────────────────────────────────
@@ -185,7 +186,7 @@ const STANDALONE_FUNCTIONS = [
   'tupleMap',
   'defineCapsule',
   'getCapsuleCatalog',
-  'resetCapsuleCatalog',
+  // `resetCapsuleCatalog` lives at `@czap/core/testing` sub-path — see below.
 ];
 
 // ── Error classes ───────────────────────────────────────────────────
@@ -326,6 +327,37 @@ describe('API health canary', () => {
         'Add them to API_REGISTRY, STANDALONE_FUNCTIONS, or BRANDED_CONSTRUCTORS ' +
         'in tests/unit/api-health.test.ts',
       ).toEqual([]);
+    });
+  });
+
+  describe('sub-path exports', () => {
+    test('@czap/core/testing exposes resetCapsuleCatalog', async () => {
+      const Testing = await import('@czap/core/testing');
+      expect(typeof Testing.resetCapsuleCatalog).toBe('function');
+    });
+
+    test('@czap/core/harness exposes the harness generators', async () => {
+      const Harness = await import('@czap/core/harness');
+      const expected = [
+        'generatePureTransform',
+        'generateReceiptedMutation',
+        'generateStateMachine',
+        'generateSiteAdapter',
+        'generatePolicyGate',
+        'generateCachedProjection',
+        'generateSceneComposition',
+      ];
+      for (const name of expected) {
+        expect(typeof (Harness as Record<string, unknown>)[name]).toBe('function');
+      }
+    });
+
+    test('resetCapsuleCatalog is NOT on the main entry (footgun gate)', () => {
+      expect((Core as Record<string, unknown>).resetCapsuleCatalog).toBeUndefined();
+    });
+
+    test('Harness namespace is NOT on the main entry (bundle-weight gate)', () => {
+      expect((Core as Record<string, unknown>).Harness).toBeUndefined();
     });
   });
 });

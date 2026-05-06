@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { defineAsset, AssetRef, getAssetRegistry, resetAssetRegistry } from '@czap/assets';
+import { defineAsset, AssetRef, getAssetRegistry } from '@czap/assets';
+import { resetAssetRegistry } from '@czap/assets/testing';
 
 describe('Asset capsule', () => {
   beforeEach(() => resetAssetRegistry());

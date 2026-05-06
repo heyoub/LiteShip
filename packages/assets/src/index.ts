@@ -1,6 +1,8 @@
 /** Asset capsules + analysis projections for czap. */
 
-export { defineAsset, AssetRef, getAssetRegistry, resetAssetRegistry } from './contract.js';
+export { defineAsset, AssetRef, getAssetRegistry } from './contract.js';
+// `resetAssetRegistry` is intentionally NOT re-exported here — it mutates
+// global registry state and ships from `@czap/assets/testing` only.
 export type { AssetDecl, AssetKind } from './contract.js';
 
 export { audioDecoder } from './decoders/audio.js';

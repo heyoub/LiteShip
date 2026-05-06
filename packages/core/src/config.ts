@@ -96,7 +96,12 @@ export const Config = {
     void cfg; // cfg reserved for future per-project customisation
     // Use forward-slash join so paths are portable across platforms.
     const r = (sub: string) => `${repoRoot.replace(/\\/g, '/')}/${sub}`;
+    // NOTE: longer prefixes MUST come before shorter ones — vitest's alias
+    // resolver matches the first prefix in iteration order, so e.g.
+    // `@czap/core/testing` would be intercepted by `@czap/core` if listed first.
     return {
+      '@czap/core/testing':        r('packages/core/src/testing.ts'),
+      '@czap/core/harness':        r('packages/core/src/harness/index.ts'),
       '@czap/core':                r('packages/core/src/index.ts'),
       '@czap/quantizer':           r('packages/quantizer/src/index.ts'),
       '@czap/compiler':            r('packages/compiler/src/index.ts'),
@@ -108,7 +113,9 @@ export const Config = {
       '@czap/astro/runtime':       r('packages/astro/src/runtime/index.ts'),
       '@czap/astro':               r('packages/astro/src/index.ts'),
       '@czap/remotion':            r('packages/remotion/src/index.ts'),
+      '@czap/scene/dev':           r('packages/scene/src/dev/server.ts'),
       '@czap/scene':               r('packages/scene/src/index.ts'),
+      '@czap/assets/testing':      r('packages/assets/src/testing.ts'),
       '@czap/assets':              r('packages/assets/src/index.ts'),
       '@czap/cli':                 r('packages/cli/src/index.ts'),
       '@czap/mcp-server':          r('packages/mcp-server/src/index.ts'),

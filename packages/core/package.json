@@ -21,6 +21,16 @@
       "import": "./dist/index.js",
       "development": "./src/index.ts"
     },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js",
+      "development": "./src/testing.ts"
+    },
+    "./harness": {
+      "types": "./dist/harness/index.d.ts",
+      "import": "./dist/harness/index.js",
+      "development": "./src/harness/index.ts"
+    },
     "./*": {
       "types": "./dist/*.d.ts",
       "import": "./dist/*.js",
@@ -35,8 +45,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "cborg": "^4.2.0",
-    "effect": "4.0.0-beta.32"
+    "cborg": "^4.2.0"
   },
   "peerDependencies": {
     "effect": ">=4.0.0-beta.0"

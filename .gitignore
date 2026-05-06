@@ -30,3 +30,23 @@ tests/smoke/.out-*.mp4
 
 # czap capsule factory scratch (generated MCP manifests, content-addressed cache)
 .czap/
+
+# Local Claude tooling state (per-machine, contains absolute paths)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# IDE workspace files (per-developer)
+*.code-workspace
+
+# Gauntlet / shell output logs (large, churn often)
+*.log
+
+# Atomic-write tmp orphans from interrupted runs
+tests/generated/**/*.tmp
+reports/**/*.tmp
+
+# Internal-only docs (kept locally for reference, not for OSS distribution)
+docs/superpowers/
+docs/sixsigma/
+docs/plans/
+docs/internal/

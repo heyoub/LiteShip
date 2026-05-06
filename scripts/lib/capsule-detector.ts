@@ -22,6 +22,8 @@ import { resolve } from 'node:path';
  * checker has no resolver for that bare specifier).
  */
 export const WORKSPACE_ALIASES: Readonly<Record<string, readonly string[]>> = {
+  '@czap/core/testing': ['packages/core/src/testing.ts'],
+  '@czap/core/harness': ['packages/core/src/harness/index.ts'],
   '@czap/core': ['packages/core/src/index.ts'],
   '@czap/quantizer': ['packages/quantizer/src/index.ts'],
   '@czap/compiler': ['packages/compiler/src/index.ts'],
@@ -33,7 +35,9 @@ export const WORKSPACE_ALIASES: Readonly<Record<string, readonly string[]>> = {
   '@czap/astro/runtime': ['packages/astro/src/runtime/index.ts'],
   '@czap/astro': ['packages/astro/src/index.ts'],
   '@czap/remotion': ['packages/remotion/src/index.ts'],
+  '@czap/scene/dev': ['packages/scene/src/dev/server.ts'],
   '@czap/scene': ['packages/scene/src/index.ts'],
+  '@czap/assets/testing': ['packages/assets/src/testing.ts'],
   '@czap/assets': ['packages/assets/src/index.ts'],
   '@czap/cli': ['packages/cli/src/index.ts'],
   '@czap/mcp-server': ['packages/mcp-server/src/index.ts'],

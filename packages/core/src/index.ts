@@ -233,13 +233,16 @@ export type {
 
 export { TypeValidator } from './capsule.js';
 
-export { defineCapsule, getCapsuleCatalog, resetCapsuleCatalog } from './assembly.js';
+export { defineCapsule, getCapsuleCatalog } from './assembly.js';
 export type { CapsuleDef } from './assembly.js';
+// `resetCapsuleCatalog` is intentionally NOT re-exported here — it mutates
+// global registry state and ships from `@czap/core/testing` only.
 
 // Capsule declarations — concrete instances of the 7-arm factory
 export { boundaryEvaluateCapsule } from './capsules/boundary-evaluate.js';
 export { tokenBufferCapsule } from './capsules/token-buffer.js';
 export { canonicalCborCapsule } from './capsules/canonical-cbor.js';
 
-// Harness — per-arm test + bench template generators
-export * as Harness from './harness/index.js';
+// Harness lives at `@czap/core/harness` — per-arm test + bench template
+// generators. Not re-exported here so consumers don't pull fast-check and
+// the code-gen surface into every bundle.

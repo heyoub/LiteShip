@@ -20,6 +20,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "development": "./src/index.ts"
+    },
+    "./dev": {
+      "types": "./dist/dev/server.d.ts",
+      "import": "./dist/dev/server.js",
+      "development": "./src/dev/server.ts"
     }
   },
   "files": [
@@ -33,6 +38,6 @@
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {
-    "effect": "4.0.0-beta.32"
+    "effect": ">=4.0.0-beta.0"
   }
 }
