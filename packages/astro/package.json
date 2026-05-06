@@ -11,6 +11,15 @@
   },
   "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
   "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "keywords": [
+    "czap",
+    "astro",
+    "astro-integration",
+    "ssr",
+    "satellite",
+    "client-directives",
+    "typescript"
+  ],
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",

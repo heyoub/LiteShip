@@ -11,6 +11,16 @@
   },
   "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
   "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "keywords": [
+    "czap",
+    "dom",
+    "morph",
+    "sse",
+    "ssr",
+    "physical-state",
+    "webcodecs",
+    "typescript"
+  ],
   "type": "module",
   "sideEffects": [
     "./src/physical/capture.ts",
@@ -40,7 +50,6 @@
   },
   "dependencies": {
     "@czap/core": "workspace:*",
-    "effect": "4.0.0-beta.32",
     "mediabunny": "^1.39.2"
   },
   "peerDependencies": {

@@ -15,9 +15,9 @@ Constraint-based adaptive rendering framework. Quantize continuous signals into 
 
 ## Source Of Truth
 
-- [docs/STATUS.md](C:\Users\<username>\.projects\czap\docs\STATUS.md) is the live operational truth for gates, current counts, known watch items, and current artifact policy.
+- [docs/STATUS.md](./docs/STATUS.md) is the live operational truth for gates, current counts, known watch items, and current artifact policy.
 - Generated reports in `reports/` and `benchmarks/` are the live telemetry truth when they are fresh and verification passes.
-- [docs/ARCHITECTURE.md](C:\Users\<username>\.projects\czap\docs\ARCHITECTURE.md) and the `docs/adr/` records are conceptual documents. They explain the model and design intent, but they are not run-by-run telemetry ledgers.
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) and the `docs/adr/` records are conceptual documents. They explain the model and design intent, but they are not run-by-run telemetry ledgers.
 - If a conceptual doc and a verified artifact disagree, trust `STATUS.md` and the verified generated artifacts first.
 
 ## Package Structure

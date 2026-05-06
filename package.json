@@ -2,6 +2,15 @@
   "name": "czap",
   "version": "0.1.0",
   "private": true,
+  "description": "Constraint-based adaptive rendering framework — monorepo root",
+  "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
   "type": "module",
   "packageManager": "pnpm@10.32.1",
   "engines": {

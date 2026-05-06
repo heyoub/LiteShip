@@ -11,6 +11,14 @@
   },
   "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
   "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "keywords": [
+    "czap",
+    "quantizer",
+    "boundary",
+    "state-machine",
+    "adaptive-rendering",
+    "typescript"
+  ],
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",

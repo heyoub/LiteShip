@@ -3,7 +3,24 @@
   "version": "0.1.0",
   "description": "Thin MCP server over czap's capsule factory dispatch",
   "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "directory": "packages/mcp-server"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
   "type": "module",
+  "sideEffects": false,
+  "keywords": [
+    "czap",
+    "mcp",
+    "model-context-protocol",
+    "ai-tooling",
+    "capsule-factory",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

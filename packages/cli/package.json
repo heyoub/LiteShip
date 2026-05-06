@@ -11,6 +11,14 @@
   },
   "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
   "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "keywords": [
+    "czap",
+    "cli",
+    "mcp",
+    "scene-render",
+    "capsule",
+    "typescript"
+  ],
   "type": "module",
   "bin": { "czap": "./bin/czap.mjs" },
   "main": "./dist/index.js",
