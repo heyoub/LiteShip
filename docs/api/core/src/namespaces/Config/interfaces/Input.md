@@ -6,7 +6,7 @@
 
 # Interface: Input
 
-Defined in: [core/src/config.ts:124](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L124)
+Defined in: [core/src/config.ts:131](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L131)
 
 Raw user-facing input to [Config.make](../../../variables/Config.md#make) — every field is optional.
 
@@ -16,7 +16,7 @@ Raw user-facing input to [Config.make](../../../variables/Config.md#make) — ev
 
 > `readonly` `optional` **astro?**: `Partial`\<[`CoreAstroConfig`](../../../interfaces/CoreAstroConfig.md)\>
 
-Defined in: [core/src/config.ts:130](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L130)
+Defined in: [core/src/config.ts:137](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L137)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/config.ts:130](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **boundaries?**: `Record`\<`string`, [`Shape`](../../Boundary/type-aliases/Shape.md)\<`string`, readonly \[`string`, `string`\]\>\>
 
-Defined in: [core/src/config.ts:125](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L125)
+Defined in: [core/src/config.ts:132](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L132)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/src/config.ts:125](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **styles?**: `Record`\<`string`, [`Shape`](../../Style/type-aliases/Shape.md)\<[`Shape`](../../Boundary/type-aliases/Shape.md)\<`string`, readonly \[`string`, `string`\]\>\>\>
 
-Defined in: [core/src/config.ts:128](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L128)
+Defined in: [core/src/config.ts:135](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L135)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/src/config.ts:128](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **themes?**: `Record`\<`string`, [`Shape`](../../Theme/type-aliases/Shape.md)\<readonly `string`[]\>\>
 
-Defined in: [core/src/config.ts:127](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L127)
+Defined in: [core/src/config.ts:134](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L134)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/src/config.ts:127](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **tokens?**: `Record`\<`string`, [`Shape`](../../Token/type-aliases/Shape.md)\<`string`, readonly `string`[]\>\>
 
-Defined in: [core/src/config.ts:126](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L126)
+Defined in: [core/src/config.ts:133](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L133)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [core/src/config.ts:126](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **vite?**: `Partial`\<[`CorePluginConfig`](../../../interfaces/CorePluginConfig.md)\>
 
-Defined in: [core/src/config.ts:129](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L129)
+Defined in: [core/src/config.ts:136](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L136)

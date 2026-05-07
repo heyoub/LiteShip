@@ -31,7 +31,6 @@
 - [Easing](namespaces/Easing/README.md)
 - [FrameBudget](namespaces/FrameBudget/README.md)
 - [GenFrame](namespaces/GenFrame/README.md)
-- [Harness](namespaces/Harness/README.md)
 - [HLC](namespaces/HLC/README.md)
 - [LiveCell](namespaces/LiveCell/README.md)
 - [Op](namespaces/Op/README.md)
@@ -235,7 +234,6 @@
 - [isValidationError](functions/isValidationError.md)
 - [isWire](functions/isWire.md)
 - [isZap](functions/isZap.md)
-- [resetCapsuleCatalog](functions/resetCapsuleCatalog.md)
 - [tupleMap](functions/tupleMap.md)
 
 ## References
