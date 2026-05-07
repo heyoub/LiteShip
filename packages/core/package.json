@@ -55,6 +55,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@czap/_spine": "workspace:*",
     "cborg": "^4.2.0"
   },
   "peerDependencies": {

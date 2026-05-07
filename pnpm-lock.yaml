@@ -161,7 +161,7 @@ importers:
         version: file:packages/astro(astro@6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3))(effect@4.0.0-beta.32)
       '@czap/core':
         specifier: file:../../packages/core
-        version: link:../../packages/core
+        version: file:packages/core(effect@4.0.0-beta.32)
       astro:
         specifier: ^6.0.0
         version: 6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3)
@@ -173,7 +173,7 @@ importers:
     dependencies:
       '@czap/core':
         specifier: file:../../packages/core
-        version: link:../../packages/core
+        version: file:packages/core(effect@4.0.0-beta.32)
       '@czap/quantizer':
         specifier: file:../../packages/quantizer
         version: file:packages/quantizer(effect@4.0.0-beta.32)
@@ -216,7 +216,7 @@ importers:
         version: file:packages/astro(astro@6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3))(effect@4.0.0-beta.32)
       '@czap/core':
         specifier: file:../../packages/core
-        version: link:../../packages/core
+        version: file:packages/core(effect@4.0.0-beta.32)
       '@czap/edge':
         specifier: file:../../packages/edge
         version: file:packages/edge(effect@4.0.0-beta.32)
@@ -234,7 +234,7 @@ importers:
         version: file:packages/astro(astro@6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3))(effect@4.0.0-beta.32)
       '@czap/core':
         specifier: file:../../packages/core
-        version: link:../../packages/core
+        version: file:packages/core(effect@4.0.0-beta.32)
       astro:
         specifier: ^6.0.0
         version: 6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3)
@@ -310,6 +310,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@czap/_spine':
+        specifier: workspace:*
+        version: link:../_spine
       cborg:
         specifier: ^4.2.0
         version: 4.5.8
@@ -370,6 +373,9 @@ importers:
 
   packages/scene:
     dependencies:
+      '@czap/_spine':
+        specifier: workspace:*
+        version: link:../_spine
       '@czap/core':
         specifier: workspace:*
         version: link:../core
@@ -545,6 +551,11 @@ packages:
     resolution: {directory: packages/astro, type: directory}
     peerDependencies:
       astro: '>=6.0.0'
+      effect: '>=4.0.0-beta.0'
+
+  '@czap/core@file:packages/core':
+    resolution: {directory: packages/core, type: directory}
+    peerDependencies:
       effect: '>=4.0.0-beta.0'
 
   '@czap/edge@file:packages/edge':
@@ -4768,6 +4779,12 @@ snapshots:
       '@czap/web': link:packages/web
       '@czap/worker': link:packages/worker
       astro: 6.0.5(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(terser@5.46.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3)
+      effect: 4.0.0-beta.32
+
+  '@czap/core@file:packages/core(effect@4.0.0-beta.32)':
+    dependencies:
+      '@czap/_spine': link:packages/_spine
+      cborg: 4.5.8
       effect: 4.0.0-beta.32
 
   '@czap/edge@file:packages/edge(effect@4.0.0-beta.32)':

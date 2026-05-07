@@ -36,8 +36,9 @@ mean tsc figures out the order; you don't have to.
 pnpm test
 ```
 
-You should see ~225 test files and ~2,948 tests pass in roughly 75 seconds.
-If anything fails, that's a real signal — open an issue with the failure
+You should see roughly 225 test files and 2,940+ tests pass in about 75
+seconds (counts shift slightly between runs as new coverage lands). If
+anything fails, that's a real signal — open an issue with the failure
 tail.
 
 ## 4. Your first boundary
@@ -73,7 +74,7 @@ const primary = Token.make({
   fallback: '#00e5ff',
 });
 
-console.log(Token.cssVar(primary));              // '--czap-primary'
+console.log(Token.cssVar(primary));              // 'var(--czap-primary)'
 console.log(Token.tap(primary, { theme: 'dark' })); // '#00e5ff'
 
 // A style that responds to the boundary
@@ -89,25 +90,46 @@ const card = Style.make({
 console.log(card.boundary === viewport);  // true
 ```
 
-Run it:
+Run it (the repo's devDependencies already include `tsx` for executing
+TypeScript directly; you don't need to install anything):
 
 ```bash
 pnpm exec tsx try-czap.ts
 ```
 
 You should see the three boundary evaluations print, then the token's CSS
-variable name and dark-theme value, then `true`.
+variable name and dark-theme value, then `true`. If `tsx` is not on
+PATH for some reason, `pnpm install` at the repo root pulls it in.
 
 ## 5. Compile to CSS
 
 The boundary above doesn't *do* anything until something compiles it. Add
-the CSS compiler:
+the CSS compiler — note that `compile()` takes the boundary, a per-state
+property map, and an optional selector:
 
 ```ts
 import { CSSCompiler } from '@czap/compiler';
 
-const compiled = CSSCompiler.compile(viewport);
-console.log(compiled.css);
+const result = CSSCompiler.compile(
+  viewport,
+  {
+    mobile: { 'font-size': '14px', padding: '0.5rem' },
+    tablet: { 'font-size': '16px', padding: '1rem' },
+    desktop: { 'font-size': '18px', padding: '2rem' },
+  },
+  '.card',
+);
+
+// `.raw` is the serialized CSS string; `.containerRules` is the
+// structured form (rule per state) you'd feed into a build pipeline.
+console.log(result.raw);
+// @container viewport-width (...) { .card { font-size: 14px; padding: 0.5rem } }
+// @container viewport-width (...) { .card { font-size: 16px; padding: 1rem } }
+// @container viewport-width (...) { .card { font-size: 18px; padding: 2rem } }
+
+// You can also call CSSCompiler.serialize(result) to produce the same
+// string from the structured form — useful when you want to inspect
+// individual rules first.
 ```
 
 You'll get a CSS block keyed by the boundary states — ready to paste into

@@ -44,6 +44,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@czap/_spine": "workspace:*",
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {

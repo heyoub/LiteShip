@@ -1,6 +1,33 @@
 {
   "name": "@czap/_spine",
-  "private": true,
   "version": "0.1.0",
-  "types": "./index.d.ts"
+  "description": "Type-only spine for czap — declaration-file source of truth shared across published packages",
+  "license": "MIT",
+  "author": "The Free Battery Factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "directory": "packages/_spine"
+  },
+  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
+  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "keywords": [
+    "czap",
+    "types",
+    "type-spine",
+    "internal",
+    "typescript"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "*.d.ts",
+    "tsconfig.json"
+  ]
 }

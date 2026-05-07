@@ -50,3 +50,13 @@ docs/superpowers/
 docs/sixsigma/
 docs/plans/
 docs/internal/
+
+# Stale tsc emit artifacts in scripts/ (tsconfig.scripts.json sets noEmit;
+# anything compiled here is leftover from misconfigured local runs)
+scripts/**/*.js
+scripts/**/*.js.map
+scripts/**/*.d.ts
+scripts/**/*.d.ts.map
+
+# Astro-generated content/types (regenerated on every astro dev / sync)
+**/.astro/
