@@ -73,7 +73,7 @@ Spring config driving CSS easing injection.
 
 Defined in: [quantizer/src/quantizer.ts:165](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L165)
 
-Motion tier gating active targets; see [TIER\_TARGETS](../variables/TIER_TARGETS.md).
+Motion tier gating active targets; see `TIER_TARGETS` (in `@czap/quantizer/testing`).
 
 ## Methods
 

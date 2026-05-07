@@ -55,7 +55,7 @@ function firstState<B extends Boundary.Shape>(boundary: B): StateUnion<B> {
  * `css` emits style declarations, `glsl`/`wgsl` emit shader uniforms,
  * `aria` emits accessibility attributes, `ai` emits model-facing signals.
  * MotionTier gates which targets a device is permitted to receive; see
- * {@link TIER_TARGETS}.
+ * `TIER_TARGETS` (in `@czap/quantizer/testing`).
  */
 export type OutputTarget = 'css' | 'glsl' | 'wgsl' | 'aria' | 'ai';
 
@@ -132,7 +132,7 @@ export interface SpringConfig {
 /**
  * Options accepted by {@link Q.from}.
  *
- * `tier` gates which output targets get produced (see {@link TIER_TARGETS}).
+ * `tier` gates which output targets get produced (see `TIER_TARGETS` (in `@czap/quantizer/testing`)).
  * `spring` enables automatic CSS `--czap-easing` injection on CSS outputs.
  */
 export interface QuantizerFromOptions {
@@ -161,7 +161,7 @@ export interface QuantizerConfig<B extends Boundary.Shape, O extends QuantizerOu
   readonly outputs: O;
   /** Content-addressed identity (FNV-1a of boundary id + outputs). */
   readonly id: ContentAddress;
-  /** Motion tier gating active targets; see {@link TIER_TARGETS}. */
+  /** Motion tier gating active targets; see `TIER_TARGETS` (in `@czap/quantizer/testing`). */
   readonly tier?: MotionTier;
   /** Spring config driving CSS easing injection. */
   readonly spring?: SpringConfig;

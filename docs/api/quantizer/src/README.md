@@ -11,7 +11,6 @@
 ## Namespaces
 
 - [AnimatedQuantizer](namespaces/AnimatedQuantizer/README.md)
-- [MemoCache](namespaces/MemoCache/README.md)
 
 ## Interfaces
 
@@ -36,11 +35,9 @@
 
 - [AnimatedQuantizer](variables/AnimatedQuantizer.md)
 - [Evaluate](variables/Evaluate.md)
-- [MemoCache](variables/MemoCache.md)
 - [OutputTargetSchema](variables/OutputTargetSchema.md)
 - [Q](variables/Q.md)
 - [QuantizerOutputsSchema](variables/QuantizerOutputsSchema.md)
-- [TIER\_TARGETS](variables/TIER_TARGETS.md)
 - [Transition](variables/Transition.md)
 - [TransitionConfigSchema](variables/TransitionConfigSchema.md)
 - [TransitionMapSchema](variables/TransitionMapSchema.md)

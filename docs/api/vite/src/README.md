@@ -51,10 +51,6 @@ const config = defineConfig({
 - [PrimitiveShape](type-aliases/PrimitiveShape.md)
 - [VirtualModuleId](type-aliases/VirtualModuleId.md)
 
-## Variables
-
-- [KIND\_META](variables/KIND_META.md)
-
 ## Functions
 
 - [compileQuantizeBlock](functions/compileQuantizeBlock.md)

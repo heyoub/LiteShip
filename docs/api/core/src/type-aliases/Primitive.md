@@ -8,7 +8,7 @@
 
 > **Primitive**\<`T`\> = [`Shape`](../namespaces/Cell/type-aliases/Shape.md)\<`T`\> \| [`Shape`](../namespaces/Derived/type-aliases/Shape.md)\<`T`\> \| [`Shape`](../namespaces/Zap/type-aliases/Shape.md)\<`T`\> \| [`Shape`](../namespaces/Wire/type-aliases/Shape.md)\<`T`\>
 
-Defined in: [core/src/index.ts:208](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L208)
+Defined in: [core/src/index.ts:211](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L211)
 
 Union of the four reactive primitives czap exposes to user code.
 

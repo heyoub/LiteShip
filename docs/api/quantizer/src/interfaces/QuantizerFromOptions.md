@@ -10,7 +10,7 @@ Defined in: [quantizer/src/quantizer.ts:138](https://github.com/TheFreeBatteryFa
 
 Options accepted by [Q.from](../variables/Q.md#from).
 
-`tier` gates which output targets get produced (see [TIER\_TARGETS](../variables/TIER_TARGETS.md)).
+`tier` gates which output targets get produced (see `TIER_TARGETS` (in `@czap/quantizer/testing`)).
 `spring` enables automatic CSS `--czap-easing` injection on CSS outputs.
 
 ## Properties

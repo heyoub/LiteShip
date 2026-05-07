@@ -8,7 +8,7 @@
 
 > **isCell**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: [core/src/index.ts:211](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L211)
+Defined in: [core/src/index.ts:214](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L214)
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Cell](../namespaces/Cell/README.md).
 
