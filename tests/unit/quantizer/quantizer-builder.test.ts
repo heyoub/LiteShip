@@ -11,13 +11,12 @@ import { Effect, Fiber, Scope, Stream } from 'effect';
 import { Boundary } from '@czap/core';
 import {
   Q,
-  TIER_TARGETS,
-  MemoCache,
   type OutputTarget,
   type MotionTier,
   type QuantizerConfig,
   type LiveQuantizer,
 } from '@czap/quantizer';
+import { TIER_TARGETS, MemoCache } from '@czap/quantizer/testing';
 
 // ---------------------------------------------------------------------------
 // Shared fixtures

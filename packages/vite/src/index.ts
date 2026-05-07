@@ -62,6 +62,9 @@ export { resolveVirtualId, isVirtualId, loadVirtualModule } from './virtual-modu
 export type { HMRPayload } from './hmr.js';
 export { handleHMR } from './hmr.js';
 
-// Generic primitive resolution
+// Generic primitive resolution. `KIND_META` is intentionally not exported —
+// it's the internal static lookup table that powers `resolvePrimitive`.
+// Consumers building custom Vite plugin layers use `resolvePrimitive`;
+// they don't need the internal config map.
 export type { PrimitiveKind, PrimitiveResolution, PrimitiveShape } from './primitive-resolve.js';
-export { resolvePrimitive, KIND_META } from './primitive-resolve.js';
+export { resolvePrimitive } from './primitive-resolve.js';

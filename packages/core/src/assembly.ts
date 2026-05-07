@@ -53,8 +53,8 @@ export function defineCapsule<K extends AssemblyKind, In, Out, R>(
     // eslint-disable-next-line no-console
     console.warn(
       `[defineCapsule] pureTransform capsule "${decl.name}" declares ${decl.invariants.length} ` +
-        `invariant(s) but no run handler — generated property tests will be skipped. ` +
-        `Add \`run: (input) => ...\` to enable real generative testing.`,
+        `invariant(s) but no \`run\` function — invariants are type-only without one. ` +
+        `Add \`run: (input) => ...\` to enable runtime validation against your invariants.`,
     );
   }
   const id = computeId(decl as Omit<CapsuleContract<AssemblyKind, unknown, unknown, unknown>, 'id'>);

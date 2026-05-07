@@ -25,6 +25,7 @@ export const WORKSPACE_ALIASES: Readonly<Record<string, readonly string[]>> = {
   '@czap/core/testing': ['packages/core/src/testing.ts'],
   '@czap/core/harness': ['packages/core/src/harness/index.ts'],
   '@czap/core': ['packages/core/src/index.ts'],
+  '@czap/quantizer/testing': ['packages/quantizer/src/testing.ts'],
   '@czap/quantizer': ['packages/quantizer/src/index.ts'],
   '@czap/compiler': ['packages/compiler/src/index.ts'],
   '@czap/web/lite': ['packages/web/src/lite.ts'],

@@ -8,6 +8,7 @@
  */
 
 import { createServer, type ViteDevServer } from 'vite';
+import { existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
@@ -22,6 +23,14 @@ export interface DevServerHandle {
 /** Start the scene-dev Vite server bound to `scenePath`. */
 export async function startDevServer(scenePath: string): Promise<DevServerHandle> {
   const here = dirname(fileURLToPath(import.meta.url));
+  // player.html is the Vite entry; it ships in src/dev/ rather than dist/dev/
+  // because tsc doesn't copy non-TS assets. In tsx (workspace dev) `here` is
+  // src/dev/ and player.html is right next to us. In a published consumer
+  // running dist/dev/server.js, walk back to src/dev/ (the tarball ships both
+  // dist/ and src/ via the package's `files` array).
+  const playerRoot = existsSync(resolve(here, 'player.html'))
+    ? here
+    : resolve(here, '../../src/dev');
   // Per-instance cacheDir: when multiple dev servers boot concurrently (e.g.
   // vitest forks running scene-dev tests in parallel), the default
   // node_modules/.vite/ cache is shared and the racing dep-scans trip
@@ -31,7 +40,7 @@ export async function startDevServer(scenePath: string): Promise<DevServerHandle
   // negligible for the player.html entry.
   const cacheDir = join(tmpdir(), `czap-scene-dev-${process.pid}-${randomBytes(4).toString('hex')}`);
   const server: ViteDevServer = await createServer({
-    root: here,
+    root: playerRoot,
     cacheDir,
     server: { port: 0 },
     // optimizeDeps.noDiscovery short-circuits Vite's async dep-scan (the

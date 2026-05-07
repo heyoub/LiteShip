@@ -155,7 +155,10 @@ export type { RuntimePhase, RuntimeCoordinatorConfig } from './runtime-coordinat
 
 // Codec
 export { Codec } from './codec.js';
-export { SchemaError, isSchemaError } from 'effect/Schema';
+// `SchemaError` / `isSchemaError` removed from the main entry — they were
+// orphan re-exports from `effect/Schema` with no consumers in the repo
+// and added implicit coupling to an Effect internal sub-path. Consumers
+// who need them should import directly from `effect/Schema`.
 
 // LiveCell
 export { LiveCell } from './live-cell.js';

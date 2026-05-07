@@ -103,6 +103,7 @@ export const Config = {
       '@czap/core/testing':        r('packages/core/src/testing.ts'),
       '@czap/core/harness':        r('packages/core/src/harness/index.ts'),
       '@czap/core':                r('packages/core/src/index.ts'),
+      '@czap/quantizer/testing':   r('packages/quantizer/src/testing.ts'),
       '@czap/quantizer':           r('packages/quantizer/src/index.ts'),
       '@czap/compiler':            r('packages/compiler/src/index.ts'),
       '@czap/web/lite':            r('packages/web/src/lite.ts'),

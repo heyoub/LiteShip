@@ -178,7 +178,8 @@ const STANDALONE_FUNCTIONS = [
   'isDerived',
   'isZap',
   'isWire',
-  'isSchemaError',
+  // `isSchemaError` removed from main entry — was an orphan re-export of
+  // effect/Schema. Consumers can import directly from 'effect/Schema'.
   'fnv1a',
   'fnv1aBytes',
   'isValidationError',
@@ -314,8 +315,8 @@ describe('API health canary', () => {
         ...BRANDED_CONSTRUCTORS,
         ...DEFAULT_CONSTANTS,
         ...ERROR_CLASSES,
-        // SchemaError is a re-export from effect/Schema
-        'SchemaError',
+        // SchemaError + isSchemaError were removed from the main entry as
+        // orphan re-exports of effect/Schema (no in-repo consumers).
       ]);
 
       const actual = Object.keys(Core).filter((k) => !k.startsWith('_'));

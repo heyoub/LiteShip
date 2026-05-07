@@ -23,8 +23,6 @@
   ],
   "type": "module",
   "sideEffects": [
-    "./src/physical/capture.ts",
-    "./src/physical/capture.js",
     "./dist/physical/capture.js"
   ],
   "main": "./dist/index.js",
