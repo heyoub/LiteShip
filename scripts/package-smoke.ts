@@ -12,6 +12,10 @@ type PackageSpec = {
 const ROOT = process.cwd();
 
 const PACKAGES: readonly PackageSpec[] = [
+  // _spine is type-only (no runtime); packed and overridden so consumers
+  // can resolve `@czap/core`'s and `@czap/scene`'s declared dep on it
+  // during `pnpm install`. No runtime `import()` smoke needed.
+  { dir: 'packages/_spine', name: '@czap/_spine', imports: [] },
   { dir: 'packages/core', name: '@czap/core', imports: ['@czap/core'] },
   { dir: 'packages/quantizer', name: '@czap/quantizer', imports: ['@czap/quantizer'] },
   { dir: 'packages/compiler', name: '@czap/compiler', imports: ['@czap/compiler'] },
