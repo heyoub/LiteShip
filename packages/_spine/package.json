@@ -28,6 +28,14 @@
   },
   "files": [
     "*.d.ts",
-    "tsconfig.json"
-  ]
+    "tsconfig.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -56,6 +56,7 @@ A full walkthrough — clone → install → run a hello-world boundary that com
 
 | Package | Description |
 | --- | --- |
+| [`@czap/_spine`](./packages/_spine) | Type-only declaration spine referenced by published `.d.ts` from `@czap/core` / `@czap/scene` |
 | [`@czap/core`](./packages/core) | Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Plan, AVBridge |
 | [`@czap/quantizer`](./packages/quantizer) | `Q.from()` builder, boundary evaluation, animated transitions, motion-tier gating |
 | [`@czap/compiler`](./packages/compiler) | Multi-target output: CSS, GLSL, WGSL, ARIA, AI, Tailwind v4 |
@@ -91,6 +92,8 @@ Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** — dev environment, PR conventions, gauntlet workflow
 - **[SECURITY.md](./SECURITY.md)** — vulnerability reporting, supported versions, security posture summary
 - **[CHANGELOG.md](./CHANGELOG.md)** — release history
+- **[docs/RELEASING.md](./docs/RELEASING.md)** — npm publish, tags, GitHub releases, optional history scrub
+- **[docs/HISTORY_SCRUB.md](./docs/HISTORY_SCRUB.md)** — `git filter-repo` discovery checklist before going public
 
 ## Security posture (summary)
 

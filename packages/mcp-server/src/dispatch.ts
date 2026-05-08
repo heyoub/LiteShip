@@ -13,7 +13,6 @@
  * @module
  */
 
-import { run } from '@czap/cli';
 import {
   type JsonRpcNotification,
   type JsonRpcRequest,
@@ -36,6 +35,19 @@ class InvalidParamsError extends Error {
     super(message);
     this.name = 'InvalidParamsError';
   }
+}
+
+type RunFn = (argv: readonly string[]) => Promise<number>;
+
+let cachedRun: RunFn | undefined;
+
+/** Lazy-load `@czap/cli` so `@czap/mcp-server` does not declare a package dependency cycle. */
+async function getRun(): Promise<RunFn> {
+  if (!cachedRun) {
+    const mod = await import('@czap/cli');
+    cachedRun = mod.run;
+  }
+  return cachedRun;
 }
 
 /** Shape of an MCP tools/call parameter object. */
@@ -121,6 +133,7 @@ export async function dispatchToolCall(call: McpToolCall): Promise<McpToolResult
     return true;
   });
   try {
+    const run = await getRun();
     const code = await run(args);
     return {
       content: [{ type: 'text', text: captured.trim() }],

@@ -27,8 +27,11 @@ a minute or two; subsequent installs are seconds.
 pnpm run build
 ```
 
-This runs `tsc --build` across all 14 packages. Composite project references
-mean tsc figures out the order; you don't have to.
+This runs `tsc --build` across **14** compiled packages (everything under
+`packages/*` except type-only `@czap/_spine`). `@czap/_spine` is validated via
+`pnpm run typecheck:spine`. Together there are **15** publishable `@czap/*`
+scopes on npm. Composite project references mean `tsc` figures out the order;
+you don't have to.
 
 ## 3. Run the fast test loop
 
@@ -36,10 +39,9 @@ mean tsc figures out the order; you don't have to.
 pnpm test
 ```
 
-You should see roughly 225 test files and 2,940+ tests pass in about 75
-seconds (counts shift slightly between runs as new coverage lands). If
-anything fails, that's a real signal — open an issue with the failure
-tail.
+Vitest prints the current file and test counts in the summary line; totals
+shift as suites land. If anything fails, that's a real signal — open an issue
+with the failure tail.
 
 ## 4. Your first boundary
 
@@ -179,11 +181,6 @@ without round-tripping through JavaScript.
   the gauntlet, PR conventions
 
 ## Troubleshooting
-
-**Build fails on `@czap/mcp-server` first cold install** — known cycle-aware
-quirk; run `pnpm run build` once more after install seeds the dist
-directories. The cli has an ambient declaration to break the type-time
-cycle, but the very first build still needs the bootstrap.
 
 **PowerShell shows `Γåô` / `Γ£ô` mojibake in logs** — your terminal is
 decoding czap's UTF-8 output as cp437. Use `Out-File -Encoding utf8` or

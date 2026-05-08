@@ -1,13 +1,11 @@
 // Ambient declaration for @czap/mcp-server, used only by the dynamic
 // import in dispatch.ts (`mcp` subcommand).
 //
-// mcp-server has a static `import { run } from '@czap/cli'`, so its
-// tsconfig references cli. If cli also project-referenced mcp-server,
-// tsc --build would refuse the cycle. cli's import is dynamic and only
-// uses `start({ http?: string })`, so a local subset declaration here
-// breaks the type-time dependency: cli compiles cold without needing
-// `packages/mcp-server/dist/index.d.ts` to exist first. At runtime the
-// real module resolves through the pnpm workspace symlink.
+// `@czap/mcp-server` loads `@czap/cli` lazily at runtime (peer) and does not
+// project-reference `@czap/cli`, so `tsc --build` stays acyclic. This local
+// subset keeps `@czap/cli` cold-compilable without needing
+// `packages/mcp-server/dist/index.d.ts` first. At runtime the real module
+// resolves through the pnpm workspace symlink / npm peer install.
 declare module '@czap/mcp-server' {
   export function start(opts?: { http?: string }): Promise<void>;
 }

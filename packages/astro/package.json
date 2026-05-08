@@ -73,7 +73,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc"
@@ -93,5 +94,11 @@
   "devDependencies": {
     "astro": "^6.0.0",
     "effect": "4.0.0-beta.32"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

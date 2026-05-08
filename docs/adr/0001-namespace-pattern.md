@@ -5,7 +5,7 @@
 
 ## Context
 
-czap spans 10 packages and 50+ primitive modules (Boundary, Token, Style, Theme, Signal, Cell, Compositor, Plan, ...). Each primitive needs a factory (`make`), a handful of operations (`evaluate`, `pipe`, `diff`, ...), and a type surface its shape is referenced by. The framework is ESM-only, strict TypeScript, and targets tree-shakable bundling from edge to browser. Many primitive values carry domain meaning plain types can't express (a `ContentAddress` is not just a string; a `ThresholdValue` is not just a number).
+czap spans 15 published `@czap/*` npm packages (plus examples and integration harnesses) and 50+ primitive modules (Boundary, Token, Style, Theme, Signal, Cell, Compositor, Plan, ...). Each primitive needs a factory (`make`), a handful of operations (`evaluate`, `pipe`, `diff`, ...), and a type surface its shape is referenced by. The framework is ESM-only, strict TypeScript, and targets tree-shakable bundling from edge to browser. Many primitive values carry domain meaning plain types can't express (a `ContentAddress` is not just a string; a `ThresholdValue` is not just a number).
 
 ## Decision
 

@@ -11,13 +11,18 @@ type PackageSpec = {
 
 const ROOT = process.cwd();
 
+/** Mirrors every publishable `@czap/*` scope under `packages/*` (see `pnpm-workspace.yaml`). */
 const PACKAGES: readonly PackageSpec[] = [
   // _spine is type-only (no runtime); packed and overridden so consumers
   // can resolve `@czap/core`'s and `@czap/scene`'s declared dep on it
   // during `pnpm install`. No runtime `import()` smoke needed.
   { dir: 'packages/_spine', name: '@czap/_spine', imports: [] },
-  { dir: 'packages/core', name: '@czap/core', imports: ['@czap/core'] },
-  { dir: 'packages/quantizer', name: '@czap/quantizer', imports: ['@czap/quantizer'] },
+  {
+    dir: 'packages/core',
+    name: '@czap/core',
+    imports: ['@czap/core', '@czap/core/testing', '@czap/core/harness'],
+  },
+  { dir: 'packages/quantizer', name: '@czap/quantizer', imports: ['@czap/quantizer', '@czap/quantizer/testing'] },
   { dir: 'packages/compiler', name: '@czap/compiler', imports: ['@czap/compiler'] },
   { dir: 'packages/web', name: '@czap/web', imports: ['@czap/web', '@czap/web/lite'] },
   { dir: 'packages/detect', name: '@czap/detect', imports: ['@czap/detect'] },
@@ -40,6 +45,10 @@ const PACKAGES: readonly PackageSpec[] = [
     ],
   },
   { dir: 'packages/remotion', name: '@czap/remotion', imports: ['@czap/remotion'] },
+  { dir: 'packages/scene', name: '@czap/scene', imports: ['@czap/scene', '@czap/scene/dev'] },
+  { dir: 'packages/assets', name: '@czap/assets', imports: ['@czap/assets', '@czap/assets/testing'] },
+  { dir: 'packages/cli', name: '@czap/cli', imports: ['@czap/cli'] },
+  { dir: 'packages/mcp-server', name: '@czap/mcp-server', imports: ['@czap/mcp-server'] },
 ];
 
 const PEER_INSTALLS = [
@@ -49,6 +58,7 @@ const PEER_INSTALLS = [
   'react@19.2.0',
   'react-dom@19.2.0',
   'remotion@4.0.440',
+  'fast-check@4.7.0',
 ] as const;
 
 function run(command: string, args: readonly string[], cwd: string): string {
@@ -157,6 +167,8 @@ for (const specifier of imports) {
 `;
     await writeFile(join(consumerDir, 'smoke.mjs'), smokeModule);
     run('node', ['smoke.mjs'], consumerDir);
+
+    run('pnpm', ['exec', 'czap', 'describe', '--format=json'], consumerDir);
 
     console.log(`Package smoke passed for ${PACKAGES.length} packages.`);
   } finally {

@@ -1,0 +1,29 @@
+[**czap**](../../../README.md)
+
+***
+
+[czap](../../../README.md) / [assets/src](../README.md) / detectOnsets
+
+# Function: detectOnsets()
+
+> **detectOnsets**(`audio`): readonly `number`[]
+
+Defined in: [assets/src/analysis/onsets.ts:14](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/onsets.ts#L14)
+
+Detect note-attack onsets as an ordered array of sample indices.
+
+## Parameters
+
+### audio
+
+#### sampleRate
+
+`number`
+
+#### samples
+
+`Int16Array`\<`ArrayBufferLike`\> \| `Float32Array`\<`ArrayBufferLike`\>
+
+## Returns
+
+readonly `number`[]

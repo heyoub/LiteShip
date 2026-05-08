@@ -1,0 +1,13 @@
+[**czap**](../../../../../README.md)
+
+***
+
+[czap](../../../../../README.md) / [scene/src](../../../README.md) / [SceneRuntime](../README.md) / Handle
+
+# Type Alias: Handle
+
+> **Handle** = [`SceneRuntimeHandle`](../../../interfaces/SceneRuntimeHandle.md)
+
+Defined in: [scene/src/runtime.ts:284](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L284)
+
+Live runtime handle — see [SceneRuntimeHandle](../../../interfaces/SceneRuntimeHandle.md).

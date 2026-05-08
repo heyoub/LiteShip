@@ -93,7 +93,8 @@ Read [ROADMAP.md](./ROADMAP.md).
 
 ### If the question is "What changed?"
 
-Read [CHANGELOG.md](./CHANGELOG.md).
+Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
+[RELEASING.md](./RELEASING.md).
 
 ---
 

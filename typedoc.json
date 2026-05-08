@@ -10,7 +10,12 @@
     "packages/edge/src/index.ts",
     "packages/vite/src/index.ts",
     "packages/astro/src/index.ts",
-    "packages/remotion/src/index.ts"
+    "packages/remotion/src/index.ts",
+    "packages/scene/src/index.ts",
+    "packages/assets/src/index.ts",
+    "packages/cli/src/index.ts",
+    "packages/mcp-server/src/index.ts",
+    "packages/_spine/typedoc-entry.ts"
   ],
   "entryPointStrategy": "expand",
   "out": "docs/api",

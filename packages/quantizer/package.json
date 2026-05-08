@@ -37,7 +37,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc"
@@ -47,5 +48,11 @@
   },
   "peerDependencies": {
     "effect": ">=4.0.0-beta.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

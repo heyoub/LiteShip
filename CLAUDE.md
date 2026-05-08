@@ -6,8 +6,8 @@ Constraint-based adaptive rendering framework. Quantize continuous signals into 
 
 ## Commands
 
-- `pnpm run build` -- TypeScript build (`tsc --build` across 10 packages)
-- `pnpm test` -- Run all tests (vitest, 2234 tests, 131 files)
+- `pnpm run build` -- TypeScript build (`tsc --build` across 14 compiled packages; `@czap/_spine` is type-only)
+- `pnpm test` -- Run all tests (vitest; last green main: ~225 files / ~2942 tests — always trust local `pnpm test` output)
 - `pnpm run typecheck` -- Type check without emit
 - `pnpm run bench` -- Run benchmarks (tinybench)
 
@@ -25,6 +25,11 @@ Constraint-based adaptive rendering framework. Quantize continuous signals into 
 | @czap/edge      | packages/edge/      | CDN-edge: Client Hints, tier detection, KV boundary cache, theme compilation                 |
 | @czap/worker    | packages/worker/    | Off-thread: SPSC ring buffer, compositor worker, render worker, OffscreenCanvas              |
 | @czap/remotion  | packages/remotion/  | Remotion adapter: React hooks + composition helpers                                          |
+| @czap/scene     | packages/scene/     | ECS-backed scene composition + timeline authoring                                            |
+| @czap/assets    | packages/assets/    | Asset capsules + analysis projections (audio waveform, beat markers, …)                    |
+| @czap/cli       | packages/cli/        | `czap` CLI — AI-first JSON I/O + MCP bridge                                                 |
+| @czap/mcp-server | packages/mcp-server/ | Model Context Protocol server over capsule factory dispatch                                |
+| @czap/_spine    | packages/_spine/     | Type-only declaration spine shared across published `.d.ts` output                           |
 
 Also: `crates/czap-compute/` -- Rust #![no_std] WASM crate (spring, boundary, blend kernels)
 

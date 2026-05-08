@@ -289,9 +289,6 @@ importers:
       '@czap/core':
         specifier: workspace:*
         version: link:../core
-      '@czap/mcp-server':
-        specifier: workspace:*
-        version: link:../mcp-server
       '@czap/scene':
         specifier: workspace:*
         version: link:../scene
@@ -549,27 +546,32 @@ packages:
 
   '@czap/astro@file:packages/astro':
     resolution: {directory: packages/astro, type: directory}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       astro: '>=6.0.0'
       effect: '>=4.0.0-beta.0'
 
   '@czap/core@file:packages/core':
     resolution: {directory: packages/core, type: directory}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       effect: '>=4.0.0-beta.0'
 
   '@czap/edge@file:packages/edge':
     resolution: {directory: packages/edge, type: directory}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       effect: '>=4.0.0-beta.0'
 
   '@czap/quantizer@file:packages/quantizer':
     resolution: {directory: packages/quantizer, type: directory}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       effect: '>=4.0.0-beta.0'
 
   '@czap/remotion@file:packages/remotion':
     resolution: {directory: packages/remotion, type: directory}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       react: '>=18'
       remotion: 4.0.440

@@ -20,7 +20,9 @@
     "typescript"
   ],
   "type": "module",
-  "bin": { "czap": "./bin/czap.mjs" },
+  "bin": {
+    "czap": "./bin/czap.mjs"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -33,7 +35,8 @@
   "files": [
     "dist",
     "src",
-    "bin"
+    "bin",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc"
@@ -41,10 +44,15 @@
   "dependencies": {
     "@czap/core": "workspace:*",
     "@czap/scene": "workspace:*",
-    "@czap/assets": "workspace:*",
-    "@czap/mcp-server": "workspace:*"
+    "@czap/assets": "workspace:*"
   },
   "peerDependencies": {
     "effect": ">=4.0.0-beta.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

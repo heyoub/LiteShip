@@ -1,6 +1,6 @@
 # czap -- Status & Remaining Work
 
-Last updated: 2026-04-23
+Last updated: 2026-05-07
 Coverage stack standardized on Vitest 4.1.2 + Playwright browser mode.
 Current node lane: run `pnpm test` for the fresh pass/fail and file-count truth.
 Current browser lane: shared-runtime suites run against a Chromium + Firefox + WebKit matrix, with capability-specific browser tests remaining Chromium-first where the platform surface is intentionally non-uniform.
@@ -58,7 +58,7 @@ Current browser-security posture:
 | `pnpm run bench`            | green                                                   | any                |
 | `pnpm run bench:gate`       | green, replicated statistical gate                      | any                |
 | `pnpm run bench:reality`    | green, browser cold-start evidence artifact             | any                |
-| `pnpm run package:smoke`    | green, pack/install/export smoke for 10 publishable packages | any           |
+| `pnpm run package:smoke`    | green, pack/install/export smoke for all 15 publishable `@czap/*` scopes | any           |
 | `pnpm run coverage:node`    | green, v8 coverage output                               | any                |
 | `pnpm run coverage:browser` | green, Vitest browser mode with Chromium-only coverage collection (matrix correctness runs separately) | any |
 | `pnpm run coverage:merge`   | green, merged thresholds enforced                       | any                |
@@ -553,13 +553,13 @@ requiring its own `cd examples/remotion-demo && pnpm install`.
 
 ### 5. Release model for packages
 
-Packages are publish-shaped and tarball-smoke-tested, but the repo is still
-dogfooded through `workspace:*` links until the first intentional external npm
-release. The current policy is:
+Packages are publish-shaped and tarball-smoke-tested. The repo still dogfoods
+through `workspace:*` links until each external npm cut.
 
 - package surfaces, `dist/` outputs, export maps, and type entrypoints must
   stay release-ready
-- `package:smoke` is required proof for every publishable package
+- `package:smoke` is required proof for every publishable `@czap/*` scope
+  (15 packages, including type-only `@czap/_spine`)
 - external publishing remains a deliberate release decision, not an accidental
   side effect of package shape
 

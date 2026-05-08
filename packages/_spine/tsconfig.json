@@ -9,5 +9,5 @@
     "esModuleInterop": true,
     "noEmit": true
   },
-  "include": ["*.d.ts"]
+  "include": ["*.d.ts", "typedoc-entry.ts"]
 }

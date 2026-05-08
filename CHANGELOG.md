@@ -8,7 +8,8 @@ break policy is intentionally aggressive — minor version bumps may carry break
 
 First public release on npm and GitHub. Pre-release entries below this section
 chronicle internal development milestones from before the framework went public;
-the 14 packages all land on npm at `0.1.0` regardless of their internal history.
+all **15** `@czap/*` packages (including type-only `@czap/_spine`) land on npm at
+`0.1.0` regardless of their internal history.
 
 ### Public-API surface
 - Test-only helpers moved off main entries to dedicated `/testing` sub-paths.
@@ -32,7 +33,7 @@ the 14 packages all land on npm at `0.1.0` regardless of their internal history.
   from `@czap/vite` (internal lookup table that powers `resolvePrimitive`).
 
 ### Package metadata
-- All 14 packages now have `keywords`, full `repository`/`bugs`/`homepage`
+- All 15 packages now have `keywords`, full `repository`/`bugs`/`homepage`
   fields, `sideEffects: false` (or a precise array for `@czap/web`'s
   capture init), and `license: MIT`.
 - `effect` peer-dep ranges relaxed from exact `4.0.0-beta.32` pin to
@@ -147,7 +148,11 @@ the 14 packages all land on npm at `0.1.0` regardless of their internal history.
 - CHANGELOG.md: version history
 - README.md: installation, quick start, package table
 
-## [0.1.0] — 2026-03-16
+## [0.0.1] — 2026-03-16 (internal milestone; superseded by public 0.1.0 on 2026-05-07)
+
+This section records the first in-repo development snapshot. It used a `0.1.0`
+style heading historically; the **canonical public** `0.1.0` release is dated
+**2026-05-07** at the top of this file.
 
 ### Core
 

@@ -19,10 +19,7 @@
       "@czap/_spine": ["../_spine/index.d.ts"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../core" },
-    { "path": "../cli" }
-  ]
+  "references": [{ "path": "../core" }]
 }
