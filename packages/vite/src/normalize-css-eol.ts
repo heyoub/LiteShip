@@ -1,5 +1,5 @@
 /**
- * Normalize CSS newlines to LF for line-based @rule parsers.
+ * Normalize CSS newlines to LF for line-based parsing of CSS at-rules.
  *
  * @module
  */
