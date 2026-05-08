@@ -4,8 +4,13 @@
  * files in parallel workers; keeping these in a single file ensures
  * they run sequentially in the same worker so races on the manifest
  * file don't corrupt each other.
+ *
+ * Cross-file note: `tests/integration/capsule-compile.test.ts` also reads
+ * this manifest. Tests that replace it with broken entries must restore
+ * the prior bytes in `afterEach`, or another worker can observe poisoned
+ * JSON for the full `capsule verify` timeout window.
  */
-import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { run } from '../../../packages/cli/src/dispatch.js';
@@ -69,15 +74,29 @@ const FIXTURE_MANIFEST = {
 };
 
 let savedManifest: string | undefined;
+/** Bytes on disk immediately before each `beforeEach` — restored in `afterEach` for other workers. */
+let manifestSnapBeforeEach: string | undefined;
 
 describe('cli — manifest-dependent commands (serialized)', () => {
   beforeAll(() => {
     if (existsSync(MANIFEST_PATH)) savedManifest = readFileSync(MANIFEST_PATH, 'utf8');
   });
   beforeEach(() => {
+    manifestSnapBeforeEach = existsSync(MANIFEST_PATH)
+      ? readFileSync(MANIFEST_PATH, 'utf8')
+      : undefined;
     mkdirSync(dirname(MANIFEST_PATH), { recursive: true });
     writeFileSync(MANIFEST_PATH, JSON.stringify(FIXTURE_MANIFEST), 'utf8');
     if (existsSync('.czap/cache')) rmSync('.czap/cache', { recursive: true, force: true });
+  });
+  afterEach(() => {
+    const restore = manifestSnapBeforeEach ?? savedManifest;
+    if (restore !== undefined) {
+      mkdirSync(dirname(MANIFEST_PATH), { recursive: true });
+      writeFileSync(MANIFEST_PATH, restore, 'utf8');
+    } else if (existsSync(MANIFEST_PATH)) {
+      rmSync(MANIFEST_PATH);
+    }
   });
   afterAll(() => {
     if (savedManifest !== undefined) writeFileSync(MANIFEST_PATH, savedManifest, 'utf8');
