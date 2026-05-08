@@ -46,6 +46,14 @@
     "@czap/detect": {
       "ExtendedDeviceCapabilities": "#"
     },
+    "@czap/scene": {
+      "CANONICAL_SYSTEM_COUNT": "#",
+      "DEFAULT_MIX_RECEIPT_CAP": "#"
+    },
+    "effect": {
+      "": "#",
+      "Scope": "#"
+    },
     "typescript": {
       "Map": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
     }

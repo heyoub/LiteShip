@@ -10,6 +10,7 @@
 
 import type { Token } from '@czap/core';
 import { TokenCSSCompiler } from '@czap/compiler';
+import { normalizeCssLineEndings } from './normalize-css-eol.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -46,7 +47,7 @@ export interface TokenBlock {
  */
 export function parseTokenBlocks(css: string, sourceFile: string): readonly TokenBlock[] {
   const blocks: TokenBlock[] = [];
-  const lines = css.split('\n');
+  const lines = normalizeCssLineEndings(css).split('\n');
   let i = 0;
 
   while (i < lines.length) {

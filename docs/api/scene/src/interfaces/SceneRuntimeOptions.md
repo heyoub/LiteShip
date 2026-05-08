@@ -19,7 +19,7 @@ Options accepted by [SceneRuntime.build](../variables/SceneRuntime.md#build).
 Defined in: [scene/src/runtime.ts:108](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L108)
 
 Mix-receipt sink for PassThroughMixer. Defaults to a bounded ring
-(last DEFAULT\_MIX\_RECEIPT\_CAP receipts) accessible via
+(last [DEFAULT\_MIX\_RECEIPT\_CAP](#) receipts) accessible via
 `handle.receipts`. Pass an explicit sink to receive every receipt.
 
 #### Parameters

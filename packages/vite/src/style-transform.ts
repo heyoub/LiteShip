@@ -11,6 +11,7 @@
 
 import type { Style } from '@czap/core';
 import { StyleCSSCompiler } from '@czap/compiler';
+import { normalizeCssLineEndings } from './normalize-css-eol.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -52,7 +53,7 @@ export interface StyleBlock {
  */
 export function parseStyleBlocks(css: string, sourceFile: string): readonly StyleBlock[] {
   const blocks: StyleBlock[] = [];
-  const lines = css.split('\n');
+  const lines = normalizeCssLineEndings(css).split('\n');
   let i = 0;
 
   while (i < lines.length) {

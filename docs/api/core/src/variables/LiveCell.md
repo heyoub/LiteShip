@@ -19,7 +19,7 @@ between peers as self-describing messages.
 
 ### make
 
-> **make**: \<`K`, `T`\>(`kind`, `initial`) => `Effect`\<`LiveCellShape`\<`K`, `T`\>, `never`, `Scope`\> = `_make`
+> **make**: \<`K`, `T`\>(`kind`, `initial`) => `Effect`\<`LiveCellShape`\<`K`, `T`\>, `never`, [`Scope`](#)\> = `_make`
 
 Wrap an arbitrary value in a LiveCell with freshly minted identity + HLC.
 
@@ -45,11 +45,11 @@ Wrap an arbitrary value in a LiveCell with freshly minted identity + HLC.
 
 #### Returns
 
-`Effect`\<`LiveCellShape`\<`K`, `T`\>, `never`, `Scope`\>
+`Effect`\<`LiveCellShape`\<`K`, `T`\>, `never`, [`Scope`](#)\>
 
 ### makeBoundary
 
-> **makeBoundary**: \<`I`, `S`\>(`boundary`, `initial`) => `Effect`\<`LiveCellShape`\<`"boundary"`, `number`\>, `never`, `Scope`\> = `_makeBoundary`
+> **makeBoundary**: \<`I`, `S`\>(`boundary`, `initial`) => `Effect`\<`LiveCellShape`\<`"boundary"`, `number`\>, `never`, [`Scope`](#)\> = `_makeBoundary`
 
 Specialized factory for boundary crossings so the envelope captures crossing metadata.
 
@@ -78,4 +78,4 @@ when the numeric value transitions between boundary states.
 
 #### Returns
 
-`Effect`\<`LiveCellShape`\<`"boundary"`, `number`\>, `never`, `Scope`\>
+`Effect`\<`LiveCellShape`\<`"boundary"`, `number`\>, `never`, [`Scope`](#)\>

@@ -43,6 +43,12 @@ install (`pnpm exec playwright install` if needed).
 - runtime gate, capsule verify
 - `flex:verify` 10/10 acceptance across 7 rating dimensions
 
+**Bench trend gate (`bench:trend`):** it reads `benchmarks/history.jsonl` (one
+JSON line per `bench:gate` run) and only enforces drift once there are **three**
+distinct historical fingerprints. Until then it prints a skip message and
+exits zero — run the gauntlet (or `bench:gate`) a few times on `main` to warm
+the file, or expect `bench:trend` to stay in “skipping” mode on fresh clones.
+
 The gauntlet exits cleanly with `flex:verify PASSED — project is 10/10 by
 every rating dimension` or it fails closed. Not a stylistic gate; a
 correctness gate. PRs need to be green here before merge.

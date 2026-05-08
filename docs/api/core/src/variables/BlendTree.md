@@ -17,7 +17,7 @@ Add named nodes with values and weights, then compute the weighted average.
 
 ### make
 
-> **make**: \<`T`\>() => `Effect`\<`BlendTreeShape`\<`T`\>, `never`, `Scope`\> = `_make`
+> **make**: \<`T`\>() => `Effect`\<`BlendTreeShape`\<`T`\>, `never`, [`Scope`](#)\> = `_make`
 
 Creates a new BlendTree for weighted multi-state blending of numeric records.
 Requires a Scope for lifecycle management of the change stream.
@@ -30,7 +30,7 @@ Requires a Scope for lifecycle management of the change stream.
 
 #### Returns
 
-`Effect`\<`BlendTreeShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`BlendTreeShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 

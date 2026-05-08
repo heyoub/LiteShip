@@ -1,5 +1,9 @@
 # czap
 
+[![CI](https://github.com/TheFreeBatteryFactory/czap/actions/workflows/ci.yml/badge.svg)](https://github.com/TheFreeBatteryFactory/czap/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@czap/core.svg)](https://www.npmjs.com/package/@czap/core)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 > Constraint-based adaptive rendering for the web. Quantize continuous signals into discrete states, compile to CSS / GLSL / WGSL / ARIA / AI, run off-thread.
 
 `czap` is a TypeScript-first frontend framework that treats UI state as **boundaries between continuous signals and discrete responses**. Hover position, scroll progress, viewport width, network latency, GPU tier, motion preference — all of these are continuous inputs. Most UI just wants to react to a small set of *states* derived from them. czap formalizes that boundary, compiles it to your output target, and keeps the runtime off the main thread.

@@ -79,7 +79,7 @@ Motion tier gating active targets; see `TIER_TARGETS` (in `@czap/quantizer/testi
 
 ### create()
 
-> **create**(): `Effect`\<[`LiveQuantizer`](LiveQuantizer.md)\<`B`, `O`\>, `never`, `Scope`\>
+> **create**(): `Effect`\<[`LiveQuantizer`](LiveQuantizer.md)\<`B`, `O`\>, `never`, [`Scope`](#)\>
 
 Defined in: [quantizer/src/quantizer.ts:169](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L169)
 
@@ -87,4 +87,4 @@ Instantiate a reactive [LiveQuantizer](LiveQuantizer.md) scoped to an Effect fib
 
 #### Returns
 
-`Effect`\<[`LiveQuantizer`](LiveQuantizer.md)\<`B`, `O`\>, `never`, `Scope`\>
+`Effect`\<[`LiveQuantizer`](LiveQuantizer.md)\<`B`, `O`\>, `never`, [`Scope`](#)\>

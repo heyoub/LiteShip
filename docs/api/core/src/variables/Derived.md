@@ -18,7 +18,7 @@ when any dependency changes; composes via `combine`, `map`, and `flatten`.
 
 ### combine
 
-> **combine**: \<`T`, `U`\>(`cells`, `combiner`) => `Effect`\<`DerivedShape`\<`U`\>, `never`, `Scope`\> = `_combine`
+> **combine**: \<`T`, `U`\>(`cells`, `combiner`) => `Effect`\<`DerivedShape`\<`U`\>, `never`, [`Scope`](#)\> = `_combine`
 
 Combine multiple cells into a single derived cell of their tuple.
 
@@ -44,11 +44,11 @@ Combine multiple cells into a single derived cell of their tuple.
 
 #### Returns
 
-`Effect`\<`DerivedShape`\<`U`\>, `never`, `Scope`\>
+`Effect`\<`DerivedShape`\<`U`\>, `never`, [`Scope`](#)\>
 
 ### flatten
 
-> **flatten**: \<`T`\>(`nested`) => `Effect`\<`DerivedShape`\<`T`\>, `never`, `Scope`\> = `_flatten`
+> **flatten**: \<`T`\>(`nested`) => `Effect`\<`DerivedShape`\<`T`\>, `never`, [`Scope`](#)\> = `_flatten`
 
 Flatten a derived-of-derived into a single derived of the inner value.
 
@@ -66,11 +66,11 @@ Flatten a derived-of-derived into a single derived of the inner value.
 
 #### Returns
 
-`Effect`\<`DerivedShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`DerivedShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 ### make
 
-> **make**: \<`T`\>(`compute`, `sources`) => `Effect`\<`DerivedShape`\<`T`\>, `never`, `Scope`\> = `_make`
+> **make**: \<`T`\>(`compute`, `sources`) => `Effect`\<`DerivedShape`\<`T`\>, `never`, [`Scope`](#)\> = `_make`
 
 Build a derived cell from a factory computing against upstream sources.
 
@@ -92,11 +92,11 @@ readonly `Stream`\<`unknown`, `never`, `never`\>[] = `[]`
 
 #### Returns
 
-`Effect`\<`DerivedShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`DerivedShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 ### map
 
-> **map**: \<`A`, `B`\>(`derived`, `f`) => `Effect`\<`DerivedShape`\<`B`\>, `never`, `Scope`\> = `_map`
+> **map**: \<`A`, `B`\>(`derived`, `f`) => `Effect`\<`DerivedShape`\<`B`\>, `never`, [`Scope`](#)\> = `_map`
 
 Pure projection of an existing cell/derived.
 
@@ -122,4 +122,4 @@ Pure projection of an existing cell/derived.
 
 #### Returns
 
-`Effect`\<`DerivedShape`\<`B`\>, `never`, `Scope`\>
+`Effect`\<`DerivedShape`\<`B`\>, `never`, [`Scope`](#)\>

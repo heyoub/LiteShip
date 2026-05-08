@@ -27,7 +27,7 @@ import type { BeatBinding } from './capsules/beat-binding.js';
 export interface TrackSpawn {
   /** The phantom-kinded id of the source track. */
   readonly trackId: TrackId<TrackKind>;
-  /** Component seed map handed to {@link World.spawn}. */
+  /** Component seed map passed to `world.spawn(...)` when {@link SceneRuntime} builds the ECS world. */
   readonly components: Readonly<Record<string, unknown>>;
 }
 

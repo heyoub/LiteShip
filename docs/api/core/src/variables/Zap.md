@@ -17,7 +17,7 @@ Provides reactive event streams with map, filter, merge, debounce, and throttle.
 
 ### debounce
 
-> **debounce**: \<`T`\>(`event`, `ms`) => `Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\> = `_debounce`
+> **debounce**: \<`T`\>(`event`, `ms`) => `Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\> = `_debounce`
 
 Debounces a Zap, only emitting after `ms` milliseconds of silence.
 
@@ -39,7 +39,7 @@ Debounces a Zap, only emitting after `ms` milliseconds of silence.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -53,7 +53,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### filter
 
-> **filter**: \<`T`\>(`event`, `predicate`) => `Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\> = `_filter`
+> **filter**: \<`T`\>(`event`, `predicate`) => `Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\> = `_filter`
 
 Filters a Zap, only forwarding values that satisfy the predicate.
 
@@ -75,7 +75,7 @@ Filters a Zap, only forwarding values that satisfy the predicate.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -89,7 +89,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### fromDOMEvent
 
-> **fromDOMEvent**: \<`K`\>(`element`, `event`) => `Effect`\<`ZapShape`\<`HTMLElementEventMap`\[`K`\]\>, `never`, `Scope`\> = `_fromDOMEvent`
+> **fromDOMEvent**: \<`K`\>(`element`, `event`) => `Effect`\<`ZapShape`\<`HTMLElementEventMap`\[`K`\]\>, `never`, [`Scope`](#)\> = `_fromDOMEvent`
 
 Creates a Zap from a DOM event, auto-managing listener lifecycle via Scope.
 
@@ -111,7 +111,7 @@ Creates a Zap from a DOM event, auto-managing listener lifecycle via Scope.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`HTMLElementEventMap`\[`K`\]\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`HTMLElementEventMap`\[`K`\]\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -126,7 +126,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### make
 
-> **make**: \<`T`\>() => `Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\> = `_make`
+> **make**: \<`T`\>() => `Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\> = `_make`
 
 Creates a new push-based event channel backed by an unbounded PubSub.
 
@@ -138,7 +138,7 @@ Creates a new push-based event channel backed by an unbounded PubSub.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -150,7 +150,7 @@ Effect.runSync(zap.emit(42));
 
 ### map
 
-> **map**: \<`A`, `B`\>(`event`, `f`) => `Effect`\<`ZapShape`\<`B`\>, `never`, `Scope`\> = `_map`
+> **map**: \<`A`, `B`\>(`event`, `f`) => `Effect`\<`ZapShape`\<`B`\>, `never`, [`Scope`](#)\> = `_map`
 
 Transforms each value emitted by a Zap through a mapping function.
 
@@ -176,7 +176,7 @@ Transforms each value emitted by a Zap through a mapping function.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`B`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`B`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -190,7 +190,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### merge
 
-> **merge**: \<`T`\>(`events`) => `Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\> = `_merge`
+> **merge**: \<`T`\>(`events`) => `Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\> = `_merge`
 
 Merges multiple Zaps of the same type into a single Zap.
 
@@ -208,7 +208,7 @@ readonly `ZapShape`\<`T`\>[]
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -223,7 +223,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### throttle
 
-> **throttle**: \<`T`\>(`event`, `ms`) => `Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\> = `_throttle`
+> **throttle**: \<`T`\>(`event`, `ms`) => `Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\> = `_throttle`
 
 Throttles a Zap, allowing at most one emission per `ms` milliseconds.
 
@@ -245,7 +245,7 @@ Throttles a Zap, allowing at most one emission per `ms` milliseconds.
 
 #### Returns
 
-`Effect`\<`ZapShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`ZapShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 #### Example
 

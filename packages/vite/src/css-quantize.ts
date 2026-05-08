@@ -10,6 +10,7 @@
 
 import type { Boundary } from '@czap/core';
 import { CSSCompiler } from '@czap/compiler';
+import { normalizeCssLineEndings } from './normalize-css-eol.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -199,8 +200,9 @@ function parseStateDeclarations(css: string, pos: number): { props: Record<strin
  * before being matched.
  */
 export function parseQuantizeBlocks(css: string, sourceFile: string): readonly QuantizeBlock[] {
+  const normalized = normalizeCssLineEndings(css);
   const blocks: QuantizeBlock[] = [];
-  const lines = css.split('\n');
+  const lines = normalized.split('\n');
   let i = 0;
 
   while (i < lines.length) {
@@ -228,16 +230,16 @@ export function parseQuantizeBlocks(css: string, sourceFile: string): readonly Q
             // Compute the character offset of the `{` that opens this state
             // block inside the full CSS string so we can hand off to the
             // character-level parser.
-            const lineOffset = css.split('\n').slice(0, i).join('\n').length + 1;
+            const lineOffset = normalized.split('\n').slice(0, i).join('\n').length + 1;
             const openBrace = lineOffset + currentLine.indexOf('{') + 1;
 
-            const { props, end } = parseStateDeclarations(css, openBrace);
+            const { props, end } = parseStateDeclarations(normalized, openBrace);
             states[stateName] = props;
 
             // Advance the line cursor to the line that contains `end`
             let charCount = 0;
             let lineIdx = 0;
-            for (const l of css.split('\n')) {
+            for (const l of normalized.split('\n')) {
               charCount += l.length + 1; // +1 for the '\n'
               lineIdx++;
               if (charCount >= end) break;

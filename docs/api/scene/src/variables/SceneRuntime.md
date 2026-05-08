@@ -24,7 +24,7 @@ Build a live runtime handle.
 
 Build a live SceneRuntime handle from a [CompiledScene](../interfaces/CompiledScene.md).
 
-Holds an explicit Scope for the world's lifetime so the
+Holds an explicit [Scope](#) for the world's lifetime so the
 caller controls when finalizers run. Systems are registered in the
 canonical topological order — this matches ADR-0009's
 ECS-as-scene-substrate discipline.

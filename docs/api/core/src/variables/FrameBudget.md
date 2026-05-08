@@ -18,7 +18,7 @@ Tracks remaining time per animation frame and gates work by priority:
 
 ### make
 
-> **make**: (`config?`) => `Effect`\<`FrameBudgetShape`, `never`, `Scope`\> = `_make`
+> **make**: (`config?`) => `Effect`\<`FrameBudgetShape`, `never`, [`Scope`](#)\> = `_make`
 
 Creates a FrameBudget tracker tied to rAF, with priority-based scheduling.
 Critical tasks always run; lower priorities are deferred if budget is exhausted.
@@ -33,7 +33,7 @@ Critical tasks always run; lower priorities are deferred if budget is exhausted.
 
 #### Returns
 
-`Effect`\<`FrameBudgetShape`, `never`, `Scope`\>
+`Effect`\<`FrameBudgetShape`, `never`, [`Scope`](#)\>
 
 #### Example
 

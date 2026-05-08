@@ -20,7 +20,7 @@ backed by Effect's SubscriptionRef. Scoped for automatic listener cleanup.
 
 ### audio
 
-> **audio**: (`bridge`, `mode`, `totalDurationSec?`) => `Effect`\<`AudioSignalShape`, `never`, `Scope`\> = `_audio`
+> **audio**: (`bridge`, `mode`, `totalDurationSec?`) => `Effect`\<`AudioSignalShape`, `never`, [`Scope`](#)\> = `_audio`
 
 Create an audio signal backed by an AVBridge.
 
@@ -44,7 +44,7 @@ to read the latest sample from the bridge and update the signal.
 
 #### Returns
 
-`Effect`\<`AudioSignalShape`, `never`, `Scope`\>
+`Effect`\<`AudioSignalShape`, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -61,7 +61,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### controllable
 
-> **controllable**: () => `Effect`\<`ControllableSignalShape`\<`number`\>, `never`, `Scope`\> = `_controllable`
+> **controllable**: () => `Effect`\<`ControllableSignalShape`\<`number`\>, `never`, [`Scope`](#)\> = `_controllable`
 
 Create a controllable time signal for video rendering / scrubbing.
 
@@ -70,7 +70,7 @@ Supports pause/resume to temporarily ignore seek updates.
 
 #### Returns
 
-`Effect`\<`ControllableSignalShape`\<`number`\>, `never`, `Scope`\>
+`Effect`\<`ControllableSignalShape`\<`number`\>, `never`, [`Scope`](#)\>
 
 #### Example
 
@@ -90,7 +90,7 @@ const program = Effect.scoped(Effect.gen(function* () {
 
 ### make
 
-> **make**: (`source`) => `Effect`\<`SignalShape`\<`number`\>, `never`, `Scope`\> = `_make`
+> **make**: (`source`) => `Effect`\<`SignalShape`\<`number`\>, `never`, [`Scope`](#)\> = `_make`
 
 Create a reactive signal from a browser environment source.
 
@@ -106,7 +106,7 @@ exposes `.current` (latest value) and `.changes` (stream of updates).
 
 #### Returns
 
-`Effect`\<`SignalShape`\<`number`\>, `never`, `Scope`\>
+`Effect`\<`SignalShape`\<`number`\>, `never`, [`Scope`](#)\>
 
 #### Example
 

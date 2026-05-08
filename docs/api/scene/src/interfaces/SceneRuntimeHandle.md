@@ -80,7 +80,7 @@ Release the world's scope. Idempotent.
 
 Defined in: [scene/src/runtime.ts:116](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L116)
 
-Number of systems registered (always CANONICAL\_SYSTEM\_COUNT).
+Number of systems registered (always [CANONICAL\_SYSTEM\_COUNT](#)).
 
 ***
 

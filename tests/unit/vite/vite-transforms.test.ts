@@ -62,6 +62,14 @@ describe('parseTokenBlocks', () => {
     expect(blocks[0]!.sourceFile).toBe(FILE);
   });
 
+  test('parses token blocks when CSS uses CRLF line endings', () => {
+    const css = '@token accent {\r\n  color: #ff0000;\r\n}\r\n';
+    const blocks = parseTokenBlocks(css, FILE);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0]!.tokenName).toBe('accent');
+    expect(blocks[0]!.declarations).toEqual({ color: '#ff0000' });
+  });
+
   test('parses multiple token blocks', () => {
     const css = `
 @token primary {

@@ -6,7 +6,7 @@
 
 # Function: watchCapabilities()
 
-> **watchCapabilities**(`onChange`): `Effect`\<`void`, `never`, `Scope`\>
+> **watchCapabilities**(`onChange`): `Effect`\<`void`, `never`, [`Scope`](#)\>
 
 Defined in: [detect/src/detect.ts:617](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/detect.ts#L617)
 
@@ -26,7 +26,7 @@ Callback invoked with fresh detection results on change
 
 ## Returns
 
-`Effect`\<`void`, `never`, `Scope`\>
+`Effect`\<`void`, `never`, [`Scope`](#)\>
 
 An Effect (scoped) that sets up listeners
 

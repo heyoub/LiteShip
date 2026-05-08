@@ -22,6 +22,7 @@ import { parseStyleBlocks, compileStyleBlock } from './style-transform.js';
 import { resolveVirtualId, loadVirtualModule } from './virtual-modules.js';
 import { buildEnvironments, type CzapEnvironmentName } from './environments.js';
 import { resolveWASM } from './wasm-resolve.js';
+import { normalizeCssLineEndings } from './normalize-css-eol.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -190,7 +191,7 @@ export function plugin(config?: PluginConfig): Plugin {
 
       if (!hasToken && !hasTheme && !hasStyle && !hasQuantize) return null;
 
-      let transformed = code;
+      let transformed = normalizeCssLineEndings(code);
 
       // ---- Phase 1: @token -> CSS custom properties + @property ----
       if (hasToken) {

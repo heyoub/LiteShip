@@ -10,6 +10,7 @@
 
 import type { Theme } from '@czap/core';
 import { ThemeCSSCompiler } from '@czap/compiler';
+import { normalizeCssLineEndings } from './normalize-css-eol.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -47,7 +48,7 @@ export interface ThemeBlock {
  */
 export function parseThemeBlocks(css: string, sourceFile: string): readonly ThemeBlock[] {
   const blocks: ThemeBlock[] = [];
-  const lines = css.split('\n');
+  const lines = normalizeCssLineEndings(css).split('\n');
   let i = 0;
 
   while (i < lines.length) {

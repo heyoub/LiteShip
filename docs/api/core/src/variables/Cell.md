@@ -18,7 +18,7 @@ push, `changes` for the stream of subsequent values.
 
 ### all
 
-> **all**: \<`T`\>(`cells`) => `Effect`\<`CellShape`\<`T`\>, `never`, `Scope`\> = `_all`
+> **all**: \<`T`\>(`cells`) => `Effect`\<`CellShape`\<`T`\>, `never`, [`Scope`](#)\> = `_all`
 
 Tuple-combine cells into a single cell of their current values.
 
@@ -36,11 +36,11 @@ Tuple-combine cells into a single cell of their current values.
 
 #### Returns
 
-`Effect`\<`CellShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`CellShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 ### fromStream
 
-> **fromStream**: \<`T`\>(`initial`, `source`) => `Effect`\<`CellShape`\<`T`\>, `never`, `Scope`\> = `_fromStream`
+> **fromStream**: \<`T`\>(`initial`, `source`) => `Effect`\<`CellShape`\<`T`\>, `never`, [`Scope`](#)\> = `_fromStream`
 
 Seed a cell with an initial value and mirror every stream emission into it.
 
@@ -62,7 +62,7 @@ Seed a cell with an initial value and mirror every stream emission into it.
 
 #### Returns
 
-`Effect`\<`CellShape`\<`T`\>, `never`, `Scope`\>
+`Effect`\<`CellShape`\<`T`\>, `never`, [`Scope`](#)\>
 
 ### make
 
@@ -88,7 +88,7 @@ Build a cell with an initial value.
 
 ### map
 
-> **map**: \<`T`, `U`\>(`cell`, `fn`) => `Effect`\<`CellShape`\<`U`\>, `never`, `Scope`\> = `_map`
+> **map**: \<`T`, `U`\>(`cell`, `fn`) => `Effect`\<`CellShape`\<`U`\>, `never`, [`Scope`](#)\> = `_map`
 
 Scoped `map` — derive a new cell by applying `fn` to every emission.
 
@@ -114,4 +114,4 @@ Scoped `map` — derive a new cell by applying `fn` to every emission.
 
 #### Returns
 
-`Effect`\<`CellShape`\<`U`\>, `never`, `Scope`\>
+`Effect`\<`CellShape`\<`U`\>, `never`, [`Scope`](#)\>

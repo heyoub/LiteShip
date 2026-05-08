@@ -22,7 +22,7 @@ the current interpolated output record.
 
 ### make
 
-> `readonly` **make**: \<`B`\>(`quantizer`, `transitions`, `outputs?`) => `Effect`\<[`AnimatedQuantizerShape`](../interfaces/AnimatedQuantizerShape.md)\<`B`\>, `never`, `Scope`\> = `makeAnimatedQuantizer`
+> `readonly` **make**: \<`B`\>(`quantizer`, `transitions`, `outputs?`) => `Effect`\<[`AnimatedQuantizerShape`](../interfaces/AnimatedQuantizerShape.md)\<`B`\>, `never`, [`Scope`](#)\> = `makeAnimatedQuantizer`
 
 Wrap a quantizer with transition-aware output interpolation.
 
@@ -61,7 +61,7 @@ Per-state numeric output maps for interpolation
 
 #### Returns
 
-`Effect`\<[`AnimatedQuantizerShape`](../interfaces/AnimatedQuantizerShape.md)\<`B`\>, `never`, `Scope`\>
+`Effect`\<[`AnimatedQuantizerShape`](../interfaces/AnimatedQuantizerShape.md)\<`B`\>, `never`, [`Scope`](#)\>
 
 An Effect yielding an [AnimatedQuantizerShape](../interfaces/AnimatedQuantizerShape.md) (scoped)
 

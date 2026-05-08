@@ -20,7 +20,7 @@ cross-reference (e.g. transition `between` refs).
 
 Defined in: [scene/src/compile.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/compile.ts#L31)
 
-Component seed map handed to World.spawn.
+Component seed map passed to `world.spawn(...)` when [SceneRuntime](../namespaces/SceneRuntime/README.md) builds the ECS world.
 
 ***
 

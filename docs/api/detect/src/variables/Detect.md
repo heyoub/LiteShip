@@ -72,7 +72,7 @@ const tier = Effect.runSync(Detect.detectGPUTier());
 
 ### watchCapabilities
 
-> **watchCapabilities**: (`onChange`) => `Effect`\<`void`, `never`, `Scope`\>
+> **watchCapabilities**: (`onChange`) => `Effect`\<`void`, `never`, [`Scope`](#)\>
 
 Watch for capability changes via matchMedia listeners and resize observer.
 Emits a fresh DetectionResult whenever viewport, color scheme, or
@@ -90,7 +90,7 @@ Callback invoked with fresh detection results on change
 
 #### Returns
 
-`Effect`\<`void`, `never`, `Scope`\>
+`Effect`\<`void`, `never`, [`Scope`](#)\>
 
 An Effect (scoped) that sets up listeners
 
