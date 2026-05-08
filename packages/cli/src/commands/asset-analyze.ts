@@ -9,7 +9,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { audioDecoder, detectBeats, detectOnsets, computeWaveform } from '@czap/assets';
-import { emit, emitError } from '../receipts.js';
+import { emit, emitError, getCapsuleManifestPath } from '../receipts.js';
 import { tryReadCache, writeCache } from '../idempotency.js';
 import type { IdempotencyCtx } from '../idempotency.js';
 
@@ -25,7 +25,7 @@ type Projection = 'beat' | 'onset' | 'waveform';
 
 /** Execute the asset analyze command. */
 export async function assetAnalyze(assetId: string, projection: Projection, force = false): Promise<number> {
-  const manifestPath = 'reports/capsule-manifest.json';
+  const manifestPath = getCapsuleManifestPath();
   if (!existsSync(manifestPath)) {
     emitError('asset.analyze', 'capsule manifest missing — run capsule:compile first');
     return 1;

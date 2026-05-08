@@ -390,7 +390,8 @@ function writeSatelliteScanArtifact(root: string, generatedAt = '2099-01-01T00:0
   writeFileSync(join(root, 'reports/satellite-scan.md'), renderSatelliteScanMarkdown(report));
 }
 
-describe('feedback integrity', () => {
+// Heavy audit + artifact verification; default 5s is too tight under parallel gauntlet workers.
+describe('feedback integrity', { timeout: 30_000 }, () => {
   test('runtime seams report carries provenance and passes integrity checks', () => {
     const root = createRepo(baseRepoFiles());
     const context = ensureArtifactContext(root);

@@ -40,6 +40,7 @@
     "feedback:verify": "pnpm exec tsx scripts/feedback-verify.ts",
     "runtime:gate": "pnpm exec tsx scripts/runtime-gate.ts",
     "flex:verify": "pnpm exec tsx scripts/flex-verify.ts",
+    "devx:check": "pnpm exec tsx scripts/devx-check.ts",
     "audit": "pnpm run audit:report",
     "audit:structure": "pnpm exec tsx scripts/audit/structure.ts",
     "audit:integrity": "pnpm exec tsx scripts/audit/integrity.ts",

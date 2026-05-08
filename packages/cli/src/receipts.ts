@@ -6,6 +6,8 @@
  * @module
  */
 
+import { resolve } from 'node:path';
+
 /** Base shape carried by every CLI command receipt. */
 export interface BaseReceipt {
   readonly status: 'ok' | 'failed';
@@ -53,4 +55,13 @@ export function emitError(command: string, message: string): void {
       timestamp: new Date().toISOString(),
     }) + '\n',
   );
+}
+
+const DEFAULT_CAPSULE_MANIFEST_RELATIVE = 'reports/capsule-manifest.json';
+
+/** Override default manifest path with `CZAP_CAPSULE_MANIFEST` (relative to cwd or absolute). */
+export function getCapsuleManifestPath(cwd: string = process.cwd()): string {
+  const raw = process.env.CZAP_CAPSULE_MANIFEST?.trim();
+  if (!raw) return resolve(cwd, DEFAULT_CAPSULE_MANIFEST_RELATIVE);
+  return resolve(cwd, raw);
 }

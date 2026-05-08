@@ -7,7 +7,7 @@
  */
 
 import { existsSync, readFileSync } from 'node:fs';
-import { emit, emitError } from '../receipts.js';
+import { emit, emitError, getCapsuleManifestPath } from '../receipts.js';
 import { VitestRunner } from '../capsules/vitest-runner.js';
 
 interface ManifestEntry {
@@ -19,7 +19,7 @@ interface Manifest { readonly capsules: readonly ManifestEntry[]; }
 
 /** Execute the asset verify command. */
 export async function assetVerify(assetId: string): Promise<number> {
-  const manifestPath = 'reports/capsule-manifest.json';
+  const manifestPath = getCapsuleManifestPath();
   if (!existsSync(manifestPath)) {
     emitError('asset.verify', 'manifest missing; run capsule:compile first');
     return 1;

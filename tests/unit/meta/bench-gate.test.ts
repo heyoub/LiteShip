@@ -19,6 +19,7 @@ import {
   type PairEvaluation,
   type ReplicateResult,
 } from '../../../scripts/bench/directive-suite.ts';
+import { LLM_STEADY_REPLICATE_EXCEEDANCE_MAX } from '../../../scripts/bench/flex-policy.ts';
 
 function makeBenchResult(name: string, meanNs: number): BenchResult {
   return {
@@ -356,5 +357,22 @@ describe('directive benchmark suite', () => {
     expect(llmSignals.replicateExceedanceRate).toBe(0);
     expect(llmSignals.directiveP99ToBaselineP99).toBeGreaterThan(1);
     expect(llmSignals.directiveP75ToBaselineP75).toBeGreaterThan(1);
+  });
+
+  test('flex LLM steady exceedance policy matches directive-suite (> max elevated, <= max ok)', () => {
+    const steadyPair = DIRECTIVE_BENCH_PAIRS.find((pair) => pair.label === 'llm-runtime-steady')!;
+    const atCeiling = summarizeLLMRuntimeSteadySignals(
+      makeReplicates(steadyPair, [0.26, 0.1, 0.1, 0.1, 0.1]),
+    );
+    expect(atCeiling.replicateExceedanceRate).toBe(0.2);
+    expect(atCeiling.replicateExceedanceRate <= LLM_STEADY_REPLICATE_EXCEEDANCE_MAX).toBe(true);
+    expect(atCeiling.conclusion.includes('threshold flirtation')).toBe(false);
+
+    const elevated = summarizeLLMRuntimeSteadySignals(
+      makeReplicates(steadyPair, [0.26, 0.26, 0.1, 0.1, 0.1]),
+    );
+    expect(elevated.replicateExceedanceRate).toBe(0.4);
+    expect(elevated.replicateExceedanceRate > LLM_STEADY_REPLICATE_EXCEEDANCE_MAX).toBe(true);
+    expect(elevated.conclusion.includes('threshold flirtation')).toBe(true);
   });
 });

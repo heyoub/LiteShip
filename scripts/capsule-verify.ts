@@ -11,6 +11,7 @@
 
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { getCapsuleManifestPath } from '../packages/cli/src/receipts.js';
 import { execSync } from 'node:child_process';
 
 interface Verdict {
@@ -27,7 +28,7 @@ interface ManifestEntry {
 
 function main(): Verdict {
   const errors: string[] = [];
-  const manifestPath = resolve('reports/capsule-manifest.json');
+  const manifestPath = getCapsuleManifestPath();
 
   if (!existsSync(manifestPath)) {
     return { status: 'stale', errors: ['manifest missing; run capsule:compile first'], capsuleCount: 0 };

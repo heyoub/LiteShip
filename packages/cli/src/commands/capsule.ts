@@ -7,7 +7,7 @@
  */
 
 import { existsSync, readFileSync } from 'node:fs';
-import { emit, emitError } from '../receipts.js';
+import { emit, emitError, getCapsuleManifestPath } from '../receipts.js';
 import { VitestRunner } from '../capsules/vitest-runner.js';
 
 interface ManifestEntry {
@@ -20,7 +20,7 @@ interface ManifestEntry {
 interface Manifest { readonly capsules: readonly ManifestEntry[]; }
 
 function loadManifest(): Manifest | null {
-  const path = 'reports/capsule-manifest.json';
+  const path = getCapsuleManifestPath();
   if (!existsSync(path)) return null;
   return JSON.parse(readFileSync(path, 'utf8')) as Manifest;
 }

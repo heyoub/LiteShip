@@ -1,4 +1,5 @@
 import { Bench, type FnOptions } from 'tinybench';
+import { LLM_STEADY_REPLICATE_EXCEEDANCE_MAX } from './flex-policy.js';
 import { Boundary, GenFrame, TokenBuffer, UIQuality, RuntimeCoordinator, type CompositeState } from '@czap/core';
 import { ClientHints, compileTheme, createEdgeHostAdapter, EdgeTier } from '@czap/edge';
 import { LLMChunkNormalization, SSE, type LLMChunk } from '@czap/web';
@@ -2040,7 +2041,7 @@ export function summarizeLLMRuntimeSteadySignals(
   const longSessionSlopeNsPerChunk = Number(((longText256Ns - longText64Ns) / (256 - 64)).toFixed(2));
   const mixedChunkSlopeNsPerChunk = Number(((mixed256Ns - mixed64Ns) / (256 - 64)).toFixed(2));
   const conclusion =
-    replicateExceedanceRate > 0.2
+    replicateExceedanceRate > LLM_STEADY_REPLICATE_EXCEEDANCE_MAX
       ? 'LLM steady-state still shows real threshold flirtation across replicates, so burst handling and queue coalescing remain active watch items.'
       : (directiveP99ToBaselineP99 ?? 0) >= 1.25 && (directiveP75ToBaselineP75 ?? 0) < 1.15
         ? 'Median steady-state cost is controlled, but the tail is still more inflated than the center, which points to scheduler sensitivity under bursts.'

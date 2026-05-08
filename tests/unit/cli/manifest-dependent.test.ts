@@ -11,8 +11,9 @@
  * JSON for the full `capsule verify` timeout window.
  */
 import { describe, it, expect, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join as pathJoin } from 'node:path';
 import { run } from '../../../packages/cli/src/dispatch.js';
 import { capsuleInspect, capsuleList, capsuleVerify } from '../../../packages/cli/src/commands/capsule.js';
 import { assetAnalyze } from '../../../packages/cli/src/commands/asset-analyze.js';
@@ -338,5 +339,31 @@ describe('cli — manifest-dependent commands (serialized)', () => {
     const receipt = JSON.parse(r.stdout.trim().split('\n').pop()!);
     expect(receipt.dryRun).toBe(true);
     expect(Array.isArray(receipt.phases)).toBe(true);
+  });
+
+  describe('CZAP_CAPSULE_MANIFEST override', () => {
+    let tmpManifest: string;
+
+    beforeEach(() => {
+      const dir = mkdtempSync(pathJoin(tmpdir(), 'czap-cap-'));
+      tmpManifest = pathJoin(dir, 'manifest.json');
+      process.env.CZAP_CAPSULE_MANIFEST = tmpManifest;
+      writeFileSync(tmpManifest, JSON.stringify(FIXTURE_MANIFEST), 'utf8');
+    });
+
+    afterEach(() => {
+      delete process.env.CZAP_CAPSULE_MANIFEST;
+      rmSync(dirname(tmpManifest), { recursive: true, force: true });
+    });
+
+    it('capsule list reads manifest from env path (not only reports/)', async () => {
+      const r = await capture(() => capsuleList(undefined));
+      expect(r.exit).toBe(0);
+      const receipt = JSON.parse(r.stdout.trim().split('\n').pop()!);
+      expect(receipt.capsules).toHaveLength(FIXTURE_MANIFEST.capsules.length);
+      expect(receipt.capsules.map((c: { name: string }) => c.name).sort()).toEqual(
+        FIXTURE_MANIFEST.capsules.map((c) => c.name).sort(),
+      );
+    });
   });
 });

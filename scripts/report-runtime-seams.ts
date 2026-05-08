@@ -15,6 +15,7 @@ import {
   verifyRuntimeSeamsReport,
 } from './artifact-integrity.js';
 import type { PairedTruthEntry } from './paired-truth.js';
+import { LLM_STEADY_REPLICATE_EXCEEDANCE_MAX } from './bench/flex-policy.js';
 
 type PreviousHotspotEntry = {
   file: string;
@@ -215,7 +216,7 @@ function classifyWorkerStartupEarlyWarning(
 }
 
 function classifyLLMRuntimeSteadySignals(signals: ExtendedRuntimeSeamsReport['llmRuntimeSteadySignals']): string {
-  if (signals.replicateExceedanceRate > 0.2) {
+  if (signals.replicateExceedanceRate > LLM_STEADY_REPLICATE_EXCEEDANCE_MAX) {
     return 'watch: replicate exceedance rate is elevated, so the steady lane is still flirting with the diagnostic threshold.';
   }
 

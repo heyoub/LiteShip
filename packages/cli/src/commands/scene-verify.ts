@@ -9,7 +9,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { emit, emitError } from '../receipts.js';
+import { emit, emitError, getCapsuleManifestPath } from '../receipts.js';
 import { VitestRunner } from '../capsules/vitest-runner.js';
 
 interface ManifestEntry {
@@ -40,7 +40,7 @@ export async function sceneVerify(scenePath: string): Promise<number> {
     return 1;
   }
 
-  const manifestPath = 'reports/capsule-manifest.json';
+  const manifestPath = getCapsuleManifestPath();
   if (!existsSync(manifestPath)) {
     emitError('scene.verify', 'capsule manifest missing; run capsule:compile first');
     return 1;
