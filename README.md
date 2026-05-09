@@ -89,6 +89,10 @@ Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary
 ## Documentation
 
 - **[docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md)** — clone → install → first boundary, end-to-end
+- **[docs/ASTRO-STATIC-MENTAL-MODEL.md](./docs/ASTRO-STATIC-MENTAL-MODEL.md)** — signals → boundaries → named states → outputs; the theory-first authoring frame
+- **[docs/AUTHORING-MODEL.md](./docs/AUTHORING-MODEL.md)** — definition shapes, naming, and composition rules
+- **[docs/ASTRO-RUNTIME-MODEL.md](./docs/ASTRO-RUNTIME-MODEL.md)** — how Astro hosts the runtime, directives, and escalation path
+- **[docs/PACKAGE-SURFACES.md](./docs/PACKAGE-SURFACES.md)** — package-by-package import and ownership map
 - **[docs/DOCS.md](./docs/DOCS.md)** — full documentation map
 - **[docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** — package and system architecture
 - **[docs/adr/](./docs/adr)** — architecture decision records (numbered, indexed)

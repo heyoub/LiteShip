@@ -77,7 +77,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "pnpm run build"
   },
   "dependencies": {
     "@czap/core": "workspace:*",

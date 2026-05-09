@@ -36,7 +36,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "pnpm run build"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -48,7 +49,8 @@
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {
-    "@czap/cli": "workspace:*"
+    "@czap/cli": "workspace:*",
+    "effect": ">=4.0.0-beta.0"
   },
   "peerDependenciesMeta": {
     "@czap/cli": {

@@ -88,6 +88,7 @@
     "@czap/worker": "workspace:*",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/node": "4",
+    "@types/node": "^22.19.15",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitest/browser": "^4.1.2",
