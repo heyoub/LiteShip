@@ -4,9 +4,9 @@ Multi-target output: CSS, GLSL, WGSL, ARIA, AI, Tailwind (11 compilers).
 
 ## Docs
 
-- [API reference](../../docs/api/compiler/) — generated from source TSDoc
-- [Architecture index](../../docs/ARCHITECTURE.md)
-- [ADRs](../../docs/adr/)
+- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/compiler/) — generated from source TSDoc
+- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
 
 ## Install
 
@@ -14,4 +14,4 @@ Multi-target output: CSS, GLSL, WGSL, ARIA, AI, Tailwind (11 compilers).
 pnpm add @czap/compiler
 ```
 
-## Part of [czap](../../README.md)
+## Part of [czap](https://github.com/TheFreeBatteryFactory/czap#readme)

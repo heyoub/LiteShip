@@ -10,15 +10,19 @@ Use it as the entry point for humans and agents.
 
 ### If the question is "What is czap?"
 
-Read [ARCHITECTURE.md](./ARCHITECTURE.md).
+Read [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md), then
+[ARCHITECTURE.md](./ARCHITECTURE.md).
 
-This is the package and system overview:
+Together these explain the ontology and the package shape:
 
+- signals
+- boundaries
+- named states
+- outputs
 - package DAG
-- primitives
 - compiler targets
 - Vite and Astro positioning
-- video and capture pipeline
+- scene, asset, CLI, and MCP surfaces
 
 ### If the question is "What is the philosophy behind the runtime?"
 
@@ -102,9 +106,9 @@ Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
 
 For a theory-first understanding:
 
-1. [ARCHITECTURE.md](./ARCHITECTURE.md)
-2. [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md) + [ADR-0004 plan/coordinator](./adr/0004-plan-coordinator.md)
-3. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
+1. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
+2. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md) + [ADR-0004 plan/coordinator](./adr/0004-plan-coordinator.md)
 4. [AUTHORING-MODEL.md](./AUTHORING-MODEL.md)
 5. [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md)
 6. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md)

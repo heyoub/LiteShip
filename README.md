@@ -89,6 +89,10 @@ Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary
 ## Documentation
 
 - **[docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md)** — clone → install → first boundary, end-to-end
+- **[docs/ASTRO-STATIC-MENTAL-MODEL.md](./docs/ASTRO-STATIC-MENTAL-MODEL.md)** — signals → boundaries → named states → outputs; the theory-first authoring frame
+- **[docs/AUTHORING-MODEL.md](./docs/AUTHORING-MODEL.md)** — definition shapes, naming, and composition rules
+- **[docs/ASTRO-RUNTIME-MODEL.md](./docs/ASTRO-RUNTIME-MODEL.md)** — how Astro hosts the runtime, directives, and escalation path
+- **[docs/PACKAGE-SURFACES.md](./docs/PACKAGE-SURFACES.md)** — package-by-package import and ownership map
 - **[docs/DOCS.md](./docs/DOCS.md)** — full documentation map
 - **[docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** — package and system architecture
 - **[docs/adr/](./docs/adr)** — architecture decision records (numbered, indexed)
@@ -136,6 +140,31 @@ pnpm run gauntlet:full    # full release-grade gate (~22min)
 Other lanes — `test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify` — are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 `pnpm run gauntlet:full` is the one that matters before a release: 30 phases, ~22 minutes, ends with `flex:verify PASSED — project is 10/10 by every rating dimension` or it fails.
+
+## Latest gauntlet benchmark snapshot
+
+Fresh local run on 2026-05-09 (Cursor Cloud Linux, Node 22, pnpm 10):
+
+- `pnpm run gauntlet:full` passed end-to-end in 14m47s.
+- `flex:verify` passed: `project is 10/10 by every rating dimension`.
+- `bench:gate` passed: 7 hard gates, 0 failed, 5 replicates.
+- `package:smoke` passed for all 15 publishable `@czap/*` scopes.
+
+| Hard-gated pair | Median directive | Median baseline | Median overhead | Threshold |
+| --- | ---: | ---: | ---: | ---: |
+| `satellite` hot path | 1,034.88ns | 968.58ns | 6.88% | 15% |
+| `stream` parse + patch | 954,460.54ns | 939,129.93ns | 1.73% | 15% |
+| `llm` text chunk parse | 1,018,844.57ns | 918,664.88ns | 10.90% | 15% |
+| `worker` fallback eval | 1,588.24ns | 1,483.02ns | 7.03% | 15% |
+| `llm-startup-shared` | 98,504.37ns | 96,642.77ns | 1.63% | 25% |
+| `llm-promoted-startup-shared` | 150,845.57ns | 150,954.45ns | 0.89% | 25% |
+| `worker-runtime-startup-shared` | 1,777.50ns | 4,502.50ns | -65.91% | 25% |
+
+Diagnostic watch, not a release gate: `llm-runtime-steady` remains above its
+relative baseline (63.09% median overhead, p99 ratio 1.5233x), but the absolute
+directive p99 is 23,334.43ns against a 1,000,000ns steady-state budget. Current
+artifact truth lives in `benchmarks/directive-gate.json`,
+`reports/runtime-seams.json`, and `reports/satellite-scan.json`.
 
 ## Operational telemetry
 

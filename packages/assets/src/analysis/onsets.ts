@@ -11,9 +11,7 @@ import { defineCapsule } from '@czap/core';
 import type { CapsuleDef } from '@czap/core';
 
 /** Detect note-attack onsets as an ordered array of sample indices. */
-export function detectOnsets(
-  audio: { sampleRate: number; samples: Float32Array | Int16Array },
-): readonly number[] {
+export function detectOnsets(audio: { sampleRate: number; samples: Float32Array | Int16Array }): readonly number[] {
   const frameSize = 1024;
   const hop = 256;
   // Clamp to zero for clips shorter than one frame.

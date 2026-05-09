@@ -5,6 +5,12 @@ Operator checklist for public npm and GitHub releases. Run destructive git steps
 ## Preconditions
 
 - Release-blocking gates (for example `pnpm run gauntlet:full`) are green on the ship commit.
+- Run `pnpm run package:smoke` on the ship commit. This packs every publishable
+  `@czap/*` scope, installs the tarballs in a throwaway consumer, verifies export
+  imports, runs the CLI, and fails if a packed manifest still contains
+  `workspace:*`.
+- Publish with pnpm workspace tooling only. Plain `npm publish` does not rewrite
+  `workspace:*` specs for downstream consumers.
 - Run `pnpm run release:notes` so `RELEASE_NOTES_v0.1.0.md` matches the canonical `## [0.1.0]` block in `CHANGELOG.md`. Do not paste the full changelog into GitHub Releases.
 
 ## Extract release notes

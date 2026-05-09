@@ -4,9 +4,9 @@ Device capability probes, GPU tier, DesignTier/MotionTier mapping.
 
 ## Docs
 
-- [API reference](../../docs/api/detect/) — generated from source TSDoc
-- [Architecture index](../../docs/ARCHITECTURE.md)
-- [ADRs](../../docs/adr/)
+- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/detect/) — generated from source TSDoc
+- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
 
 ## Install
 
@@ -14,4 +14,4 @@ Device capability probes, GPU tier, DesignTier/MotionTier mapping.
 pnpm add @czap/detect
 ```
 
-## Part of [czap](../../README.md)
+## Part of [czap](https://github.com/TheFreeBatteryFactory/czap#readme)

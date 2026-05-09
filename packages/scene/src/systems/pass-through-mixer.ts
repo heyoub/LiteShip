@@ -19,10 +19,7 @@ export interface MixReceipt {
 }
 
 /** Build a PassThroughMixer keyed to a frame index + receipt sink. */
-export function PassThroughMixer(
-  frameIndex: number,
-  sink: (receipt: MixReceipt) => void,
-): System {
+export function PassThroughMixer(frameIndex: number, sink: (receipt: MixReceipt) => void): System {
   return {
     name: 'PassThroughMixer',
     query: ['AudioSource', 'Volume', 'Pan'],

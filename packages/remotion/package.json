@@ -35,12 +35,14 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "pnpm run build"
   },
   "dependencies": {
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {
+    "effect": ">=4.0.0-beta.0",
     "react": ">=18",
     "remotion": ">=4"
   },

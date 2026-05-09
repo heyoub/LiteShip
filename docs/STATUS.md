@@ -325,6 +325,7 @@ Current satellite scan blind spots:
 - audit warnings cleared; remaining blind spots are telemetry watch notes, not
   active audit findings
 - the exact ranked hotspot list should be read from fresh local
+  `reports/satellite-scan.md` and `reports/satellite-scan.json` outputs
 
 Worker startup early-warning trigger:
 
@@ -332,8 +333,8 @@ Worker startup early-warning trigger:
 - if `worker-runtime-startup-seam.absoluteMeanNs > 10000` and
   `messageReceiptSharePct >= 60` for two consecutive verified runs, open a
   separate transport architecture evaluation
-  `reports/runtime-seams.*` and `reports/satellite-scan.*` outputs instead of
-  being hardcoded here
+- use fresh `reports/runtime-seams.*` and `reports/satellite-scan.*` outputs
+  for the current evidence trail instead of hardcoding a verdict here
 
 Explicit runtime coverage exclusions now live in `vitest.shared.ts` and are
 limited to barrels plus runtime-unexecutable/type-only files:
@@ -443,7 +444,7 @@ emits stable mix receipts end-to-end through the SceneRuntime).
 ### B.1: DECIDED -- examples/remotion-demo is standalone
 
 `examples/remotion-demo` is excluded from both workspaces and tsconfig.
-It's a standalone demo requiring its own `cd examples/remotion-demo && bun install`.
+It's a standalone demo requiring its own `cd examples/remotion-demo && pnpm install`.
 Documented in README.
 
 ### B.2: DECIDED -- Node/PNPM wrappers are the supported feedback loop

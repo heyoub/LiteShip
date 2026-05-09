@@ -9,8 +9,7 @@
 import type { VideoTrack } from '../contract.js';
 
 /** Assign ascending layer values — first track on layer 0, next on 1, etc. */
-const stack = (tracks: readonly VideoTrack[]): readonly VideoTrack[] =>
-  tracks.map((t, i) => ({ ...t, layer: i }));
+const stack = (tracks: readonly VideoTrack[]): readonly VideoTrack[] => tracks.map((t, i) => ({ ...t, layer: i }));
 
 /** Assign layer values based on column count — tracks in the same row share a layer. */
 const grid = (cols: number, tracks: readonly VideoTrack[]): readonly VideoTrack[] =>

@@ -19,9 +19,7 @@ export interface BeatMarkerSet {
 }
 
 /** Detect downbeats on a decoded audio buffer. */
-export function detectBeats(
-  audio: { sampleRate: number; samples: Float32Array | Int16Array },
-): BeatMarkerSet {
+export function detectBeats(audio: { sampleRate: number; samples: Float32Array | Int16Array }): BeatMarkerSet {
   const frameSize = 1024;
   const hop = 256;
   // Clamp to zero for clips shorter than one frame so we return an empty
@@ -46,7 +44,10 @@ export function detectBeats(
   for (let lag = minLag; lag < maxLag && lag < envelope.length; lag++) {
     let corr = 0;
     for (let i = 0; i + lag < envelope.length; i++) corr += envelope[i]! * envelope[i + lag]!;
-    if (corr > bestCorr) { bestCorr = corr; bestLag = lag; }
+    if (corr > bestCorr) {
+      bestCorr = corr;
+      bestLag = lag;
+    }
   }
 
   const bpm = (audio.sampleRate * 60) / (bestLag * hop);

@@ -8,7 +8,7 @@
 
 > `const` **JsonRpcServer**: `object`
 
-Defined in: [mcp-server/src/jsonrpc.ts:216](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L216)
+Defined in: [mcp-server/src/jsonrpc.ts:222](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L222)
 
 Namespaced public surface of the kernel.
 

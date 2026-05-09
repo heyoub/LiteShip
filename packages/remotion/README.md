@@ -4,9 +4,9 @@ Remotion adapter: React hooks + composition helpers.
 
 ## Docs
 
-- [API reference](../../docs/api/remotion/) — generated from source TSDoc
-- [Architecture index](../../docs/ARCHITECTURE.md)
-- [ADRs](../../docs/adr/)
+- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/remotion/) — generated from source TSDoc
+- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
 
 ## Install
 
@@ -14,4 +14,4 @@ Remotion adapter: React hooks + composition helpers.
 pnpm add @czap/remotion
 ```
 
-## Part of [czap](../../README.md)
+## Part of [czap](https://github.com/TheFreeBatteryFactory/czap#readme)

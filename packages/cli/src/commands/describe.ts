@@ -10,8 +10,13 @@ import { existsSync, readFileSync } from 'node:fs';
 
 /** Closed catalog of the seven assembly kinds (matches ADR-0008). */
 const ASSEMBLY_KINDS = [
-  'pureTransform', 'receiptedMutation', 'stateMachine',
-  'siteAdapter', 'policyGate', 'cachedProjection', 'sceneComposition',
+  'pureTransform',
+  'receiptedMutation',
+  'stateMachine',
+  'siteAdapter',
+  'policyGate',
+  'cachedProjection',
+  'sceneComposition',
 ] as const;
 
 /** CLI command descriptor. Minimal shape — full input/output schemas come later. */
@@ -23,18 +28,73 @@ interface CommandDescriptor {
 }
 
 const COMMANDS: readonly CommandDescriptor[] = [
-  { name: 'describe', description: 'Dump capsule catalog schema', args: { format: "'json' | 'mcp' (optional)" }, outputs: 'DescribeReceipt' },
-  { name: 'scene.compile', description: 'Compile a scene capsule', args: { scene: 'string' }, outputs: 'SceneCompileReceipt' },
-  { name: 'scene.render', description: 'Render scene to mp4', args: { scene: 'string', output: 'string' }, outputs: 'SceneRenderReceipt' },
-  { name: 'scene.verify', description: 'Run scene generated tests', args: { scene: 'string' }, outputs: 'SceneVerifyReceipt' },
-  { name: 'scene.dev', description: 'Launch Vite + browser player', args: { scene: 'string' }, outputs: 'SceneDevLaunchReceipt' },
-  { name: 'asset.analyze', description: 'Run cachedProjection on asset', args: { asset: 'string', projection: "'beat' | 'onset' | 'waveform'" }, outputs: 'AssetAnalyzeReceipt' },
-  { name: 'asset.verify', description: 'Verify asset capsule', args: { asset: 'string' }, outputs: 'AssetVerifyReceipt' },
-  { name: 'capsule.inspect', description: 'Inspect a capsule manifest entry', args: { id: 'string' }, outputs: 'CapsuleInspectReceipt' },
-  { name: 'capsule.verify', description: 'Verify capsule generated tests', args: { id: 'string' }, outputs: 'CapsuleVerifyReceipt' },
-  { name: 'capsule.list', description: 'List capsules, optionally filtered by kind', args: { kind: 'AssemblyKind (optional)' }, outputs: 'CapsuleListReceipt' },
+  {
+    name: 'describe',
+    description: 'Dump capsule catalog schema',
+    args: { format: "'json' | 'mcp' (optional)" },
+    outputs: 'DescribeReceipt',
+  },
+  {
+    name: 'scene.compile',
+    description: 'Compile a scene capsule',
+    args: { scene: 'string' },
+    outputs: 'SceneCompileReceipt',
+  },
+  {
+    name: 'scene.render',
+    description: 'Render scene to mp4',
+    args: { scene: 'string', output: 'string' },
+    outputs: 'SceneRenderReceipt',
+  },
+  {
+    name: 'scene.verify',
+    description: 'Run scene generated tests',
+    args: { scene: 'string' },
+    outputs: 'SceneVerifyReceipt',
+  },
+  {
+    name: 'scene.dev',
+    description: 'Launch Vite + browser player',
+    args: { scene: 'string' },
+    outputs: 'SceneDevLaunchReceipt',
+  },
+  {
+    name: 'asset.analyze',
+    description: 'Run cachedProjection on asset',
+    args: { asset: 'string', projection: "'beat' | 'onset' | 'waveform'" },
+    outputs: 'AssetAnalyzeReceipt',
+  },
+  {
+    name: 'asset.verify',
+    description: 'Verify asset capsule',
+    args: { asset: 'string' },
+    outputs: 'AssetVerifyReceipt',
+  },
+  {
+    name: 'capsule.inspect',
+    description: 'Inspect a capsule manifest entry',
+    args: { id: 'string' },
+    outputs: 'CapsuleInspectReceipt',
+  },
+  {
+    name: 'capsule.verify',
+    description: 'Verify capsule generated tests',
+    args: { id: 'string' },
+    outputs: 'CapsuleVerifyReceipt',
+  },
+  {
+    name: 'capsule.list',
+    description: 'List capsules, optionally filtered by kind',
+    args: { kind: 'AssemblyKind (optional)' },
+    outputs: 'CapsuleListReceipt',
+  },
   { name: 'gauntlet', description: 'Run the full gauntlet', args: {}, outputs: 'GauntletReceipt' },
-  { name: 'mcp', description: 'Start the MCP server (stdio default; --http=PORT for HTTP)', args: { http: 'string (optional, port number)' }, outputs: 'MCP server (long-running)' },
+  {
+    name: 'mcp',
+    description: 'Start the MCP server (stdio default; --http=PORT for HTTP)',
+    args: { http: 'string (optional, port number)' },
+    outputs: 'MCP server (long-running)',
+  },
 ] as const;
 
 /** Result of `describe` in JSON mode. */
@@ -51,7 +111,9 @@ export interface McpToolDescriptor {
 }
 
 /** Execute the describe command. */
-export function describe(args: { format?: 'json' | 'mcp' } = {}): DescribeReceipt | { tools: readonly McpToolDescriptor[] } {
+export function describe(
+  args: { format?: 'json' | 'mcp' } = {},
+): DescribeReceipt | { tools: readonly McpToolDescriptor[] } {
   if (args.format === 'mcp') {
     const cachedManifest = '.czap/generated/mcp-manifest.json';
     if (existsSync(cachedManifest)) {

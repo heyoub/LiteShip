@@ -32,8 +32,7 @@ export async function sceneVerify(scenePath: string): Promise<number> {
   const mod = (await import(/* @vite-ignore */ pathToFileURL(abs).href)) as Record<string, unknown>;
   const cap = Object.values(mod).find(
     (v): v is { _kind: string; id: string; name: string } =>
-      typeof v === 'object' && v !== null && '_kind' in v &&
-      (v as { _kind: unknown })._kind === 'sceneComposition',
+      typeof v === 'object' && v !== null && '_kind' in v && (v as { _kind: unknown })._kind === 'sceneComposition',
   );
   if (!cap) {
     emitError('scene.verify', 'no sceneComposition capsule exported');

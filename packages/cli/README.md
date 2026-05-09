@@ -18,4 +18,4 @@ The `mcp` subcommand dynamically imports `@czap/mcp-server`. Install
 `@czap/mcp-server` alongside `@czap/cli` when you need MCP mode, and keep both
 on the same semver line.
 
-See [docs/GETTING-STARTED.md](../../docs/GETTING-STARTED.md).
+See [docs/GETTING-STARTED.md](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/GETTING-STARTED.md).

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { quoteWindowsArg, spawnArgv, withSpawned } from '../../../scripts/lib/spawn.js';
 
@@ -106,6 +107,11 @@ describe('withSpawned lifecycle', () => {
     let grandchildPid: number | undefined;
     const isAlive = (pid: number): boolean => {
       try {
+        if (process.platform !== 'win32') {
+          const stat = readFileSync(`/proc/${pid}/stat`, 'utf8');
+          const state = stat.slice(stat.lastIndexOf(')') + 2).split(' ', 1)[0];
+          if (state === 'Z') return false;
+        }
         process.kill(pid, 0);
         return true;
       } catch {

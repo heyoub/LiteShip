@@ -16,9 +16,7 @@ import type { HarnessOutput } from './pure-transform.js';
  * Generate the test + bench file contents for a `policyGate` capsule.
  * Emits `it.skip` placeholders for allow / deny / reason-chain coverage.
  */
-export function generatePolicyGate(
-  cap: CapsuleDef<'policyGate', unknown, unknown, unknown>,
-): HarnessOutput {
+export function generatePolicyGate(cap: CapsuleDef<'policyGate', unknown, unknown, unknown>): HarnessOutput {
   const testFile = `// GENERATED — do not edit by hand
 import { describe, it } from 'vitest';
 

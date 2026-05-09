@@ -118,8 +118,7 @@ export const boundaryEvaluateCapsule = defineCapsule({
     },
     {
       name: 'unmatched-implies-empty-state',
-      check: (_input: EvaluateInput, output: EvaluateOutput): boolean =>
-        output.matched || output.state === '',
+      check: (_input: EvaluateInput, output: EvaluateOutput): boolean => output.matched || output.state === '',
       message: 'unmatched outcomes must use empty-string state',
     },
   ],

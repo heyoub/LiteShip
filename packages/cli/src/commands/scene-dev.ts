@@ -25,7 +25,9 @@ async function loadStartDevServer(): Promise<StartDevServerFn> {
   const serverSrcPath = resolve(here, '../../../scene/src/dev/server.ts');
   if (existsSync(serverSrcPath)) {
     // tsx / dev mode: source is present, import it directly as a file URL
-    const mod = (await import(/* @vite-ignore */ pathToFileURL(serverSrcPath).href)) as { startDevServer: StartDevServerFn };
+    const mod = (await import(/* @vite-ignore */ pathToFileURL(serverSrcPath).href)) as {
+      startDevServer: StartDevServerFn;
+    };
     return mod.startDevServer;
   }
   // Compiled mode: import from dist via the dedicated /dev sub-path. The dev
@@ -41,10 +43,9 @@ async function loadStartDevServer(): Promise<StartDevServerFn> {
  * input-validation + receipt-emission paths without entering the
  * SIGINT-await loop (which can't be cleanly unit-tested on Windows).
  */
-export async function sceneDevSetup(scenePath: string): Promise<
-  | { kind: 'ok'; handle: { url: string; close(): Promise<void> } }
-  | { kind: 'error'; exit: number }
-> {
+export async function sceneDevSetup(
+  scenePath: string,
+): Promise<{ kind: 'ok'; handle: { url: string; close(): Promise<void> } } | { kind: 'error'; exit: number }> {
   const abs = resolve(scenePath);
   if (!existsSync(abs)) {
     emitError('scene.dev', `scene not found: ${scenePath}`);

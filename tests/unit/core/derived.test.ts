@@ -196,17 +196,20 @@ describe('Derived.flatten', () => {
         const outerCell = yield* Cell.make(derivedA);
         const nested = yield* Derived.make(outerCell.get, [outerCell.changes]);
         const flat = yield* Derived.flatten(nested);
-        const updates = Effect.forkScoped(Stream.runCollect(Stream.take(flat.changes, 3)));
+        const updates = Effect.forkScoped(
+          Stream.runCollect(flat.changes.pipe(Stream.filter((value) => value === 25), Stream.take(1))),
+        );
         yield* Effect.sleep('1 millis');
         yield* outerCell.set(derivedB);
         yield* Effect.sleep('1 millis');
         yield* innerB.set(25);
         const fiber = yield* updates;
         const values = Array.from(yield* Fiber.join(fiber));
-        return values.at(-1);
+        return { latest: values.at(-1), final: yield* flat.get };
       }),
     );
 
-    expect(result).toBe(25);
+    expect(result.latest).toBe(25);
+    expect(result.final).toBe(25);
   });
 });

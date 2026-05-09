@@ -28,9 +28,7 @@ export async function startDevServer(scenePath: string): Promise<DevServerHandle
   // src/dev/ and player.html is right next to us. In a published consumer
   // running dist/dev/server.js, walk back to src/dev/ (the tarball ships both
   // dist/ and src/ via the package's `files` array).
-  const playerRoot = existsSync(resolve(here, 'player.html'))
-    ? here
-    : resolve(here, '../../src/dev');
+  const playerRoot = existsSync(resolve(here, 'player.html')) ? here : resolve(here, '../../src/dev');
   // Per-instance cacheDir: when multiple dev servers boot concurrently (e.g.
   // vitest forks running scene-dev tests in parallel), the default
   // node_modules/.vite/ cache is shared and the racing dep-scans trip

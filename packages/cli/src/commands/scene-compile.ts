@@ -27,21 +27,11 @@ interface ContractLike {
 }
 
 function isCapsule(v: unknown): v is CapsuleLike {
-  return (
-    typeof v === 'object' &&
-    v !== null &&
-    '_kind' in v &&
-    (v as { _kind: unknown })._kind === 'sceneComposition'
-  );
+  return typeof v === 'object' && v !== null && '_kind' in v && (v as { _kind: unknown })._kind === 'sceneComposition';
 }
 
 function isContract(v: unknown): v is ContractLike {
-  return (
-    typeof v === 'object' &&
-    v !== null &&
-    'tracks' in v &&
-    Array.isArray((v as { tracks: unknown }).tracks)
-  );
+  return typeof v === 'object' && v !== null && 'tracks' in v && Array.isArray((v as { tracks: unknown }).tracks);
 }
 
 /** Execute the scene compile command. */
@@ -61,9 +51,7 @@ export async function sceneCompile(scenePath: string): Promise<number> {
     return 1;
   }
 
-  const compileFn = Object.values(mod).find(
-    (v): v is () => unknown => typeof v === 'function',
-  );
+  const compileFn = Object.values(mod).find((v): v is () => unknown => typeof v === 'function');
   const start = Date.now();
   try {
     if (compileFn) {

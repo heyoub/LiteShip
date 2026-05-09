@@ -16,9 +16,7 @@ import type { HarnessOutput } from './pure-transform.js';
  * Generate the test + bench file contents for a `siteAdapter` capsule.
  * Emits `it.skip` placeholders for round-trip and host-capability tests.
  */
-export function generateSiteAdapter(
-  cap: CapsuleDef<'siteAdapter', unknown, unknown, unknown>,
-): HarnessOutput {
+export function generateSiteAdapter(cap: CapsuleDef<'siteAdapter', unknown, unknown, unknown>): HarnessOutput {
   const testFile = `// GENERATED — do not edit by hand
 import { describe, it } from 'vitest';
 

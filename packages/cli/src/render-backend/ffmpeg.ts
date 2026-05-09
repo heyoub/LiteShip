@@ -6,7 +6,7 @@
  * @module
  */
 
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { statSync } from 'node:fs';
 import type { VideoFrameOutput } from '@czap/core';
 
@@ -29,21 +29,31 @@ export async function renderWithFfmpeg(
   frames: AsyncIterable<VideoFrameOutput>,
   opts: RenderOpts,
 ): Promise<RenderResult> {
+  assertFfmpegAvailable();
   const start = Date.now();
   const args = [
     '-y',
-    '-f', 'rawvideo',
-    '-pix_fmt', 'rgba',
-    '-s', `${opts.width}x${opts.height}`,
-    '-r', String(opts.fps),
-    '-i', '-',
-    '-c:v', 'libx264',
-    '-pix_fmt', 'yuv420p',
+    '-f',
+    'rawvideo',
+    '-pix_fmt',
+    'rgba',
+    '-s',
+    `${opts.width}x${opts.height}`,
+    '-r',
+    String(opts.fps),
+    '-i',
+    '-',
+    '-c:v',
+    'libx264',
+    '-pix_fmt',
+    'yuv420p',
     opts.output,
   ];
   const proc = spawn('ffmpeg', args, { stdio: ['pipe', 'ignore', 'pipe'] });
   let stderrBuf = '';
-  proc.stderr.on('data', (chunk: Buffer) => { stderrBuf += chunk.toString(); });
+  proc.stderr.on('data', (chunk: Buffer) => {
+    stderrBuf += chunk.toString();
+  });
 
   let frameCount = 0;
 
@@ -79,13 +89,27 @@ export async function renderWithFfmpeg(
   try {
     size = statSync(opts.output).size;
   } catch (err) {
-    throw new Error(`ffmpeg exited 0 but no output file at ${opts.output}: ${(err as Error).message}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+    throw new Error(
+      `ffmpeg exited 0 but no output file at ${opts.output}: ${(err as Error).message}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`,
+    );
   }
   if (size === 0) {
-    throw new Error(`ffmpeg exited 0 but wrote a 0-byte file at ${opts.output}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+    throw new Error(
+      `ffmpeg exited 0 but wrote a 0-byte file at ${opts.output}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`,
+    );
   }
 
   return { frameCount, elapsedMs: Date.now() - start };
+}
+
+function assertFfmpegAvailable(): void {
+  const probe = spawnSync('ffmpeg', ['-version'], { stdio: 'ignore' });
+  if (probe.error) {
+    throw new Error(`ffmpeg is required for scene rendering but was not found on PATH: ${probe.error.message}`);
+  }
+  if (probe.status !== 0) {
+    throw new Error(`ffmpeg is required for scene rendering but failed its version probe with status ${probe.status}`);
+  }
 }
 
 /**

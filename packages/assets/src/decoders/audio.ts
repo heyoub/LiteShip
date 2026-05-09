@@ -45,20 +45,14 @@ export async function audioDecoder(bytes: ArrayBuffer): Promise<DecodedAudio> {
 
   const samples = decodeSamples(data, audioFormat, bitsPerSample);
   const bytesPerSample = bitsPerSample / 8;
-  const frameCount = bytesPerSample > 0 && channels > 0
-    ? data.byteLength / (channels * bytesPerSample)
-    : 0;
+  const frameCount = bytesPerSample > 0 && channels > 0 ? data.byteLength / (channels * bytesPerSample) : 0;
   const durationMs = sampleRate > 0 ? (frameCount / sampleRate) * 1000 : 0;
   // sampleCount = frames per channel (interleaved samples / channels).
   const sampleCount = frameCount;
   return { sampleRate, channels, bitsPerSample, sampleCount, samples, durationMs };
 }
 
-function decodeSamples(
-  data: DataView,
-  format: number,
-  bitsPerSample: number,
-): Int16Array | Float32Array {
+function decodeSamples(data: DataView, format: number, bitsPerSample: number): Int16Array | Float32Array {
   // PCM int16 -> Int16Array view (no copy)
   if (format === 1 && bitsPerSample === 16) {
     return new Int16Array(data.buffer, data.byteOffset, data.byteLength / 2);
@@ -106,7 +100,5 @@ function decodeSamples(
     }
     return out;
   }
-  throw new Error(
-    `audioDecoder: unsupported audioFormat=${format} bitsPerSample=${bitsPerSample}`,
-  );
+  throw new Error(`audioDecoder: unsupported audioFormat=${format} bitsPerSample=${bitsPerSample}`);
 }

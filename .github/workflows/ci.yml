@@ -31,6 +31,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pnpm run gauntlet:full
         env:
           CI: true

@@ -37,8 +37,7 @@ export function SyncSystem(frameIndex: number, fps: number = 60): System {
         // "react to beats in the world" — when no world is supplied
         // (legacy callers, isolated unit tests) we degrade gracefully
         // to no decay rather than throw.
-        const beatEntities =
-          world !== undefined ? yield* world.query('Beat') : [];
+        const beatEntities = world !== undefined ? yield* world.query('Beat') : [];
 
         // Extract beat timestamps in ms. The Beat component is the flat
         // BeatBinding.Component shape ({ kind, timeMs, strength, ... })
@@ -64,9 +63,7 @@ export function SyncSystem(frameIndex: number, fps: number = 60): System {
           else break;
         }
         const msSinceBeat = currentTimeMs - lastBeat;
-        const decay = Number.isFinite(msSinceBeat)
-          ? Math.exp(-msSinceBeat / DECAY_TAU_MS)
-          : 0;
+        const decay = Number.isFinite(msSinceBeat) ? Math.exp(-msSinceBeat / DECAY_TAU_MS) : 0;
 
         for (const e of entities) {
           // Direct property write preserves the legacy in-place mutation

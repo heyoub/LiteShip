@@ -48,6 +48,9 @@ importers:
       '@tailwindcss/node':
         specifier: '4'
         version: 4.2.1
+      '@types/node':
+        specifier: ^22.19.15
+        version: 22.19.15
       '@types/react':
         specifier: ^19.2.2
         version: 19.2.14
@@ -179,7 +182,7 @@ importers:
         version: file:packages/quantizer(effect@4.0.0-beta.32)
       '@czap/remotion':
         specifier: file:../../packages/remotion
-        version: file:packages/remotion(react@19.2.4)(remotion@4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+        version: file:packages/remotion(effect@4.0.0-beta.32)(react@19.2.4)(remotion@4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       '@remotion/bundler':
         specifier: ^4.0.0
         version: 4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -346,6 +349,9 @@ importers:
       '@czap/core':
         specifier: workspace:*
         version: link:../core
+      effect:
+        specifier: '>=4.0.0-beta.0'
+        version: 4.0.0-beta.32
 
   packages/quantizer:
     dependencies:
@@ -361,6 +367,9 @@ importers:
       '@czap/core':
         specifier: workspace:*
         version: link:../core
+      effect:
+        specifier: '>=4.0.0-beta.0'
+        version: 4.0.0-beta.32
       react:
         specifier: '>=18'
         version: 19.2.4
@@ -573,6 +582,7 @@ packages:
     resolution: {directory: packages/remotion, type: directory}
     engines: {node: '>=22.0.0'}
     peerDependencies:
+      effect: '>=4.0.0-beta.0'
       react: '>=18'
       remotion: 4.0.440
 
@@ -4800,9 +4810,10 @@ snapshots:
       '@czap/core': link:packages/core
       effect: 4.0.0-beta.32
 
-  '@czap/remotion@file:packages/remotion(react@19.2.4)(remotion@4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
+  '@czap/remotion@file:packages/remotion(effect@4.0.0-beta.32)(react@19.2.4)(remotion@4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
     dependencies:
       '@czap/core': link:packages/core
+      effect: 4.0.0-beta.32
       react: 19.2.4
       remotion: 4.0.440(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
 

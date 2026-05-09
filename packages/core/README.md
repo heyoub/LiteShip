@@ -4,9 +4,9 @@ Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Pl
 
 ## Docs
 
-- [API reference](../../docs/api/core/) — generated from source TSDoc
-- [Architecture index](../../docs/ARCHITECTURE.md)
-- [ADRs](../../docs/adr/)
+- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/core/) — generated from source TSDoc
+- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
 
 ## Install
 
@@ -14,4 +14,4 @@ Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Pl
 pnpm add @czap/core
 ```
 
-## Part of [czap](../../README.md)
+## Part of [czap](https://github.com/TheFreeBatteryFactory/czap#readme)

@@ -47,17 +47,11 @@ export function extractWavMetadata(bytes: ArrayBuffer): WavMetadata {
     const view = chunk.data;
     let p = 4;
     while (p + 8 <= view.byteLength) {
-      const subId = dec.decode(
-        new Uint8Array(view.buffer, view.byteOffset + p, 4),
-      );
+      const subId = dec.decode(new Uint8Array(view.buffer, view.byteOffset + p, 4));
       const subSize = view.getUint32(p + 4, true);
       const textOffset = p + 8;
       if (textOffset + subSize > view.byteLength) break; // malformed; bail
-      const textBytes = new Uint8Array(
-        view.buffer,
-        view.byteOffset + textOffset,
-        subSize,
-      );
+      const textBytes = new Uint8Array(view.buffer, view.byteOffset + textOffset, subSize);
       const text = dec.decode(textBytes).replace(/\0+$/, '');
       if (subId === 'INAM') meta.title = text;
       else if (subId === 'IART') meta.artist = text;
