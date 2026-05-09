@@ -1,17 +1,34 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { run } from '@czap/cli';
-import { spawnSync } from 'node:child_process';
-import { rmSync, mkdirSync, existsSync, unlinkSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { accessSync, constants, rmSync, mkdirSync, existsSync, unlinkSync } from 'node:fs';
+import { delimiter, resolve, dirname, join } from 'node:path';
 import { captureCli } from './capture.js';
 
-const FFMPEG_AVAILABLE = (() => {
-  try {
-    return spawnSync('ffmpeg', ['-version'], { stdio: 'ignore' }).status === 0;
-  } catch {
-    return false;
+function commandOnPath(command: string): boolean {
+  const extensions = process.platform === 'win32' ? (process.env.PATHEXT ?? '.EXE;.CMD;.BAT').split(';') : [''];
+  const mode = process.platform === 'win32' ? constants.F_OK : constants.X_OK;
+  for (const dir of (process.env.PATH ?? '').split(delimiter)) {
+    for (const extension of extensions) {
+      try {
+        accessSync(join(dir, `${command}${extension.toLowerCase()}`), mode);
+        return true;
+      } catch {
+        // Try the next PATH entry.
+      }
+      if (extension !== extension.toUpperCase()) {
+        try {
+          accessSync(join(dir, `${command}${extension.toUpperCase()}`), mode);
+          return true;
+        } catch {
+          // Try the next extension.
+        }
+      }
+    }
   }
-})();
+  return false;
+}
+
+const FFMPEG_AVAILABLE = commandOnPath('ffmpeg');
 
 describe('content-addressed idempotency', () => {
   const out = resolve('tests/integration/cli/.out-idem.mp4');
