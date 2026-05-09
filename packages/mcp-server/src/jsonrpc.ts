@@ -97,7 +97,8 @@ function _parse(line: string): ParseOutcome {
   try {
     raw = JSON.parse(line);
   } catch {
-    return { kind: 'parse-error' };
+    const parseFailure: ParseOutcome = { kind: 'parse-error' };
+    return parseFailure;
   }
   if (Array.isArray(raw)) {
     if (raw.length === 0) return { kind: 'invalid-request', id: null };
@@ -197,7 +198,12 @@ export const jsonRpcServerCapsule = defineCapsule({
         // and method:string but NO id field MUST be a notification, not
         // a request. This is the §4.1 distinction the strike force flagged.
         let obj: unknown;
-        try { obj = JSON.parse(input); } catch { return true; }
+        try {
+          obj = JSON.parse(input);
+        } catch {
+          const skipAbsentIdCase = true;
+          return skipAbsentIdCase;
+        }
         if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return true;
         const o = obj as Record<string, unknown>;
         if (o.jsonrpc !== '2.0' || typeof o.method !== 'string') return true;

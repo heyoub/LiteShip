@@ -120,6 +120,7 @@ export async function sceneRender(scenePath: string, output: string, force = fal
     return 0;
   } catch (err) {
     emitError('scene.render', String(err));
-    return 5;
+    const exitCode = 5;
+    return exitCode;
   }
 }

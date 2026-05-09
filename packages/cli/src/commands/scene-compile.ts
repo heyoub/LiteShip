@@ -77,7 +77,8 @@ export async function sceneCompile(scenePath: string): Promise<number> {
     }
   } catch (err) {
     emitError('scene.compile', String(err));
-    return 1;
+    const exitCode = 1;
+    return exitCode;
   }
 
   const receipt: SceneCompileReceipt = {

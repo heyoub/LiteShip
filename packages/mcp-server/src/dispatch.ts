@@ -84,7 +84,10 @@ export async function dispatch(
     }
     return successResponse(id, result.value);
   } catch (err) {
-    if (isNotification) return null;
+    if (isNotification) {
+      const notificationAck: null = null;
+      return notificationAck;
+    }
     if (err instanceof InvalidParamsError) {
       return errorResponse(id, InvalidParams, err.message, err.detail);
     }
