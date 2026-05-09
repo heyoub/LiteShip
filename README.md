@@ -141,6 +141,31 @@ Other lanes — `test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2
 
 `pnpm run gauntlet:full` is the one that matters before a release: 30 phases, ~22 minutes, ends with `flex:verify PASSED — project is 10/10 by every rating dimension` or it fails.
 
+## Latest gauntlet benchmark snapshot
+
+Fresh local run on 2026-05-09 (Cursor Cloud Linux, Node 22, pnpm 10):
+
+- `pnpm run gauntlet:full` passed end-to-end in 14m47s.
+- `flex:verify` passed: `project is 10/10 by every rating dimension`.
+- `bench:gate` passed: 7 hard gates, 0 failed, 5 replicates.
+- `package:smoke` passed for all 15 publishable `@czap/*` scopes.
+
+| Hard-gated pair | Median directive | Median baseline | Median overhead | Threshold |
+| --- | ---: | ---: | ---: | ---: |
+| `satellite` hot path | 1,034.88ns | 968.58ns | 6.88% | 15% |
+| `stream` parse + patch | 954,460.54ns | 939,129.93ns | 1.73% | 15% |
+| `llm` text chunk parse | 1,018,844.57ns | 918,664.88ns | 10.90% | 15% |
+| `worker` fallback eval | 1,588.24ns | 1,483.02ns | 7.03% | 15% |
+| `llm-startup-shared` | 98,504.37ns | 96,642.77ns | 1.63% | 25% |
+| `llm-promoted-startup-shared` | 150,845.57ns | 150,954.45ns | 0.89% | 25% |
+| `worker-runtime-startup-shared` | 1,777.50ns | 4,502.50ns | -65.91% | 25% |
+
+Diagnostic watch, not a release gate: `llm-runtime-steady` remains above its
+relative baseline (63.09% median overhead, p99 ratio 1.5233x), but the absolute
+directive p99 is 23,334.43ns against a 1,000,000ns steady-state budget. Current
+artifact truth lives in `benchmarks/directive-gate.json`,
+`reports/runtime-seams.json`, and `reports/satellite-scan.json`.
+
 ## Operational telemetry
 
 For run-by-run truth (current test counts, coverage totals, benchmark posture, watch items, artifact policy) see [docs/STATUS.md](./docs/STATUS.md). Generated artifacts in `coverage/`, `benchmarks/`, and `reports/` are the live source of truth when fresh and `pnpm run feedback:verify` passes.
