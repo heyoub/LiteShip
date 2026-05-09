@@ -6,7 +6,7 @@
  * @module
  */
 
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { statSync } from 'node:fs';
 import type { VideoFrameOutput } from '@czap/core';
 
@@ -29,6 +29,7 @@ export async function renderWithFfmpeg(
   frames: AsyncIterable<VideoFrameOutput>,
   opts: RenderOpts,
 ): Promise<RenderResult> {
+  assertFfmpegAvailable();
   const start = Date.now();
   const args = [
     '-y',
@@ -99,6 +100,16 @@ export async function renderWithFfmpeg(
   }
 
   return { frameCount, elapsedMs: Date.now() - start };
+}
+
+function assertFfmpegAvailable(): void {
+  const probe = spawnSync('ffmpeg', ['-version'], { stdio: 'ignore' });
+  if (probe.error) {
+    throw new Error(`ffmpeg is required for scene rendering but was not found on PATH: ${probe.error.message}`);
+  }
+  if (probe.status !== 0) {
+    throw new Error(`ffmpeg is required for scene rendering but failed its version probe with status ${probe.status}`);
+  }
 }
 
 /**
