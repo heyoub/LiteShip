@@ -104,9 +104,7 @@ const _flatten = <T>(nested: DerivedShape<DerivedShape<T>>): Effect.Effect<Deriv
     const initialValue = yield* initialInner.get;
     const ref = yield* SubscriptionRef.make(initialValue);
 
-    const allInners = Stream.concat(Stream.make(initialInner), nested.changes);
-
-    const flattenedStream = allInners.pipe(
+    const flattenedStream = nested.changes.pipe(
       Stream.switchMap((inner) =>
         Stream.concat(
           Stream.make(inner).pipe(Stream.mapEffect((currentInner) => currentInner.get)),

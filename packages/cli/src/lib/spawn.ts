@@ -257,16 +257,14 @@ function startSpawn(
       } catch {
         return;
       }
-      const exited = await Promise.race([
+      await Promise.race([
         new Promise<boolean>((r) => child.once('close', () => r(true))),
         new Promise<boolean>((r) => setTimeout(() => r(false), 2000)),
       ]);
-      if (!exited) {
-        try {
-          signalGroup('SIGKILL');
-        } catch {
-          /* already dead between check and kill */
-        }
+      try {
+        signalGroup('SIGKILL');
+      } catch {
+        /* already dead between check and kill */
       }
     },
   };
