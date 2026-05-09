@@ -6,7 +6,7 @@
 
 # Interface: CapsuleDef\<K, In, Out, R\>
 
-Defined in: [core/src/assembly.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L15)
+Defined in: [core/src/assembly.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L16)
 
 A capsule declaration plus its content-addressed id.
 
@@ -86,7 +86,7 @@ Defined in: [core/src/capsule.ts:69](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **id**: `ContentAddress`
 
-Defined in: [core/src/assembly.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L17)
+Defined in: [core/src/assembly.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L18)
 
 #### Overrides
 

@@ -8,7 +8,7 @@
 
 > **defineCapsule**\<`K`, `In`, `Out`, `R`\>(`decl`): [`CapsuleDef`](../interfaces/CapsuleDef.md)\<`K`, `In`, `Out`, `R`\>
 
-Defined in: [core/src/assembly.ts:45](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L45)
+Defined in: [core/src/assembly.ts:46](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L46)
 
 Declare a capsule. Validates shape, computes content address,
 registers in the module-level catalog, returns a typed def.

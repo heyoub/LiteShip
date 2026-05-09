@@ -8,6 +8,6 @@
 
 > **Outcome** = [`ParseOutcome`](../../../type-aliases/ParseOutcome.md)
 
-Defined in: [mcp-server/src/jsonrpc.ts:224](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L224)
+Defined in: [mcp-server/src/jsonrpc.ts:230](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L230)
 
 Discriminated parse outcome.
