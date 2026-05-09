@@ -1,8 +1,7 @@
 # czap Architecture
 
 czap is a constraint-based adaptive rendering framework. This document is a
-**structural index plus orientation map**: it names the system's moving pieces
-and points to the deeper source of truth for each one.
+**slim structural index**; deeper explanation lives in the linked docs.
 
 - **Mental model** — [`ASTRO-STATIC-MENTAL-MODEL.md`](./ASTRO-STATIC-MENTAL-MODEL.md),
   [`AUTHORING-MODEL.md`](./AUTHORING-MODEL.md), and
@@ -10,70 +9,46 @@ and points to the deeper source of truth for each one.
 - **Public surfaces** — [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md) and
   [`docs/api/`](./api/) (TypeDoc-generated from source TSDoc).
 - **Decisions** — [`docs/adr/`](./adr/) (why each non-obvious choice was made).
-- **Status** — [`docs/STATUS.md`](./STATUS.md) (live test gates, perf numbers,
-  watch items).
+- **Status** — [`docs/STATUS.md`](./STATUS.md) (live gates, perf, watch items).
 
 ## System Shape
 
-The core grammar is:
-
-```text
-signal -> boundary -> named state -> target output
-```
-
-Signals are continuous reality: viewport, scroll, capability, network, audio,
-time, model-stream shape. Boundaries partition that reality into named states
-that authors can reason about. Compilers and runtimes project those states into
-CSS, shader code, ARIA, AI manifests, DOM morphs, worker messages, scenes, and
-video/capture outputs.
-
-The package graph keeps that grammar explicit: `@czap/core` owns the language,
-host packages wire it to environments, and higher-level capsules make the same
-boundary/state model usable by humans and AI tooling.
+Core grammar: `signal -> boundary -> named state -> target output`.
+`@czap/core` owns the language; host packages wire it to browsers, Astro, edge,
+workers, video, CLI, and AI-tooling surfaces.
 
 ## Package DAG
 
 ```text
-                         ┌──────────────> @czap/quantizer
-                         ├──────────────> @czap/compiler ─┐
-                         ├──────────────> @czap/detect ───┼──> @czap/edge ─┐
-@czap/_spine ─> @czap/core├──────────────> @czap/web ──────┤               │
-                         ├──────────────> @czap/worker ───┤               │
-                         ├──────────────> @czap/remotion  │               │
-                         ├──────────────> @czap/assets ───┤               │
-                         └──────────────> @czap/scene ─────┼──> @czap/cli ─┴──> @czap/mcp-server
-                                           @czap/vite <────┘
-                                                  │
-                                                  └──────────────> @czap/astro
+@czap/_spine -> @czap/core
+@czap/core -> quantizer / compiler / detect / web / worker / remotion / assets / scene
+compiler -> vite -> astro
+detect -> edge -> astro
+web + worker -> astro
+scene + assets -> cli -> mcp-server
 ```
 
-`@czap/astro` is the largest host package: it uses core, Vite transforms,
-capability detection, edge defaults, web runtime helpers, and worker hosting.
-`@czap/cli` and `@czap/mcp-server` expose the same capsule factory to terminal
-and AI-tooling workflows.
-
-Plus `crates/czap-compute/` — Rust `#![no_std]` WASM crate (spring, boundary,
-blend kernels).
+Plus `crates/czap-compute/` — Rust `#![no_std]` WASM hot-path kernels.
 
 ## Packages
 
-| Package | API docs | Notes |
+| Package | API docs | Owns |
 |---|---|---|
-| @czap/_spine | [api/@czap/_spine/](./api/@czap/_spine/) | Type-only declaration spine shared by published `.d.ts` output; no runtime import surface |
-| @czap/core | [api/core/](./api/core/) | Boundary, Token, Style, Theme, Compositor, ECS, Plan, RuntimeCoordinator, FNV/CBOR content addressing |
-| @czap/quantizer | [api/quantizer/](./api/quantizer/) | `Q.from()` builder, animated transitions, MotionTier gating |
-| @czap/compiler | [api/compiler/](./api/compiler/) | Tagged-union dispatch over CSS / GLSL / WGSL / ARIA / AI / Tailwind targets |
-| @czap/web | [api/web/](./api/web/) | DOM runtime: Morph, SlotRegistry, SSE, LLMAdapter, AudioWorklet |
-| @czap/detect | [api/detect/](./api/detect/) | Capability probes; DesignTier/MotionTier mapping |
-| @czap/vite | [api/vite/](./api/vite/) | Vite 8 plugin: `@token`/`@theme`/`@style`/`@quantize` transforms + HMR |
-| @czap/astro | [api/astro/](./api/astro/) | Astro 6 integration; `Satellite` + `client:satellite` |
-| @czap/edge | [api/edge/](./api/edge/) | CDN-edge: Client Hints, tier detection, KV boundary cache |
-| @czap/worker | [api/worker/](./api/worker/) | Off-thread: SPSC ring, compositor worker, render worker, OffscreenCanvas |
-| @czap/remotion | [api/remotion/](./api/remotion/) | Remotion adapter: hooks + composition helpers |
-| @czap/scene | [api/scene/](./api/scene/) | ECS-backed scene composition and timeline authoring |
-| @czap/assets | [api/assets/](./api/assets/) | Asset capsules and analysis projections such as waveform and beat markers |
-| @czap/cli | [api/cli/](./api/cli/) | `czap` CLI with JSON-first automation and human-readable TTY output |
-| @czap/mcp-server | [api/mcp-server/](./api/mcp-server/) | Model Context Protocol server over capsule factory dispatch |
+| @czap/_spine | [api/@czap/_spine/](./api/@czap/_spine/) | type spine |
+| @czap/core | [api/core/](./api/core/) | primitives and runtime coordination |
+| @czap/quantizer | [api/quantizer/](./api/quantizer/) | boundary evaluation and transitions |
+| @czap/compiler | [api/compiler/](./api/compiler/) | CSS / GLSL / WGSL / ARIA / AI / Tailwind output |
+| @czap/web | [api/web/](./api/web/) | DOM, SSE, morph, LLM, capture helpers |
+| @czap/detect | [api/detect/](./api/detect/) | capability and tier detection |
+| @czap/vite | [api/vite/](./api/vite/) | Vite transforms and HMR |
+| @czap/astro | [api/astro/](./api/astro/) | Astro integration and directives |
+| @czap/edge | [api/edge/](./api/edge/) | client hints, tiers, edge cache |
+| @czap/worker | [api/worker/](./api/worker/) | off-thread compositor/render workers |
+| @czap/remotion | [api/remotion/](./api/remotion/) | Remotion adapter |
+| @czap/scene | [api/scene/](./api/scene/) | ECS scene composition |
+| @czap/assets | [api/assets/](./api/assets/) | asset capsules and projections |
+| @czap/cli | [api/cli/](./api/cli/) | JSON-first CLI |
+| @czap/mcp-server | [api/mcp-server/](./api/mcp-server/) | MCP server |
 
 For package-by-package import guidance, read
 [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md).
@@ -92,9 +67,7 @@ See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADR
 ## Where to start
 
 - New contributors: read the [mental model](./ASTRO-STATIC-MENTAL-MODEL.md),
-  [ADR-0001](./adr/0001-namespace-pattern.md), and
-  [ADR-0002](./adr/0002-zero-alloc.md), then skim
-  `packages/core/src/boundary.ts` + `compositor.ts`.
+  [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
 - Framework usage: [api/core/](./api/core/) -> Boundary, Token, Style, Theme.
 - Adding a compile target: [ADR-0006](./adr/0006-compiler-dispatch.md) + `packages/compiler/src/dispatch.ts`.
 - Off-thread / WASM: [ADR-0002](./adr/0002-zero-alloc.md) + `packages/worker/` + `crates/czap-compute/`.

@@ -1,5 +1,5 @@
 import { Bench, type FnOptions } from 'tinybench';
-import { LLM_STEADY_REPLICATE_EXCEEDANCE_MAX } from './flex-policy.js';
+import { LLM_STEADY_DIRECTIVE_P99_MAX_NS, LLM_STEADY_REPLICATE_EXCEEDANCE_MAX } from './flex-policy.js';
 import { Boundary, GenFrame, TokenBuffer, UIQuality, RuntimeCoordinator, type CompositeState } from '@czap/core';
 import { ClientHints, compileTheme, createEdgeHostAdapter, EdgeTier } from '@czap/edge';
 import { LLMChunkNormalization, SSE, type LLMChunk } from '@czap/web';
@@ -140,6 +140,8 @@ export type WorkerStartupSplitResult = WorkerStartupSplitMetrics;
 export interface LLMRuntimeSteadySignals {
   readonly label: 'llm-runtime-steady';
   readonly replicateExceedanceRate: number;
+  readonly directiveP99Ns: number | null;
+  readonly absoluteP99BudgetNs: number;
   readonly directiveP99ToBaselineP99: number | null;
   readonly directiveP75ToBaselineP75: number | null;
   readonly longSessionSlopeNsPerChunk: number | null;
@@ -2052,6 +2054,8 @@ export function summarizeLLMRuntimeSteadySignals(
   return {
     label: 'llm-runtime-steady',
     replicateExceedanceRate,
+    directiveP99Ns: directiveP99Median === null ? null : Number(directiveP99Median.toFixed(2)),
+    absoluteP99BudgetNs: LLM_STEADY_DIRECTIVE_P99_MAX_NS,
     directiveP99ToBaselineP99,
     directiveP75ToBaselineP75,
     longSessionSlopeNsPerChunk,

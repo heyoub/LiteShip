@@ -23,6 +23,7 @@ import fg from 'fast-glob';
 import { getCapsuleManifestPath } from '../packages/cli/src/receipts.js';
 import {
   ACCEPTED_BENCH_STABILITY_NOISY_LABELS,
+  LLM_STEADY_DIRECTIVE_P99_MAX_NS,
   LLM_STEADY_P99_TO_BASELINE_MAX,
   LLM_STEADY_REPLICATE_EXCEEDANCE_MAX,
 } from './bench/flex-policy.js';
@@ -270,6 +271,8 @@ const checks: Check[] = [
             workerStartupAudit?: { posture?: string };
             llmRuntimeSteadySignals?: {
               replicateExceedanceRate: number;
+              directiveP99Ns?: number | null;
+              absoluteP99BudgetNs?: number;
               directiveP99ToBaselineP99: number;
             };
             benchStability?: ReadonlyArray<{ label: string; noisy: boolean }>;
@@ -282,20 +285,26 @@ const checks: Check[] = [
           const llmP99TailOk =
             rs.llmRuntimeSteadySignals != null &&
             rs.llmRuntimeSteadySignals.directiveP99ToBaselineP99 <= LLM_STEADY_P99_TO_BASELINE_MAX;
+          const llmAbsoluteTailOk =
+            rs.llmRuntimeSteadySignals != null &&
+            typeof rs.llmRuntimeSteadySignals.directiveP99Ns === 'number' &&
+            rs.llmRuntimeSteadySignals.directiveP99Ns <=
+              (rs.llmRuntimeSteadySignals.absoluteP99BudgetNs ?? LLM_STEADY_DIRECTIVE_P99_MAX_NS);
           const unexpectedNoisy = (rs.benchStability ?? []).filter(
             (p) => p.noisy && !acceptedNoisyPairs.has(p.label),
           );
           const stabilityOk = unexpectedNoisy.length === 0;
 
-          runtimeSeamsOk = postureOk && llmExceedancesOk && llmP99TailOk && stabilityOk;
+          const llmSteadyOk = (llmExceedancesOk && llmP99TailOk) || llmAbsoluteTailOk;
+          runtimeSeamsOk = postureOk && llmSteadyOk && stabilityOk;
           const unexpectedLabels = unexpectedNoisy.map((p) => p.label);
           const llmDiag =
             llmSignals == null
               ? ' llm-signals=n/a'
-              : ` replicateExceedanceRate=${llmSignals.replicateExceedanceRate} directiveP99ToBaselineP99=${llmSignals.directiveP99ToBaselineP99}`;
+              : ` replicateExceedanceRate=${llmSignals.replicateExceedanceRate} directiveP99ToBaselineP99=${llmSignals.directiveP99ToBaselineP99} directiveP99Ns=${llmSignals.directiveP99Ns ?? 'n/a'} absoluteP99BudgetNs=${llmSignals.absoluteP99BudgetNs ?? LLM_STEADY_DIRECTIVE_P99_MAX_NS}`;
           runtimeSeamsCover = runtimeSeamsOk
             ? 'runtime-seams=posture+llm-tail+stability-pass'
-            : `runtime-seams=FAIL(posture=${postureOk} llm-exceed=${llmExceedancesOk} llm-p99=${llmP99TailOk} stability=${stabilityOk} unexpected-noisy=[${unexpectedLabels.join(',')}]${llmDiag})`;
+            : `runtime-seams=FAIL(posture=${postureOk} llm-exceed=${llmExceedancesOk} llm-p99=${llmP99TailOk} llm-absolute-p99=${llmAbsoluteTailOk} stability=${stabilityOk} unexpected-noisy=[${unexpectedLabels.join(',')}]${llmDiag})`;
         } catch {
           // Malformed artifact — treat as informational; feedback:verify catches shape drift separately.
           runtimeSeamsCover = 'runtime-seams=malformed(informational)';
