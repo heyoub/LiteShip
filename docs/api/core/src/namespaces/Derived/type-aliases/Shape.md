@@ -8,7 +8,7 @@
 
 > **Shape**\<`T`\> = `DerivedShape`\<`T`\>
 
-Defined in: [core/src/derived.ts:153](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/derived.ts#L153)
+Defined in: [core/src/derived.ts:163](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/derived.ts#L163)
 
 Structural shape of a [Derived](../../../variables/Derived.md): `_tag`, `get`, `changes`.
 
