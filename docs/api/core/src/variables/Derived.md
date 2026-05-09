@@ -8,7 +8,7 @@
 
 > `const` **Derived**: `object`
 
-Defined in: [core/src/derived.ts:128](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/derived.ts#L128)
+Defined in: [core/src/derived.ts:131](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/derived.ts#L131)
 
 Derived — read-only reactive view computed from upstream [Cell](Cell.md)s.
 A `Derived` recomputes lazily and pushes the new value into its own stream
