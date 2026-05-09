@@ -27,7 +27,10 @@ export async function imageDecoder(bytes: ArrayBuffer): Promise<DecodedImage> {
 function scanJpeg(view: DataView): DecodedImage {
   let off = 2;
   while (off < view.byteLength - 8) {
-    if (view.getUint8(off) !== 0xff) { off++; continue; }
+    if (view.getUint8(off) !== 0xff) {
+      off++;
+      continue;
+    }
     const marker = view.getUint8(off + 1);
     if (marker >= 0xc0 && marker <= 0xc2) {
       const height = view.getUint16(off + 5);

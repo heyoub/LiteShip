@@ -93,12 +93,7 @@ export const vitestRunnerCapsule = defineCapsule({
  */
 export const VitestRunner = {
   run: async (input: VitestRunInput): Promise<VitestRunOutput> => {
-    const result = await spawnArgv('pnpm', [
-      'exec',
-      'vitest',
-      'run',
-      ...input.testFiles,
-    ]);
+    const result = await spawnArgv('pnpm', ['exec', 'vitest', 'run', ...input.testFiles]);
     return {
       exitCode: result.exitCode,
       testFiles: input.testFiles,

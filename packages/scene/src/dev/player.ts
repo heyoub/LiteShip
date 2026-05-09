@@ -46,7 +46,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Vite HMR — preserve playhead on scene module reload.
-const importMetaHot = (import.meta as unknown as { hot?: { on: (event: string, cb: (data: { sceneId: string }) => void) => void } }).hot;
+const importMetaHot = (
+  import.meta as unknown as { hot?: { on: (event: string, cb: (data: { sceneId: string }) => void) => void } }
+).hot;
 if (importMetaHot) {
   importMetaHot.on('czap:scene-update', (payload) => {
     log.textContent += `[hmr] scene ${payload.sceneId} reloaded at frame ${frame}\n`;

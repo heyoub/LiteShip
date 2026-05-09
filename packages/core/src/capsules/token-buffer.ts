@@ -15,11 +15,7 @@ const TokenEventSchema = Schema.Union([
   Schema.Struct({ _tag: Schema.Literal('reset') }),
 ]);
 
-const PhaseSchema = Schema.Union([
-  Schema.Literal('idle'),
-  Schema.Literal('buffering'),
-  Schema.Literal('draining'),
-]);
+const PhaseSchema = Schema.Union([Schema.Literal('idle'), Schema.Literal('buffering'), Schema.Literal('draining')]);
 
 const BufferStateSchema = Schema.Struct({
   phase: PhaseSchema,

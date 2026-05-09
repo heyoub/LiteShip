@@ -16,9 +16,7 @@ const REINIT_SELECTOR = '[data-czap-boundary],[data-czap-stream-url],[data-czap-
 function isSlotRegistryShape(value: unknown): value is SlotRegistry.Shape {
   if (typeof value !== 'object' || value === null) return false;
   if (!('get' in value) || !('register' in value) || !('entries' in value)) return false;
-  return (
-    typeof value.get === 'function' && typeof value.register === 'function' && typeof value.entries === 'function'
-  );
+  return typeof value.get === 'function' && typeof value.register === 'function' && typeof value.entries === 'function';
 }
 
 function isBoolean(value: unknown): value is boolean {

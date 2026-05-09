@@ -17,7 +17,9 @@ interface ManifestEntry {
   readonly generated: { testFile: string; benchFile: string };
 }
 
-interface Manifest { readonly capsules: readonly ManifestEntry[]; }
+interface Manifest {
+  readonly capsules: readonly ManifestEntry[];
+}
 
 function loadManifest(): Manifest | null {
   const path = getCapsuleManifestPath();
@@ -28,12 +30,20 @@ function loadManifest(): Manifest | null {
 /** Execute `capsule inspect <id>`. */
 export async function capsuleInspect(id: string): Promise<number> {
   const m = loadManifest();
-  if (!m) { emitError('capsule.inspect', 'manifest missing'); return 1; }
+  if (!m) {
+    emitError('capsule.inspect', 'manifest missing');
+    return 1;
+  }
   const entry = m.capsules.find((c) => c.name === id);
-  if (!entry) { emitError('capsule.inspect', `capsule not found: ${id}`); return 1; }
+  if (!entry) {
+    emitError('capsule.inspect', `capsule not found: ${id}`);
+    return 1;
+  }
   emit({
-    status: 'ok', command: 'capsule.inspect',
-    timestamp: new Date().toISOString(), capsule: entry,
+    status: 'ok',
+    command: 'capsule.inspect',
+    timestamp: new Date().toISOString(),
+    capsule: entry,
   });
   return 0;
 }
@@ -41,12 +51,17 @@ export async function capsuleInspect(id: string): Promise<number> {
 /** Execute `capsule list [--kind=<kind>]`. */
 export async function capsuleList(kind?: string): Promise<number> {
   const m = loadManifest();
-  if (!m) { emitError('capsule.list', 'manifest missing'); return 1; }
+  if (!m) {
+    emitError('capsule.list', 'manifest missing');
+    return 1;
+  }
   const capsules = kind ? m.capsules.filter((c) => c.kind === kind) : m.capsules;
   emit({
-    status: 'ok', command: 'capsule.list',
+    status: 'ok',
+    command: 'capsule.list',
     timestamp: new Date().toISOString(),
-    capsules, kind: kind ?? null,
+    capsules,
+    kind: kind ?? null,
   });
   return 0;
 }
@@ -54,17 +69,25 @@ export async function capsuleList(kind?: string): Promise<number> {
 /** Execute `capsule verify <id>`. */
 export async function capsuleVerify(id: string): Promise<number> {
   const m = loadManifest();
-  if (!m) { emitError('capsule.verify', 'manifest missing'); return 1; }
+  if (!m) {
+    emitError('capsule.verify', 'manifest missing');
+    return 1;
+  }
   const entry = m.capsules.find((c) => c.name === id);
-  if (!entry) { emitError('capsule.verify', `capsule not found: ${id}`); return 1; }
+  if (!entry) {
+    emitError('capsule.verify', `capsule not found: ${id}`);
+    return 1;
+  }
   const { exitCode, stderrTail } = await VitestRunner.run({ testFiles: [entry.generated.testFile] });
   if (exitCode !== 0) {
     emitError('capsule.verify', `generated tests failed${stderrTail ? `: ${stderrTail.trim()}` : ''}`);
     return 2;
   }
   emit({
-    status: 'ok', command: 'capsule.verify',
-    timestamp: new Date().toISOString(), capsuleId: entry.name,
+    status: 'ok',
+    command: 'capsule.verify',
+    timestamp: new Date().toISOString(),
+    capsuleId: entry.name,
   });
   return 0;
 }

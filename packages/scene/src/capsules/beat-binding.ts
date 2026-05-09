@@ -85,8 +85,7 @@ export const beatBindingCapsule = defineCapsule({
       name: 'spawns-preserve-beat-order',
       check: (input, output) => {
         const inBeats = (input as { beats: readonly { timeMs: number }[] }).beats;
-        const outSpawns = (output as { spawns: readonly { components: { timeMs: number } }[] })
-          .spawns;
+        const outSpawns = (output as { spawns: readonly { components: { timeMs: number } }[] }).spawns;
         if (inBeats.length !== outSpawns.length) return false;
         for (let i = 0; i < inBeats.length; i++) {
           if (inBeats[i]!.timeMs !== outSpawns[i]!.components.timeMs) return false;

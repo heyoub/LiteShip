@@ -19,7 +19,9 @@ interface ManifestEntry {
   readonly kind?: string;
 }
 
-interface Manifest { readonly capsules: readonly ManifestEntry[]; }
+interface Manifest {
+  readonly capsules: readonly ManifestEntry[];
+}
 
 type Projection = 'beat' | 'onset' | 'waveform';
 
@@ -49,10 +51,9 @@ export async function assetAnalyze(assetId: string, projection: Projection, forc
   }
 
   // Assets typically live under examples/scenes/<id>.wav; try a few conventions.
-  const candidates = [
-    resolve('examples/scenes', `${assetId}.wav`),
-    entry.source ? resolve(entry.source) : '',
-  ].filter((p) => p && existsSync(p));
+  const candidates = [resolve('examples/scenes', `${assetId}.wav`), entry.source ? resolve(entry.source) : ''].filter(
+    (p) => p && existsSync(p),
+  );
 
   if (candidates.length === 0) {
     emitError('asset.analyze', `asset source file not found for: ${assetId}`);

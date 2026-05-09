@@ -36,8 +36,7 @@ export interface HarnessContext {
   readonly arbitraryImport?: string;
 }
 
-const DEFAULT_ARBITRARY_IMPORT =
-  '../../packages/core/src/harness/arbitrary-from-schema.js';
+const DEFAULT_ARBITRARY_IMPORT = '../../packages/core/src/harness/arbitrary-from-schema.js';
 
 /**
  * Generate the test + bench file contents for a `pureTransform` capsule.
@@ -50,10 +49,7 @@ export function generatePureTransform(
 ): HarnessOutput {
   const arbitraryImport = ctx.arbitraryImport ?? DEFAULT_ARBITRARY_IMPORT;
 
-  if (
-    ctx.bindingImport === undefined ||
-    ctx.bindingName === undefined
-  ) {
+  if (ctx.bindingImport === undefined || ctx.bindingName === undefined) {
     // No real binding wired — emit honest skip per task constraint.
     const testFile = `// GENERATED — do not edit by hand
 import { describe, it } from 'vitest';

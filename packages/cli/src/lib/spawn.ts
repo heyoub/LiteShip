@@ -47,12 +47,7 @@ export interface SpawnHandle {
   dispose(): Promise<void>;
 }
 
-function pushBoundedStderr(
-  chunks: Buffer[],
-  currentBytes: number,
-  chunk: Buffer,
-  cap: number,
-): number {
+function pushBoundedStderr(chunks: Buffer[], currentBytes: number, chunk: Buffer, cap: number): number {
   chunks.push(chunk);
   let nextBytes = currentBytes + chunk.length;
 
@@ -96,10 +91,7 @@ export function quoteWindowsArg(arg: string): string {
  * enable shell interpretation but still finds .cmd / .bat shims on Windows.
  * On POSIX this is identity.
  */
-function resolveLauncher(
-  command: string,
-  args: readonly string[],
-): { command: string; args: readonly string[] } {
+function resolveLauncher(command: string, args: readonly string[]): { command: string; args: readonly string[] } {
   if (process.platform !== 'win32') {
     return { command, args };
   }
@@ -113,11 +105,7 @@ function resolveLauncher(
  * subprocess exits — never throws on nonzero exit (callers branch on
  * `exitCode`).
  */
-export function spawnArgv(
-  command: string,
-  args: readonly string[],
-  opts: SpawnArgvOpts = {},
-): Promise<SpawnResult> {
+export function spawnArgv(command: string, args: readonly string[], opts: SpawnArgvOpts = {}): Promise<SpawnResult> {
   const cap = opts.stderrCapBytes ?? 16_384;
   const launcher = resolveLauncher(command, args);
   return new Promise((resolvePromise, rejectPromise) => {
@@ -172,19 +160,11 @@ export async function withSpawned<T>(
  * Vitest browser commands that need to keep the child alive across
  * multiple browser-side calls.
  */
-export function startSpawnHandle(
-  command: string,
-  args: readonly string[],
-  opts: SpawnArgvOpts = {},
-): SpawnHandle {
+export function startSpawnHandle(command: string, args: readonly string[], opts: SpawnArgvOpts = {}): SpawnHandle {
   return startSpawn(command, args, opts);
 }
 
-function startSpawn(
-  command: string,
-  args: readonly string[],
-  opts: SpawnArgvOpts,
-): SpawnHandle {
+function startSpawn(command: string, args: readonly string[], opts: SpawnArgvOpts): SpawnHandle {
   const cap = opts.stderrCapBytes ?? 16_384;
   const launcher = resolveLauncher(command, args);
   const stdio = (opts.stdio ?? ['ignore', 'pipe', 'pipe']) as ('ignore' | 'inherit' | 'pipe')[];

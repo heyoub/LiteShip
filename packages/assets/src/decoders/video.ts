@@ -29,11 +29,19 @@ export async function videoDecoder(bytes: ArrayBuffer): Promise<DecodedVideo> {
   const file = join(dir, 'input.bin');
   try {
     writeFileSync(file, new Uint8Array(bytes));
-    const r = spawnSync('ffprobe', ['-v', 'error', '-show_format', '-show_streams', '-of', 'json', file], { encoding: 'utf8' });
+    const r = spawnSync('ffprobe', ['-v', 'error', '-show_format', '-show_streams', '-of', 'json', file], {
+      encoding: 'utf8',
+    });
     if (r.status !== 0) return { container: guessContainer(bytes) };
     const data = JSON.parse(r.stdout) as {
       format?: { format_name?: string; duration?: string };
-      streams?: Array<{ codec_type?: string; codec_name?: string; width?: number; height?: number; r_frame_rate?: string }>;
+      streams?: Array<{
+        codec_type?: string;
+        codec_name?: string;
+        width?: number;
+        height?: number;
+        r_frame_rate?: string;
+      }>;
     };
     const v = (data.streams ?? []).find((s) => s.codec_type === 'video');
     return {

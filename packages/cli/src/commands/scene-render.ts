@@ -31,22 +31,11 @@ interface ContractLike {
 }
 
 function isCapsule(v: unknown): v is CapsuleLike {
-  return (
-    typeof v === 'object' &&
-    v !== null &&
-    '_kind' in v &&
-    (v as { _kind: unknown })._kind === 'sceneComposition'
-  );
+  return typeof v === 'object' && v !== null && '_kind' in v && (v as { _kind: unknown })._kind === 'sceneComposition';
 }
 
 function isContract(v: unknown): v is ContractLike {
-  return (
-    typeof v === 'object' &&
-    v !== null &&
-    'tracks' in v &&
-    'fps' in v &&
-    'duration' in v
-  );
+  return typeof v === 'object' && v !== null && 'tracks' in v && 'fps' in v && 'duration' in v;
 }
 
 /** Execute the scene render command. */

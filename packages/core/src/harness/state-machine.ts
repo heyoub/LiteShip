@@ -17,9 +17,7 @@ import type { HarnessOutput } from './pure-transform.js';
  * Emits `it.skip` placeholders covering illegal transitions, replay, and
  * invariant preservation — each carries a TODO naming the missing handler.
  */
-export function generateStateMachine(
-  cap: CapsuleDef<'stateMachine', unknown, unknown, unknown>,
-): HarnessOutput {
+export function generateStateMachine(cap: CapsuleDef<'stateMachine', unknown, unknown, unknown>): HarnessOutput {
   const testFile = `// GENERATED — do not edit by hand
 import { describe, it } from 'vitest';
 

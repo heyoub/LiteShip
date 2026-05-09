@@ -32,18 +32,27 @@ export async function renderWithFfmpeg(
   const start = Date.now();
   const args = [
     '-y',
-    '-f', 'rawvideo',
-    '-pix_fmt', 'rgba',
-    '-s', `${opts.width}x${opts.height}`,
-    '-r', String(opts.fps),
-    '-i', '-',
-    '-c:v', 'libx264',
-    '-pix_fmt', 'yuv420p',
+    '-f',
+    'rawvideo',
+    '-pix_fmt',
+    'rgba',
+    '-s',
+    `${opts.width}x${opts.height}`,
+    '-r',
+    String(opts.fps),
+    '-i',
+    '-',
+    '-c:v',
+    'libx264',
+    '-pix_fmt',
+    'yuv420p',
     opts.output,
   ];
   const proc = spawn('ffmpeg', args, { stdio: ['pipe', 'ignore', 'pipe'] });
   let stderrBuf = '';
-  proc.stderr.on('data', (chunk: Buffer) => { stderrBuf += chunk.toString(); });
+  proc.stderr.on('data', (chunk: Buffer) => {
+    stderrBuf += chunk.toString();
+  });
 
   let frameCount = 0;
 
@@ -79,10 +88,14 @@ export async function renderWithFfmpeg(
   try {
     size = statSync(opts.output).size;
   } catch (err) {
-    throw new Error(`ffmpeg exited 0 but no output file at ${opts.output}: ${(err as Error).message}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+    throw new Error(
+      `ffmpeg exited 0 but no output file at ${opts.output}: ${(err as Error).message}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`,
+    );
   }
   if (size === 0) {
-    throw new Error(`ffmpeg exited 0 but wrote a 0-byte file at ${opts.output}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`);
+    throw new Error(
+      `ffmpeg exited 0 but wrote a 0-byte file at ${opts.output}\nffmpeg stderr tail: ${stderrBuf.slice(-500)}`,
+    );
   }
 
   return { frameCount, elapsedMs: Date.now() - start };

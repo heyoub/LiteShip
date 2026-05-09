@@ -21,11 +21,7 @@ const StreamMessageSchema = Schema.Struct({
 });
 
 const ReceiptResultSchema = Schema.Struct({
-  status: Schema.Union([
-    Schema.Literal('applied'),
-    Schema.Literal('skipped'),
-    Schema.Literal('failed'),
-  ]),
+  status: Schema.Union([Schema.Literal('applied'), Schema.Literal('skipped'), Schema.Literal('failed')]),
   receipt: Schema.Struct({
     messageId: Schema.String,
     appliedAt: Schema.Number,

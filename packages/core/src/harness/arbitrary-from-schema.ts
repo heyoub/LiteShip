@@ -30,11 +30,7 @@ export class UnsupportedSchemaError extends Error {
   readonly _tag = 'UnsupportedSchemaError';
   readonly nodeTag: string;
   constructor(nodeTag: string, hint?: string) {
-    super(
-      `arbitrary-from-schema: AST node "${nodeTag}" is not supported${
-        hint ? ` (${hint})` : ''
-      }`,
-    );
+    super(`arbitrary-from-schema: AST node "${nodeTag}" is not supported${hint ? ` (${hint})` : ''}`);
     this.nodeTag = nodeTag;
   }
 }
@@ -50,10 +46,7 @@ export class UnsupportedSchemaError extends Error {
  * arbitrary already biases toward populated values so rejection stays
  * well below the threshold.
  */
-function _applyChecks(
-  ast: SchemaAST.AST,
-  arb: fc.Arbitrary<unknown>,
-): fc.Arbitrary<unknown> {
+function _applyChecks(ast: SchemaAST.AST, arb: fc.Arbitrary<unknown>): fc.Arbitrary<unknown> {
   const checks = ast.checks;
   if (checks === undefined || checks.length === 0) return arb;
   return arb.filter((sample) => {
@@ -61,21 +54,13 @@ function _applyChecks(
       if (check._tag === 'Filter') {
         // ParseOptions is opaque — pass an empty object; the runtime
         // tolerates missing fields for filter execution.
-        const issue = (check as SchemaAST.Filter<unknown>).run(
-          sample,
-          ast,
-          {} as SchemaAST.ParseOptions,
-        );
+        const issue = (check as SchemaAST.Filter<unknown>).run(sample, ast, {} as SchemaAST.ParseOptions);
         if (issue !== undefined) return false;
       } else if (check._tag === 'FilterGroup') {
         const group = check as SchemaAST.FilterGroup<unknown>;
         for (const inner of group.checks) {
           if (inner._tag === 'Filter') {
-            const issue = (inner as SchemaAST.Filter<unknown>).run(
-              sample,
-              ast,
-              {} as SchemaAST.ParseOptions,
-            );
+            const issue = (inner as SchemaAST.Filter<unknown>).run(sample, ast, {} as SchemaAST.ParseOptions);
             if (issue !== undefined) return false;
           }
           // Nested FilterGroup is theoretically possible but rare;
@@ -96,9 +81,7 @@ function _applyChecks(
  * Currently supports `Date`. Add new probes here when production
  * capsules require them.
  */
-function _arbitraryForDeclaration(
-  ast: SchemaAST.Declaration,
-): fc.Arbitrary<unknown> {
+function _arbitraryForDeclaration(ast: SchemaAST.Declaration): fc.Arbitrary<unknown> {
   const parser = ast.run(ast.typeParameters);
   // Probe with `new Date()` — the most common Declaration in production.
   const probeDate = new Date();
@@ -119,10 +102,7 @@ function _arbitraryForDeclaration(
     acceptsDate = false;
   }
   if (acceptsDate) return fc.date();
-  throw new UnsupportedSchemaError(
-    'Declaration',
-    'opaque user-defined type — only Date is currently probed',
-  );
+  throw new UnsupportedSchemaError('Declaration', 'opaque user-defined type — only Date is currently probed');
 }
 
 function walk(ast: SchemaAST.AST): fc.Arbitrary<unknown> {
@@ -205,9 +185,7 @@ function walk(ast: SchemaAST.AST): fc.Arbitrary<unknown> {
           throw new UnsupportedSchemaError('Arrays', 'rest[0] missing');
         }
         const tailArb = fc.array(walk(tailElem), { maxLength: 7 });
-        arb = fc
-          .tuple(fc.tuple(...headArbs), tailArb)
-          .map(([head, tail]) => [...head, ...tail]);
+        arb = fc.tuple(fc.tuple(...headArbs), tailArb).map(([head, tail]) => [...head, ...tail]);
         break;
       }
       throw new UnsupportedSchemaError(
@@ -237,23 +215,19 @@ function walk(ast: SchemaAST.AST): fc.Arbitrary<unknown> {
       // but the simpler, version-stable approach is to merge all keys and
       // post-process: for each optional key, randomly drop it.
       const allKeys = { ...required, ...optional };
-      arb = fc
-        .record(allKeys)
-        .chain((rec) =>
-          fc
-            .tuple(...Object.keys(optional).map(() => fc.boolean()))
-            .map((dropFlags) => {
-              const out: Record<string, unknown> = { ...rec };
-              const optKeys = Object.keys(optional);
-              for (let i = 0; i < optKeys.length; i++) {
-                if (dropFlags[i] === true) {
-                  const k = optKeys[i];
-                  if (k !== undefined) delete out[k];
-                }
-              }
-              return out;
-            }),
-        );
+      arb = fc.record(allKeys).chain((rec) =>
+        fc.tuple(...Object.keys(optional).map(() => fc.boolean())).map((dropFlags) => {
+          const out: Record<string, unknown> = { ...rec };
+          const optKeys = Object.keys(optional);
+          for (let i = 0; i < optKeys.length; i++) {
+            if (dropFlags[i] === true) {
+              const k = optKeys[i];
+              if (k !== undefined) delete out[k];
+            }
+          }
+          return out;
+        }),
+      );
       break;
     }
     case 'Suspend': {

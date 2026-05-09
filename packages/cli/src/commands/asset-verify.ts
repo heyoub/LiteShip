@@ -15,7 +15,9 @@ interface ManifestEntry {
   readonly generated: { testFile: string; benchFile: string };
 }
 
-interface Manifest { readonly capsules: readonly ManifestEntry[]; }
+interface Manifest {
+  readonly capsules: readonly ManifestEntry[];
+}
 
 /** Execute the asset verify command. */
 export async function assetVerify(assetId: string): Promise<number> {
