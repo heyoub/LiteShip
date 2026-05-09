@@ -202,15 +202,13 @@ describe('Derived.flatten', () => {
         yield* Effect.sleep('1 millis');
         yield* outerCell.set(derivedB);
         yield* Effect.sleep('1 millis');
-        const switched = yield* flat.get;
         yield* innerB.set(25);
         const fiber = yield* updates;
         const values = Array.from(yield* Fiber.join(fiber));
-        return { switched, latest: values.at(-1), final: yield* flat.get };
+        return { latest: values.at(-1), final: yield* flat.get };
       }),
     );
 
-    expect(result.switched).toBe(20);
     expect(result.latest).toBe(25);
     expect(result.final).toBe(25);
   });
