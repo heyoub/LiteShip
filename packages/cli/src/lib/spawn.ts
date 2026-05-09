@@ -47,6 +47,33 @@ export interface SpawnHandle {
   dispose(): Promise<void>;
 }
 
+function pushBoundedStderr(
+  chunks: Buffer[],
+  currentBytes: number,
+  chunk: Buffer,
+  cap: number,
+): number {
+  chunks.push(chunk);
+  let nextBytes = currentBytes + chunk.length;
+
+  while (nextBytes > cap && chunks.length > 0) {
+    const overflow = nextBytes - cap;
+    const head = chunks[0];
+    if (!head) break;
+
+    if (head.length <= overflow) {
+      chunks.shift();
+      nextBytes -= head.length;
+      continue;
+    }
+
+    chunks[0] = head.subarray(overflow);
+    nextBytes -= overflow;
+  }
+
+  return nextBytes;
+}
+
 /**
  * Quote a single argv token for safe inclusion in a Windows cmd.exe command
  * line. Tokens with no special characters round-trip as-is; everything else
@@ -106,12 +133,7 @@ export function spawnArgv(
     const stderrChunks: Buffer[] = [];
     let stderrBytes = 0;
     proc.stderr?.on('data', (chunk: Buffer) => {
-      stderrChunks.push(chunk);
-      stderrBytes += chunk.length;
-      while (stderrBytes > cap && stderrChunks.length > 1) {
-        const head = stderrChunks.shift();
-        if (head) stderrBytes -= head.length;
-      }
+      stderrBytes = pushBoundedStderr(stderrChunks, stderrBytes, chunk, cap);
     });
     proc.on('error', rejectPromise);
     proc.on('close', (code) => {
@@ -169,6 +191,7 @@ function startSpawn(
   const child = spawn(launcher.command, launcher.args as string[], {
     stdio,
     shell: false,
+    detached: process.platform !== 'win32',
     // On Windows the cmd.exe launcher needs verbatim args; see spawnArgv.
     windowsVerbatimArguments: process.platform === 'win32',
     // CRITICAL: do not set `env` — see comment in spawnArgv.
@@ -176,12 +199,7 @@ function startSpawn(
   const stderrChunks: Buffer[] = [];
   let stderrBytes = 0;
   child.stderr?.on('data', (chunk: Buffer) => {
-    stderrChunks.push(chunk);
-    stderrBytes += chunk.length;
-    while (stderrBytes > cap && stderrChunks.length > 1) {
-      const head = stderrChunks.shift();
-      if (head) stderrBytes -= head.length;
-    }
+    stderrBytes = pushBoundedStderr(stderrChunks, stderrBytes, chunk, cap);
   });
 
   let disposed = false;
@@ -206,7 +224,7 @@ function startSpawn(
     async dispose() {
       if (disposed) return;
       disposed = true;
-      if (child.exitCode !== null || child.signalCode !== null) return;
+      if (child.pid === undefined) return;
       if (process.platform === 'win32') {
         // Windows has no real signals: child.kill() is TerminateProcess on the
         // *immediate* child only. Our immediate child is the cmd.exe launcher,
@@ -215,18 +233,27 @@ function startSpawn(
         // the tree with taskkill /T /F — same approach scripts/gauntlet.ts
         // uses for the same reason. /F is acceptable here: the SIGINT-grace
         // path was already a lie on Windows (no signal was ever delivered).
-        if (child.pid !== undefined) {
-          try {
-            execSync(`taskkill /T /F /PID ${child.pid}`, { stdio: 'ignore' });
-          } catch {
-            /* already dead */
-          }
+        try {
+          execSync(`taskkill /T /F /PID ${child.pid}`, { stdio: 'ignore' });
+        } catch {
+          /* already dead */
         }
         return;
       }
-      // POSIX: SIGINT first (graceful). Wait up to 2s. If still alive, SIGKILL.
+      if (child.exitCode !== null || child.signalCode !== null) return;
+      // POSIX: each long-lived child gets its own process group. Signal the
+      // group so launchers and their descendants are disposed together.
+      const signalGroup = (signal: NodeJS.Signals): void => {
+        try {
+          process.kill(-child.pid!, signal);
+        } catch {
+          child.kill(signal);
+        }
+      };
+
+      // SIGINT first (graceful). Wait up to 2s. If still alive, SIGKILL.
       try {
-        child.kill('SIGINT');
+        signalGroup('SIGINT');
       } catch {
         return;
       }
@@ -236,7 +263,7 @@ function startSpawn(
       ]);
       if (!exited) {
         try {
-          child.kill('SIGKILL');
+          signalGroup('SIGKILL');
         } catch {
           /* already dead between check and kill */
         }

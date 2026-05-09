@@ -107,7 +107,12 @@ const _flatten = <T>(nested: DerivedShape<DerivedShape<T>>): Effect.Effect<Deriv
     const allInners = Stream.concat(Stream.make(initialInner), nested.changes);
 
     const flattenedStream = allInners.pipe(
-      Stream.switchMap((inner) => inner.changes),
+      Stream.switchMap((inner) =>
+        Stream.concat(
+          Stream.make(inner).pipe(Stream.mapEffect((currentInner) => currentInner.get)),
+          inner.changes,
+        ),
+      ),
       Stream.tap((value) => SubscriptionRef.set(ref, value)),
     );
 
