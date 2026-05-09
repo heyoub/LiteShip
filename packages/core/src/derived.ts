@@ -105,12 +105,21 @@ const _flatten = <T>(nested: DerivedShape<DerivedShape<T>>): Effect.Effect<Deriv
     const ref = yield* SubscriptionRef.make(initialValue);
 
     const flattenedStream = nested.changes.pipe(
-      Stream.switchMap((inner) =>
-        Stream.concat(
+      Stream.switchMap((inner) => {
+        let skipInitialReplay = true;
+        return Stream.concat(
           Stream.make(inner).pipe(Stream.mapEffect((currentInner) => currentInner.get)),
-          inner.changes,
-        ),
-      ),
+          inner.changes.pipe(
+            Stream.filter(() => {
+              if (skipInitialReplay) {
+                skipInitialReplay = false;
+                return false;
+              }
+              return true;
+            }),
+          ),
+        );
+      }),
       Stream.tap((value) => SubscriptionRef.set(ref, value)),
     );
 
