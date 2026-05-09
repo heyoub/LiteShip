@@ -14,6 +14,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const COMMITTED_DIR = 'docs/api';
+const DOCS_NODE_OPTIONS = ['--max-old-space-size=4096', process.env.NODE_OPTIONS ?? ''].join(' ').trim();
 
 if (!existsSync(COMMITTED_DIR)) {
   console.error(`docs:check — ${COMMITTED_DIR} does not exist. Run 'pnpm run docs:build' first.`);
@@ -26,6 +27,10 @@ try {
   const build = spawnSync('pnpm', ['exec', 'typedoc', '--out', tempDir], {
     stdio: 'inherit',
     shell: true,
+    env: {
+      ...process.env,
+      NODE_OPTIONS: DOCS_NODE_OPTIONS,
+    },
   });
   if (build.status !== 0) {
     console.error('docs:check — typedoc build failed');
