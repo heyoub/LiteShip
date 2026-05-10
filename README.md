@@ -132,7 +132,12 @@ LiteShip is greenfield-first. There is no migration guide for porting an existin
 - **Vite filesystem watchers** — chokidar takes different code paths on APFS (FSEvents) vs ext4 / NTFS. HMR watch behavior under `@czap/vite` may differ.
 - **Bench-gate distributions on Apple Silicon** — worker startup is faster than the Linux baseline some bench pairs are calibrated against. Hard gates should still pass; the numeric distributions will look different.
 
-Promotion path: macOS moves to tier-1 (drop `continue-on-error`, add to `ci-summary` needs) when `macos-smoke` has been green for a full release cycle on a fresh `macos-latest` image. Contributors are welcome to file macOS-specific issues against the smoke job's logs.
+Promotion path: macOS moves to tier-1 (drop `continue-on-error`, add to `ci-summary` needs) in two milestones:
+
+1. **macOS smoke green for a release cycle.** `macos-smoke` (the current job, covering build / typecheck / lint / invariants / non-browser tests / package:smoke) stays green on a fresh `macos-latest` image across a full release cycle.
+2. **macOS browser coverage added.** A second job, `macos-browser`, gets a Playwright-with-deps install (Homebrew path), runs `test:e2e` and `coverage:browser`, and stays green for a release cycle.
+
+Both milestones are signal-gated, not promise-gated. Contributors are welcome to file macOS-specific issues against the smoke job's logs and to PR the `macos-browser` job once they can verify the Playwright-deps path locally.
 
 ## Documentation
 

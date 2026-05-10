@@ -25,7 +25,12 @@ macOS (tier-2, best-effort, real CI signal):
 - Worker startup on Apple Silicon is faster than the Linux baseline the bench gates are calibrated against; hard gates should still pass, distributions will differ.
 - The `coverage:browser` lane is Linux-only; merged coverage on macOS is partial.
 
-Promotion path to tier-1 (drop `continue-on-error`, add to `ci-summary` needs): `macos-smoke` green for a full release cycle on a fresh `macos-latest` image. Promotion is gated by signal, not by promise.
+Promotion path to tier-1 has two milestones:
+
+1. `macos-smoke` (current scope: build / typecheck / lint / invariants / non-browser tests / package:smoke) stays green for a release cycle on a fresh `macos-latest` image.
+2. A second job, `macos-browser`, lands with a Playwright-with-deps Homebrew install path, runs `test:e2e` and `coverage:browser`, and stays green for a release cycle.
+
+When both are met, `continue-on-error` drops and macOS jobs join `ci-summary` needs. Until then, the gap is explicit: macOS authoring is safe; macOS browser-runtime testing is at-your-own-risk territory and won't catch a Safari-specific regression before merge.
 
 Current security/default-trust posture:
 
@@ -249,6 +254,8 @@ Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are meas
 Phase 8 is the only phase with a meaningfully bimodal cost — the cold path on a fresh `node_modules/.vite-browser` cache crosses ten minutes. If your CI image rebuilds the Vite browser optimizer cache from scratch, plan around that; if it persists the cache, you stay at the ~10s warm cost.
 
 For the canonical, current truth, read `benchmarks/gauntlet-phase-timings.json` after a fresh `pnpm run gauntlet:full`. The snapshot above is a reference anchor, not the live ledger.
+
+**For 3am operators without a local repo:** the `truth-linux` job in `.github/workflows/ci.yml` uploads `benchmarks/` (including `gauntlet-phase-timings.json`) as the `truth-artifacts-linux` artifact on every push to `main` and every pull request. That artifact carries all 29 phases measured under CI conditions and is the single source of truth without needing to re-run anything locally — find the most recent successful CI run on the relevant branch in the GitHub Actions UI, download the artifact, read the JSON. The static table above is for orientation; the artifact is for decisions.
 
 ---
 
