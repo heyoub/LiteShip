@@ -7,7 +7,16 @@
  * @module
  */
 
+import type { MotionTier as _MotionTier } from '@czap/_spine';
 import { Boundary } from './boundary.js';
+
+/**
+ * Motion tier — re-anchored from `@czap/_spine` (the canonical declaration
+ * per ADR-0010). The ladder runs from lowest capability (`none`, forced by
+ * `prefers-reduced-motion: reduce` regardless of GPU tier) to highest
+ * (`compute`, which unlocks the Rust/WASM kernels).
+ */
+export type MotionTier = _MotionTier;
 
 /**
  * Coarse UI-complexity ladder, in increasing fidelity: `skeleton` (placeholder
@@ -40,8 +49,6 @@ const uiQualityBoundary: UIQualityBoundary = Boundary.make({
 /**
  * Motion tier to normalized device capability score (0-1).
  */
-export type MotionTier = 'none' | 'transitions' | 'animations' | 'physics' | 'compute';
-
 const DEVICE_CAPABILITY_SCORES: Record<MotionTier, number> = {
   none: 0.0,
   transitions: 0.25,

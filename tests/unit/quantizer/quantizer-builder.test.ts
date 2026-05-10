@@ -150,8 +150,14 @@ describe('Q.from() config creation', () => {
 // ---------------------------------------------------------------------------
 
 describe('MotionTier gating', () => {
-  test('TIER_TARGETS has all 5 tiers', () => {
-    const tiers: MotionTier[] = ['none', 'transitions', 'animations', 'physics', 'compute'];
+  test('TIER_TARGETS has every tier in the union', () => {
+    // `satisfies` catches the case where a new tier is added to the
+    // union but omitted from this array — the array literal must
+    // include every element of `MotionTier` or the type-check fails.
+    const tiers = ['none', 'transitions', 'animations', 'physics', 'compute'] as const satisfies readonly MotionTier[];
+    type _ExhaustiveCheck = Exclude<MotionTier, (typeof tiers)[number]> extends never ? true : never;
+    const _ok: _ExhaustiveCheck = true;
+    void _ok;
     for (const tier of tiers) {
       expect(TIER_TARGETS[tier]).toBeDefined();
     }

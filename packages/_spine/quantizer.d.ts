@@ -11,15 +11,19 @@ import type {
   Easing,
   Quantizer,
   OutputsFor,
+  MotionTier,
 } from './core.d.ts';
+
+// MotionTier canonical declaration lives in core.d.ts; re-exported here so
+// `@czap/_spine` consumers reading the quantizer surface still see it on
+// this sub-spine without an extra import.
+export type { MotionTier };
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // § 1. QUANTIZER BUILDER (Q.from(boundary).outputs({...}))
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export type OutputTarget = 'css' | 'glsl' | 'wgsl' | 'aria' | 'ai';
-
-export type MotionTier = 'none' | 'transitions' | 'animations' | 'physics' | 'compute';
 
 export interface SpringConfig {
   readonly stiffness: number;

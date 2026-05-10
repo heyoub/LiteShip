@@ -3,7 +3,12 @@
  */
 
 import type { Effect } from 'effect';
-import type { CapLevel, CapSet } from './core.d.ts';
+import type { CapLevel, CapSet, MotionTier } from './core.d.ts';
+
+// MotionTier canonical declaration lives in core.d.ts; re-exported here so
+// `@czap/_spine` consumers reading the detect surface still see it on this
+// sub-spine without an extra import.
+export type { MotionTier };
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // § 1. DETECTION TIERS
@@ -58,7 +63,6 @@ export declare function watchCapabilities(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export type DesignTier = 'minimal' | 'standard' | 'enhanced' | 'rich';
-export type MotionTier = 'none' | 'transitions' | 'animations' | 'physics' | 'compute';
 
 export interface ExtendedDeviceCapabilities extends DeviceCapabilities {
   readonly prefersContrast: 'no-preference' | 'more' | 'less' | 'custom';
