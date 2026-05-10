@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Device capability detection and tier mapping",
   "license": "MIT",
-  "author": "heyoub <eassa@heyoub.dev>",
+  "author": "Eassa Ayoub <eassa@heyoub.dev>",
   "repository": {
     "type": "git",
     "url": "https://github.com/heyoub/LiteShip",

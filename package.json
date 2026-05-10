@@ -4,7 +4,7 @@
   "private": true,
   "description": "Constraint-based adaptive rendering framework — monorepo root",
   "license": "MIT",
-  "author": "heyoub <eassa@heyoub.dev>",
+  "author": "Eassa Ayoub <eassa@heyoub.dev>",
   "repository": {
     "type": "git",
     "url": "https://github.com/heyoub/LiteShip"

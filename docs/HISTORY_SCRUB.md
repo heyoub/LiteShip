@@ -90,7 +90,7 @@ The pre-public scrub for the v0.1.0 publish was executed 2026-05-10. What it cov
       `Eassa Ayoub <hello@heyoub.dev>`, `Cursor Agent
       <cursoragent@cursor.com>`, `Claude <noreply@anthropic.com>`)
       collapsed via `git filter-repo --mailmap` to two:
-      `heyoub <eassa@heyoub.dev>` for human + tooling commits, and
+      `Eassa Ayoub <eassa@heyoub.dev>` for human + tooling commits, and
       `Claude <noreply@anthropic.com>` preserved for AI-attributed
       commits per standard practice. The web-merge committer
       `GitHub <noreply@github.com>` is preserved (GitHub-side

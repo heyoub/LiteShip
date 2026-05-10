@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "ECS-backed scene composition capsule for czap",
   "license": "MIT",
-  "author": "heyoub <eassa@heyoub.dev>",
+  "author": "Eassa Ayoub <eassa@heyoub.dev>",
   "repository": {
     "type": "git",
     "url": "https://github.com/heyoub/LiteShip",
