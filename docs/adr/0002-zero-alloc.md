@@ -31,7 +31,7 @@ The per-frame inner loop is plain JS. Effect is used only for setup/teardown (sc
 
 - `Boundary.evaluate` at **71 ns / 10M+ ops/s**; `Compositor.computeState` at **~42 μs**. Together 0.05–0.25% of the 16 ms frame budget.
 - `ECS World tick — 100 entities (dense)` at **3893 ns** vs sparse at **21789 ns** (5.6×).
-- Bench: `tests/bench/core.bench.ts`; gates in `scripts/bench-gate.ts`.
+- Bench source: `tests/bench/core.bench.ts`. Gate enforcement: `scripts/bench-gate.ts`. Numbers above are baseline reference points; the *current* gate posture is recorded per-run in `benchmarks/directive-gate.json` and rolled up into `reports/runtime-seams.json`. Read those first when verifying claims; this ADR is the design rationale, not the live ledger.
 - **Transport cost floor** (diagnostic `worker-runtime-startup`): the off-thread seam is inherent. Node/BenchWorker median overhead ~75–80% (support ~32 μs/iter, parity ~17 μs). Dominant residual stages (`state-delivery:message-receipt` for one microtask turn in Node, structured-clone + event-loop hop in browser, Chromium ~100 μs; and `request-compute:dispatch-send`) are `support-only` in `WORKER_STARTUP_DIAGNOSTIC_STAGE_LABELS`: no in-process analogue by design. SAB-backed delivery rejected (strings in `BootstrapQuantizerRegistration` still need encoding). **Tradeoff:** keep structured-clone envelopes; residual is boundary cost, not product debt. Threshold `WORKER_TRANSPORT_FLOOR_THRESHOLD = 100%` gives ~22 pp headroom; reducible shared portion is hard-gated via `worker-runtime-startup-shared` (15%).
 
 ## Rejected alternatives

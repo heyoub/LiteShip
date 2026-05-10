@@ -29,4 +29,4 @@ Vocabulary for prose across this repository. Technical identifiers (`Boundary`, 
 
 ## Drift check
 
-After editing docs, search for mixed boundary verbs (*wire* vs *rig*), banned words, and accidental product rename of `@czap/*` or public APIs.
+After editing docs, run the sweep: mixed boundary verbs (*wire* vs *rig*), banned words, accidental rename of `@czap/*` or public APIs. The glossary holds; the prose comes back to it.

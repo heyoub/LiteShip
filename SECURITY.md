@@ -88,8 +88,7 @@ The repo includes a dedicated red-team regression lane:
 pnpm run test:redteam
 ```
 
-It runs in the gauntlet and on every PR. New security-relevant findings
-should be encoded as a regression test there to prevent re-introduction.
+It runs as phase 16 of `pnpm run gauntlet:full` (see [STATUS.md](./docs/STATUS.md#gates)) and on every PR through `.github/workflows/ci.yml`. New security-relevant findings should be encoded as a regression test there to prevent re-introduction.
 
 ## Disclosure timeline
 

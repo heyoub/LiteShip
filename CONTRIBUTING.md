@@ -95,6 +95,7 @@ readable.
 ## Testing lanes
 
 - `pnpm test`: full node/jsdom surface (~75s)
+- `pnpm test path/to/foo.test.ts`: single file, fastest feedback when you're chasing one failure
 - `pnpm run test:e2e`: Playwright e2e (~6s)
 - `pnpm run test:flake`: repeated runs of runtime-sensitive tests to catch flakes
 - `pnpm run test:redteam`: security regressions
