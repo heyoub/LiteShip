@@ -4,13 +4,13 @@
   "private": true,
   "description": "Constraint-based adaptive rendering framework — monorepo root",
   "license": "MIT",
-  "author": "The Free Battery Factory",
+  "author": "heyoub <eassa@heyoub.dev>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheFreeBatteryFactory/czap"
+    "url": "https://github.com/heyoub/LiteShip"
   },
-  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
-  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "bugs": "https://github.com/heyoub/LiteShip/issues",
+  "homepage": "https://github.com/heyoub/LiteShip#readme",
   "type": "module",
   "packageManager": "pnpm@10.32.1",
   "engines": {

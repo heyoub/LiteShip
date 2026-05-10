@@ -7,7 +7,7 @@ Please do not open public GitHub issues for security findings.
 Instead, use one of these private channels:
 
 - **GitHub Security Advisory** (preferred). From the repo's "Security" tab, click "Report a vulnerability." This creates a private advisory visible only to maintainers.
-- **Email**: send to the maintainer team via the contact listed on the organization profile at [github.com/TheFreeBatteryFactory](https://github.com/TheFreeBatteryFactory).
+- **Email**: send to the maintainer via the contact listed on the maintainer profile at [github.com/heyoub](https://github.com/heyoub).
 
 When reporting, please include:
 

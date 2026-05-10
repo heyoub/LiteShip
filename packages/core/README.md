@@ -6,9 +6,9 @@ Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Pl
 
 - [Naming & vocabulary](../../docs/GLOSSARY.md) — LiteShip, CZAP, `@czap/*`
 
-- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/core/) — generated from source TSDoc
-- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
-- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
+- [API reference](https://github.com/heyoub/LiteShip/tree/main/docs/api/core/) — generated from source TSDoc
+- [Architecture index](https://github.com/heyoub/LiteShip/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/heyoub/LiteShip/tree/main/docs/adr/)
 
 ## Install
 
@@ -16,4 +16,4 @@ Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Pl
 pnpm add @czap/core
 ```
 
-## Part of [LiteShip](https://github.com/TheFreeBatteryFactory/czap#readme)
+## Part of [LiteShip](https://github.com/heyoub/LiteShip#readme)

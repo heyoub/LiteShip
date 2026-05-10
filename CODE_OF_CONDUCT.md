@@ -36,7 +36,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at the project's GitHub Security Advisories at https://github.com/TheFreeBatteryFactory/czap/security/advisories, or via the contact email listed on the organization profile at https://github.com/TheFreeBatteryFactory. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at the project's GitHub Security Advisories at https://github.com/heyoub/LiteShip/security/advisories, or via the contact email listed on the maintainer profile at https://github.com/heyoub. All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 

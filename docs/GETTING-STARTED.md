@@ -13,7 +13,7 @@ LiteShip / CZAP / `@czap/*` naming: [GLOSSARY.md](./GLOSSARY.md).
 ## 1. Clone and install
 
 ```bash
-git clone https://github.com/TheFreeBatteryFactory/czap.git
+git clone https://github.com/heyoub/LiteShip.git
 cd czap
 pnpm install
 ```
@@ -184,4 +184,4 @@ The `client:satellite` directive hydrates only the boundary evaluator (not a who
 
 **`Boundary.evaluate` returns the wrong state for a value at exactly a threshold.** That's by design: thresholds are inclusive lower bounds. A boundary with `[[0, 'mobile'], [768, 'tablet']]` returns `'tablet'` for `768`, not `'mobile'`. If you need exclusive bounds, offset the threshold by 1.
 
-Found a different issue? Open one at [github.com/TheFreeBatteryFactory/czap/issues](https://github.com/TheFreeBatteryFactory/czap/issues).
+Found a different issue? Open one at [github.com/heyoub/LiteShip/issues](https://github.com/heyoub/LiteShip/issues).

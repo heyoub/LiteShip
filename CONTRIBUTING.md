@@ -8,7 +8,7 @@ Ontology for prose and docs: [docs/GLOSSARY.md](./docs/GLOSSARY.md). The git rem
 
 ```bash
 # Clone + install
-git clone https://github.com/TheFreeBatteryFactory/czap.git
+git clone https://github.com/heyoub/LiteShip.git
 cd czap
 pnpm install
 

@@ -6,9 +6,9 @@ Astro 6 integration: Satellite component + client:satellite directive.
 
 - [Naming & vocabulary](../../docs/GLOSSARY.md) — LiteShip, CZAP, `@czap/*`
 
-- [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/astro/) — generated from source TSDoc
-- [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
-- [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
+- [API reference](https://github.com/heyoub/LiteShip/tree/main/docs/api/astro/) — generated from source TSDoc
+- [Architecture index](https://github.com/heyoub/LiteShip/blob/main/docs/ARCHITECTURE.md)
+- [ADRs](https://github.com/heyoub/LiteShip/tree/main/docs/adr/)
 
 ## Install
 
@@ -16,4 +16,4 @@ Astro 6 integration: Satellite component + client:satellite directive.
 pnpm add @czap/astro
 ```
 
-## Part of [LiteShip](https://github.com/TheFreeBatteryFactory/czap#readme)
+## Part of [LiteShip](https://github.com/heyoub/LiteShip#readme)

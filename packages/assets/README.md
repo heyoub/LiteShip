@@ -13,4 +13,4 @@ pnpm add @czap/assets effect
 - `@czap/assets` - production APIs.
 - `@czap/assets/testing` - test-only helpers; do not ship to production bundles.
 
-See the monorepo [README](https://github.com/TheFreeBatteryFactory/czap#readme).
+See the monorepo [README](https://github.com/heyoub/LiteShip#readme).

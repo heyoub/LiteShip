@@ -11,4 +11,4 @@ branded contracts without pulling runtime JavaScript from this package.
 - **Consumers:** depend on `@czap/_spine` the same way core/scene do; do not
   import it from browser bundles unless you only need types at compile time.
 
-See the monorepo [README](https://github.com/TheFreeBatteryFactory/czap#readme) and [docs/ARCHITECTURE.md](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md).
+See the monorepo [README](https://github.com/heyoub/LiteShip#readme) and [docs/ARCHITECTURE.md](https://github.com/heyoub/LiteShip/blob/main/docs/ARCHITECTURE.md).

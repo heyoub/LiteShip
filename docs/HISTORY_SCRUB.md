@@ -1,6 +1,6 @@
 # Pre-public git history scrub
 
-This checklist applies to the LiteShip monorepo (GitHub path `TheFreeBatteryFactory/czap`); clone directory names may still read `czap` on disk.
+This checklist applies to the LiteShip monorepo (GitHub path `heyoub/LiteShip`); clone directory names may still read `czap` on disk.
 
 Use this checklist before the repository is public if local machine paths or editor-only files ever appeared in git history.
 

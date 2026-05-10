@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Multi-target compiler: CSS, GLSL, WGSL, ARIA, AI, Tailwind",
   "license": "MIT",
-  "author": "The Free Battery Factory",
+  "author": "heyoub <eassa@heyoub.dev>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheFreeBatteryFactory/czap",
+    "url": "https://github.com/heyoub/LiteShip",
     "directory": "packages/compiler"
   },
-  "bugs": "https://github.com/TheFreeBatteryFactory/czap/issues",
-  "homepage": "https://github.com/TheFreeBatteryFactory/czap#readme",
+  "bugs": "https://github.com/heyoub/LiteShip/issues",
+  "homepage": "https://github.com/heyoub/LiteShip#readme",
   "keywords": [
     "czap",
     "compiler",
