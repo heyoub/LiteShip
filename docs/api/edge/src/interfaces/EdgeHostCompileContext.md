@@ -6,7 +6,7 @@
 
 # Interface: EdgeHostCompileContext
 
-Defined in: [edge/src/host-adapter.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L42)
+Defined in: edge/src/host-adapter.ts:42
 
 Compile-time context passed to [EdgeHostCacheConfig.compile](EdgeHostCacheConfig.md#compile).
 
@@ -24,7 +24,7 @@ compiled per-state outputs without recomputation.
 
 > `readonly` **capabilities**: [`ExtendedDeviceCapabilities`](#)
 
-Defined in: [edge/src/host-adapter.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L30)
+Defined in: edge/src/host-adapter.ts:30
 
 Capabilities parsed from Client Hints.
 
@@ -38,7 +38,7 @@ Capabilities parsed from Client Hints.
 
 > `readonly` `optional` **theme?**: [`ThemeCompileResult`](ThemeCompileResult.md)
 
-Defined in: [edge/src/host-adapter.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L44)
+Defined in: edge/src/host-adapter.ts:44
 
 Pre-compiled theme output, if the adapter resolved one for this request.
 
@@ -48,7 +48,7 @@ Pre-compiled theme output, if the adapter resolved one for this request.
 
 > `readonly` **tier**: [`EdgeTierResult`](EdgeTierResult.md)
 
-Defined in: [edge/src/host-adapter.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L32)
+Defined in: edge/src/host-adapter.ts:32
 
 Derived tier triple (cap, motion, design).
 

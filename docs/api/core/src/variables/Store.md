@@ -8,7 +8,7 @@
 
 > `const` **Store**: `object`
 
-Defined in: [core/src/store.ts:65](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/store.ts#L65)
+Defined in: core/src/store.ts:65
 
 Store — TEA-style state container.
 Build with an initial state and a pure `reducer(state, msg) => state`, then

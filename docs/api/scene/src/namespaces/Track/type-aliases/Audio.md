@@ -8,6 +8,6 @@
 
 > **Audio** = [`AudioTrack`](../../../interfaces/AudioTrack.md)
 
-Defined in: [scene/src/track.ts:116](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L116)
+Defined in: scene/src/track.ts:116
 
 Audio helper return.

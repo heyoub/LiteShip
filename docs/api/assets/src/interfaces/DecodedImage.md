@@ -6,7 +6,7 @@
 
 # Interface: DecodedImage
 
-Defined in: [assets/src/decoders/image.ts:9](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/image.ts#L9)
+Defined in: assets/src/decoders/image.ts:9
 
 Decoded image format + dimensions.
 
@@ -16,7 +16,7 @@ Decoded image format + dimensions.
 
 > `readonly` **format**: `"unknown"` \| `"png"` \| `"jpeg"` \| `"webp"`
 
-Defined in: [assets/src/decoders/image.ts:10](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/image.ts#L10)
+Defined in: assets/src/decoders/image.ts:10
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [assets/src/decoders/image.ts:10](https://github.com/TheFreeBatteryF
 
 > `readonly` **height**: `number`
 
-Defined in: [assets/src/decoders/image.ts:12](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/image.ts#L12)
+Defined in: assets/src/decoders/image.ts:12
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [assets/src/decoders/image.ts:12](https://github.com/TheFreeBatteryF
 
 > `readonly` **width**: `number`
 
-Defined in: [assets/src/decoders/image.ts:11](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/image.ts#L11)
+Defined in: assets/src/decoders/image.ts:11

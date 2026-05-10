@@ -8,6 +8,6 @@
 
 > **Site** = `"node"` \| `"browser"` \| `"worker"` \| `"edge"`
 
-Defined in: [core/src/capsule.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L23)
+Defined in: core/src/capsule.ts:23
 
 Where a capsule may run.

@@ -8,7 +8,7 @@
 
 > `const` **Hints**: `object`
 
-Defined in: [web/src/morph/hints.ts:279](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/morph/hints.ts#L279)
+Defined in: web/src/morph/hints.ts:279
 
 Consolidated namespace export matching the spine contract.
 

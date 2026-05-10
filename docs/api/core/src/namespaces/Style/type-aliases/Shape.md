@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`\> = `StyleDef`\<`B`\>
 
-Defined in: [core/src/style.ts:247](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L247)
+Defined in: core/src/style.ts:247
 
 Structural shape of a style definition parameterized by its governing [Boundary](../../../variables/Boundary.md).
 

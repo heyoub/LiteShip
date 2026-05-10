@@ -8,7 +8,7 @@
 
 > **StateName**\<`S`\> = `_StateName`\<`S`\>
 
-Defined in: [core/src/brands.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L33)
+Defined in: core/src/brands.ts:33
 
 Branded state name -- e.g. 'mobile', 'tablet', 'desktop'
 

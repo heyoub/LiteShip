@@ -8,7 +8,7 @@
 
 > `const` **SceneRuntime**: `object`
 
-Defined in: [scene/src/runtime.ts:275](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L275)
+Defined in: scene/src/runtime.ts:275
 
 SceneRuntime namespace — build a live, tickable handle from a
 compiled scene. The companion type namespace exposes

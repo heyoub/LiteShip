@@ -6,7 +6,7 @@
 
 # Interface: ARIACompileResult\<S\>
 
-Defined in: [compiler/src/aria.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/aria.ts#L26)
+Defined in: compiler/src/aria.ts:26
 
 Output of [ARIACompiler.compile](../variables/ARIACompiler.md#compile).
 
@@ -27,7 +27,7 @@ immediately without duplicating the lookup.
 
 > `readonly` **currentAttributes**: `Record`\<`string`, `string`\>
 
-Defined in: [compiler/src/aria.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/aria.ts#L30)
+Defined in: compiler/src/aria.ts:30
 
 Attributes for the active state at compile time.
 
@@ -37,6 +37,6 @@ Attributes for the active state at compile time.
 
 > `readonly` **stateAttributes**: `Record`\<`S`, `Record`\<`string`, `string`\>\>
 
-Defined in: [compiler/src/aria.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/aria.ts#L28)
+Defined in: compiler/src/aria.ts:28
 
 Validated per-state ARIA attribute maps.

@@ -6,7 +6,7 @@
 
 # Interface: VideoTrack
 
-Defined in: [scene/src/contract.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L23)
+Defined in: scene/src/contract.ts:23
 
 Video track — renders a quantizer-driven source for its frame range.
 
@@ -16,7 +16,7 @@ Video track — renders a quantizer-driven source for its frame range.
 
 > `readonly` **from**: `number`
 
-Defined in: [scene/src/contract.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L26)
+Defined in: scene/src/contract.ts:26
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [scene/src/contract.ts:26](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **id**: [`TrackId`](../type-aliases/TrackId.md)\<`"video"`\>
 
-Defined in: [scene/src/contract.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L25)
+Defined in: scene/src/contract.ts:25
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [scene/src/contract.ts:25](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **kind**: `"video"`
 
-Defined in: [scene/src/contract.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L24)
+Defined in: scene/src/contract.ts:24
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [scene/src/contract.ts:24](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` `optional` **layer?**: `number`
 
-Defined in: [scene/src/contract.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L29)
+Defined in: scene/src/contract.ts:29
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [scene/src/contract.ts:29](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **source**: `unknown`
 
-Defined in: [scene/src/contract.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L28)
+Defined in: scene/src/contract.ts:28
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [scene/src/contract.ts:28](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **to**: `number`
 
-Defined in: [scene/src/contract.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L27)
+Defined in: scene/src/contract.ts:27

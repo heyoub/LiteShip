@@ -8,7 +8,7 @@
 
 > `const` **TokenCSSCompiler**: `object`
 
-Defined in: [compiler/src/token-css.ts:137](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-css.ts#L137)
+Defined in: compiler/src/token-css.ts:137
 
 Token CSS compiler namespace.
 

@@ -8,7 +8,7 @@
 
 > **isWire**\<`T`\>(`p`): `p is Shape<T, never>`
 
-Defined in: [core/src/index.ts:222](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L222)
+Defined in: core/src/index.ts:222
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Wire](../namespaces/Wire/README.md).
 

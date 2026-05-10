@@ -6,7 +6,7 @@
 
 # Interface: JsonRpcErrorResponse
 
-Defined in: [mcp-server/src/jsonrpc.ts:55](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L55)
+Defined in: mcp-server/src/jsonrpc.ts:55
 
 Error response per §5 + §5.1.
 
@@ -16,7 +16,7 @@ Error response per §5 + §5.1.
 
 > `readonly` **error**: `object`
 
-Defined in: [mcp-server/src/jsonrpc.ts:58](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L58)
+Defined in: mcp-server/src/jsonrpc.ts:58
 
 #### code
 
@@ -36,7 +36,7 @@ Defined in: [mcp-server/src/jsonrpc.ts:58](https://github.com/TheFreeBatteryFact
 
 > `readonly` **id**: [`JsonRpcId`](../type-aliases/JsonRpcId.md)
 
-Defined in: [mcp-server/src/jsonrpc.ts:57](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L57)
+Defined in: mcp-server/src/jsonrpc.ts:57
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [mcp-server/src/jsonrpc.ts:57](https://github.com/TheFreeBatteryFact
 
 > `readonly` **jsonrpc**: `"2.0"`
 
-Defined in: [mcp-server/src/jsonrpc.ts:56](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L56)
+Defined in: mcp-server/src/jsonrpc.ts:56

@@ -8,6 +8,6 @@
 
 > **ValidationError** = `PlanValidationError`
 
-Defined in: [core/src/plan.ts:310](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/plan.ts#L310)
+Defined in: core/src/plan.ts:310
 
 Alias for `PlanValidationError`.

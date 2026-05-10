@@ -6,7 +6,7 @@
 
 # Interface: DenseStore
 
-Defined in: [core/src/ecs.ts:37](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L37)
+Defined in: core/src/ecs.ts:37
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/src/ecs.ts:37](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **\_dense**: `true`
 
-Defined in: [core/src/ecs.ts:40](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L40)
+Defined in: core/src/ecs.ts:40
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [core/src/ecs.ts:40](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **capacity**: `number`
 
-Defined in: [core/src/ecs.ts:39](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L39)
+Defined in: core/src/ecs.ts:39
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [core/src/ecs.ts:39](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **count**: `number`
 
-Defined in: [core/src/ecs.ts:48](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L48)
+Defined in: core/src/ecs.ts:48
 
 Current number of live entries
 
@@ -40,7 +40,7 @@ Current number of live entries
 
 > `readonly` **data**: `Float64Array`
 
-Defined in: [core/src/ecs.ts:46](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L46)
+Defined in: core/src/ecs.ts:46
 
 The raw Float64Array backing store
 
@@ -50,7 +50,7 @@ The raw Float64Array backing store
 
 > `readonly` **entityToIndex**: [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)\<[`EntityId`](../type-aliases/EntityId.md), `number`\>
 
-Defined in: [core/src/ecs.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L42)
+Defined in: core/src/ecs.ts:42
 
 Entity ID `->` index in the data array
 
@@ -60,7 +60,7 @@ Entity ID `->` index in the data array
 
 > `readonly` **indexToEntity**: [`EntityId`](../type-aliases/EntityId.md)[]
 
-Defined in: [core/src/ecs.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L44)
+Defined in: core/src/ecs.ts:44
 
 Index `->` Entity ID (for iteration)
 
@@ -70,7 +70,7 @@ Index `->` Entity ID (for iteration)
 
 > `readonly` **name**: `string`
 
-Defined in: [core/src/ecs.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L38)
+Defined in: core/src/ecs.ts:38
 
 ## Methods
 
@@ -78,7 +78,7 @@ Defined in: [core/src/ecs.ts:38](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **delete**(`entityId`): `boolean`
 
-Defined in: [core/src/ecs.ts:53](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L53)
+Defined in: core/src/ecs.ts:53
 
 #### Parameters
 
@@ -96,7 +96,7 @@ Defined in: [core/src/ecs.ts:53](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **entities**(): readonly [`EntityId`](../type-aliases/EntityId.md)[]
 
-Defined in: [core/src/ecs.ts:58](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L58)
+Defined in: core/src/ecs.ts:58
 
 All entity IDs with values, in dense order
 
@@ -110,7 +110,7 @@ readonly [`EntityId`](../type-aliases/EntityId.md)[]
 
 > **get**(`entityId`): `number` \| `undefined`
 
-Defined in: [core/src/ecs.ts:50](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L50)
+Defined in: core/src/ecs.ts:50
 
 #### Parameters
 
@@ -128,7 +128,7 @@ Defined in: [core/src/ecs.ts:50](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **has**(`entityId`): `boolean`
 
-Defined in: [core/src/ecs.ts:52](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L52)
+Defined in: core/src/ecs.ts:52
 
 #### Parameters
 
@@ -146,7 +146,7 @@ Defined in: [core/src/ecs.ts:52](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **reset**(): `void`
 
-Defined in: [core/src/ecs.ts:54](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L54)
+Defined in: core/src/ecs.ts:54
 
 #### Returns
 
@@ -158,7 +158,7 @@ Defined in: [core/src/ecs.ts:54](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **set**(`entityId`, `value`): `void`
 
-Defined in: [core/src/ecs.ts:51](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L51)
+Defined in: core/src/ecs.ts:51
 
 #### Parameters
 
@@ -180,7 +180,7 @@ Defined in: [core/src/ecs.ts:51](https://github.com/TheFreeBatteryFactory/czap/b
 
 > **view**(): `Float64Array`
 
-Defined in: [core/src/ecs.ts:56](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L56)
+Defined in: core/src/ecs.ts:56
 
 Direct typed array view for tight-loop iteration (length = count)
 

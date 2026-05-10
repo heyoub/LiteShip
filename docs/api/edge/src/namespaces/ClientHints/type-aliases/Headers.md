@@ -8,6 +8,6 @@
 
 > **Headers** = [`ClientHintsHeaders`](../../../interfaces/ClientHintsHeaders.md)
 
-Defined in: [edge/src/client-hints.ts:337](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/client-hints.ts#L337)
+Defined in: edge/src/client-hints.ts:337
 
 Alias for [ClientHintsHeaders](../../../interfaces/ClientHintsHeaders.md) — plain-object header bag shape.

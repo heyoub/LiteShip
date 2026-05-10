@@ -8,6 +8,6 @@
 
 > **Spawn** = [`BeatSpawn`](../../../interfaces/BeatSpawn.md)
 
-Defined in: [scene/src/capsules/beat-binding.ts:123](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/capsules/beat-binding.ts#L123)
+Defined in: scene/src/capsules/beat-binding.ts:123
 
 Spawn descriptor — one per input beat marker.

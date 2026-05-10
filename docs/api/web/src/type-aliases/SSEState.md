@@ -8,6 +8,6 @@
 
 > **SSEState** = `"connecting"` \| `"connected"` \| `"reconnecting"` \| `"disconnected"` \| `"error"`
 
-Defined in: [web/src/types.ts:197](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L197)
+Defined in: web/src/types.ts:197
 
 SSE connection state.

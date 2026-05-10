@@ -8,7 +8,7 @@
 
 > `const` **pulse**: `object`
 
-Defined in: [scene/src/sugar/envelope.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L42)
+Defined in: scene/src/sugar/envelope.ts:42
 
 Pulse constructors.
 

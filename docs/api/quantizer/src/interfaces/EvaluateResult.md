@@ -6,7 +6,7 @@
 
 # Interface: EvaluateResult\<S\>
 
-Defined in: [quantizer/src/evaluate.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L15)
+Defined in: quantizer/src/evaluate.ts:15
 
 Result of quantizing a single numeric value against a boundary.
 
@@ -26,7 +26,7 @@ transition events and route side effects.
 
 > `readonly` **crossed**: `boolean`
 
-Defined in: [quantizer/src/evaluate.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L23)
+Defined in: quantizer/src/evaluate.ts:23
 
 Whether evaluation produced a change from `previousState`.
 
@@ -36,7 +36,7 @@ Whether evaluation produced a change from `previousState`.
 
 > `readonly` **index**: `number`
 
-Defined in: [quantizer/src/evaluate.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L19)
+Defined in: quantizer/src/evaluate.ts:19
 
 Index of `state` within the boundary's states tuple.
 
@@ -46,7 +46,7 @@ Index of `state` within the boundary's states tuple.
 
 > `readonly` **state**: `S`
 
-Defined in: [quantizer/src/evaluate.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L17)
+Defined in: quantizer/src/evaluate.ts:17
 
 The resolved state literal.
 
@@ -56,6 +56,6 @@ The resolved state literal.
 
 > `readonly` **value**: `number`
 
-Defined in: [quantizer/src/evaluate.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L21)
+Defined in: quantizer/src/evaluate.ts:21
 
 The input value that was evaluated.

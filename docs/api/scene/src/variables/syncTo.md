@@ -8,7 +8,7 @@
 
 > `const` **syncTo**: `object`
 
-Defined in: [scene/src/sugar/sync-to.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/sync-to.ts#L19)
+Defined in: scene/src/sugar/sync-to.ts:19
 
 Typed SyncAnchor constructors for the three supported modes.
 

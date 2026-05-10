@@ -8,6 +8,6 @@
 
 > **Config** = [`CompositorConfig`](../../../interfaces/CompositorConfig.md)
 
-Defined in: [core/src/compositor.ts:378](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/compositor.ts#L378)
+Defined in: core/src/compositor.ts:386
 
 Alias for [CompositorConfig](../../../interfaces/CompositorConfig.md).

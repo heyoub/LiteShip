@@ -8,7 +8,7 @@
 
 > `const` **LLMChunkNormalization**: `object`
 
-Defined in: [web/src/stream/llm-chunks.ts:126](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L126)
+Defined in: web/src/stream/llm-chunks.ts:126
 
 Pure normalisation helpers for provider-agnostic LLM chunk streams.
 

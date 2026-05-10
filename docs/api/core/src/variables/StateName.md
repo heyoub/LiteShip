@@ -8,7 +8,7 @@
 
 > **StateName**: \<`S`\>(`value`) => [`StateName`](../type-aliases/StateName.md)\<`S`\>
 
-Defined in: [core/src/brands.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L33)
+Defined in: core/src/brands.ts:33
 
 Wrap a plain string as a StateName — the one sanctioned cast site for this brand.
 

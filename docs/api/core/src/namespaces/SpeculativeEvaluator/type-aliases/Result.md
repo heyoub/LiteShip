@@ -8,7 +8,7 @@
 
 > **Result**\<`B`\> = `SpeculativeResult`\<`B`\>
 
-Defined in: [core/src/speculative.ts:185](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/speculative.ts#L185)
+Defined in: core/src/speculative.ts:185
 
 Prediction result from `evaluate()` — current state, optional prefetched next state, and confidence.
 

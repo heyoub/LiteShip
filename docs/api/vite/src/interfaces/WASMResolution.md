@@ -6,7 +6,7 @@
 
 # Interface: WASMResolution
 
-Defined in: [vite/src/wasm-resolve.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/wasm-resolve.ts#L19)
+Defined in: vite/src/wasm-resolve.ts:19
 
 Successful WASM-resolution result: the absolute binary path plus the
 search step that found it (useful for diagnostics).
@@ -17,7 +17,7 @@ search step that found it (useful for diagnostics).
 
 > `readonly` **filePath**: `string`
 
-Defined in: [vite/src/wasm-resolve.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/wasm-resolve.ts#L21)
+Defined in: vite/src/wasm-resolve.ts:21
 
 Absolute filesystem path to the WASM binary.
 
@@ -27,6 +27,6 @@ Absolute filesystem path to the WASM binary.
 
 > `readonly` **source**: `"config"` \| `"crate"` \| `"public"`
 
-Defined in: [vite/src/wasm-resolve.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/wasm-resolve.ts#L23)
+Defined in: vite/src/wasm-resolve.ts:23
 
 Which search step matched (`'config'`, `'crate'`, or `'public'`).

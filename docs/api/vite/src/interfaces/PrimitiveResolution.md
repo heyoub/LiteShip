@@ -6,7 +6,7 @@
 
 # Interface: PrimitiveResolution\<K\>
 
-Defined in: [vite/src/primitive-resolve.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/primitive-resolve.ts#L41)
+Defined in: vite/src/primitive-resolve.ts:41
 
 A successful primitive resolution: the loaded primitive plus the
 absolute path of the module it came from (surfaced in diagnostics).
@@ -23,7 +23,7 @@ absolute path of the module it came from (surfaced in diagnostics).
 
 > `readonly` **primitive**: [`PrimitiveShape`](../type-aliases/PrimitiveShape.md)\<`K`\>
 
-Defined in: [vite/src/primitive-resolve.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/primitive-resolve.ts#L42)
+Defined in: vite/src/primitive-resolve.ts:42
 
 ***
 
@@ -31,4 +31,4 @@ Defined in: [vite/src/primitive-resolve.ts:42](https://github.com/TheFreeBattery
 
 > `readonly` **source**: `string`
 
-Defined in: [vite/src/primitive-resolve.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/primitive-resolve.ts#L43)
+Defined in: vite/src/primitive-resolve.ts:43

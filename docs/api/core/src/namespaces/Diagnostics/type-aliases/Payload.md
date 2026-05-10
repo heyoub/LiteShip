@@ -8,6 +8,6 @@
 
 > **Payload** = [`DiagnosticPayload`](../../../interfaces/DiagnosticPayload.md)
 
-Defined in: [core/src/diagnostics.ts:179](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/diagnostics.ts#L179)
+Defined in: core/src/diagnostics.ts:179
 
 Alias for [DiagnosticPayload](../../../interfaces/DiagnosticPayload.md).

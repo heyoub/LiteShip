@@ -8,7 +8,7 @@
 
 > **Millis**: (`value`) => `Millis`
 
-Defined in: [core/src/brands.ts:48](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L48)
+Defined in: core/src/brands.ts:48
 
 Wrap a plain number as a Millis — the one sanctioned cast site for this brand.
 

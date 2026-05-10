@@ -8,7 +8,7 @@
 
 > `const` **Receipt**: `object`
 
-Defined in: [core/src/receipt.ts:419](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/receipt.ts#L419)
+Defined in: core/src/receipt.ts:419
 
 Receipt namespace -- chain validation and envelope construction.
 

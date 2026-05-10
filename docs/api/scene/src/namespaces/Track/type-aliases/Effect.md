@@ -8,6 +8,6 @@
 
 > **Effect** = [`EffectTrack`](../../../interfaces/EffectTrack.md)
 
-Defined in: [scene/src/track.ts:120](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L120)
+Defined in: scene/src/track.ts:120
 
 Effect helper return.

@@ -8,6 +8,6 @@
 
 > **Error** = [`JsonRpcErrorResponse`](../../../interfaces/JsonRpcErrorResponse.md)
 
-Defined in: [mcp-server/src/jsonrpc.ts:240](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L240)
+Defined in: mcp-server/src/jsonrpc.ts:240
 
 Wire-shape error response.

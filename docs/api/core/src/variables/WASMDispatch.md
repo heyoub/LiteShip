@@ -8,7 +8,7 @@
 
 > `const` **WASMDispatch**: [`WASMDispatchAPI`](../interfaces/WASMDispatchAPI.md)
 
-Defined in: [core/src/wasm-dispatch.ts:226](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-dispatch.ts#L226)
+Defined in: core/src/wasm-dispatch.ts:226
 
 WASMDispatch — singleton that wires the Rust compute crate (spring, boundary,
 blend kernels) into the runtime, falling back to [fallbackKernels](fallbackKernels.md)

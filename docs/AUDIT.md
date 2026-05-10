@@ -89,7 +89,7 @@ failing the lane by default.
 The audit intentionally classifies a few known patterns instead of treating them as
 repo failures:
 
-- Astro client directives keep default exports because that is how Astro **binds** them
+- Astro client directives keep default exports because that is how Astro binds them
 - `packages/vite/src/virtual-modules.ts` is allowed to expose documented placeholder
   stubs for bundler/type-checker compatibility
 - The GPU directive's current WebGPU/WGSL gap is treated as an explicitly documented

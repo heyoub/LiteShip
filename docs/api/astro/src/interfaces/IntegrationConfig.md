@@ -6,7 +6,7 @@
 
 # Interface: IntegrationConfig
 
-Defined in: [astro/src/integration.ts:35](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L35)
+Defined in: astro/src/integration.ts:35
 
 Options passed to [integration](../functions/integration.md) from `astro.config.mjs`. Every
 field is optional; omitted features fall back to conservative
@@ -19,7 +19,7 @@ islands opt-in).
 
 > `readonly` `optional` **detect?**: `boolean`
 
-Defined in: [astro/src/integration.ts:39](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L39)
+Defined in: astro/src/integration.ts:39
 
 Enable the inline detect script (default `true`).
 
@@ -29,7 +29,7 @@ Enable the inline detect script (default `true`).
 
 > `readonly` `optional` **gpu?**: `object`
 
-Defined in: [astro/src/integration.ts:45](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L45)
+Defined in: astro/src/integration.ts:45
 
 GPU runtime configuration.
 
@@ -47,7 +47,7 @@ GPU runtime configuration.
 
 > `readonly` `optional` **llm?**: `object`
 
-Defined in: [astro/src/integration.ts:51](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L51)
+Defined in: astro/src/integration.ts:51
 
 LLM streaming runtime configuration.
 
@@ -61,7 +61,7 @@ LLM streaming runtime configuration.
 
 > `readonly` `optional` **security?**: `object`
 
-Defined in: [astro/src/integration.ts:53](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L53)
+Defined in: astro/src/integration.ts:53
 
 Security policies applied to runtime fetch/HTML boundaries.
 
@@ -79,7 +79,7 @@ Security policies applied to runtime fetch/HTML boundaries.
 
 > `readonly` `optional` **serverIslands?**: `boolean`
 
-Defined in: [astro/src/integration.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L41)
+Defined in: astro/src/integration.ts:41
 
 Turn on Astro's experimental server-islands flag (default `false`).
 
@@ -89,7 +89,7 @@ Turn on Astro's experimental server-islands flag (default `false`).
 
 > `readonly` `optional` **stream?**: `object`
 
-Defined in: [astro/src/integration.ts:49](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L49)
+Defined in: astro/src/integration.ts:49
 
 SSE streaming runtime configuration.
 
@@ -103,7 +103,7 @@ SSE streaming runtime configuration.
 
 > `readonly` `optional` **vite?**: `PluginConfig`
 
-Defined in: [astro/src/integration.ts:37](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L37)
+Defined in: astro/src/integration.ts:37
 
 Overrides passed through to `@czap/vite`'s plugin.
 
@@ -113,7 +113,7 @@ Overrides passed through to `@czap/vite`'s plugin.
 
 > `readonly` `optional` **wasm?**: `object`
 
-Defined in: [astro/src/integration.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L43)
+Defined in: astro/src/integration.ts:43
 
 WASM runtime configuration.
 
@@ -131,7 +131,7 @@ WASM runtime configuration.
 
 > `readonly` `optional` **workers?**: `object`
 
-Defined in: [astro/src/integration.ts:47](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L47)
+Defined in: astro/src/integration.ts:47
 
 Off-thread worker runtime configuration.
 

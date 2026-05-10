@@ -8,7 +8,7 @@
 
 > **precomputeFrames**(`renderer`): `Promise`\<readonly [`VideoFrameOutput`](#)[]\>
 
-Defined in: [remotion/src/composition.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/remotion/src/composition.ts#L32)
+Defined in: remotion/src/composition.ts:32
 
 Precompute every [VideoFrameOutput](#) from a `VideoRenderer` into
 an in-memory array.

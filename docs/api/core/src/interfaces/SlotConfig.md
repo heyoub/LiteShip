@@ -6,7 +6,7 @@
 
 # Interface: SlotConfig
 
-Defined in: [core/src/component.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/component.ts#L16)
+Defined in: core/src/component.ts:16
 
 Per-slot configuration on a component — whether the slot must be provided, plus optional description.
 
@@ -16,7 +16,7 @@ Per-slot configuration on a component — whether the slot must be provided, plu
 
 > `readonly` `optional` **description?**: `string`
 
-Defined in: [core/src/component.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/component.ts#L18)
+Defined in: core/src/component.ts:18
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [core/src/component.ts:18](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **required**: `boolean`
 
-Defined in: [core/src/component.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/component.ts#L17)
+Defined in: core/src/component.ts:17

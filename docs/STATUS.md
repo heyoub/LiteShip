@@ -6,7 +6,7 @@ Coverage stack standardized on Vitest 4.1.2 + Playwright browser mode.
 Current node lane: run `pnpm test` for the fresh pass/fail and file-count truth.
 Current browser lane: shared-runtime suites run against a Chromium + Firefox + WebKit matrix, with capability-specific browser tests remaining Chromium-first where the platform surface is intentionally non-uniform.
 
-Product naming for prose elsewhere: [GLOSSARY.md](./GLOSSARY.md). Tables below stay operational — identifiers like `host-wired` and `pnpm exec czap` are literal gate vocabulary, not marketing rename targets.
+Product naming for prose elsewhere: [GLOSSARY.md](./GLOSSARY.md). Tables below stay operational. Identifiers like `host-wired` and `pnpm exec czap` are literal gate vocabulary, not marketing rename targets.
 
 Current first-class support target:
 
@@ -162,7 +162,7 @@ Startup steering now follows a generic `paired-truth` model:
 - raw bench formatter tone is an operator-experience watch item; the output should stay honest without implying release danger where the verified gate posture is green.
 - partial pasted transcripts are not authoritative; fresh shell output plus verified artifacts are the source of truth.
 - Capsule catalog closure -- any new assembly arm proposal must go through an ADR amendment with first concrete instance in the same PR (ADR-0008). Governance watch, not a bench watch.
-- `ReceiptDAG.nodes` has no pruning, TTL, or max-size guard; per-session DAGs grow until `tracker.reset()` on session close. Bounded by user behavior in normal flows, but worth a future `linearizeFrom`-or-pruning policy if long-lived LLM sessions become common. Not a bench watch — a memory-shape watch.
+- `ReceiptDAG.nodes` has no pruning, TTL, or max-size guard; per-session DAGs grow until `tracker.reset()` on session close. Bounded by user behavior in normal flows, but worth a future `linearizeFrom`-or-pruning policy if long-lived LLM sessions become common. Not a bench watch; a memory-shape watch.
 
 `pnpm run gauntlet:full` is the canonical sequential order:
 

@@ -8,7 +8,7 @@
 
 > `const` **Token**: `TokenFactory` & `object`
 
-Defined in: [core/src/token.ts:128](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/token.ts#L128)
+Defined in: core/src/token.ts:128
 
 Token namespace -- design token primitive for adaptive rendering.
 

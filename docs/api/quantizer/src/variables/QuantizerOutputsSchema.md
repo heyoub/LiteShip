@@ -8,7 +8,7 @@
 
 > `const` **QuantizerOutputsSchema**: `Struct`\<\{ `ai`: `optionalKey`\<`$Record`\<`String`, `Unknown`\>\>; `aria`: `optionalKey`\<`$Record`\<`String`, `Unknown`\>\>; `css`: `optionalKey`\<`$Record`\<`String`, `Unknown`\>\>; `glsl`: `optionalKey`\<`$Record`\<`String`, `Unknown`\>\>; `wgsl`: `optionalKey`\<`$Record`\<`String`, `Unknown`\>\>; \}\>
 
-Defined in: [quantizer/src/schemas.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/schemas.ts#L44)
+Defined in: quantizer/src/schemas.ts:44
 
 Runtime schema for [QuantizerOutputs](../interfaces/QuantizerOutputs.md).
 

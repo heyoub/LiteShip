@@ -8,7 +8,7 @@
 
 > `const` **Boundary**: `BoundaryFactory` & `object`
 
-Defined in: [core/src/boundary.ts:235](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L235)
+Defined in: core/src/boundary.ts:235
 
 Boundary — core primitive of constraint-based adaptive rendering.
 

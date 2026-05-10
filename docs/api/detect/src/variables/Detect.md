@@ -8,7 +8,7 @@
 
 > `const` **Detect**: `object`
 
-Defined in: [detect/src/detect.ts:589](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/detect.ts#L589)
+Defined in: detect/src/detect.ts:589
 
 Device capability detection namespace.
 

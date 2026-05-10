@@ -8,7 +8,7 @@
 
 > `const` **EdgeTier**: `object`
 
-Defined in: [edge/src/edge-tier.ts:83](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/edge-tier.ts#L83)
+Defined in: edge/src/edge-tier.ts:83
 
 Edge tier detection namespace.
 

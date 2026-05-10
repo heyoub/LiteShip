@@ -8,7 +8,7 @@
 
 > **OutputsFor**\<`B`, `T`\> = `{ readonly [S in StateUnion<B>]: T }`
 
-Defined in: [core/src/type-utils.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L24)
+Defined in: core/src/type-utils.ts:24
 
 Generate valid output shapes per state
 

@@ -8,7 +8,7 @@
 
 > **HtmlPolicy** = `"text"` \| `"sanitized-html"` \| `"trusted-html"`
 
-Defined in: [web/src/types.ts:168](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L168)
+Defined in: web/src/types.ts:168
 
 Trust level a slot applies to string content injected into it.
 

@@ -1,10 +1,8 @@
 # Contributing to LiteShip
 
-Thanks for considering a contribution. LiteShip is pre-1.0 and intentionally
-greenfield — we'd rather break things now than later — so most of the
-guidance here is about keeping the gauntlet honest, not gatekeeping.
+Thanks for considering a contribution. LiteShip is pre-1.0 and intentionally greenfield (we'd rather break things now than later), so most of the guidance here is about keeping the gauntlet honest, not gatekeeping.
 
-Ontology for prose and docs: [docs/GLOSSARY.md](./docs/GLOSSARY.md). The git remote and directory name may still read `czap`; **`@czap/*`** on npm is the package line.
+Ontology for prose and docs: [docs/GLOSSARY.md](./docs/GLOSSARY.md). The git remote and directory name may still read `czap`; `@czap/*` on npm is the package line.
 
 ## Quick start (development)
 
@@ -28,9 +26,9 @@ Required versions: Node.js 22+, pnpm 10+. The repo runs on Windows + Linux,
 PowerShell + bash. WebKit/Firefox/Chromium tests run on the system Playwright
 install (`pnpm exec playwright install` if needed).
 
-## The gauntlet — your release gate
+## The gauntlet, your release gate
 
-`pnpm run gauntlet:full` is the contract — the full shake-down cruise. It runs ~30 phases:
+`pnpm run gauntlet:full` is the contract: the full shake-down cruise. It runs ~30 phases:
 
 - build, capsule:compile, typecheck, lint, docs:check, invariants
 - the full vitest test surface (unit + component + property + integration)
@@ -46,14 +44,12 @@ install (`pnpm exec playwright install` if needed).
 - `flex:verify` 10/10 acceptance across 7 rating dimensions
 
 **Bench trend gate (`bench:trend`):** it reads `benchmarks/history.jsonl` (one
-JSON line per `bench:gate` run) and only enforces drift once there are **three**
+JSON line per `bench:gate` run) and only enforces drift once there are three
 distinct historical fingerprints. Until then it prints a skip message and
-exits zero — run the gauntlet (or `bench:gate`) a few times on `main` to warm
-the file, or expect `bench:trend` to stay in “skipping” mode on fresh clones.
+exits zero. Run the gauntlet (or `bench:gate`) a few times on `main` to warm
+the file, or expect `bench:trend` to stay in "skipping" mode on fresh clones.
 
-The gauntlet exits cleanly with `flex:verify PASSED — project is 10/10 by
-every rating dimension` or it fails closed. Not a stylistic gate; a
-correctness gate. PRs need to be green here before merge.
+The gauntlet exits cleanly with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails closed. Not a stylistic gate; a correctness gate. PRs need to be green here before merge.
 
 For Windows users: PowerShell's `>` redirect writes UTF-16 LE; use
 `Out-File -Encoding utf8` or run `chcp 65001` first to keep gauntlet logs
@@ -76,7 +72,7 @@ readable.
 
 - TypeScript strict mode, ESM only (`.js` extensions in import specifiers
   per Node ESM rules)
-- No default exports — named exports only
+- No default exports; named exports only
 - Branded types via Effect's Brand module (`Brand.Branded<T, 'Tag'>`)
 - Namespace-object pattern for module facades:
 
@@ -98,15 +94,12 @@ readable.
 
 ## Testing lanes
 
-- `pnpm test` — full node/jsdom surface (~75s)
-- `pnpm run test:e2e` — Playwright e2e (~6s)
-- `pnpm run test:flake` — repeated runs of runtime-sensitive tests to
-  catch flakes
-- `pnpm run test:redteam` — security regressions
-- `pnpm run bench` — full benchmark sweep with directive-overhead pairs
-  and rolling-median trend gate
-- `pnpm run coverage:merge` — node + browser coverage merge with
-  statementMap-divergence dedup
+- `pnpm test`: full node/jsdom surface (~75s)
+- `pnpm run test:e2e`: Playwright e2e (~6s)
+- `pnpm run test:flake`: repeated runs of runtime-sensitive tests to catch flakes
+- `pnpm run test:redteam`: security regressions
+- `pnpm run bench`: full benchmark sweep with directive-overhead pairs and rolling-median trend gate
+- `pnpm run coverage:merge`: node + browser coverage merge with statementMap-divergence dedup
 
 The gauntlet runs all of these in sequence. Most PRs only need the fast
 loop (`pnpm test`) until they touch something the larger lanes cover.
@@ -127,12 +120,9 @@ in `flex:verify` checks the canonical ADR set is present.
 
 ## Issues vs feature requests
 
-- **Bug** — open a GitHub issue with: gauntlet phase, command, exit code,
-  log tail (the relevant ~50 lines, not the whole 22-min log)
-- **Feature** — open a discussion or issue with: what you're trying to do,
-  what LiteShip doesn't currently let you do, what shape an answer might have
-- **Security** — read [SECURITY.md](./SECURITY.md) and follow the private
-  reporting path
+- **Bug**: open a GitHub issue with the gauntlet phase, command, exit code, and log tail (the relevant ~50 lines, not the whole 22-min log).
+- **Feature**: open a discussion or issue with what you're trying to do, what LiteShip doesn't currently let you do, and what shape an answer might have.
+- **Security**: read [SECURITY.md](./SECURITY.md) and follow the private reporting path.
 
 ## Code of Conduct
 

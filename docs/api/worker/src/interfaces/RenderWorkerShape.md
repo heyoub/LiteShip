@@ -6,7 +6,7 @@
 
 # Interface: RenderWorkerShape
 
-Defined in: [worker/src/render-worker.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L30)
+Defined in: worker/src/render-worker.ts:30
 
 Host-facing surface of a render worker. Owns the underlying `Worker`
 and `OffscreenCanvas` once transferred; created by
@@ -18,7 +18,7 @@ and `OffscreenCanvas` once transferred; created by
 
 > `readonly` **worker**: `Worker`
 
-Defined in: [worker/src/render-worker.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L32)
+Defined in: worker/src/render-worker.ts:32
 
 The underlying Worker instance.
 
@@ -28,7 +28,7 @@ The underlying Worker instance.
 
 > **dispose**(): `void`
 
-Defined in: [worker/src/render-worker.ts:53](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L53)
+Defined in: worker/src/render-worker.ts:53
 
 Terminate the worker and clean up resources.
 
@@ -42,7 +42,7 @@ Terminate the worker and clean up resources.
 
 > **onComplete**(`callback`): () => `void`
 
-Defined in: [worker/src/render-worker.ts:50](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L50)
+Defined in: worker/src/render-worker.ts:50
 
 Subscribe to render completion. Returns an unsubscribe function.
 
@@ -62,7 +62,7 @@ Subscribe to render completion. Returns an unsubscribe function.
 
 > **onFrame**(`callback`): () => `void`
 
-Defined in: [worker/src/render-worker.ts:47](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L47)
+Defined in: worker/src/render-worker.ts:47
 
 Subscribe to per-frame output. Returns an unsubscribe function.
 
@@ -82,7 +82,7 @@ Subscribe to per-frame output. Returns an unsubscribe function.
 
 > **startRender**(`config`): `void`
 
-Defined in: [worker/src/render-worker.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L41)
+Defined in: worker/src/render-worker.ts:41
 
 Start rendering frames with the given video configuration.
 
@@ -102,7 +102,7 @@ Start rendering frames with the given video configuration.
 
 > **stopRender**(): `void`
 
-Defined in: [worker/src/render-worker.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L44)
+Defined in: worker/src/render-worker.ts:44
 
 Stop an in-progress render.
 
@@ -116,7 +116,7 @@ Stop an in-progress render.
 
 > **transferCanvas**(`canvas`): `void`
 
-Defined in: [worker/src/render-worker.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L38)
+Defined in: worker/src/render-worker.ts:38
 
 Transfer an OffscreenCanvas to the worker.
 The canvas must have been obtained via `canvas.transferControlToOffscreen()`.

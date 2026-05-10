@@ -8,7 +8,7 @@
 
 > `const` **ThemeCSSCompiler**: `object`
 
-Defined in: [compiler/src/theme-css.ts:99](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/theme-css.ts#L99)
+Defined in: compiler/src/theme-css.ts:99
 
 Theme CSS compiler namespace.
 

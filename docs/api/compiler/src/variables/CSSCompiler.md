@@ -8,7 +8,7 @@
 
 > `const` **CSSCompiler**: `object`
 
-Defined in: [compiler/src/css.ts:307](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/css.ts#L307)
+Defined in: compiler/src/css.ts:307
 
 CSS compiler namespace.
 

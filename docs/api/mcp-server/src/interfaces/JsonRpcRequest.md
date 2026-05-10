@@ -6,7 +6,7 @@
 
 # Interface: JsonRpcRequest
 
-Defined in: [mcp-server/src/jsonrpc.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L33)
+Defined in: mcp-server/src/jsonrpc.ts:33
 
 A JSON-RPC 2.0 request (has `id`).
 
@@ -16,7 +16,7 @@ A JSON-RPC 2.0 request (has `id`).
 
 > `readonly` **id**: [`JsonRpcId`](../type-aliases/JsonRpcId.md)
 
-Defined in: [mcp-server/src/jsonrpc.ts:35](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L35)
+Defined in: mcp-server/src/jsonrpc.ts:35
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [mcp-server/src/jsonrpc.ts:35](https://github.com/TheFreeBatteryFact
 
 > `readonly` **jsonrpc**: `"2.0"`
 
-Defined in: [mcp-server/src/jsonrpc.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L34)
+Defined in: mcp-server/src/jsonrpc.ts:34
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [mcp-server/src/jsonrpc.ts:34](https://github.com/TheFreeBatteryFact
 
 > `readonly` **method**: `string`
 
-Defined in: [mcp-server/src/jsonrpc.ts:36](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L36)
+Defined in: mcp-server/src/jsonrpc.ts:36
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [mcp-server/src/jsonrpc.ts:36](https://github.com/TheFreeBatteryFact
 
 > `readonly` `optional` **params?**: `Record`\<`string`, `unknown`\> \| readonly `unknown`[]
 
-Defined in: [mcp-server/src/jsonrpc.ts:37](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L37)
+Defined in: mcp-server/src/jsonrpc.ts:37

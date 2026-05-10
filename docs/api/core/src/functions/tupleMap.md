@@ -8,7 +8,7 @@
 
 > **tupleMap**\<`T`, `U`\>(`tuple`, `fn`): \{ readonly \[K in string \| number \| symbol\]: U \}
 
-Defined in: [core/src/tuple.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/tuple.ts#L15)
+Defined in: core/src/tuple.ts:15
 
 Map each element of a readonly tuple, preserving tuple arity and ordering.
 

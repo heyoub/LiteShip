@@ -6,7 +6,7 @@
 
 # Class: CzapValidationError
 
-Defined in: [core/src/validation-error.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/validation-error.ts#L18)
+Defined in: core/src/validation-error.ts:18
 
 Structured validation error thrown by czap factory/constructor functions.
 
@@ -24,7 +24,7 @@ Carries a `module` identifier (e.g. `'Boundary.make'`) and a human-readable
 
 > **new CzapValidationError**(`module`, `detail`): `CzapValidationError`
 
-Defined in: [core/src/validation-error.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/validation-error.ts#L23)
+Defined in: core/src/validation-error.ts:23
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [core/src/validation-error.ts:23](https://github.com/TheFreeBatteryF
 
 > `readonly` **\_tag**: `"CzapValidationError"`
 
-Defined in: [core/src/validation-error.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/validation-error.ts#L19)
+Defined in: core/src/validation-error.ts:19
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [core/src/validation-error.ts:19](https://github.com/TheFreeBatteryF
 
 > `readonly` **detail**: `string`
 
-Defined in: [core/src/validation-error.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/validation-error.ts#L21)
+Defined in: core/src/validation-error.ts:21
 
 ***
 
@@ -66,4 +66,4 @@ Defined in: [core/src/validation-error.ts:21](https://github.com/TheFreeBatteryF
 
 > `readonly` **module**: `string`
 
-Defined in: [core/src/validation-error.ts:20](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/validation-error.ts#L20)
+Defined in: core/src/validation-error.ts:20

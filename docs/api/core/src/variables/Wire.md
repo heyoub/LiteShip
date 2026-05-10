@@ -8,7 +8,7 @@
 
 > `const` **Wire**: `object`
 
-Defined in: [core/src/wire.ts:260](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wire.ts#L260)
+Defined in: core/src/wire.ts:260
 
 Wire -- fluent stream wrapper with chainable operators for map, filter,
 scan, debounce, throttle, merge, and more. Wraps Effect Streams.

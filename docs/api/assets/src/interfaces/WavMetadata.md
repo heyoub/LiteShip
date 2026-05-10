@@ -6,7 +6,7 @@
 
 # Interface: WavMetadata
 
-Defined in: [assets/src/analysis/wav-metadata.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L25)
+Defined in: assets/src/analysis/wav-metadata.ts:25
 
 Tag fields read from a WAV file's LIST/INFO chunks.
 
@@ -16,7 +16,7 @@ Tag fields read from a WAV file's LIST/INFO chunks.
 
 > `readonly` `optional` **artist?**: `string`
 
-Defined in: [assets/src/analysis/wav-metadata.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L27)
+Defined in: assets/src/analysis/wav-metadata.ts:27
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [assets/src/analysis/wav-metadata.ts:27](https://github.com/TheFreeB
 
 > `readonly` `optional` **bpm?**: `number`
 
-Defined in: [assets/src/analysis/wav-metadata.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L28)
+Defined in: assets/src/analysis/wav-metadata.ts:28
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [assets/src/analysis/wav-metadata.ts:28](https://github.com/TheFreeB
 
 > `readonly` `optional` **title?**: `string`
 
-Defined in: [assets/src/analysis/wav-metadata.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L26)
+Defined in: assets/src/analysis/wav-metadata.ts:26

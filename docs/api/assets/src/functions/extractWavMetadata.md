@@ -8,7 +8,7 @@
 
 > **extractWavMetadata**(`bytes`): [`WavMetadata`](../interfaces/WavMetadata.md)
 
-Defined in: [assets/src/analysis/wav-metadata.ts:36](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L36)
+Defined in: assets/src/analysis/wav-metadata.ts:36
 
 Walk LIST/INFO sub-chunks and project them onto the canonical
 WavMetadata shape. Unknown tags are ignored. Returns an empty object

@@ -8,6 +8,6 @@
 
 > **ToWorker** = [`ToWorkerMessage`](../../../type-aliases/ToWorkerMessage.md)
 
-Defined in: [worker/src/messages.ts:330](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/messages.ts#L330)
+Defined in: worker/src/messages.ts:330
 
 Every message the main thread may send to a worker.

@@ -6,7 +6,7 @@
 
 # Interface: CzapMiddlewareConfig
 
-Defined in: [astro/src/middleware.ts:48](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/middleware.ts#L48)
+Defined in: astro/src/middleware.ts:48
 
 Options accepted by [czapMiddleware](../functions/czapMiddleware.md).
 
@@ -19,7 +19,7 @@ have an `@czap/edge` host adapter (KV cache, theme compilation).
 
 > `readonly` `optional` **detect?**: `boolean`
 
-Defined in: [astro/src/middleware.ts:52](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/middleware.ts#L52)
+Defined in: astro/src/middleware.ts:52
 
 Whether to include the Client Hints request headers (default `true`).
 
@@ -29,7 +29,7 @@ Whether to include the Client Hints request headers (default `true`).
 
 > `readonly` `optional` **edge?**: `EdgeHostAdapterConfig`
 
-Defined in: [astro/src/middleware.ts:50](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/middleware.ts#L50)
+Defined in: astro/src/middleware.ts:50
 
 Edge host adapter configuration (KV cache, theme compilation).
 
@@ -39,7 +39,7 @@ Edge host adapter configuration (KV cache, theme compilation).
 
 > `readonly` `optional` **workers?**: `object`
 
-Defined in: [astro/src/middleware.ts:54](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/middleware.ts#L54)
+Defined in: astro/src/middleware.ts:54
 
 Whether to emit COOP/COEP headers for worker features.
 

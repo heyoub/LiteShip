@@ -8,7 +8,7 @@
 
 > `const` **AnimatedQuantizer**: `object`
 
-Defined in: [quantizer/src/animated-quantizer.ts:264](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/animated-quantizer.ts#L264)
+Defined in: quantizer/src/animated-quantizer.ts:264
 
 Animated quantizer namespace.
 

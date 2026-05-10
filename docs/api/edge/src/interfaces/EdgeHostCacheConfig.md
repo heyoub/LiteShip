@@ -6,7 +6,7 @@
 
 # Interface: EdgeHostCacheConfig
 
-Defined in: [edge/src/host-adapter.ts:55](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L55)
+Defined in: edge/src/host-adapter.ts:55
 
 Cache configuration for the edge host adapter.
 
@@ -21,7 +21,7 @@ written back to KV with the configured `ttl`.
 
 > `readonly` **boundaryId**: `ContentAddress`
 
-Defined in: [edge/src/host-adapter.ts:59](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L59)
+Defined in: edge/src/host-adapter.ts:59
 
 Content address of the boundary being compiled.
 
@@ -31,7 +31,7 @@ Content address of the boundary being compiled.
 
 > `readonly` **compile**: (`context`) => [`CompiledOutputs`](CompiledOutputs.md) \| `Promise`\<[`CompiledOutputs`](CompiledOutputs.md)\>
 
-Defined in: [edge/src/host-adapter.ts:61](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L61)
+Defined in: edge/src/host-adapter.ts:61
 
 Compile function invoked on cache miss.
 
@@ -51,7 +51,7 @@ Compile function invoked on cache miss.
 
 > `readonly` **kv**: [`KVNamespace`](KVNamespace.md)
 
-Defined in: [edge/src/host-adapter.ts:57](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L57)
+Defined in: edge/src/host-adapter.ts:57
 
 KV namespace backing the boundary cache.
 
@@ -61,7 +61,7 @@ KV namespace backing the boundary cache.
 
 > `readonly` `optional` **prefix?**: `string`
 
-Defined in: [edge/src/host-adapter.ts:65](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L65)
+Defined in: edge/src/host-adapter.ts:65
 
 Optional KV key prefix.
 
@@ -71,6 +71,6 @@ Optional KV key prefix.
 
 > `readonly` `optional` **ttl?**: `number`
 
-Defined in: [edge/src/host-adapter.ts:63](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L63)
+Defined in: edge/src/host-adapter.ts:63
 
 Cache entry TTL in seconds.

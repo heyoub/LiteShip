@@ -6,7 +6,7 @@
 
 # Interface: QuantizerFromOptions
 
-Defined in: [quantizer/src/quantizer.ts:138](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L138)
+Defined in: quantizer/src/quantizer.ts:138
 
 Options accepted by [Q.from](../variables/Q.md#from).
 
@@ -19,7 +19,7 @@ Options accepted by [Q.from](../variables/Q.md#from).
 
 > `readonly` `optional` **spring?**: [`SpringConfig`](SpringConfig.md)
 
-Defined in: [quantizer/src/quantizer.ts:142](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L142)
+Defined in: quantizer/src/quantizer.ts:142
 
 Spring config that drives CSS easing generation for CSS outputs.
 
@@ -29,6 +29,6 @@ Spring config that drives CSS easing generation for CSS outputs.
 
 > `readonly` `optional` **tier?**: [`MotionTier`](../type-aliases/MotionTier.md)
 
-Defined in: [quantizer/src/quantizer.ts:140](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L140)
+Defined in: quantizer/src/quantizer.ts:140
 
 MotionTier for output gating; omit to allow all targets.

@@ -6,7 +6,7 @@
 
 # Interface: LLMChunk
 
-Defined in: [web/src/stream/llm-chunks.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L23)
+Defined in: web/src/stream/llm-chunks.ts:23
 
 One normalised chunk delivered by [LLMAdapter](../namespaces/LLMAdapter/README.md). `partial` flags
 streaming deltas that will be superseded by a later, finalised chunk.
@@ -17,7 +17,7 @@ streaming deltas that will be superseded by a later, finalised chunk.
 
 > `readonly` `optional` **content?**: `string`
 
-Defined in: [web/src/stream/llm-chunks.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L29)
+Defined in: web/src/stream/llm-chunks.ts:29
 
 Text content (for `text` and tool-call deltas).
 
@@ -27,7 +27,7 @@ Text content (for `text` and tool-call deltas).
 
 > `readonly` **partial**: `boolean`
 
-Defined in: [web/src/stream/llm-chunks.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L27)
+Defined in: web/src/stream/llm-chunks.ts:27
 
 Whether this chunk is incremental (more is coming).
 
@@ -37,7 +37,7 @@ Whether this chunk is incremental (more is coming).
 
 > `readonly` `optional` **toolArgs?**: `unknown`
 
-Defined in: [web/src/stream/llm-chunks.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L33)
+Defined in: web/src/stream/llm-chunks.ts:33
 
 Parsed tool arguments (populated on `tool-call-end`).
 
@@ -47,7 +47,7 @@ Parsed tool arguments (populated on `tool-call-end`).
 
 > `readonly` `optional` **toolName?**: `string`
 
-Defined in: [web/src/stream/llm-chunks.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L31)
+Defined in: web/src/stream/llm-chunks.ts:31
 
 Tool name for tool-call chunks.
 
@@ -57,6 +57,6 @@ Tool name for tool-call chunks.
 
 > `readonly` **type**: [`LLMChunkType`](../type-aliases/LLMChunkType.md)
 
-Defined in: [web/src/stream/llm-chunks.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-chunks.ts#L25)
+Defined in: web/src/stream/llm-chunks.ts:25
 
 Kind of chunk.

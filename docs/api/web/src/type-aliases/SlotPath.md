@@ -8,7 +8,7 @@
 
 > **SlotPath** = (`value`) => `SlotPath`
 
-Defined in: [web/src/types.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L21)
+Defined in: web/src/types.ts:21
 
 Brand an already-validated slot path string.
 

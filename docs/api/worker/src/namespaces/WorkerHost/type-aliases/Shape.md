@@ -8,6 +8,6 @@
 
 > **Shape** = [`WorkerHostShape`](../../../interfaces/WorkerHostShape.md)
 
-Defined in: [worker/src/host.ts:186](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/host.ts#L186)
+Defined in: worker/src/host.ts:186
 
 Public host surface returned by [WorkerHost.create](../../../variables/WorkerHost.md#create).

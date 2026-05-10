@@ -8,7 +8,7 @@
 
 > **defineAsset**\<`K`\>(`decl`): `AnyAssetCapsule`
 
-Defined in: [assets/src/contract.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/contract.ts#L33)
+Defined in: assets/src/contract.ts:33
 
 Declare an asset as a cachedProjection capsule + register in the module-level asset registry.
 

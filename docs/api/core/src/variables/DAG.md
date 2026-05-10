@@ -8,7 +8,7 @@
 
 > `const` **DAG**: `object`
 
-Defined in: [core/src/dag.ts:500](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L500)
+Defined in: core/src/dag.ts:500
 
 DAG namespace -- receipt DAG merge and canonical linearization.
 

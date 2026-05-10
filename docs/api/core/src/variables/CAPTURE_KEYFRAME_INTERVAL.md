@@ -8,6 +8,6 @@
 
 > `const` **CAPTURE\_KEYFRAME\_INTERVAL**: `30` = `30`
 
-Defined in: [core/src/defaults.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/defaults.ts#L38)
+Defined in: core/src/defaults.ts:38
 
 Default keyframe interval in frames for video encoding. Used by: web/capture/webcodecs.ts

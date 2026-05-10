@@ -8,7 +8,7 @@
 
 > `const` **Cap**: `object`
 
-Defined in: [core/src/caps.ts:74](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/caps.ts#L74)
+Defined in: core/src/caps.ts:74
 
 Cap — algebra over [CapSet](../interfaces/CapSet.md).
 Pure, immutable helpers for building, combining, and comparing capability

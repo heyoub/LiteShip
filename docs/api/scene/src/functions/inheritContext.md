@@ -8,7 +8,7 @@
 
 > **inheritContext**(`parent`, `overrides?`): [`SceneContext`](../interfaces/SceneContext.md)
 
-Defined in: [scene/src/context.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/context.ts#L26)
+Defined in: scene/src/context.ts:26
 
 Build a child [SceneContext](../interfaces/SceneContext.md) by merging explicit overrides
 over inherited parent fields. Missing override fields fall through

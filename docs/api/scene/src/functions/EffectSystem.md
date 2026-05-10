@@ -8,7 +8,7 @@
 
 > **EffectSystem**(`frameIndex`): `SystemShape`
 
-Defined in: [scene/src/systems/effect.ts:14](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/systems/effect.ts#L14)
+Defined in: scene/src/systems/effect.ts:14
 
 Build an EffectSystem keyed to a frame index.
 

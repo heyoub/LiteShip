@@ -8,6 +8,6 @@
 
 > **Shape** = `CompositorShape`
 
-Defined in: [core/src/compositor.ts:376](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/compositor.ts#L376)
+Defined in: core/src/compositor.ts:384
 
 Structural shape of a live compositor instance.

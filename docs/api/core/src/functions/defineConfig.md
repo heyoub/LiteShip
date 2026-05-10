@@ -8,7 +8,7 @@
 
 > **defineConfig**(`input`): [`Shape`](../namespaces/Config/interfaces/Shape.md)
 
-Defined in: [core/src/config.ts:155](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L155)
+Defined in: core/src/config.ts:155
 
 Thin alias for [Config.make](../variables/Config.md#make) — matches the `defineConfig(...)` ergonomics other tools use.
 

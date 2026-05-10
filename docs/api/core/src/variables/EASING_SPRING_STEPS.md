@@ -8,6 +8,6 @@
 
 > `const` **EASING\_SPRING\_STEPS**: `2000` = `2000`
 
-Defined in: [core/src/defaults.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/defaults.ts#L41)
+Defined in: core/src/defaults.ts:41
 
 Number of sub-steps for spring animation resolution. Used by: easing.ts

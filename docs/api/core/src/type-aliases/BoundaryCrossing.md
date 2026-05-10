@@ -8,7 +8,7 @@
 
 > **BoundaryCrossing**\<`S`\> = `object`
 
-Defined in: [core/src/type-utils.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L29)
+Defined in: core/src/type-utils.ts:29
 
 Discriminated union of boundary crossings
 
@@ -24,7 +24,7 @@ Discriminated union of boundary crossings
 
 > `readonly` **from**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: [core/src/type-utils.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L30)
+Defined in: core/src/type-utils.ts:30
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/src/type-utils.ts:30](https://github.com/TheFreeBatteryFactory
 
 > `readonly` **timestamp**: [`HLCBrand`](../interfaces/HLCBrand.md)
 
-Defined in: [core/src/type-utils.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L32)
+Defined in: core/src/type-utils.ts:32
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/src/type-utils.ts:32](https://github.com/TheFreeBatteryFactory
 
 > `readonly` **to**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: [core/src/type-utils.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L31)
+Defined in: core/src/type-utils.ts:31
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [core/src/type-utils.ts:31](https://github.com/TheFreeBatteryFactory
 
 > `readonly` **value**: `number`
 
-Defined in: [core/src/type-utils.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L33)
+Defined in: core/src/type-utils.ts:33

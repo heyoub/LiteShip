@@ -6,7 +6,7 @@
 
 # Interface: FocusState
 
-Defined in: [web/src/types.ts:65](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L65)
+Defined in: web/src/types.ts:65
 
 Focus state with cursor and selection details for input elements.
 
@@ -16,7 +16,7 @@ Focus state with cursor and selection details for input elements.
 
 > `readonly` **cursorPosition**: `number`
 
-Defined in: [web/src/types.ts:67](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L67)
+Defined in: web/src/types.ts:67
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [web/src/types.ts:67](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **elementId**: `string`
 
-Defined in: [web/src/types.ts:66](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L66)
+Defined in: web/src/types.ts:66
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [web/src/types.ts:66](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **selectionDirection**: `string`
 
-Defined in: [web/src/types.ts:70](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L70)
+Defined in: web/src/types.ts:70
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [web/src/types.ts:70](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **selectionEnd**: `number`
 
-Defined in: [web/src/types.ts:69](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L69)
+Defined in: web/src/types.ts:69
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [web/src/types.ts:69](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **selectionStart**: `number`
 
-Defined in: [web/src/types.ts:68](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L68)
+Defined in: web/src/types.ts:68

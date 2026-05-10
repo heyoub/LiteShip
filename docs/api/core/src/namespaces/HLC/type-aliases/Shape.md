@@ -8,6 +8,6 @@
 
 > **Shape** = `HLCShape`
 
-Defined in: [core/src/hlc.ts:237](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/hlc.ts#L237)
+Defined in: core/src/hlc.ts:237
 
 Structural shape of a hybrid logical clock timestamp: `{ wall_ms, counter, node_id }`.

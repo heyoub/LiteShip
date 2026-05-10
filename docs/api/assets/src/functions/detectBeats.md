@@ -8,7 +8,7 @@
 
 > **detectBeats**(`audio`): [`BeatMarkerSet`](../interfaces/BeatMarkerSet.md)
 
-Defined in: [assets/src/analysis/beat-markers.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/beat-markers.ts#L22)
+Defined in: assets/src/analysis/beat-markers.ts:22
 
 Detect downbeats on a decoded audio buffer.
 

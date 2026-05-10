@@ -8,7 +8,7 @@
 
 > **dispatch**(`def`): [`CompileResult`](../type-aliases/CompileResult.md)
 
-Defined in: [compiler/src/dispatch.ts:137](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/dispatch.ts#L137)
+Defined in: compiler/src/dispatch.ts:137
 
 Dispatch a [CompilerDef](../type-aliases/CompilerDef.md) to the matching compiler and return a
 tagged [CompileResult](../type-aliases/CompileResult.md).

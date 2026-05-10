@@ -8,7 +8,7 @@
 
 > `const` **HLC**: `object`
 
-Defined in: [core/src/hlc.ts:223](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/hlc.ts#L223)
+Defined in: core/src/hlc.ts:223
 
 HLC namespace -- Hybrid Logical Clock.
 

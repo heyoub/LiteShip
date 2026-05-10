@@ -8,7 +8,7 @@
 
 > `const` **Compositor**: `CompositorFactory`
 
-Defined in: [core/src/compositor.ts:118](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/compositor.ts#L118)
+Defined in: core/src/compositor.ts:118
 
 Compositor — the live merge point for every attached [Quantizer](../interfaces/Quantizer.md).
 

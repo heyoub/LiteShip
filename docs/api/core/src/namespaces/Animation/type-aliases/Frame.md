@@ -8,6 +8,6 @@
 
 > **Frame** = `AnimationFrameShape`
 
-Defined in: [core/src/animation.ts:102](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/animation.ts#L102)
+Defined in: core/src/animation.ts:102
 
 Structural shape of a single frame emitted by [Animation.run](../../../variables/Animation.md#run).

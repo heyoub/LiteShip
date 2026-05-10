@@ -6,7 +6,7 @@
 
 # Interface: CorePluginConfig
 
-Defined in: [core/src/config.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L26)
+Defined in: core/src/config.ts:26
 
 Vite-plugin slice of a czap [Config.Shape](../namespaces/Config/interfaces/Shape.md): source directories per
 primitive kind, HMR opt-in, environment targeting, and optional WASM hints.
@@ -17,7 +17,7 @@ primitive kind, HMR opt-in, environment targeting, and optional WASM hints.
 
 > `readonly` `optional` **dirs?**: `Partial`\<`Record`\<[`PrimitiveKind`](../type-aliases/PrimitiveKind.md), `string`\>\>
 
-Defined in: [core/src/config.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L27)
+Defined in: core/src/config.ts:27
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [core/src/config.ts:27](https://github.com/TheFreeBatteryFactory/cza
 
 > `readonly` `optional` **environments?**: readonly (`"browser"` \| `"server"` \| `"shader"`)[]
 
-Defined in: [core/src/config.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L29)
+Defined in: core/src/config.ts:29
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [core/src/config.ts:29](https://github.com/TheFreeBatteryFactory/cza
 
 > `readonly` `optional` **hmr?**: `boolean`
 
-Defined in: [core/src/config.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L28)
+Defined in: core/src/config.ts:28
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [core/src/config.ts:28](https://github.com/TheFreeBatteryFactory/cza
 
 > `readonly` `optional` **wasm?**: `object`
 
-Defined in: [core/src/config.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/config.ts#L30)
+Defined in: core/src/config.ts:30
 
 #### enabled?
 

@@ -8,7 +8,7 @@
 
 > **CompositorWorkerState** = `CompositeState` & `object`
 
-Defined in: [worker/src/compositor-types.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/compositor-types.ts#L24)
+Defined in: worker/src/compositor-types.ts:24
 
 A `CompositeState` snapshot emitted by the compositor worker, optionally
 annotated with per-quantizer generation counters. The generation map

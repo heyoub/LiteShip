@@ -8,7 +8,7 @@
 
 > `const` **fallbackKernels**: [`WASMKernels`](../interfaces/WASMKernels.md)
 
-Defined in: [core/src/wasm-fallback.ts:98](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-fallback.ts#L98)
+Defined in: core/src/wasm-fallback.ts:98
 
 Pure-JS implementation of the [WASMKernels](../interfaces/WASMKernels.md) contract.
 

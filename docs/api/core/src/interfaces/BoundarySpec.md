@@ -6,7 +6,7 @@
 
 # Interface: BoundarySpec
 
-Defined in: [core/src/boundary.ts:314](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L314)
+Defined in: core/src/boundary.ts:314
 
 BoundarySpec: optional filter that gates whether a boundary is active.
 Enables A/B testing, time-bounded experiments, and device targeting
@@ -22,7 +22,7 @@ into the Compositor evaluation loop. Call `BoundarySpec.isActive()` or
 
 > `readonly` `optional` **deviceFilter?**: (`capabilities`) => `boolean`
 
-Defined in: [core/src/boundary.ts:316](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L316)
+Defined in: core/src/boundary.ts:316
 
 Only evaluate this boundary when the device filter returns true.
 
@@ -42,7 +42,7 @@ Only evaluate this boundary when the device filter returns true.
 
 > `readonly` `optional` **experimentId?**: `string`
 
-Defined in: [core/src/boundary.ts:320](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L320)
+Defined in: core/src/boundary.ts:320
 
 Only evaluate this boundary for participants in this experiment.
 
@@ -52,7 +52,7 @@ Only evaluate this boundary for participants in this experiment.
 
 > `readonly` `optional` **timeRange?**: `object`
 
-Defined in: [core/src/boundary.ts:318](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L318)
+Defined in: core/src/boundary.ts:318
 
 Only evaluate this boundary within this time range (epoch ms).
 

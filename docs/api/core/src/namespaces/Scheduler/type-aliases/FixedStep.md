@@ -8,6 +8,6 @@
 
 > **FixedStep** = `FixedStepShape`
 
-Defined in: [core/src/scheduler.ts:158](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/scheduler.ts#L158)
+Defined in: core/src/scheduler.ts:158
 
 Fixed-step scheduler with manual `step()` advancement.

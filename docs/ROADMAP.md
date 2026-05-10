@@ -90,16 +90,16 @@ Spec `2026-04-23-capsule-factory-video-stack-design.md` shipped with 5 atomic ph
 
 ## Product-Adjacent Future Epics
 
-These are real future **LiteShip** / **CZAP** directions, but they are not promises for the current hardening wave.
+These are real future LiteShip / CZAP directions, but they are not promises for the current hardening wave.
 
 ### Component-local data loading
 
 Goal:
-- define a host-safe, boundary-aware data-loading model that does not accidentally turn **LiteShip** into an RPC layer
+- define a host-safe, boundary-aware data-loading model that does not accidentally turn LiteShip into an RPC layer
 
 Entry criteria:
 - current runtime/security/package hardening wave is stable
-- dogfooded apps show repeated loader patterns that belong in **LiteShip** core
+- dogfooded apps show repeated loader patterns that belong in LiteShip core
 
 **Assembly mapping:** cachedProjection capsules keyed on (url, params, auth-scope). Scenes and hosts reference loaders by capsule id; the factory emits decode + cache-invalidation harnesses.
 
@@ -117,7 +117,7 @@ Entry criteria:
 ### Plugin-as-integration sidecar
 
 Goal:
-- make the Vite/Astro integration path feel like a coherent **sidecar** without collapsing package boundaries
+- make the Vite/Astro integration path feel like a coherent sidecar without collapsing package boundaries
 
 Entry criteria:
 - package smoke, CI truth, and support-matrix policy stay stable across dogfooding

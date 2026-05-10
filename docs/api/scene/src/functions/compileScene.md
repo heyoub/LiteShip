@@ -8,7 +8,7 @@
 
 > **compileScene**(`scene`): [`CompiledScene`](../interfaces/CompiledScene.md)
 
-Defined in: [scene/src/compile.ts:69](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/compile.ts#L69)
+Defined in: scene/src/compile.ts:69
 
 Compile a [SceneContract](../interfaces/SceneContract.md) into a pure [CompiledScene](../interfaces/CompiledScene.md)
 descriptor. No world is constructed here — see [SceneRuntime](../namespaces/SceneRuntime/README.md).

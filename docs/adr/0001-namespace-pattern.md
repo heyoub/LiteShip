@@ -16,30 +16,30 @@ export const Boundary = { make: _make, evaluate: _evaluate };
 export declare namespace Boundary { export type Shape = BoundaryDef; }
 ```
 
-Branded types use `Brand.Branded<T, 'Tag'>` — or the unique-symbol equivalent used in `packages/core/src/brands.ts`. Factory functions in `brands.ts`, and a small adjacent set (`ecs.ts` for `EntityId`, `web/types.ts` for `SlotPath`), are the **only** sanctioned brand-construction sites. Consumer code routes through them; inline casts to branded types are lint errors.
+Branded types use `Brand.Branded<T, 'Tag'>` (or the unique-symbol equivalent used in `packages/core/src/brands.ts`). Factory functions in `brands.ts`, and a small adjacent set (`ecs.ts` for `EntityId`, `web/types.ts` for `SlotPath`), are the only sanctioned brand-construction sites. Consumer code routes through them; inline casts to branded types are lint errors.
 
 ## Consequences
 
-- **Weight-trimmed.** A `const` object on a named export, not a class — unused rigging drops at bundling time.
+- **Weight-trimmed.** A `const` object on a named export, not a class. Unused rigging drops at bundling time.
 - **Stable across the deck.** Every call site reads `X.make(...)`, `X.evaluate(...)`, uniform `X.Shape` type access.
 - **No ceremony.** No `new` invocation, no instance-per-value overhead.
 - Branded types enforce nominal identity at zero runtime cost.
-- Trade-off: `declare namespace X` beside `const X` is unfamiliar to ES-class-oriented reviewers — but once learned, the pattern composes cleanly with ESM tree-shaking in a way classes never do.
+- Trade-off: `declare namespace X` beside `const X` is unfamiliar to ES-class-oriented reviewers. Once learned, the pattern composes cleanly with ESM tree-shaking in a way classes never do.
 
 ## Evidence
 
-40+ core modules follow the pattern — `boundary.ts`, `token.ts`, `style.ts`, `theme.ts`, `compositor.ts`, `plan.ts`, `signal.ts`, `cell.ts`, `derived.ts`, `wire.ts`, `zap.ts`, `timeline.ts`, `gen-frame.ts`, `receipt.ts`, and onwards. The sanctioned-brand-factories list lives in `eslint.config.js`; the ESLint pipeline enforces zero inline brand casts across packages.
+40+ core modules follow the pattern: `boundary.ts`, `token.ts`, `style.ts`, `theme.ts`, `compositor.ts`, `plan.ts`, `signal.ts`, `cell.ts`, `derived.ts`, `wire.ts`, `zap.ts`, `timeline.ts`, `gen-frame.ts`, `receipt.ts`, and onwards. The sanctioned-brand-factories list lives in `eslint.config.js`; the ESLint pipeline enforces zero inline brand casts across packages.
 
 ## Rejected alternatives
 
-- **ES classes** — no tree-shake, `new` ceremony, instance-per-value allocation on a hot path.
-- **Bare function exports** — loses grouping and type co-location; call sites become a salad of free functions.
-- **TypeScript `namespace` blocks** — historical, collides awkwardly with ESM bundlers.
+- **ES classes**: no tree-shake, `new` ceremony, instance-per-value allocation on a hot path.
+- **Bare function exports**: loses grouping and type co-location; call sites become a salad of free functions.
+- **TypeScript `namespace` blocks**: historical, collides awkwardly with ESM bundlers.
 
 ## References
 
-- `packages/core/src/boundary.ts` — canonical example of the pattern
-- `packages/core/src/brands.ts` — branded type factories
-- `packages/core/src/typed-ref.ts` — branded reference wrappers
-- `eslint.config.js` — sanctioned brand-construction files
+- `packages/core/src/boundary.ts`: canonical example of the pattern
+- `packages/core/src/brands.ts`: branded type factories
+- `packages/core/src/typed-ref.ts`: branded reference wrappers
+- `eslint.config.js`: sanctioned brand-construction files
 - `CLAUDE.md` §Architecture Patterns

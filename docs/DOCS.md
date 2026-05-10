@@ -64,7 +64,7 @@ This is the mechanics layer:
 
 Read [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md).
 
-This is the **LiteShip** host layer (Astro + CZAP runtime):
+This is the LiteShip host layer (Astro + CZAP runtime):
 
 - integration
 - middleware
@@ -108,7 +108,7 @@ Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
 
 For a theory-first understanding:
 
-1. [GLOSSARY.md](./GLOSSARY.md) — LiteShip / CZAP / `@czap/*` + prose register (short; read once)
+1. [GLOSSARY.md](./GLOSSARY.md): LiteShip / CZAP / `@czap/*` + prose register (short; read once)
 2. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
 3. [ARCHITECTURE.md](./ARCHITECTURE.md)
 4. [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md) + [ADR-0004 plan/coordinator](./adr/0004-plan-coordinator.md)

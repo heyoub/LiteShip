@@ -6,7 +6,7 @@
 
 # Interface: CapsuleDef\<K, In, Out, R\>
 
-Defined in: [core/src/assembly.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L16)
+Defined in: core/src/assembly.ts:16
 
 A capsule declaration plus its content-addressed id.
 
@@ -38,7 +38,7 @@ A capsule declaration plus its content-addressed id.
 
 > `readonly` **\_kind**: `K`
 
-Defined in: [core/src/capsule.ts:64](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L64)
+Defined in: core/src/capsule.ts:64
 
 #### Inherited from
 
@@ -50,7 +50,7 @@ Defined in: [core/src/capsule.ts:64](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **attribution?**: [`AttributionDecl`](AttributionDecl.md)
 
-Defined in: [core/src/capsule.ts:73](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L73)
+Defined in: core/src/capsule.ts:73
 
 #### Inherited from
 
@@ -62,7 +62,7 @@ Defined in: [core/src/capsule.ts:73](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **budgets**: [`BudgetDecl`](BudgetDecl.md)
 
-Defined in: [core/src/capsule.ts:71](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L71)
+Defined in: core/src/capsule.ts:71
 
 #### Inherited from
 
@@ -74,7 +74,7 @@ Defined in: [core/src/capsule.ts:71](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **capabilities**: [`CapabilityDecl`](CapabilityDecl.md)\<`R`\>
 
-Defined in: [core/src/capsule.ts:69](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L69)
+Defined in: core/src/capsule.ts:69
 
 #### Inherited from
 
@@ -86,7 +86,7 @@ Defined in: [core/src/capsule.ts:69](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **id**: `ContentAddress`
 
-Defined in: [core/src/assembly.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L18)
+Defined in: core/src/assembly.ts:18
 
 #### Overrides
 
@@ -98,7 +98,7 @@ Defined in: [core/src/assembly.ts:18](https://github.com/TheFreeBatteryFactory/c
 
 > `readonly` **input**: `Schema`\<`In`\>
 
-Defined in: [core/src/capsule.ts:67](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L67)
+Defined in: core/src/capsule.ts:67
 
 #### Inherited from
 
@@ -110,7 +110,7 @@ Defined in: [core/src/capsule.ts:67](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **invariants**: readonly [`Invariant`](Invariant.md)\<`In`, `Out`\>[]
 
-Defined in: [core/src/capsule.ts:70](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L70)
+Defined in: core/src/capsule.ts:70
 
 #### Inherited from
 
@@ -122,7 +122,7 @@ Defined in: [core/src/capsule.ts:70](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **name**: `string`
 
-Defined in: [core/src/capsule.ts:66](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L66)
+Defined in: core/src/capsule.ts:66
 
 #### Inherited from
 
@@ -134,7 +134,7 @@ Defined in: [core/src/capsule.ts:66](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **output**: `Schema`\<`Out`\>
 
-Defined in: [core/src/capsule.ts:68](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L68)
+Defined in: core/src/capsule.ts:68
 
 #### Inherited from
 
@@ -146,7 +146,7 @@ Defined in: [core/src/capsule.ts:68](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` `optional` **run?**: (`input`) => `Out`
 
-Defined in: [core/src/capsule.ts:79](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L79)
+Defined in: core/src/capsule.ts:79
 
 Optional pure-transform handler: takes a decoded input and returns a
 decoded output. Used by the harness to drive generated property tests
@@ -172,7 +172,7 @@ end-to-end. Only meaningful for `pureTransform` arms today.
 
 > `readonly` **site**: readonly [`Site`](../type-aliases/Site.md)[]
 
-Defined in: [core/src/capsule.ts:72](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L72)
+Defined in: core/src/capsule.ts:72
 
 #### Inherited from
 

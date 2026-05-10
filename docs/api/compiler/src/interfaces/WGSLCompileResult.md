@@ -6,7 +6,7 @@
 
 # Interface: WGSLCompileResult
 
-Defined in: [compiler/src/wgsl.ts:62](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L62)
+Defined in: compiler/src/wgsl.ts:62
 
 Output of [WGSLCompiler.compile](../variables/WGSLCompiler.md#compile).
 
@@ -19,7 +19,7 @@ constants, the uniform struct, and its binding declaration.
 
 > `readonly` **bindings**: readonly [`WGSLBinding`](WGSLBinding.md)[]
 
-Defined in: [compiler/src/wgsl.ts:66](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L66)
+Defined in: compiler/src/wgsl.ts:66
 
 Uniform buffer bindings.
 
@@ -29,7 +29,7 @@ Uniform buffer bindings.
 
 > `readonly` **bindingValues**: `Record`\<`string`, `number`\>
 
-Defined in: [compiler/src/wgsl.ts:68](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L68)
+Defined in: compiler/src/wgsl.ts:68
 
 Default field values keyed by WGSL field name.
 
@@ -39,7 +39,7 @@ Default field values keyed by WGSL field name.
 
 > `readonly` **declarations**: `string`
 
-Defined in: [compiler/src/wgsl.ts:70](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L70)
+Defined in: compiler/src/wgsl.ts:70
 
 Pre-serialized WGSL preamble string.
 
@@ -49,6 +49,6 @@ Pre-serialized WGSL preamble string.
 
 > `readonly` **structs**: readonly [`WGSLStruct`](WGSLStruct.md)[]
 
-Defined in: [compiler/src/wgsl.ts:64](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L64)
+Defined in: compiler/src/wgsl.ts:64
 
 Declared struct types (currently one: the boundary's state struct).

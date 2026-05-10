@@ -8,7 +8,7 @@
 
 > `const` **Track**: `object`
 
-Defined in: [scene/src/track.ts:100](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L100)
+Defined in: scene/src/track.ts:100
 
 Track namespace — typed constructors for the four track kinds plus
 per-kind id minters (Track.videoId, Track.audioId, Track.transitionId,

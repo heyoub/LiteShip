@@ -8,7 +8,7 @@
 
 > **Prettify**\<`T`\> = `{ [K in keyof T]: T[K] }` & `object`
 
-Defined in: [core/src/type-utils.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L15)
+Defined in: core/src/type-utils.ts:15
 
 Flatten branded intersections for clean IDE hints
 

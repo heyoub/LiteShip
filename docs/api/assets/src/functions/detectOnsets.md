@@ -8,7 +8,7 @@
 
 > **detectOnsets**(`audio`): readonly `number`[]
 
-Defined in: [assets/src/analysis/onsets.ts:14](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/onsets.ts#L14)
+Defined in: assets/src/analysis/onsets.ts:14
 
 Detect note-attack onsets as an ordered array of sample indices.
 

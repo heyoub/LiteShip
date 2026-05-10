@@ -1,8 +1,8 @@
 # Architecture decision records
 
-This directory contains Architecture Decision Records (ADRs) for **LiteShip** — the **CZAP** engine and **`@czap/*`** hull they document. Each ADR captures one decision: its status, the context that forced the choice, the decision itself, its consequences, supporting evidence, and references.
+This directory contains Architecture Decision Records (ADRs) for LiteShip: the CZAP engine and the `@czap/*` hull they document. Each ADR captures one decision: its status, the context that forced the choice, the decision itself, its consequences, supporting evidence, and references.
 
-ADRs are the source of truth for **why** — what decision was made and why it was the right one. The code is the source of truth for **what** — the current implementation of the decision.
+ADRs are the source of truth for *why* a decision was made. The code is the source of truth for *what* the current implementation looks like.
 
 Prose vocabulary: [../GLOSSARY.md](../GLOSSARY.md).
 

@@ -8,7 +8,7 @@
 
 > `const` **TokenTailwindCompiler**: `object`
 
-Defined in: [compiler/src/token-tailwind.ts:127](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-tailwind.ts#L127)
+Defined in: compiler/src/token-tailwind.ts:127
 
 Token Tailwind compiler namespace.
 

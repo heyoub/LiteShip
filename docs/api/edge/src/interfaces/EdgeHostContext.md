@@ -6,7 +6,7 @@
 
 # Interface: EdgeHostContext
 
-Defined in: [edge/src/host-adapter.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L28)
+Defined in: edge/src/host-adapter.ts:28
 
 Detected device context available to host callbacks before compile.
 
@@ -25,7 +25,7 @@ decision without re-parsing headers.
 
 > `readonly` **capabilities**: [`ExtendedDeviceCapabilities`](#)
 
-Defined in: [edge/src/host-adapter.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L30)
+Defined in: edge/src/host-adapter.ts:30
 
 Capabilities parsed from Client Hints.
 
@@ -35,6 +35,6 @@ Capabilities parsed from Client Hints.
 
 > `readonly` **tier**: [`EdgeTierResult`](EdgeTierResult.md)
 
-Defined in: [edge/src/host-adapter.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L32)
+Defined in: edge/src/host-adapter.ts:32
 
 Derived tier triple (cap, motion, design).

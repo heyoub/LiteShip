@@ -8,7 +8,7 @@
 
 > **satelliteAttrs**(`props`): `Record`\<`string`, `string`\>
 
-Defined in: [astro/src/Satellite.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/Satellite.ts#L44)
+Defined in: astro/src/Satellite.ts:44
 
 Generate the HTML attributes for a satellite container div.
 Used by framework integrations (Astro, etc.) to render the satellite wrapper.

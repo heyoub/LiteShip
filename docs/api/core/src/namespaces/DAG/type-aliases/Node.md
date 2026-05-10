@@ -8,6 +8,6 @@
 
 > **Node** = [`DAGNode`](../../../interfaces/DAGNode.md)
 
-Defined in: [core/src/dag.ts:520](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L520)
+Defined in: core/src/dag.ts:520
 
 Alias for [DAGNode](../../../interfaces/DAGNode.md).

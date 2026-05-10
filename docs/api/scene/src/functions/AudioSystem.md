@@ -8,7 +8,7 @@
 
 > **AudioSystem**(`frameIndex`, `fps`, `sampleRate`): `SystemShape`
 
-Defined in: [scene/src/systems/audio.ts:13](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/systems/audio.ts#L13)
+Defined in: scene/src/systems/audio.ts:13
 
 Build an AudioSystem keyed to frame index + fps + sample rate.
 

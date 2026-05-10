@@ -8,7 +8,7 @@
 
 > **Node**\<`T`\> = `BlendNodeShape`\<`T`\>
 
-Defined in: [core/src/blend.ts:134](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/blend.ts#L134)
+Defined in: core/src/blend.ts:134
 
 Individual leaf/intermediate node in a blend tree.
 

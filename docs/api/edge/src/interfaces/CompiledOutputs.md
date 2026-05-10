@@ -6,7 +6,7 @@
 
 # Interface: CompiledOutputs
 
-Defined in: [edge/src/kv-cache.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L31)
+Defined in: edge/src/kv-cache.ts:31
 
 Precompiled CSS outputs for a single boundary at a given tier.
 
@@ -16,7 +16,7 @@ Precompiled CSS outputs for a single boundary at a given tier.
 
 > `readonly` **containerQueries**: `string`
 
-Defined in: [edge/src/kv-cache.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L34)
+Defined in: edge/src/kv-cache.ts:34
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [edge/src/kv-cache.ts:34](https://github.com/TheFreeBatteryFactory/c
 
 > `readonly` **css**: `string`
 
-Defined in: [edge/src/kv-cache.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L32)
+Defined in: edge/src/kv-cache.ts:32
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [edge/src/kv-cache.ts:32](https://github.com/TheFreeBatteryFactory/c
 
 > `readonly` **propertyRegistrations**: `string`
 
-Defined in: [edge/src/kv-cache.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L33)
+Defined in: edge/src/kv-cache.ts:33

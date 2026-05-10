@@ -6,7 +6,7 @@
 
 # Interface: TokenJSResult
 
-Defined in: [compiler/src/token-js.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-js.ts#L25)
+Defined in: compiler/src/token-js.ts:25
 
 Output of [TokenJSCompiler.compile](../variables/TokenJSCompiler.md#compile).
 
@@ -21,7 +21,7 @@ duplication.
 
 > `readonly` **code**: `string`
 
-Defined in: [compiler/src/token-js.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-js.ts#L27)
+Defined in: compiler/src/token-js.ts:27
 
 Runtime `.ts` source declaring `export const tokens` with const assertion.
 
@@ -31,6 +31,6 @@ Runtime `.ts` source declaring `export const tokens` with const assertion.
 
 > `readonly` **typeDeclaration**: `string`
 
-Defined in: [compiler/src/token-js.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-js.ts#L29)
+Defined in: compiler/src/token-js.ts:29
 
 Ambient `.d.ts` declaration exposing the same shape via `typeof`.

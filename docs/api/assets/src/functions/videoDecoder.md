@@ -8,7 +8,7 @@
 
 > **videoDecoder**(`bytes`): `Promise`\<[`DecodedVideo`](../interfaces/DecodedVideo.md)\>
 
-Defined in: [assets/src/decoders/video.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/video.ts#L26)
+Defined in: assets/src/decoders/video.ts:26
 
 Probe a video buffer for container/codec metadata.
 

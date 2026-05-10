@@ -8,7 +8,7 @@
 
 > **listTools**(): readonly `object`[]
 
-Defined in: [mcp-server/src/dispatch.ts:164](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/dispatch.ts#L164)
+Defined in: mcp-server/src/dispatch.ts:164
 
 Static list of MCP tools produced by czap's CLI.
 

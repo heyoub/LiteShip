@@ -8,7 +8,7 @@
 
 > **OutputTarget** = `"css"` \| `"glsl"` \| `"wgsl"` \| `"aria"` \| `"ai"`
 
-Defined in: [quantizer/src/quantizer.ts:60](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L60)
+Defined in: quantizer/src/quantizer.ts:60
 
 Compilation target for quantizer per-state outputs.
 

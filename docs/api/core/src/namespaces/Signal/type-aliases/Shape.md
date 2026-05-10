@@ -8,7 +8,7 @@
 
 > **Shape**\<`T`\> = `SignalShape`\<`T`\>
 
-Defined in: [core/src/signal.ts:340](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/signal.ts#L340)
+Defined in: core/src/signal.ts:340
 
 Structural shape of a passive [Signal](../../../variables/Signal.md): `source` + `current` + `changes`.
 

@@ -6,7 +6,7 @@
 
 # Interface: MorphCallbacks
 
-Defined in: [web/src/types.ts:132](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L132)
+Defined in: web/src/types.ts:132
 
 Morph lifecycle callbacks.
 
@@ -16,7 +16,7 @@ Morph lifecycle callbacks.
 
 > `optional` **afterAdd**(`node`): `void`
 
-Defined in: [web/src/types.ts:134](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L134)
+Defined in: web/src/types.ts:134
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [web/src/types.ts:134](https://github.com/TheFreeBatteryFactory/czap
 
 > `optional` **beforeAttributeUpdate**(`element`, `name`, `value`): `boolean`
 
-Defined in: [web/src/types.ts:135](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L135)
+Defined in: web/src/types.ts:135
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [web/src/types.ts:135](https://github.com/TheFreeBatteryFactory/czap
 
 > `optional` **beforeRemove**(`node`): `boolean`
 
-Defined in: [web/src/types.ts:133](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L133)
+Defined in: web/src/types.ts:133
 
 #### Parameters
 

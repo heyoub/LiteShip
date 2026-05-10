@@ -8,7 +8,7 @@
 
 > **Shape**\<`A`, `I`\> = `CodecShape`\<`A`, `I`\>
 
-Defined in: [core/src/codec.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/codec.ts#L38)
+Defined in: core/src/codec.ts:38
 
 Structural shape of a codec: underlying schema plus `encode` / `decode` Effects.
 

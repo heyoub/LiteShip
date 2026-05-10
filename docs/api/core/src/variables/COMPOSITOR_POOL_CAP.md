@@ -8,6 +8,6 @@
 
 > `const` **COMPOSITOR\_POOL\_CAP**: `8` = `8`
 
-Defined in: [core/src/defaults.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/defaults.ts#L29)
+Defined in: core/src/defaults.ts:29
 
 Default compositor state pool capacity. Used by: compositor.ts, compositor-pool.ts

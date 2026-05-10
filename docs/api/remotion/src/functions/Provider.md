@@ -8,7 +8,7 @@
 
 > **Provider**(`props`): `unknown`
 
-Defined in: [remotion/src/composition.ts:64](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/remotion/src/composition.ts#L64)
+Defined in: remotion/src/composition.ts:64
 
 React context provider that makes precomputed frames available to
 [useCzapState](useCzapState.md) anywhere in the subtree. Use this when you prefer

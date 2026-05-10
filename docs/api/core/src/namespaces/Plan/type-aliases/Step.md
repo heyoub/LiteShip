@@ -8,6 +8,6 @@
 
 > **Step** = `PlanStep`
 
-Defined in: [core/src/plan.ts:306](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/plan.ts#L306)
+Defined in: core/src/plan.ts:306
 
 Alias for `PlanStep`.

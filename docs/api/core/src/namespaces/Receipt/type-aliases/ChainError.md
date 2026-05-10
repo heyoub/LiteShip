@@ -8,6 +8,6 @@
 
 > **ChainError** = [`ChainValidationError`](../../../type-aliases/ChainValidationError.md)
 
-Defined in: [core/src/receipt.ts:443](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/receipt.ts#L443)
+Defined in: core/src/receipt.ts:443
 
 Alias for [ChainValidationError](../../../type-aliases/ChainValidationError.md).

@@ -6,7 +6,7 @@
 
 # Interface: StyleBlock
 
-Defined in: [vite/src/style-transform.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/style-transform.ts#L24)
+Defined in: vite/src/style-transform.ts:24
 
 Single parsed `@style` block: the style name being referenced, its
 per-state CSS property overrides, and provenance.
@@ -17,7 +17,7 @@ per-state CSS property overrides, and provenance.
 
 > `readonly` **line**: `number`
 
-Defined in: [vite/src/style-transform.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/style-transform.ts#L32)
+Defined in: vite/src/style-transform.ts:32
 
 1-based line where the block begins.
 
@@ -27,7 +27,7 @@ Defined in: [vite/src/style-transform.ts:32](https://github.com/TheFreeBatteryFa
 
 > `readonly` **sourceFile**: `string`
 
-Defined in: [vite/src/style-transform.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/style-transform.ts#L30)
+Defined in: vite/src/style-transform.ts:30
 
 Absolute source file path.
 
@@ -37,7 +37,7 @@ Absolute source file path.
 
 > `readonly` **states**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [vite/src/style-transform.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/style-transform.ts#L28)
+Defined in: vite/src/style-transform.ts:28
 
 `{ stateName: { cssProp: value } }` mapping.
 
@@ -47,6 +47,6 @@ Defined in: [vite/src/style-transform.ts:28](https://github.com/TheFreeBatteryFa
 
 > `readonly` **styleName**: `string`
 
-Defined in: [vite/src/style-transform.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/style-transform.ts#L26)
+Defined in: vite/src/style-transform.ts:26
 
 Named style (resolved against exported `StyleDef` values).

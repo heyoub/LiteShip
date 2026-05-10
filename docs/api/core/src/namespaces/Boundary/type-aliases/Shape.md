@@ -8,7 +8,7 @@
 
 > **Shape**\<`I`, `S`\> = `BoundaryDef`\<`I`, `S`\>
 
-Defined in: [core/src/boundary.ts:355](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L355)
+Defined in: core/src/boundary.ts:355
 
 Structural shape of a boundary definition parameterized by input name `I` and state tuple `S`.
 

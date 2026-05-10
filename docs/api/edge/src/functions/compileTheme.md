@@ -8,7 +8,7 @@
 
 > **compileTheme**(`config`): [`ThemeCompileResult`](../interfaces/ThemeCompileResult.md)
 
-Defined in: [edge/src/theme-compiler.ts:123](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/theme-compiler.ts#L123)
+Defined in: edge/src/theme-compiler.ts:123
 
 Compile a set of design tokens into CSS custom property declarations.
 

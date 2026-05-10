@@ -8,7 +8,7 @@
 
 > `const` **VectorClock**: `object`
 
-Defined in: [core/src/vector-clock.ts:81](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/vector-clock.ts#L81)
+Defined in: core/src/vector-clock.ts:81
 
 VectorClock — per-peer counter algebra for causal ordering.
 Pairs with [HLC](../namespaces/HLC/README.md) when you need exact happens-before rather than HLC's

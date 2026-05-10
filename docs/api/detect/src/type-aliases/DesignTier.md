@@ -8,7 +8,7 @@
 
 > **DesignTier** = `"minimal"` \| `"standard"` \| `"enhanced"` \| `"rich"`
 
-Defined in: [detect/src/tiers.ts:79](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/tiers.ts#L79)
+Defined in: detect/src/tiers.ts:79
 
 Visual fidelity tier derived from device capabilities.
 

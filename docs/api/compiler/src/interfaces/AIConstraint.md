@@ -6,7 +6,7 @@
 
 # Interface: AIConstraint
 
-Defined in: [compiler/src/ai-manifest.ts:89](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L89)
+Defined in: compiler/src/ai-manifest.ts:89
 
 Cross-cutting invariant declared alongside the manifest.
 
@@ -20,7 +20,7 @@ LLM sees when the constraint is reported as violated.
 
 > `readonly` **condition**: `unknown`
 
-Defined in: [compiler/src/ai-manifest.ts:93](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L93)
+Defined in: compiler/src/ai-manifest.ts:93
 
 Host-defined condition payload (opaque at this layer).
 
@@ -30,7 +30,7 @@ Host-defined condition payload (opaque at this layer).
 
 > `readonly` **id**: `string`
 
-Defined in: [compiler/src/ai-manifest.ts:91](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L91)
+Defined in: compiler/src/ai-manifest.ts:91
 
 Stable identifier for diagnostics and citation.
 
@@ -40,6 +40,6 @@ Stable identifier for diagnostics and citation.
 
 > `readonly` **message**: `string`
 
-Defined in: [compiler/src/ai-manifest.ts:95](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L95)
+Defined in: compiler/src/ai-manifest.ts:95
 
 Human-readable message for violation reports.

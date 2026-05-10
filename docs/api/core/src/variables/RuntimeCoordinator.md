@@ -8,7 +8,7 @@
 
 > `const` **RuntimeCoordinator**: `object`
 
-Defined in: [core/src/runtime-coordinator.ts:218](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/runtime-coordinator.ts#L218)
+Defined in: core/src/runtime-coordinator.ts:218
 
 Runtime coordinator namespace — single entry point for building the shared
 [Plan](Plan.md) + ECS store bundle consumed by every host adapter.

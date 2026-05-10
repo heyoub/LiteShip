@@ -8,7 +8,7 @@
 
 > `const` **GenFrame**: `object`
 
-Defined in: [core/src/gen-frame.ts:215](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/gen-frame.ts#L215)
+Defined in: core/src/gen-frame.ts:215
 
 Generative-UI frame scheduler namespace.
 

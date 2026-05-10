@@ -8,6 +8,6 @@
 
 > **Chunk** = [`LLMChunk`](../../../interfaces/LLMChunk.md)
 
-Defined in: [web/src/stream/llm-adapter.ts:181](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-adapter.ts#L181)
+Defined in: web/src/stream/llm-adapter.ts:181
 
 Normalized LLM chunk type alias.

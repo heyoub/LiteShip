@@ -6,7 +6,7 @@
 
 # Interface: AnimatedQuantizerShape\<B\>
 
-Defined in: [quantizer/src/animated-quantizer.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/animated-quantizer.ts#L24)
+Defined in: quantizer/src/animated-quantizer.ts:24
 
 Quantizer augmented with transition-aware output interpolation.
 
@@ -66,7 +66,7 @@ Defined in: core/dist/quantizer-types.d.ts:25
 
 > `readonly` **interpolated**: `Stream`\<\{ `outputs`: `Record`\<`string`, `number` \| `string`\>; `progress`: `number`; `state`: `StateUnion`\<`B`\>; \}\>
 
-Defined in: [quantizer/src/animated-quantizer.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/animated-quantizer.ts#L28)
+Defined in: quantizer/src/animated-quantizer.ts:28
 
 Stream of interpolated animation frames during crossings.
 
@@ -106,7 +106,7 @@ Synchronous state accessor for hot paths (avoids Effect overhead).
 
 > `readonly` **transition**: [`Transition`](Transition.md)\<`B`\>
 
-Defined in: [quantizer/src/animated-quantizer.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/animated-quantizer.ts#L26)
+Defined in: quantizer/src/animated-quantizer.ts:26
 
 Resolver that maps `from -> to` crossings to [TransitionConfig](TransitionConfig.md).
 

@@ -8,6 +8,6 @@
 
 > **Options** = [`SceneRuntimeOptions`](../../../interfaces/SceneRuntimeOptions.md)
 
-Defined in: [scene/src/runtime.ts:286](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L286)
+Defined in: scene/src/runtime.ts:286
 
 Build-time options — see [SceneRuntimeOptions](../../../interfaces/SceneRuntimeOptions.md).

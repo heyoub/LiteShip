@@ -8,7 +8,7 @@
 
 > `const` **Theme**: `ThemeFactory` & `object`
 
-Defined in: [core/src/theme.ts:98](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/theme.ts#L98)
+Defined in: core/src/theme.ts:98
 
 Theme namespace -- theme primitive for constraint-based adaptive rendering.
 

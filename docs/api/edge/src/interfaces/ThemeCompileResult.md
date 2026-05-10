@@ -6,7 +6,7 @@
 
 # Interface: ThemeCompileResult
 
-Defined in: [edge/src/theme-compiler.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/theme-compiler.ts#L38)
+Defined in: edge/src/theme-compiler.ts:38
 
 Output of [compileTheme](../functions/compileTheme.md).
 
@@ -20,7 +20,7 @@ serialization best fits their HTML injection strategy.
 
 > `readonly` **css**: `string`
 
-Defined in: [edge/src/theme-compiler.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/theme-compiler.ts#L42)
+Defined in: edge/src/theme-compiler.ts:42
 
 Full CSS rule with custom property declarations inside `:root {}`.
 
@@ -30,7 +30,7 @@ Full CSS rule with custom property declarations inside `:root {}`.
 
 > `readonly` **declarations**: readonly `ThemeDeclaration`[]
 
-Defined in: [edge/src/theme-compiler.ts:40](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/theme-compiler.ts#L40)
+Defined in: edge/src/theme-compiler.ts:40
 
 Structured declarations suitable for serializer-specific output.
 
@@ -40,6 +40,6 @@ Structured declarations suitable for serializer-specific output.
 
 > `readonly` **inlineStyle**: `string`
 
-Defined in: [edge/src/theme-compiler.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/theme-compiler.ts#L44)
+Defined in: edge/src/theme-compiler.ts:44
 
 Inline style string for `<html style="...">` injection.

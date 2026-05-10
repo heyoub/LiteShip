@@ -8,6 +8,6 @@
 
 > **AssemblyKind** = `"pureTransform"` \| `"receiptedMutation"` \| `"stateMachine"` \| `"siteAdapter"` \| `"policyGate"` \| `"cachedProjection"` \| `"sceneComposition"`
 
-Defined in: [core/src/capsule.ts:13](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L13)
+Defined in: core/src/capsule.ts:13
 
 Closed seven-arm catalog of capsule kinds. Adding an eighth requires ADR amendment.

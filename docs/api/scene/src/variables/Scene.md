@@ -8,7 +8,7 @@
 
 > `const` **Scene**: `object`
 
-Defined in: [scene/src/include.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/include.ts#L23)
+Defined in: scene/src/include.ts:23
 
 Scene composition helpers.
 

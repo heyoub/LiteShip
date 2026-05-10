@@ -8,7 +8,7 @@
 
 > `const` **LLMAdapter**: `object`
 
-Defined in: [web/src/stream/llm-adapter.ts:173](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-adapter.ts#L173)
+Defined in: web/src/stream/llm-adapter.ts:173
 
 LLM adapter namespace.
 

@@ -2,16 +2,15 @@
 
 ## Purpose
 
-This document explains how **LiteShip** sits inside an Astro site — where the document host ends and the **CZAP** runtime begins. Imports stay on **`@czap/*`**; export names like `czapMiddleware()` stay literal.
+How LiteShip sits inside an Astro site: where the document host ends and the CZAP runtime begins. Imports stay on `@czap/*`; export names like `czapMiddleware()` stay literal.
 
 Naming: [GLOSSARY.md](./GLOSSARY.md).
 
-It is not a routing guide and not a content-model guide.
-It is about runtime responsibility.
+This is not a routing guide and not a content-model guide. It is about runtime responsibility.
 
 ---
 
-## The Division of Labor
+## The division of labor
 
 Astro should own:
 
@@ -20,24 +19,20 @@ Astro should own:
 - server rendering
 - content composition
 
-**LiteShip** should own:
+LiteShip should own:
 
 - adaptive state logic
 - capability-aware escalation
 - authored visual state outputs
 - media, worker, and shader runtime behavior where needed
 
-This division is important.
-
-Astro is the document host.
-**LiteShip** is the adaptive surface engine.
+This division is important. Astro is the document host. LiteShip is the adaptive surface engine.
 
 ---
 
-## The Main Astro Surfaces
+## The main Astro surfaces
 
-The public Astro package surface is in
-[`packages/astro/src/index.ts`](../packages/astro/src/index.ts).
+The public Astro package surface is in [`packages/astro/src/index.ts`](../packages/astro/src/index.ts).
 
 The important exports are:
 
@@ -53,15 +48,15 @@ These form the Astro host layer.
 
 ## Integration
 
-`integration()` is the **Astro integration** entry point — the host-level hook that registers transforms and **rigs** detection alongside Astro’s lifecycle.
+`integration()` is the Astro integration entry point: the host-level hook that registers transforms and rigs detection alongside Astro's lifecycle.
 
 It is responsible for:
 
 - registering the Vite plugin path that understands authored `@token` / `@theme` / `@style` / `@quantize` transforms
 - rigging client-side detection support
-- connecting Astro lifecycle behavior to LiteShip’s assumptions
+- connecting Astro lifecycle behavior to LiteShip's assumptions
 
-Use it when the site itself is a **LiteShip-aware** Astro host.
+Use it when the site itself is a LiteShip-aware Astro host.
 
 ---
 
@@ -69,23 +64,20 @@ Use it when the site itself is a **LiteShip-aware** Astro host.
 
 `czapMiddleware()` is the request-time bridge.
 
-Its job is to let the server side understand request and capability context
-well enough to emit a sensible initial result.
+Its job is to let the server side understand request and capability context well enough to emit a sensible initial result.
 
 The important idea is:
 
 - first paint should already reflect a good state guess
 - client runtime should refine or continue, not invent the experience from nothing
 
-For static visual sites, this keeps the document legible and intentional before
-client work begins.
+For static visual sites, this keeps the document legible and intentional before client work begins.
 
 ---
 
-## Initial State
+## Initial state
 
-`resolveInitialState()` and `resolveInitialStateFallback()` exist because a
-surface should not begin life as an empty runtime shell.
+`resolveInitialState()` and `resolveInitialStateFallback()` exist because a surface should not begin life as an empty runtime shell.
 
 The server can often choose a useful initial state from:
 
@@ -94,21 +86,15 @@ The server can often choose a useful initial state from:
 - capability hints
 - authored fallback rules
 
-This is one of the strongest reasons to pair **LiteShip** with Astro.
-
-The system is allowed to be intelligent before hydration.
+This is one of the strongest reasons to pair LiteShip with Astro. The system is allowed to be intelligent before hydration.
 
 ---
 
-## Satellite Attributes
+## Satellite attributes
 
-`satelliteAttrs()` expresses the shell contract that client directives and
-runtime code understand.
+`satelliteAttrs()` expresses the shell contract that client directives and runtime code understand.
 
-This matters because **LiteShip** runtime behavior is DOM-and-attribute based.
-
-The shell is not a virtual tree abstraction.
-It is real HTML with semantic `data-czap-*` meaning attached.
+This matters because LiteShip runtime behavior is DOM-and-attribute based. The shell is not a virtual tree abstraction. It is real HTML with semantic `data-czap-*` meaning attached.
 
 That keeps Astro in its strongest mode:
 
@@ -118,10 +104,9 @@ That keeps Astro in its strongest mode:
 
 ---
 
-## Client Directives
+## Client directives
 
-The Astro client-directive layer currently includes important runtime surfaces
-such as:
+The Astro client-directive layer currently includes important runtime surfaces:
 
 - `satellite`
 - `stream`
@@ -130,8 +115,7 @@ such as:
 - `worker`
 - `wasm`
 
-These are not interchangeable.
-They represent different escalation levels.
+These are not interchangeable. They represent different escalation levels.
 
 ### `satellite`
 
@@ -151,36 +135,32 @@ Use when the visual meaning depends on shader execution, not merely decoration.
 
 ### `worker`
 
-Use when off-main-thread coordination is part of the surface’s runtime need.
+Use when off-main-thread coordination is part of the surface's runtime need.
 
 ### `wasm`
 
-Use when compute cost meaningfully exceeds what the normal runtime should carry.
+Use when compute cost meaningfully exceeds what the normal runtime should carry. Worth noting: every directive past `satellite` is additive. The surface should still be coherent if `wasm` doesn't load and the worker falls back to TypeScript kernels (`packages/core/src/wasm-fallback.ts`). The escalation path is a budget, not a dependency.
 
 ---
 
-## Runtime Escalation in Astro
+## Runtime escalation in Astro
 
 The correct Astro posture is:
 
 1. emit real HTML
 2. let CSS carry as much as possible
-3. attach **LiteShip** runtime only where authored behavior needs it
+3. attach LiteShip runtime only where authored behavior needs it
 4. escalate to worker, gpu, or wasm only where meaning requires it
 
 That is the host model.
 
-Astro gives the page a strong server-rendered base.
-**LiteShip** adds stateful adaptive behavior without forcing every surface into a
-general-purpose app runtime.
+Astro gives the page a strong server-rendered base. LiteShip adds stateful adaptive behavior without forcing every surface into a general-purpose app runtime.
 
 ---
 
-## Capability Ceilings
+## Capability ceilings
 
-A key **LiteShip** invariant is that authored intent degrades gracefully under
-capability ceilings (see [ADR-0002](./adr/0002-zero-alloc.md) for the
-cheapest-valid-default discipline).
+A key LiteShip invariant is that authored intent degrades gracefully under capability ceilings (see [ADR-0002](./adr/0002-zero-alloc.md) for the cheapest-valid-default discipline).
 
 Inside Astro, that means:
 
@@ -188,12 +168,11 @@ Inside Astro, that means:
 - richer directives should be additive, not required for baseline meaning
 - surfaces should preserve narrative and hierarchy even when the runtime is reduced
 
-This makes the system suitable for static visual websites rather than only for
-full client apps.
+This makes the system suitable for static visual websites rather than only for full client apps.
 
 ---
 
-## The Rendering Sequence
+## The rendering sequence
 
 The ideal sequence is:
 
@@ -206,15 +185,13 @@ The ideal sequence is:
 
 That sequence is the correct model to preserve.
 
-If the site is authored with that order in mind, the system stays elegant.
-If everything assumes maximum runtime from the start, Astro’s advantages are
-wasted.
+If the site is authored with that order in mind, the system stays elegant. If everything assumes maximum runtime from the start, Astro's advantages are wasted.
 
 ---
 
-## Working Definition
+## Working definition
 
-Inside Astro, **LiteShip** should be understood as:
+Inside Astro, LiteShip should be understood as:
 
 > an adaptive authored runtime layered on top of an HTML-first document host
 

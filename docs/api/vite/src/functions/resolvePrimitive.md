@@ -8,7 +8,7 @@
 
 > **resolvePrimitive**\<`K`\>(`kind`, `name`, `fromFile`, `projectRoot`, `userDir?`): `Promise`\<[`PrimitiveResolution`](../interfaces/PrimitiveResolution.md)\<`K`\> \| `null`\>
 
-Defined in: [vite/src/primitive-resolve.ts:69](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/primitive-resolve.ts#L69)
+Defined in: vite/src/primitive-resolve.ts:69
 
 Resolve a named primitive (boundary / token / theme / style) by
 walking the convention-based search order. Returns `null` when no

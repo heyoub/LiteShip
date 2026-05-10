@@ -8,7 +8,7 @@
 
 > **Shape**\<`S`, `Msg`\> = `StoreShape`\<`S`, `Msg`\>
 
-Defined in: [core/src/store.ts:74](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/store.ts#L74)
+Defined in: core/src/store.ts:74
 
 Structural shape of a synchronous store.
 

@@ -8,7 +8,7 @@
 
 > **compileAIManifest**(`input`): [`AIManifestCompileResult`](../interfaces/AIManifestCompileResult.md) \| \{ `tools`: readonly [`McpCommandDescriptor`](../interfaces/McpCommandDescriptor.md)[]; \}
 
-Defined in: [compiler/src/ai-manifest.ts:657](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L657)
+Defined in: compiler/src/ai-manifest.ts:657
 
 Compile an AI manifest or MCP tool list from a high-level descriptor.
 

@@ -8,7 +8,7 @@
 
 > **Transition**: `object`
 
-Defined in: [quantizer/src/transition.ts:45](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/transition.ts#L45)
+Defined in: quantizer/src/transition.ts:45
 
 Transition resolver namespace.
 

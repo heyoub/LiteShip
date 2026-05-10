@@ -8,7 +8,7 @@
 
 > `const` **Plan**: `object`
 
-Defined in: [core/src/plan.ts:293](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/plan.ts#L293)
+Defined in: core/src/plan.ts:293
 
 Plan namespace -- plan IR builder for universal execution DAG.
 

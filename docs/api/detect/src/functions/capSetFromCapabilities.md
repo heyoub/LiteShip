@@ -8,7 +8,7 @@
 
 > **capSetFromCapabilities**(`caps`): [`CapSet`](#)
 
-Defined in: [detect/src/tiers.ts:57](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/tiers.ts#L57)
+Defined in: detect/src/tiers.ts:57
 
 Build a CapSet containing all levels the device qualifies for.
 A device at level X automatically has all levels below it.

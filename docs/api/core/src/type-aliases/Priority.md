@@ -8,7 +8,7 @@
 
 > **Priority** = `"critical"` \| `"high"` \| `"low"` \| `"idle"`
 
-Defined in: [core/src/frame-budget.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/frame-budget.ts#L23)
+Defined in: core/src/frame-budget.ts:23
 
 Frame-budget priority lane in descending urgency. `critical` always runs;
 `high` / `low` / `idle` gate based on the milliseconds remaining in the

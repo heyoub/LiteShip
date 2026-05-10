@@ -8,6 +8,6 @@
 
 > **Handle** = [`SceneRuntimeHandle`](../../../interfaces/SceneRuntimeHandle.md)
 
-Defined in: [scene/src/runtime.ts:284](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L284)
+Defined in: scene/src/runtime.ts:284
 
 Live runtime handle — see [SceneRuntimeHandle](../../../interfaces/SceneRuntimeHandle.md).

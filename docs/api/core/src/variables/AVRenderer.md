@@ -8,7 +8,7 @@
 
 > `const` **AVRenderer**: `object`
 
-Defined in: [core/src/av-renderer.ts:106](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/av-renderer.ts#L106)
+Defined in: core/src/av-renderer.ts:106
 
 AVRenderer — deterministic offline audio+video renderer.
 

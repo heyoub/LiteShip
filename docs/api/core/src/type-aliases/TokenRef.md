@@ -8,7 +8,7 @@
 
 > **TokenRef**\<`N`\> = `_TokenRef`\<`N`\>
 
-Defined in: [core/src/brands.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L42)
+Defined in: core/src/brands.ts:42
 
 Branded token reference name
 

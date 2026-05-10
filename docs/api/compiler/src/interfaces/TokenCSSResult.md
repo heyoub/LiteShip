@@ -6,7 +6,7 @@
 
 # Interface: TokenCSSResult
 
-Defined in: [compiler/src/token-css.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-css.ts#L25)
+Defined in: compiler/src/token-css.ts:25
 
 Output of [TokenCSSCompiler.compile](../variables/TokenCSSCompiler.md#compile).
 
@@ -21,7 +21,7 @@ per-variant override blocks derived from an optional theme.
 
 > `readonly` **customProperties**: `string`
 
-Defined in: [compiler/src/token-css.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-css.ts#L29)
+Defined in: compiler/src/token-css.ts:29
 
 `@property` registrations plus the `:root { … }` fallback block.
 
@@ -31,7 +31,7 @@ Defined in: [compiler/src/token-css.ts:29](https://github.com/TheFreeBatteryFact
 
 > `readonly` **properties**: readonly `string`[]
 
-Defined in: [compiler/src/token-css.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-css.ts#L27)
+Defined in: compiler/src/token-css.ts:27
 
 CSS custom property names emitted for this token.
 
@@ -41,6 +41,6 @@ CSS custom property names emitted for this token.
 
 > `readonly` **themed**: `string`
 
-Defined in: [compiler/src/token-css.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-css.ts#L31)
+Defined in: compiler/src/token-css.ts:31
 
 `html[data-theme="…"]` override blocks (empty when no theme supplied).

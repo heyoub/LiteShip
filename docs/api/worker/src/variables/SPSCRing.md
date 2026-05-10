@@ -8,7 +8,7 @@
 
 > `const` **SPSCRing**: `object`
 
-Defined in: [worker/src/spsc-ring.ts:300](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/spsc-ring.ts#L300)
+Defined in: worker/src/spsc-ring.ts:300
 
 SPSC ring buffer namespace.
 

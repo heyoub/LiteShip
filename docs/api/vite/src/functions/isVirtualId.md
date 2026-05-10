@@ -8,7 +8,7 @@
 
 > **isVirtualId**(`id`): `boolean`
 
-Defined in: [vite/src/virtual-modules.ts:64](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/virtual-modules.ts#L64)
+Defined in: vite/src/virtual-modules.ts:64
 
 Return `true` when `id` is a fully-resolved czap virtual module
 (null-byte-prefixed). Callers use this to gate `load` handler

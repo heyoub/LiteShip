@@ -8,7 +8,7 @@
 
 > `const` **VIEWPORT**: `object`
 
-Defined in: [core/src/defaults.ts:56](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/defaults.ts#L56)
+Defined in: core/src/defaults.ts:56
 
 Viewport breakpoints in CSS pixels. Used by: astro/quantize.ts
 

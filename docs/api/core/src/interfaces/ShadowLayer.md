@@ -6,7 +6,7 @@
 
 # Interface: ShadowLayer
 
-Defined in: [core/src/style.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L17)
+Defined in: core/src/style.ts:17
 
 Single `box-shadow` layer — compiled into a space-separated CSS value by [Style.tap](../variables/Style.md).
 
@@ -16,7 +16,7 @@ Single `box-shadow` layer — compiled into a space-separated CSS value by [Styl
 
 > `readonly` **blur**: `number`
 
-Defined in: [core/src/style.ts:20](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L20)
+Defined in: core/src/style.ts:20
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/style.ts:20](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **color**: `string`
 
-Defined in: [core/src/style.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L22)
+Defined in: core/src/style.ts:22
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/src/style.ts:22](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` `optional` **inset?**: `boolean`
 
-Defined in: [core/src/style.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L23)
+Defined in: core/src/style.ts:23
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/src/style.ts:23](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` `optional` **spread?**: `number`
 
-Defined in: [core/src/style.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L21)
+Defined in: core/src/style.ts:21
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/src/style.ts:21](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **x**: `number`
 
-Defined in: [core/src/style.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L18)
+Defined in: core/src/style.ts:18
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [core/src/style.ts:18](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **y**: `number`
 
-Defined in: [core/src/style.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L19)
+Defined in: core/src/style.ts:19

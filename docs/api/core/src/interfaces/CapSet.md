@@ -6,7 +6,7 @@
 
 # Interface: CapSet
 
-Defined in: [core/src/caps.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/caps.ts#L24)
+Defined in: core/src/caps.ts:24
 
 Immutable set of [CapLevel](../type-aliases/CapLevel.md)s — the tagged value returned by [Cap](../variables/Cap.md) combinators.
 
@@ -16,7 +16,7 @@ Immutable set of [CapLevel](../type-aliases/CapLevel.md)s — the tagged value r
 
 > `readonly` **\_tag**: `"CapSet"`
 
-Defined in: [core/src/caps.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/caps.ts#L25)
+Defined in: core/src/caps.ts:25
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [core/src/caps.ts:25](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **levels**: `ReadonlySet`\<[`CapLevel`](../type-aliases/CapLevel.md)\>
 
-Defined in: [core/src/caps.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/caps.ts#L26)
+Defined in: core/src/caps.ts:26

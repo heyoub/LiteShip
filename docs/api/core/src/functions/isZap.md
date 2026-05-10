@@ -8,7 +8,7 @@
 
 > **isZap**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: [core/src/index.ts:220](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L220)
+Defined in: core/src/index.ts:220
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Zap](../namespaces/Zap/README.md).
 

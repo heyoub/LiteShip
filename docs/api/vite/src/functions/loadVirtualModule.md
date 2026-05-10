@@ -8,7 +8,7 @@
 
 > **loadVirtualModule**(`id`): `string` \| `undefined`
 
-Defined in: [vite/src/virtual-modules.ts:87](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/virtual-modules.ts#L87)
+Defined in: vite/src/virtual-modules.ts:87
 
 Return the source for a resolved virtual module ID.
 

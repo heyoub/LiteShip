@@ -8,7 +8,7 @@
 
 > **TokenRef**: \<`N`\>(`value`) => [`TokenRef`](../type-aliases/TokenRef.md)\<`N`\>
 
-Defined in: [core/src/brands.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L42)
+Defined in: core/src/brands.ts:42
 
 Wrap a plain string as a TokenRef — the one sanctioned cast site for this brand.
 

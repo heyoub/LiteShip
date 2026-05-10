@@ -8,4 +8,4 @@
 
 > `const` **ParseError**: `-32700`
 
-Defined in: [mcp-server/src/jsonrpc.ts:66](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L66)
+Defined in: mcp-server/src/jsonrpc.ts:66

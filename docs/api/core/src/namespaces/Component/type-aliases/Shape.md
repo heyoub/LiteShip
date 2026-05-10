@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`, `SN`\> = `ComponentDef`\<`B`, `SN`\>
 
-Defined in: [core/src/component.ts:97](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/component.ts#L97)
+Defined in: core/src/component.ts:97
 
 Structural shape of a component definition, parameterized by its boundary and slot names.
 

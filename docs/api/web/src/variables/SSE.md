@@ -8,7 +8,7 @@
 
 > `const` **SSE**: `object`
 
-Defined in: [web/src/stream/sse.ts:274](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L274)
+Defined in: web/src/stream/sse.ts:274
 
 SSE client namespace.
 

@@ -6,7 +6,7 @@
 
 # Interface: ThemeBlock
 
-Defined in: [vite/src/theme-transform.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/theme-transform.ts#L23)
+Defined in: vite/src/theme-transform.ts:23
 
 Parsed `@theme` block: the theme to apply and any inline token
 overrides declared on the block itself.
@@ -17,7 +17,7 @@ overrides declared on the block itself.
 
 > `readonly` **declarations**: `Record`\<`string`, `string`\>
 
-Defined in: [vite/src/theme-transform.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/theme-transform.ts#L27)
+Defined in: vite/src/theme-transform.ts:27
 
 Inline token overrides (`{ tokenName: value }`).
 
@@ -27,7 +27,7 @@ Inline token overrides (`{ tokenName: value }`).
 
 > `readonly` **line**: `number`
 
-Defined in: [vite/src/theme-transform.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/theme-transform.ts#L31)
+Defined in: vite/src/theme-transform.ts:31
 
 1-based line where the block begins.
 
@@ -37,7 +37,7 @@ Defined in: [vite/src/theme-transform.ts:31](https://github.com/TheFreeBatteryFa
 
 > `readonly` **sourceFile**: `string`
 
-Defined in: [vite/src/theme-transform.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/theme-transform.ts#L29)
+Defined in: vite/src/theme-transform.ts:29
 
 Absolute source file path.
 
@@ -47,6 +47,6 @@ Absolute source file path.
 
 > `readonly` **themeName**: `string`
 
-Defined in: [vite/src/theme-transform.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/theme-transform.ts#L25)
+Defined in: vite/src/theme-transform.ts:25
 
 Named theme (resolved against exported `ThemeDef` values).

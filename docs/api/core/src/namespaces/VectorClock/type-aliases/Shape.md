@@ -8,6 +8,6 @@
 
 > **Shape** = `VectorClockShape`
 
-Defined in: [core/src/vector-clock.ts:110](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/vector-clock.ts#L110)
+Defined in: core/src/vector-clock.ts:110
 
 Structural shape of a vector clock: a `Map<peer, counter>` wrapper.

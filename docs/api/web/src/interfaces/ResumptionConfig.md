@@ -6,7 +6,7 @@
 
 # Interface: ResumptionConfig
 
-Defined in: [web/src/types.ts:248](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L248)
+Defined in: web/src/types.ts:248
 
 Resumption configuration for gap detection and recovery.
 
@@ -16,7 +16,7 @@ Resumption configuration for gap detection and recovery.
 
 > `readonly` `optional` **endpointPolicy?**: [`RuntimeEndpointPolicy`](RuntimeEndpointPolicy.md)
 
-Defined in: [web/src/types.ts:253](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L253)
+Defined in: web/src/types.ts:253
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [web/src/types.ts:253](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **maxGapSize**: `number`
 
-Defined in: [web/src/types.ts:249](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L249)
+Defined in: web/src/types.ts:249
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [web/src/types.ts:249](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` `optional` **replayUrl?**: `string`
 
-Defined in: [web/src/types.ts:251](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L251)
+Defined in: web/src/types.ts:251
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [web/src/types.ts:251](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` `optional` **snapshotUrl?**: `string`
 
-Defined in: [web/src/types.ts:250](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L250)
+Defined in: web/src/types.ts:250
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [web/src/types.ts:250](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` `optional` **timeout?**: `Millis`
 
-Defined in: [web/src/types.ts:252](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L252)
+Defined in: web/src/types.ts:252

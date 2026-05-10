@@ -8,6 +8,6 @@
 
 > **ResumeResponse** = \{ `patches`: readonly `unknown`[]; `type`: `"replay"`; \} \| \{ `html`: `string`; `lastEventId`: `string`; `signals`: `unknown`; `type`: `"snapshot"`; \}
 
-Defined in: [web/src/types.ts:269](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L269)
+Defined in: web/src/types.ts:269
 
 Resume response from the server.

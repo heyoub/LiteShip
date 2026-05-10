@@ -8,6 +8,6 @@
 
 > **StartupTelemetry** = `CompositorWorkerStartupTelemetry`
 
-Defined in: [worker/src/host.ts:188](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/host.ts#L188)
+Defined in: worker/src/host.ts:188
 
 Telemetry sink forwarded to the inner compositor worker.

@@ -8,7 +8,7 @@
 
 > `const` **Evaluate**: `object`
 
-Defined in: [quantizer/src/evaluate.ts:160](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/evaluate.ts#L160)
+Defined in: quantizer/src/evaluate.ts:160
 
 Boundary evaluation namespace.
 

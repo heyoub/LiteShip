@@ -1,6 +1,6 @@
 # Releasing LiteShip (`@czap/*`)
 
-Operator vocabulary: [GLOSSARY.md](./GLOSSARY.md) — **LiteShip** (product), **CZAP** (engine), **`@czap/*`** (packages). CLI and commands stay `czap`.
+Operator vocabulary: [GLOSSARY.md](./GLOSSARY.md). LiteShip (product), CZAP (engine), `@czap/*` (packages). CLI and commands stay `czap`.
 
 Operator checklist for public npm and GitHub releases. Run destructive git steps locally.
 

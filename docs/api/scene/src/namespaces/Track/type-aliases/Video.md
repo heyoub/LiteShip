@@ -8,6 +8,6 @@
 
 > **Video** = [`VideoTrack`](../../../interfaces/VideoTrack.md)
 
-Defined in: [scene/src/track.ts:114](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L114)
+Defined in: scene/src/track.ts:114
 
 Video helper return.

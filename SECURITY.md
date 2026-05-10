@@ -2,16 +2,12 @@
 
 ## Reporting a vulnerability
 
-Please **do not** open public GitHub issues for security findings.
+Please do not open public GitHub issues for security findings.
 
 Instead, use one of these private channels:
 
-- **GitHub Security Advisory** — preferred. From the repo's "Security"
-  tab, click "Report a vulnerability." This creates a private advisory
-  visible only to maintainers.
-- **Email** — send to the maintainer team via the contact listed on the
-  organization profile at
-  [github.com/TheFreeBatteryFactory](https://github.com/TheFreeBatteryFactory).
+- **GitHub Security Advisory** (preferred). From the repo's "Security" tab, click "Report a vulnerability." This creates a private advisory visible only to maintainers.
+- **Email**: send to the maintainer team via the contact listed on the organization profile at [github.com/TheFreeBatteryFactory](https://github.com/TheFreeBatteryFactory).
 
 When reporting, please include:
 
@@ -39,28 +35,15 @@ maintainer discretion if the fix is trivial to backport.
 
 ## Security posture (summary)
 
-Trust is **tensioned** around explicit boundaries instead of permissive defaults:
+Trust is set explicitly, not by permission default:
 
-- **Runtime URL allowlist** — runtime URLs are same-origin by default;
-  cross-origin requires explicit allowlist policy before the line is run. SSRF protections reject
-  private/link-local IPs even when an allowlist is configured.
-- **Artifact ID validation** — IDs are validated as single path segments,
-  preventing path-traversal attempts via runtime URL construction.
-- **HTML trust pipeline** — stream and LLM HTML flows route through a
-  shared trust gate with three modes: `text` (default, no HTML), `sanitized-html`
-  (strips executable markup), and explicit `trusted-html` (caller asserts).
-- **Theme/CSS sanitization** — theme compilation rejects unsafe prefixes
-  (e.g. attempts to escape custom-property scoping) and CSS-breaking token
-  values.
-- **Boundary state surface** — boundary state application is locked to
-  `--czap-*` custom properties, `aria-*`, and `role`. Arbitrary attribute
-  injection is rejected.
-- **Bootstrap snapshot hardening** — the `__CZAP_DETECT__` snapshot is
-  non-enumerable, frozen, and intentionally minimal. Astro integration
-  publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime
-  endpoint and HTML trust decisions.
-- **No eval, no new Function** — the runtime does not generate code at
-  voyage time.
+- **Runtime URL allowlist.** Runtime URLs are same-origin by default; cross-origin requires explicit allowlist policy before the line is run. SSRF protections reject private/link-local IPs even when an allowlist is configured.
+- **Artifact ID validation.** IDs are validated as single path segments, preventing path-traversal attempts via runtime URL construction.
+- **HTML trust pipeline.** Stream and LLM HTML flows route through a shared trust gate with three modes: `text` (default, no HTML), `sanitized-html` (strips executable markup), and explicit `trusted-html` (caller asserts).
+- **Theme/CSS sanitization.** Theme compilation rejects unsafe prefixes (e.g. attempts to escape custom-property scoping) and CSS-breaking token values.
+- **Boundary state surface.** Boundary state application is locked to `--czap-*` custom properties, `aria-*`, and `role`. Arbitrary attribute injection is rejected.
+- **Bootstrap snapshot hardening.** The `__CZAP_DETECT__` snapshot is non-enumerable, frozen, and intentionally minimal. Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions.
+- **No eval, no new Function.** The runtime does not generate code at voyage time.
 
 ## CSP and Trusted Types
 
@@ -107,7 +90,7 @@ In scope:
 - The runtime trust gate and HTML sanitization paths
 
 Out of scope (not because they don't matter, but because they're not
-**LiteShip’s** published security surface):
+LiteShip's published security surface):
 
 - Vulnerabilities in upstream dependencies (please report to those
   maintainers; we'll bump if a fix is available)

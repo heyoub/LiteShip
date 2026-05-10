@@ -8,7 +8,7 @@
 
 > `const` **Layout**: `object`
 
-Defined in: [scene/src/sugar/layout.ts:19](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/layout.ts#L19)
+Defined in: scene/src/sugar/layout.ts:19
 
 Layout helpers for multi-track arrangement.
 

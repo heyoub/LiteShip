@@ -8,7 +8,7 @@
 
 > `const` **KVCache**: `object`
 
-Defined in: [edge/src/kv-cache.ts:187](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L187)
+Defined in: edge/src/kv-cache.ts:187
 
 KV cache namespace.
 

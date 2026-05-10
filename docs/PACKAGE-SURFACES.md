@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document maps the main **`@czap/*`** compartments in the repo — the hull sections you import from.
+This document maps the main `@czap/*` compartments in the repo: the hull sections you import from.
 
 It answers:
 
@@ -20,9 +20,7 @@ Product naming for surrounding docs: [GLOSSARY.md](./GLOSSARY.md).
 
 Source: [`packages/core/src/index.ts`](../packages/core/src/index.ts)
 
-This is the semantic and runtime foundation.
-Runtime status: `host-wired`, including `Plan` and `ECS` through the shared
-`RuntimeCoordinator` host surface.
+The semantic and runtime foundation. Runtime status: `host-wired`, including `Plan` and `ECS` through the shared `RuntimeCoordinator` host surface.
 
 Reach for it when you need:
 
@@ -66,7 +64,7 @@ Main surfaces:
 - `Receipt`
 - `DAG`
 
-This is the package that defines the system’s language.
+This is the package that defines the system's language.
 
 ---
 
@@ -74,8 +72,7 @@ This is the package that defines the system’s language.
 
 Source: [`packages/quantizer/src/index.ts`](../packages/quantizer/src/index.ts)
 
-This package turns boundaries and outputs into live quantized behavior.
-Runtime status: `host-wired`.
+Turns boundaries and outputs into live quantized behavior. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -100,8 +97,7 @@ This is the package for runtime state selection and transition behavior.
 
 Source: [`packages/compiler/src/index.ts`](../packages/compiler/src/index.ts)
 
-This package projects authored definitions into target-specific outputs.
-Runtime status: `host-wired` through the Vite and Astro host paths.
+Projects authored definitions into target-specific outputs. Runtime status: `host-wired` through the Vite and Astro host paths.
 
 Reach for it when you need:
 
@@ -134,8 +130,7 @@ This is the projection layer from semantic state to concrete target.
 
 Source: [`packages/web/src/index.ts`](../packages/web/src/index.ts)
 
-This is the browser runtime package.
-Runtime status: `host-wired`.
+The browser runtime package. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -171,8 +166,7 @@ This is the package that touches the browser most directly.
 
 Source: [`packages/detect/src/index.ts`](../packages/detect/src/index.ts)
 
-This package reads capabilities and maps them into the tier lattice.
-Runtime status: `host-wired`.
+Reads capabilities and maps them into the tier lattice. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -198,8 +192,7 @@ This is the package for deciding what the runtime is allowed to do.
 
 Source: [`packages/vite/src/index.ts`](../packages/vite/src/index.ts)
 
-This package is the authored-CSS transformation layer.
-Runtime status: `host-wired`.
+The authored-CSS transformation layer. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -237,8 +230,7 @@ This is the package that turns authored CSS into runtime-ready CSS.
 
 Source: [`packages/astro/src/index.ts`](../packages/astro/src/index.ts)
 
-This is the Astro host package.
-Runtime status: `host-wired`.
+The Astro host package. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -262,7 +254,7 @@ Host-owned shared runtime surfaces:
 - `@czap/astro/runtime` wasm runtime configuration and loading
 - internal runtime adapters for `satellite`, `stream`, `llm`, `worker`, and `wasm`
 
-This is the package that makes Astro a **LiteShip-aware** host.
+This is the package that makes Astro a LiteShip-aware host.
 
 ---
 
@@ -270,8 +262,7 @@ This is the package that makes Astro a **LiteShip-aware** host.
 
 Source: [`packages/edge/src/index.ts`](../packages/edge/src/index.ts)
 
-This is the edge/server capability and caching layer.
-Runtime status: `host-wired`.
+The edge / server capability and caching layer. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -290,10 +281,7 @@ Main surfaces:
 - `KVCache`
 - `compileTheme`
 
-The default Astro host path now routes through `createEdgeHostAdapter`, which
-combines `ClientHints`, `EdgeTier`, `compileTheme`, and `createBoundaryCache`
-into one request-time resolution pass.
-This is the package for request-time adaptation outside the browser.
+The default Astro host path now routes through `createEdgeHostAdapter`, which combines `ClientHints`, `EdgeTier`, `compileTheme`, and `createBoundaryCache` into one request-time resolution pass. This is the package for request-time adaptation outside the browser.
 
 ---
 
@@ -301,8 +289,7 @@ This is the package for request-time adaptation outside the browser.
 
 Source: [`packages/worker/src/index.ts`](../packages/worker/src/index.ts)
 
-This is the off-main-thread runtime layer.
-Runtime status: `host-wired`.
+The off-main-thread runtime layer. Runtime status: `host-wired`.
 
 Reach for it when you need:
 
@@ -320,9 +307,7 @@ Main surfaces:
 - `RenderWorker`
 - `WorkerHost`
 
-This package assumes stronger runtime requirements and should be used where the
-surface meaning justifies off-thread work. The Astro worker directive now routes
-through this package rather than carrying its own worker protocol.
+This package assumes stronger runtime requirements and should be used where the surface meaning justifies off-thread work. The Astro worker directive routes through this package rather than carrying its own worker protocol. By the way, `SPSCRing` is a real lock-free single-producer / single-consumer ring on `SharedArrayBuffer`, with `Atomics.load` and `Atomics.store` only — no `Atomics.wait` or `Atomics.notify`, which keeps it fully non-blocking on both sides.
 
 ---
 
@@ -330,8 +315,7 @@ through this package rather than carrying its own worker protocol.
 
 Source: [`packages/remotion/src/index.ts`](../packages/remotion/src/index.ts)
 
-This package is the React/Remotion video adapter.
-Runtime status: `standalone subsystem`.
+The React / Remotion video adapter. Runtime status: `standalone subsystem`.
 
 Reach for it when you need:
 
@@ -348,22 +332,21 @@ Main surfaces:
 - `Provider`
 - `useCzapState`
 
-This package is for the Remotion/video branch of the ecosystem, not the main
-Astro static-site path.
+This package is for the Remotion / video branch of the ecosystem, not the main Astro static-site path.
 
 ---
 
-## A Simple Selection Rule
+## A simple selection rule
 
 If the problem is:
 
-- semantic authored definitions -> `@czap/core`
-- live quantized state -> `@czap/quantizer`
-- **cast** to output targets -> `@czap/compiler`
-- browser runtime behavior -> `@czap/web`
-- capability decisions -> `@czap/detect`
-- authored CSS in Vite -> `@czap/vite`
-- Astro host integration -> `@czap/astro`
-- request-time adaptation -> `@czap/edge`
-- off-thread runtime -> `@czap/worker`
-- Remotion/video composition -> `@czap/remotion`
+- semantic authored definitions: `@czap/core`
+- live quantized state: `@czap/quantizer`
+- cast to output targets: `@czap/compiler`
+- browser runtime behavior: `@czap/web`
+- capability decisions: `@czap/detect`
+- authored CSS in Vite: `@czap/vite`
+- Astro host integration: `@czap/astro`
+- request-time adaptation: `@czap/edge`
+- off-thread runtime: `@czap/worker`
+- Remotion / video composition: `@czap/remotion`

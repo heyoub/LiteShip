@@ -6,7 +6,7 @@
 
 # Interface: DecodedAudio
 
-Defined in: [assets/src/decoders/audio.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L21)
+Defined in: assets/src/decoders/audio.ts:21
 
 Decoded audio metadata + sample buffer.
 
@@ -22,7 +22,7 @@ keep independently of the input.
 
 > `readonly` **bitsPerSample**: `number`
 
-Defined in: [assets/src/decoders/audio.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L24)
+Defined in: assets/src/decoders/audio.ts:24
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [assets/src/decoders/audio.ts:24](https://github.com/TheFreeBatteryF
 
 > `readonly` **channels**: `number`
 
-Defined in: [assets/src/decoders/audio.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L23)
+Defined in: assets/src/decoders/audio.ts:23
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [assets/src/decoders/audio.ts:23](https://github.com/TheFreeBatteryF
 
 > `readonly` **durationMs**: `number`
 
-Defined in: [assets/src/decoders/audio.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L27)
+Defined in: assets/src/decoders/audio.ts:27
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [assets/src/decoders/audio.ts:27](https://github.com/TheFreeBatteryF
 
 > `readonly` **sampleCount**: `number`
 
-Defined in: [assets/src/decoders/audio.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L25)
+Defined in: assets/src/decoders/audio.ts:25
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [assets/src/decoders/audio.ts:25](https://github.com/TheFreeBatteryF
 
 > `readonly` **sampleRate**: `number`
 
-Defined in: [assets/src/decoders/audio.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L22)
+Defined in: assets/src/decoders/audio.ts:22
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [assets/src/decoders/audio.ts:22](https://github.com/TheFreeBatteryF
 
 > `readonly` **samples**: `Int16Array`\<`ArrayBufferLike`\> \| `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [assets/src/decoders/audio.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/audio.ts#L26)
+Defined in: assets/src/decoders/audio.ts:26

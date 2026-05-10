@@ -8,7 +8,7 @@
 
 > `const` **Messages**: `object`
 
-Defined in: [worker/src/messages.ts:316](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/messages.ts#L316)
+Defined in: worker/src/messages.ts:316
 
 Runtime type guards and type aliases for the worker message protocol.
 Consumers typically use [Messages.isToWorker](#istoworker) /

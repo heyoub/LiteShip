@@ -12,7 +12,7 @@ LiteShip uses Effect v4 for async composition, resource lifecycle, and streams. 
 Six categorized patterns:
 
 1. **Setup/teardown.** `Signal.make`, `Cell.make`, `Derived.make`, `Compositor.create`, `SSE.create` return `Effect<..., never, Scope.Scope>`. Scope releases resources on close.
-2. **Hot loops plain JS.** `computeStateSync`, `Boundary.evaluate`, `DenseStore` iteration — no Effect on inner loops.
+2. **Hot loops plain JS.** `computeStateSync`, `Boundary.evaluate`, `DenseStore` iteration. No Effect on inner loops.
 3. **Event-handler grounding.** DOM handlers sync-update state via `Effect.runSync(SubscriptionRef.set(ref, val))`. Sanctioned seam: browser events are sync; Effect owns the Ref.
 4. **State-machine wrapping.** Long-lived machines model transitions as plain mutable state; Effect appears only at the Scope boundary and public reader accessors.
 5. **Resource cleanup (finalizers).** Sync finalizer-side `runSync` (e.g. `Queue.shutdown(...).pipe(Effect.runSync)`).
@@ -41,14 +41,14 @@ Phase B §5.7 audit outcome:
 
 ## Rejected alternatives
 
-- **All-Effect everywhere** — per-frame overhead unacceptable at 120 fps.
-- **All-plain-JS** — loses Scope-backed resource safety.
-- **Compositor stateRef → plain-JS pub/sub** — would break `Stream<CompositeState>` public API; gain <1 µs/frame.
+- **All-Effect everywhere**: per-frame overhead unacceptable at 120 fps.
+- **All-plain-JS**: loses Scope-backed resource safety.
+- **Compositor stateRef → plain-JS pub/sub**: would break `Stream<CompositeState>` public API; gain <1 µs/frame.
 
 ## References
 
-- `packages/core/src/signal.ts` — event-handler seam
-- `packages/core/src/compositor.ts` — setup via Effect, per-frame plain JS
-- `packages/web/src/stream/sse.ts` — pure-reducer state machine
-- `packages/core/src/wire.ts` — finalizer seam
-- `packages/quantizer/src/animated-quantizer.ts` — `stateSync` short-circuit
+- `packages/core/src/signal.ts`: event-handler seam
+- `packages/core/src/compositor.ts`: setup via Effect, per-frame plain JS
+- `packages/web/src/stream/sse.ts`: pure-reducer state machine
+- `packages/core/src/wire.ts`: finalizer seam
+- `packages/quantizer/src/animated-quantizer.ts`: `stateSync` short-circuit

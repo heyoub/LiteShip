@@ -8,6 +8,6 @@
 
 > **ValidationResult** = `PlanValidationResult`
 
-Defined in: [core/src/plan.ts:312](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/plan.ts#L312)
+Defined in: core/src/plan.ts:312
 
 Alias for `PlanValidationResult`.

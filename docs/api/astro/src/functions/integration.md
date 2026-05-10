@@ -8,7 +8,7 @@
 
 > **integration**(`config?`): `AstroIntegration`
 
-Defined in: [astro/src/integration.ts:174](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/astro/src/integration.ts#L174)
+Defined in: astro/src/integration.ts:174
 
 Build the czap `AstroIntegration`.
 

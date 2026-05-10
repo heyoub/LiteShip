@@ -5,7 +5,7 @@
 
 ## Context
 
-`packages/_spine/` contains 13 `.d.ts` files (~90K+ lines) with comprehensive branded-type contracts for every package. Until this ADR, `_spine` had zero runtime imports — 100% type duplication between `_spine` and each implementation package's `brands.ts`. Classic Island Syndrome, documented in `docs/sixsigma/threads/thread-04-spine-runtime-gap.md`.
+`packages/_spine/` contains 13 `.d.ts` files (~90K+ lines) with comprehensive branded-type contracts for every package. Until this ADR, `_spine` had zero runtime imports: 100% type duplication between `_spine` and each implementation package's `brands.ts`. Classic Island Syndrome, documented in `docs/sixsigma/threads/thread-04-spine-runtime-gap.md`.
 
 The capsule factory needs a canonical type source. Declaring capsule contracts that themselves duplicate types across `_spine` and implementation packages would inherit the duplication.
 
@@ -21,18 +21,18 @@ The capsule factory needs a canonical type source. Declaring capsule contracts t
 ## Consequences
 
 - Eliminates 100% type duplication. Types change in one place.
-- Runtime validation bridges contracts to implementation — `_spine` stops being documentation-only.
+- Runtime validation bridges contracts to implementation. `_spine` stops being documentation-only.
 - Future contributors have one authoritative type location.
 - `_spine` participates in builds and tests, so drift is caught by the existing gauntlet.
-- Branded-type additions now land in `_spine/core.d.ts` (or the appropriate `_spine/*.d.ts` file) BEFORE the implementation package re-exports them — the ADR enforces the order to keep the bridge honest.
+- Branded-type additions now land in `_spine/core.d.ts` (or the appropriate `_spine/*.d.ts` file) BEFORE the implementation package re-exports them. The ADR enforces the order to keep the bridge honest.
 
 ## Supporting evidence
 
-- `packages/core/src/brands.ts` — re-export pattern for six branded types (`SignalInput`, `ThresholdValue`, `StateName`, `ContentAddress`, `TokenRef`, `Millis`).
-- `packages/core/src/capsule.ts` — `import type { ContentAddress } from '@czap/_spine'`; `TypeValidator.validate` uses `Schema.decodeUnknownEffect`.
+- `packages/core/src/brands.ts`: re-export pattern for six branded types (`SignalInput`, `ThresholdValue`, `StateName`, `ContentAddress`, `TokenRef`, `Millis`).
+- `packages/core/src/capsule.ts`: `import type { ContentAddress } from '@czap/_spine'`; `TypeValidator.validate` uses `Schema.decodeUnknownEffect`.
 - `tsconfig.json` references include `./packages/_spine` as the first entry.
 - `vitest.shared.ts` alias: `'@czap/_spine': resolve(repoRoot, 'packages/_spine/index.d.ts')`.
-- `packages/_spine/core.d.ts` — `Millis` added here (was absent before this ADR shipped) to unblock the `brands.ts` re-export.
+- `packages/_spine/core.d.ts`: `Millis` added here (was absent before this ADR shipped) to unblock the `brands.ts` re-export.
 
 ## References
 

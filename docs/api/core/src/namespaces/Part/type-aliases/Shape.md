@@ -8,7 +8,7 @@
 
 > **Shape**\<`T`\> = `PartShape`\<`T`\>
 
-Defined in: [core/src/ecs.ts:367](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L367)
+Defined in: core/src/ecs.ts:367
 
 Structural shape of a typed component definition (`name` + schema).
 

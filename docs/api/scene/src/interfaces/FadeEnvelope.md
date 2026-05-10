@@ -6,7 +6,7 @@
 
 # Interface: FadeEnvelope
 
-Defined in: [scene/src/sugar/envelope.ts:12](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L12)
+Defined in: scene/src/sugar/envelope.ts:12
 
 Fade envelope (linear over a beat span).
 
@@ -16,7 +16,7 @@ Fade envelope (linear over a beat span).
 
 > `readonly` **\_t**: `"envelope"`
 
-Defined in: [scene/src/sugar/envelope.ts:14](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L14)
+Defined in: scene/src/sugar/envelope.ts:14
 
 Discriminant tag.
 
@@ -26,7 +26,7 @@ Discriminant tag.
 
 > `readonly` **curve**: `"linear-in"` \| `"linear-out"`
 
-Defined in: [scene/src/sugar/envelope.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L16)
+Defined in: scene/src/sugar/envelope.ts:16
 
 Curve kind — linear-in or linear-out.
 
@@ -36,6 +36,6 @@ Curve kind — linear-in or linear-out.
 
 > `readonly` **span**: [`BeatHandle`](BeatHandle.md)
 
-Defined in: [scene/src/sugar/envelope.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L18)
+Defined in: scene/src/sugar/envelope.ts:18
 
 Duration of the fade in beats.

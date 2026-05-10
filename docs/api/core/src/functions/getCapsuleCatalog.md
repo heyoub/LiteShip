@@ -8,7 +8,7 @@
 
 > **getCapsuleCatalog**(): readonly [`CapsuleDef`](../interfaces/CapsuleDef.md)\<[`AssemblyKind`](../type-aliases/AssemblyKind.md), `unknown`, `unknown`, `unknown`\>[]
 
-Defined in: [core/src/assembly.ts:69](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/assembly.ts#L69)
+Defined in: core/src/assembly.ts:69
 
 Read-only snapshot of all registered capsules.
 

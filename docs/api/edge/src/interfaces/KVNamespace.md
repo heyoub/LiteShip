@@ -6,7 +6,7 @@
 
 # Interface: KVNamespace
 
-Defined in: [edge/src/kv-cache.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L23)
+Defined in: edge/src/kv-cache.ts:23
 
 Minimal KV namespace interface -- compatible with Cloudflare Workers KV,
 Deno KV, or any adapter that implements get/put with string values.
@@ -17,7 +17,7 @@ Deno KV, or any adapter that implements get/put with string values.
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [edge/src/kv-cache.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L24)
+Defined in: edge/src/kv-cache.ts:24
 
 #### Parameters
 
@@ -35,7 +35,7 @@ Defined in: [edge/src/kv-cache.ts:24](https://github.com/TheFreeBatteryFactory/c
 
 > **put**(`key`, `value`, `options?`): `Promise`\<`void`\>
 
-Defined in: [edge/src/kv-cache.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/kv-cache.ts#L25)
+Defined in: edge/src/kv-cache.ts:25
 
 #### Parameters
 

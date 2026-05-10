@@ -8,6 +8,6 @@
 
 > **AssetKind** = `"audio"` \| `"video"` \| `"image"` \| `"beat-markers"` \| `"onsets"` \| `"waveform"`
 
-Defined in: [assets/src/contract.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/contract.ts#L15)
+Defined in: assets/src/contract.ts:15
 
 Supported asset kinds.

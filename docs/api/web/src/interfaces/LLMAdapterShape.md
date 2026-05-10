@@ -6,7 +6,7 @@
 
 # Interface: LLMAdapterShape
 
-Defined in: [web/src/stream/llm-adapter.ts:57](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-adapter.ts#L57)
+Defined in: web/src/stream/llm-adapter.ts:57
 
 Host-facing surface of an LLM adapter. Exposes both the typed
 [LLMChunk](LLMChunk.md) stream and the decoded text-token stream derived
@@ -18,7 +18,7 @@ from it. Returned by [LLMAdapter.create](../variables/LLMAdapter.md#create).
 
 > `readonly` **chunks**: `Stream`\<[`LLMChunk`](LLMChunk.md)\>
 
-Defined in: [web/src/stream/llm-adapter.ts:58](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-adapter.ts#L58)
+Defined in: web/src/stream/llm-adapter.ts:58
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [web/src/stream/llm-adapter.ts:58](https://github.com/TheFreeBattery
 
 > `readonly` **textTokens**: `Stream`\<`string`\>
 
-Defined in: [web/src/stream/llm-adapter.ts:59](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/llm-adapter.ts#L59)
+Defined in: web/src/stream/llm-adapter.ts:59

@@ -8,7 +8,7 @@
 
 > `const` **BlendTree**: `object`
 
-Defined in: [core/src/blend.ts:128](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/blend.ts#L128)
+Defined in: core/src/blend.ts:128
 
 BlendTree -- weighted multi-state blending for numeric records.
 Add named nodes with values and weights, then compute the weighted average.

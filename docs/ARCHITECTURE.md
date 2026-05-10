@@ -1,22 +1,19 @@
 # LiteShip architecture
 
-LiteShip is a constraint-shaped adaptive projection stack — **powered by the CZAP engine** (*Content-Zoned Adaptive Projection*), **distributed as `@czap/*`**. This document is a **slim structural index**; deeper explanation lives in the linked docs.
+Slim structural index. Deeper explanation lives in the linked docs.
+
+*LiteShip — powered by the CZAP engine (Content-Zoned Adaptive Projection), distributed as `@czap/*` packages on npm.*
 
 Prose vocabulary: [GLOSSARY.md](./GLOSSARY.md).
 
-- **Mental model** — [`ASTRO-STATIC-MENTAL-MODEL.md`](./ASTRO-STATIC-MENTAL-MODEL.md),
-  [`AUTHORING-MODEL.md`](./AUTHORING-MODEL.md), and
-  [`ASTRO-RUNTIME-MODEL.md`](./ASTRO-RUNTIME-MODEL.md).
-- **Public surfaces** — [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md) and
-  [`docs/api/`](./api/) (TypeDoc-generated from source TSDoc).
-- **Decisions** — [`docs/adr/`](./adr/) (why each non-obvious choice was made).
-- **Status** — [`docs/STATUS.md`](./STATUS.md) (live gates, perf, watch items).
+- Mental model: [`ASTRO-STATIC-MENTAL-MODEL.md`](./ASTRO-STATIC-MENTAL-MODEL.md), [`AUTHORING-MODEL.md`](./AUTHORING-MODEL.md), and [`ASTRO-RUNTIME-MODEL.md`](./ASTRO-RUNTIME-MODEL.md).
+- Public surfaces: [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md) and [`docs/api/`](./api/) (TypeDoc-generated from source TSDoc).
+- Decisions: [`docs/adr/`](./adr/), where each non-obvious choice has a record.
+- Status: [`docs/STATUS.md`](./STATUS.md), live gates, perf, watch items.
 
-## System Shape
+## System shape
 
-Core grammar: `signal -> boundary -> named state -> target output`.
-`@czap/core` owns the language; host packages **rig** it to browsers, Astro, edge,
-workers, video, CLI, and AI-tooling surfaces.
+Core grammar: `signal -> boundary -> named state -> target output`. `@czap/core` owns the language; host packages rig it to browsers, Astro, edge, workers, video, CLI, and AI-tooling surfaces. Worth noting: the grammar holds across all of them. No host gets to invent its own boundary semantics; every projection target reads the same content-addressed definition.
 
 ## Package DAG
 
@@ -29,7 +26,7 @@ web + worker -> astro
 scene + assets -> cli -> mcp-server
 ```
 
-Plus `crates/czap-compute/` — Rust `#![no_std]` WASM hot-path kernels.
+Plus `crates/czap-compute/`, the Rust `#![no_std]` WASM hot-path kernels.
 
 ## Packages
 
@@ -44,17 +41,20 @@ Plus `crates/czap-compute/` — Rust `#![no_std]` WASM hot-path kernels.
 | @czap/vite | [api/vite/](./api/vite/) | Vite transforms and HMR |
 | @czap/astro | [api/astro/](./api/astro/) | Astro integration and directives |
 | @czap/edge | [api/edge/](./api/edge/) | client hints, tiers, edge cache |
-| @czap/worker | [api/worker/](./api/worker/) | off-thread compositor/render workers |
+| @czap/worker | [api/worker/](./api/worker/) | off-thread compositor / render workers |
 | @czap/remotion | [api/remotion/](./api/remotion/) | Remotion adapter |
 | @czap/scene | [api/scene/](./api/scene/) | ECS scene composition |
 | @czap/assets | [api/assets/](./api/assets/) | asset capsules and projections |
 | @czap/cli | [api/cli/](./api/cli/) | JSON-first CLI |
 | @czap/mcp-server | [api/mcp-server/](./api/mcp-server/) | MCP server |
 
-For package-by-package import guidance, read
-[`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md).
+For package-by-package import guidance, read [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md).
 
-## Architectural Decisions
+## Graceful degradation, not silent ceilings
+
+`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:145`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:83`). The pattern repeats: pick the right-shaped optimization for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
+
+## Architectural decisions
 
 See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADRs:
 
@@ -67,12 +67,11 @@ See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADR
 
 ## Where to start
 
-- New contributors: read the [mental model](./ASTRO-STATIC-MENTAL-MODEL.md),
-  [GLOSSARY](./GLOSSARY.md), [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
-- Using primitives: [api/core/](./api/core/) → Boundary, Token, Style, Theme.
-- Adding a projection target: [ADR-0006](./adr/0006-compiler-dispatch.md) + `packages/compiler/src/dispatch.ts`.
-- Off-thread / WASM: [ADR-0002](./adr/0002-zero-alloc.md) + `packages/worker/` + `crates/czap-compute/`.
+- New contributors: read the [mental model](./ASTRO-STATIC-MENTAL-MODEL.md), [GLOSSARY](./GLOSSARY.md), [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
+- Using primitives: [api/core/](./api/core/) for Boundary, Token, Style, Theme.
+- Adding a projection target: [ADR-0006](./adr/0006-compiler-dispatch.md) and `packages/compiler/src/dispatch.ts`.
+- Off-thread / WASM: [ADR-0002](./adr/0002-zero-alloc.md), `packages/worker/`, and `crates/czap-compute/`.
 
-## Capsule Factory + Video Stack (2026-04-23)
+## Capsule factory and video stack (2026-04-23)
 
-Full details: [capsule-factory.md](./capsule-factory.md) — factory kernel, scene stack, assets, CLI/MCP, spine bridge.
+Full details: [capsule-factory.md](./capsule-factory.md). Factory kernel, scene stack, assets, CLI / MCP, spine bridge.

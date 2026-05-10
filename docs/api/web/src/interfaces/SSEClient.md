@@ -6,7 +6,7 @@
 
 # Interface: SSEClient
 
-Defined in: [web/src/stream/sse.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L21)
+Defined in: web/src/stream/sse.ts:21
 
 SSE client instance.
 
@@ -16,7 +16,7 @@ SSE client instance.
 
 > `readonly` **backpressure**: `Effect`\<[`BackpressureHint`](BackpressureHint.md)\>
 
-Defined in: [web/src/stream/sse.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L27)
+Defined in: web/src/stream/sse.ts:27
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [web/src/stream/sse.ts:27](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **lastEventId**: `Effect`\<`string` \| `null`\>
 
-Defined in: [web/src/stream/sse.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L26)
+Defined in: web/src/stream/sse.ts:26
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [web/src/stream/sse.ts:26](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **messages**: `Stream`\<[`SSEMessage`](../type-aliases/SSEMessage.md)\>
 
-Defined in: [web/src/stream/sse.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L22)
+Defined in: web/src/stream/sse.ts:22
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [web/src/stream/sse.ts:22](https://github.com/TheFreeBatteryFactory/
 
 > `readonly` **state**: `Effect`\<[`SSEState`](../type-aliases/SSEState.md)\>
 
-Defined in: [web/src/stream/sse.ts:23](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L23)
+Defined in: web/src/stream/sse.ts:23
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: [web/src/stream/sse.ts:23](https://github.com/TheFreeBatteryFactory/
 
 > **close**(): `Effect`\<`void`\>
 
-Defined in: [web/src/stream/sse.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L24)
+Defined in: web/src/stream/sse.ts:24
 
 #### Returns
 
@@ -60,7 +60,7 @@ Defined in: [web/src/stream/sse.ts:24](https://github.com/TheFreeBatteryFactory/
 
 > **reconnect**(): `Effect`\<`void`\>
 
-Defined in: [web/src/stream/sse.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/sse.ts#L25)
+Defined in: web/src/stream/sse.ts:25
 
 #### Returns
 

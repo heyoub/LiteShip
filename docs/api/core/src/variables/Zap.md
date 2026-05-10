@@ -8,7 +8,7 @@
 
 > `const` **Zap**: `object`
 
-Defined in: [core/src/zap.ts:228](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/zap.ts#L228)
+Defined in: core/src/zap.ts:228
 
 Zap -- push-based event channel backed by Effect PubSub.
 Provides reactive event streams with map, filter, merge, debounce, and throttle.

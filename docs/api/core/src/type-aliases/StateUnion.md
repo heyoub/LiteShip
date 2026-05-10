@@ -8,7 +8,7 @@
 
 > **StateUnion**\<`B`\> = `B`\[`"states"`\]\[`number`\]
 
-Defined in: [core/src/type-utils.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L18)
+Defined in: core/src/type-utils.ts:18
 
 Extract literal union of state names from a Boundary.Shape
 

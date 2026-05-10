@@ -8,6 +8,6 @@
 
 > **CompileContext** = [`EdgeHostCompileContext`](../../../interfaces/EdgeHostCompileContext.md)
 
-Defined in: [edge/src/host-adapter.ts:216](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/host-adapter.ts#L216)
+Defined in: edge/src/host-adapter.ts:216
 
 Alias for [EdgeHostCompileContext](../../../interfaces/EdgeHostCompileContext.md).

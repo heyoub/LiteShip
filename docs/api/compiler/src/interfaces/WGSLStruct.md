@@ -6,7 +6,7 @@
 
 # Interface: WGSLStruct
 
-Defined in: [compiler/src/wgsl.ts:49](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L49)
+Defined in: compiler/src/wgsl.ts:49
 
 A WGSL `struct { … }` definition produced by [WGSLCompiler.compile](../variables/WGSLCompiler.md#compile).
 
@@ -16,7 +16,7 @@ A WGSL `struct { … }` definition produced by [WGSLCompiler.compile](../variabl
 
 > `readonly` **fields**: readonly `object`[]
 
-Defined in: [compiler/src/wgsl.ts:53](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L53)
+Defined in: compiler/src/wgsl.ts:53
 
 Ordered fields; the first is always `state_index: u32`.
 
@@ -26,6 +26,6 @@ Ordered fields; the first is always `state_index: u32`.
 
 > `readonly` **name**: `string`
 
-Defined in: [compiler/src/wgsl.ts:51](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/wgsl.ts#L51)
+Defined in: compiler/src/wgsl.ts:51
 
 Struct identifier (PascalCase, suffixed `State`).

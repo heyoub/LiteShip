@@ -8,7 +8,7 @@
 
 > `const` **ARIACompiler**: `object`
 
-Defined in: [compiler/src/aria.ts:146](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/aria.ts#L146)
+Defined in: compiler/src/aria.ts:146
 
 ARIA compiler namespace.
 

@@ -8,7 +8,7 @@
 
 > **WavMetadataProjection**(`audioAssetId`): `CapsuleDef`\<`"cachedProjection"`, `unknown`, [`WavMetadata`](../interfaces/WavMetadata.md), `unknown`\>
 
-Defined in: [assets/src/analysis/wav-metadata.ts:75](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/wav-metadata.ts#L75)
+Defined in: assets/src/analysis/wav-metadata.ts:75
 
 Build a WavMetadataProjection cachedProjection capsule for a named audio asset.
 

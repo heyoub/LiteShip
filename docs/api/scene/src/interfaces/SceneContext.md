@@ -6,7 +6,7 @@
 
 # Interface: SceneContext
 
-Defined in: [scene/src/context.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/context.ts#L15)
+Defined in: scene/src/context.ts:15
 
 Per-scene compositional state inherited across `Scene.subscene`.
 
@@ -16,7 +16,7 @@ Per-scene compositional state inherited across `Scene.subscene`.
 
 > `readonly` **bpm**: `number`
 
-Defined in: [scene/src/context.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/context.ts#L16)
+Defined in: scene/src/context.ts:16
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [scene/src/context.ts:16](https://github.com/TheFreeBatteryFactory/c
 
 > `readonly` **fps**: `number`
 
-Defined in: [scene/src/context.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/context.ts#L17)
+Defined in: scene/src/context.ts:17
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [scene/src/context.ts:17](https://github.com/TheFreeBatteryFactory/c
 
 > `readonly` **rootTimeMs**: `number`
 
-Defined in: [scene/src/context.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/context.ts#L18)
+Defined in: scene/src/context.ts:18

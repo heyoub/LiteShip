@@ -8,6 +8,6 @@
 
 > **Shape** = [`RenderWorkerShape`](../../../interfaces/RenderWorkerShape.md)
 
-Defined in: [worker/src/render-worker.ts:453](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L453)
+Defined in: worker/src/render-worker.ts:453
 
 Public host-side surface returned by [RenderWorker.create](../../../variables/RenderWorker.md#create).

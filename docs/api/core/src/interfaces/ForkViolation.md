@@ -6,7 +6,7 @@
 
 # Interface: ForkViolation
 
-Defined in: [core/src/dag.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L38)
+Defined in: core/src/dag.ts:38
 
 Detail record describing a single-writer fork-rule violation.
 
@@ -16,7 +16,7 @@ Detail record describing a single-writer fork-rule violation.
 
 > `readonly` **actor**: `string`
 
-Defined in: [core/src/dag.ts:39](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L39)
+Defined in: core/src/dag.ts:39
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/dag.ts:39](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **attempted**: `string`
 
-Defined in: [core/src/dag.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L42)
+Defined in: core/src/dag.ts:42
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/src/dag.ts:42](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **existing**: `string`
 
-Defined in: [core/src/dag.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L41)
+Defined in: core/src/dag.ts:41
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [core/src/dag.ts:41](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **prevHash**: `string`
 
-Defined in: [core/src/dag.ts:40](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L40)
+Defined in: core/src/dag.ts:40

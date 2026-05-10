@@ -8,7 +8,7 @@
 
 > `const` **GLSLCompiler**: `object`
 
-Defined in: [compiler/src/glsl.ts:277](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/glsl.ts#L277)
+Defined in: compiler/src/glsl.ts:277
 
 GLSL compiler namespace.
 

@@ -8,7 +8,7 @@
 
 > **CapLevel** = `"static"` \| `"styled"` \| `"reactive"` \| `"animated"` \| `"gpu"`
 
-Defined in: [core/src/caps.ts:13](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/caps.ts#L13)
+Defined in: core/src/caps.ts:13
 
 Rung on the rendering-capability ladder. Higher levels imply lower ones:
 `gpu > animated > reactive > styled > static`.

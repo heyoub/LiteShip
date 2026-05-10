@@ -8,6 +8,6 @@
 
 > **Shape** = `AVRendererShape`
 
-Defined in: [core/src/av-renderer.ts:113](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/av-renderer.ts#L113)
+Defined in: core/src/av-renderer.ts:113
 
 Structural shape of a renderer instance returned by [AVRenderer.make](../../../variables/AVRenderer.md#make).

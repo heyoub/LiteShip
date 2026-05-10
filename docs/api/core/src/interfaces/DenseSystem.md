@@ -6,7 +6,7 @@
 
 # Interface: DenseSystem
 
-Defined in: [core/src/ecs.ts:144](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L144)
+Defined in: core/src/ecs.ts:144
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/src/ecs.ts:144](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **\_denseSystem**: `true`
 
-Defined in: [core/src/ecs.ts:147](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L147)
+Defined in: core/src/ecs.ts:147
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [core/src/ecs.ts:147](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **name**: `string`
 
-Defined in: [core/src/ecs.ts:145](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L145)
+Defined in: core/src/ecs.ts:145
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [core/src/ecs.ts:145](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **query**: readonly `string`[]
 
-Defined in: [core/src/ecs.ts:146](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L146)
+Defined in: core/src/ecs.ts:146
 
 ## Methods
 
@@ -38,7 +38,7 @@ Defined in: [core/src/ecs.ts:146](https://github.com/TheFreeBatteryFactory/czap/
 
 > **execute**(`stores`): `Effect`\<`void`\>
 
-Defined in: [core/src/ecs.ts:152](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L152)
+Defined in: core/src/ecs.ts:152
 
 Execute receives dense stores keyed by component name.
 Systems iterate the typed arrays directly -- zero allocation per tick.

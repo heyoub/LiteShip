@@ -6,7 +6,7 @@
 
 # Interface: Invariant\<In, Out\>
 
-Defined in: [core/src/capsule.ts:40](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L40)
+Defined in: core/src/capsule.ts:40
 
 A typed invariant over input and output that the harness will check.
 
@@ -26,7 +26,7 @@ A typed invariant over input and output that the harness will check.
 
 > `readonly` **check**: (`input`, `output`) => `boolean`
 
-Defined in: [core/src/capsule.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L42)
+Defined in: core/src/capsule.ts:42
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: [core/src/capsule.ts:42](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **message**: `string`
 
-Defined in: [core/src/capsule.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L43)
+Defined in: core/src/capsule.ts:43
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [core/src/capsule.ts:43](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **name**: `string`
 
-Defined in: [core/src/capsule.ts:41](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capsule.ts#L41)
+Defined in: core/src/capsule.ts:41

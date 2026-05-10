@@ -8,7 +8,7 @@
 
 > `const` **ease**: `object`
 
-Defined in: [scene/src/sugar/ease.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/ease.ts#L42)
+Defined in: scene/src/sugar/ease.ts:42
 
 Named easing catalog. Closed set; extend via ADR amendment.
 

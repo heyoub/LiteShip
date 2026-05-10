@@ -6,7 +6,7 @@
 
 # Interface: BackpressureHint
 
-Defined in: [web/src/types.ts:223](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L223)
+Defined in: web/src/types.ts:223
 
 Backpressure hint emitted when SSE buffer fills.
 
@@ -16,7 +16,7 @@ Backpressure hint emitted when SSE buffer fills.
 
 > `readonly` **bufferSize**: `number`
 
-Defined in: [web/src/types.ts:224](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L224)
+Defined in: web/src/types.ts:224
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [web/src/types.ts:224](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **dropping**: `boolean`
 
-Defined in: [web/src/types.ts:227](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L227)
+Defined in: web/src/types.ts:227
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [web/src/types.ts:227](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **maxBufferSize**: `number`
 
-Defined in: [web/src/types.ts:225](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L225)
+Defined in: web/src/types.ts:225
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [web/src/types.ts:225](https://github.com/TheFreeBatteryFactory/czap
 
 > `readonly` **percentFull**: `number`
 
-Defined in: [web/src/types.ts:226](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L226)
+Defined in: web/src/types.ts:226

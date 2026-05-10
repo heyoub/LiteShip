@@ -6,7 +6,7 @@
 
 # Interface: CaptureResult
 
-Defined in: [core/src/capture.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capture.ts#L43)
+Defined in: core/src/capture.ts:43
 
 Encoder output returned from [FrameCapture](FrameCapture.md).`finalize`: the encoded blob plus codec metadata.
 
@@ -16,7 +16,7 @@ Encoder output returned from [FrameCapture](FrameCapture.md).`finalize`: the enc
 
 > `readonly` **blob**: `Blob`
 
-Defined in: [core/src/capture.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capture.ts#L44)
+Defined in: core/src/capture.ts:44
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/capture.ts:44](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **codec**: `string`
 
-Defined in: [core/src/capture.ts:45](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capture.ts#L45)
+Defined in: core/src/capture.ts:45
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/src/capture.ts:45](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **durationMs**: `Millis`
 
-Defined in: [core/src/capture.ts:47](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capture.ts#L47)
+Defined in: core/src/capture.ts:47
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [core/src/capture.ts:47](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **frames**: `number`
 
-Defined in: [core/src/capture.ts:46](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/capture.ts#L46)
+Defined in: core/src/capture.ts:46

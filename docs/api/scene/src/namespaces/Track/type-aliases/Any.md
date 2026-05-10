@@ -8,6 +8,6 @@
 
 > **Any** = [`VideoTrack`](../../../interfaces/VideoTrack.md) \| [`AudioTrack`](../../../interfaces/AudioTrack.md) \| [`TransitionTrack`](../../../interfaces/TransitionTrack.md) \| [`EffectTrack`](../../../interfaces/EffectTrack.md)
 
-Defined in: [scene/src/track.ts:122](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L122)
+Defined in: scene/src/track.ts:122
 
 Union of all concrete track shapes returned by Track.{video,audio,transition,effect}.

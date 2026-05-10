@@ -8,7 +8,7 @@
 
 > `const` **Style**: `StyleFactory` & `object`
 
-Defined in: [core/src/style.ts:190](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/style.ts#L190)
+Defined in: core/src/style.ts:190
 
 Style namespace -- adaptive style primitive for constraint-based rendering.
 

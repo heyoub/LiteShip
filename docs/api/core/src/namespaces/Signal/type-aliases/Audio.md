@@ -8,6 +8,6 @@
 
 > **Audio** = `AudioSignalShape`
 
-Defined in: [core/src/signal.ts:344](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/signal.ts#L344)
+Defined in: core/src/signal.ts:344
 
 Structural shape of an audio-sourced signal backed by an [AVBridge](../../../variables/AVBridge.md).

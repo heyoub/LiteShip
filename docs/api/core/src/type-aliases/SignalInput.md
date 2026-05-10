@@ -8,7 +8,7 @@
 
 > **SignalInput**\<`I`\> = `_SignalInput`\<`I`\>
 
-Defined in: [core/src/brands.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L27)
+Defined in: core/src/brands.ts:27
 
 Branded input signal name. Dot-notation signal path (e.g. viewport.width, prefers-color-scheme).
 

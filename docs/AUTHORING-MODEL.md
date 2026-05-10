@@ -2,17 +2,15 @@
 
 ## Purpose
 
-This document explains how to author with **LiteShip** — the **CZAP** engine’s rigging surface, shipped as **`@czap/*`** packages.
+How to author with LiteShip: the CZAP engine's rigging surface, shipped as `@czap/*` packages.
 
 Naming: [GLOSSARY.md](./GLOSSARY.md).
 
-It is about construction, not migration.
-It assumes the mental model in
-[ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md).
+This is about construction, not migration. It assumes the mental model in [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md).
 
 ---
 
-## The Main Authoring Objects
+## The main authoring objects
 
 There are four primary authored definition types:
 
@@ -91,7 +89,7 @@ Style guidance:
 
 ---
 
-## The Authoring Order
+## The authoring order
 
 When building a new surface, the clean order is:
 
@@ -105,12 +103,11 @@ When building a new surface, the clean order is:
 
 This order matters because it keeps authored behavior semantic.
 
-If you start from CSS declarations, the system becomes accidental.
-If you start from signals and states, the system becomes legible.
+If you start from CSS declarations, the system becomes accidental. If you start from signals and states, the system becomes legible.
 
 ---
 
-## Naming Rules
+## Naming rules
 
 ### State names
 
@@ -156,14 +153,14 @@ Boundary identifiers should describe the surface domain:
 - `narrativeMode`
 - `ambientMotion`
 
-Avoid ids that merely restate the primitive type:
+Avoid IDs that merely restate the primitive type:
 
 - `mainBoundary`
 - `layoutBoundary`
 
 ---
 
-## Example Shapes
+## Example shapes
 
 ### Boundary
 
@@ -256,7 +253,7 @@ export const heroShell = Style.make({
 
 ---
 
-## File Organization
+## File organization
 
 The cleanest repo-level shape is convention-driven:
 
@@ -265,8 +262,7 @@ The cleanest repo-level shape is convention-driven:
 - `themes.ts`
 - `styles.ts`
 
-The Vite plugin already expects this shape well, and the resolver pipeline is
-built around it.
+The Vite plugin already expects this shape, and the resolver pipeline is built around it.
 
 Recommended section-level layout:
 
@@ -281,13 +277,11 @@ src/
   narrative.css
 ```
 
-This works because authored definitions live in TypeScript, while emitted style
-consumers can stay in CSS with `@token`, `@theme`, `@style`, and `@quantize`
-blocks.
+This works because authored definitions live in TypeScript, while emitted style consumers can stay in CSS with `@token`, `@theme`, `@style`, and `@quantize` blocks.
 
 ---
 
-## Authoring Surfaces in CSS
+## Authoring surfaces in CSS
 
 The Vite layer transforms authored blocks through four phases:
 
@@ -296,8 +290,7 @@ The Vite layer transforms authored blocks through four phases:
 3. `@style`
 4. `@quantize`
 
-This means CSS can stay declarative while still referencing authored
-definitions.
+CSS can stay declarative while still referencing authored definitions.
 
 Example:
 
@@ -326,12 +319,11 @@ Example:
 }
 ```
 
-The value of this model is that authored semantics remain centralized in the
-definition files, while CSS remains the expression layer.
+The value of this model is that authored semantics remain centralized in the definition files, while CSS remains the expression layer.
 
 ---
 
-## Outputs as Contracts
+## Outputs as contracts
 
 A single authored state may need to drive several targets:
 
@@ -340,18 +332,16 @@ A single authored state may need to drive several targets:
 - ARIA attributes
 - stream or media behavior
 
-Do not duplicate the state logic for each target.
-
-Instead:
+Do not duplicate the state logic for each target. Instead:
 
 - let the boundary define state
 - let compilers project the state into each target
 
-This is what gives **LiteShip** coherence across presentation layers.
+This is what gives LiteShip coherence across presentation layers. By the way, the projection is content-addressed: the boundary's FNV-1a hash is the contract every compiler reads from. CSS, GLSL, and ARIA can't drift on each other because they're emitted from the same canonical definition.
 
 ---
 
-## Runtime Escalation
+## Runtime escalation
 
 A surface should always choose the cheapest runtime that preserves its intent.
 
@@ -367,12 +357,11 @@ The authored design should remain valid under capability ceilings.
 
 ---
 
-## What Not To Do
+## What not to do
 
 ### Do not author too many states
 
-If a surface has many states, authors stop thinking semantically and start
-encoding implementation noise.
+If a surface has many states, authors stop thinking semantically and start encoding implementation noise.
 
 ### Do not use thresholds as names
 
@@ -392,9 +381,9 @@ The visual effect should justify the runtime.
 
 ---
 
-## Working Definition
+## Working definition
 
-Authoring in **LiteShip** means:
+Authoring in LiteShip means:
 
 - defining semantic partitions of reality
 - naming the states those partitions produce

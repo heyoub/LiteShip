@@ -2,13 +2,11 @@
 
 ## Purpose
 
-This document explains how to think with **LiteShip** when building visually rich
-Astro websites. The **CZAP** engine is what evaluates boundaries, **casts** styles, and keeps the working deck trim; you still install and import **`@czap/*`** packages.
+How to think with LiteShip when building visually rich Astro websites. The CZAP engine evaluates boundaries, casts styles, and keeps the working deck trim; you still install and import `@czap/*` packages.
 
 Naming: [GLOSSARY.md](./GLOSSARY.md).
 
-It is not a migration guide and not a product comparison against other stacks. It is a mental
-model for authoring.
+This is not a migration guide and not a product comparison. It's a mental model for authoring.
 
 The right question is not:
 
@@ -21,14 +19,13 @@ The right questions are:
 - "What outputs should those states drive?"
 - "What is the cheapest runtime that can deliver the effect?"
 
-**LiteShip** is strongest when the site is visual, adaptive, media-aware, and mostly
-about presentation rather than application logic.
+LiteShip is strongest when the site is visual, adaptive, media-aware, and mostly about presentation rather than application logic.
 
 ---
 
-## Core Idea
+## Core idea
 
-The CZAP engine **tensions** continuous reality into discrete visual bearings.
+The CZAP engine tensions continuous reality into discrete visual bearings.
 
 Reality is continuous:
 
@@ -40,8 +37,7 @@ Reality is continuous:
 - audio amplitude
 - time
 
-The UI should usually not be continuous.
-It should move through named, intentional states:
+The UI should usually not be continuous. It should move through named, intentional states:
 
 - `compact`
 - `comfortable`
@@ -59,7 +55,7 @@ Once this is clear, the rest of the architecture follows.
 
 ---
 
-## The Authoring Model
+## The authoring model
 
 ### 1. Signals
 
@@ -73,18 +69,15 @@ Examples:
 - `audio.level`
 - `network.effectiveType`
 
-Signals are not presentation.
-They are observations.
+Signals are not presentation. They are observations.
 
-If React tends to make authors think in terms of component-local state,
-**LiteShip** starts earlier, at the level of environment and perception.
+If React tends to make authors think in terms of component-local state, LiteShip starts earlier, at the level of environment and perception.
 
 ### 2. Boundaries
 
 A boundary defines where one named state becomes another.
 
-This is not raw breakpoint logic.
-It is a semantic partition of experience.
+This is not raw breakpoint logic. It is a semantic partition of experience.
 
 Example:
 
@@ -132,8 +125,7 @@ They hold:
 
 Tokens belong to the design language, not to a single section.
 
-If boundaries answer "what state are we in?",
-tokens answer "what are this brand system's materials?"
+If boundaries answer "what state are we in?", tokens answer "what are this brand system's materials?"
 
 ### 4. Themes
 
@@ -145,12 +137,11 @@ They answer:
 - what changes between neutral and campaign palettes
 - what changes between seasonal or narrative variants
 
-Themes are not ad-hoc class switches.
-They are explicit token-space variants.
+Themes are not ad-hoc class switches. They are explicit token-space variants.
 
 ### 5. Styles
 
-Styles define what each named bearing **casts** — the properties **projected** when that state is active.
+Styles define what each named bearing casts: the properties projected when that state is active.
 
 A style is where the author says:
 
@@ -163,7 +154,7 @@ This is the authored visual behavior.
 The important shift is:
 
 - React often computes UI by re-running component logic
-- **LiteShip** selects UI by choosing named, authored outputs
+- LiteShip selects UI by choosing named, authored outputs
 
 That produces a more deliberate visual system.
 
@@ -171,10 +162,7 @@ That produces a more deliberate visual system.
 
 A satellite is the shell that binds authored definitions to real DOM.
 
-For Astro, this matters a lot.
-Astro wants HTML first.
-**LiteShip** fits that posture because the shell is fundamentally DOM-and-attribute
-based, not virtual-DOM dependent.
+For Astro, this matters a lot. Astro wants HTML first. LiteShip fits that posture because the shell is fundamentally DOM-and-attribute based, not virtual-DOM dependent.
 
 Satellites are the bridge between:
 
@@ -184,18 +172,15 @@ Satellites are the bridge between:
 
 ### 7. Outputs
 
-The same state can **cast** to multiple projection targets:
+The same state can cast to multiple projection targets:
 
 - CSS
 - GLSL
 - WGSL
 - ARIA
-- AI/tool manifests
+- AI / tool manifests
 
-This is one of the system's deepest ideas.
-
-A boundary is not "for CSS only."
-It is a shared semantic contract — one **rigged** partition — that multiple runtimes consume.
+This is one of the system's deepest ideas. A boundary is not "for CSS only." It is a shared semantic contract, one rigged partition that multiple runtimes consume.
 
 That means a single authored decision can drive:
 
@@ -204,13 +189,13 @@ That means a single authored decision can drive:
 - accessibility labels
 - streamed content behavior
 
-without duplicating the logic in each layer.
+without duplicating the logic in each layer. By the way, the boundary's content address (FNV-1a of the canonical CBOR encoding) means the same definition produces byte-identical IDs across runtimes. CSS, GLSL, and ARIA can't drift on you, because they're reading the same hash.
 
 ---
 
-## The Runtime Model
+## The runtime model
 
-The working deck should stay as light as the journey allows.
+The working deck should stay as light as the workload allows.
 
 This is the opposite of a framework that raises every sail at the dock and reefs them later when something tears.
 
@@ -221,24 +206,21 @@ The intended order is:
 3. off-deck work only where justified
 4. GPU or media pipelines only where the visual payoff warrants it
 
-This matters most for static websites because a rich site is still often a
-trim-sensitive site.
+This matters most for static websites because a rich site is still often a trim-sensitive site. The homepage can be visually ambitious without turning into a JavaScript app.
 
-The homepage can be visually ambitious without turning into a JavaScript app.
-
-**LiteShip** is **trimmed** around that constraint.
+LiteShip is trimmed around that constraint.
 
 ---
 
-## The Astro Model
+## The Astro model
 
-Astro is a strong host for **LiteShip** because Astro already assumes:
+Astro is a strong host for LiteShip because Astro already assumes:
 
 - server-rendered HTML first
 - limited client runtime
 - selective enhancement
 
-**LiteShip** slots into that worldview naturally.
+LiteShip slots into that worldview naturally.
 
 In practice, the Astro side of the model is:
 
@@ -249,15 +231,13 @@ In practice, the Astro side of the model is:
 
 That is why the combination makes sense for static visual sites.
 
-Astro gives the document.
-**LiteShip** gives the adaptive visual logic.
+Astro gives the document. LiteShip gives the adaptive visual logic.
 
 ---
 
-## How to Think About Sections
+## How to think about sections
 
-Do not start from implementation units.
-Start from perceptual units.
+Do not start from implementation units. Start from perceptual units.
 
 A good authored section usually has:
 
@@ -303,15 +283,13 @@ Questions:
 - What is the stable presentation state?
 - What should happen under slow arrival or partial content?
 
-Each section is best understood as a state machine with authored outputs, not
-as a tree of reactive components.
+Each section is best understood as a state machine with authored outputs, not as a tree of reactive components.
 
 ---
 
-## What Replaces React Thinking
+## What replaces React thinking
 
-The replacement is not "no components."
-The replacement is a different center of gravity.
+The replacement is not "no components." The replacement is a different center of gravity.
 
 React centers:
 
@@ -320,7 +298,7 @@ React centers:
 - local state
 - prop flow
 
-**LiteShip** centers:
+LiteShip centers:
 
 - signals
 - boundaries
@@ -328,15 +306,13 @@ React centers:
 - compiled outputs
 - capability-aware runtime selection
 
-That means the main design object is no longer "the component."
-It is "the authored behavior of a surface."
+That means the main design object is no longer "the component." It is "the authored behavior of a surface."
 
-This is a very good fit for brand sites, editorial sites, launch pages, and
-other highly visual work where the page is choreography more than application.
+This is a good fit for brand sites, editorial sites, launch pages, and other highly visual work where the page is choreography more than application.
 
 ---
 
-## A Practical Theory of Rich Static Sites
+## A practical theory of rich static sites
 
 For this class of site, every section should answer five questions:
 
@@ -362,27 +338,21 @@ What changes in:
 
 ### 4. What is the cheapest runtime that can express it?
 
-Can CSS do it?
-Does it need directive runtime?
-Does it need a worker?
-Does it need GPU?
+Can CSS do it? Does it need directive runtime? Does it need a worker? Does it need GPU?
 
 ### 5. What happens on weak devices?
 
 What is the graceful version of the same experience?
 
-This is the part many systems treat as fallback.
-In **LiteShip**, it is part of the authored model.
+This is the part many systems treat as fallback. In LiteShip, it is part of the authored model.
 
 ---
 
-## Capability and Taste
+## Capability and taste
 
-**LiteShip** is not only about trim on the working line.
-It is also about taste.
+LiteShip is not only about trim on the working line. It is also about taste.
 
-A visually rich site should not merely "respond."
-It should choose.
+A visually rich site should not merely "respond." It should choose.
 
 The system is strongest when authored with:
 
@@ -392,36 +362,30 @@ The system is strongest when authored with:
 - a coherent token system
 - motion that reflects meaning, not decoration
 
-The best outcome is not a maximal runtime.
-The best outcome is a sharp aesthetic decision delivered at the lowest
-necessary cost.
+The best outcome is not a maximal runtime. The best outcome is a sharp aesthetic decision delivered at the lowest necessary cost.
 
 ---
 
-## What This Means for You
+## What this means for you
 
-For a solo builder working with many agents, the system is usable if the agents
-share one mental model:
+For a solo builder working with many agents, the system is usable if the agents share one mental model:
 
 - define signals first
 - define boundaries second
 - define tokens and themes as the material language
 - define styles as named-state outputs
 - let Astro own the document
-- let **LiteShip** own adaptive visual behavior
+- let LiteShip own adaptive visual behavior
 - prefer the cheapest runtime that preserves intent
 
-If the agents start from React habits, they will ask the wrong questions.
-If they start from signals, boundaries, and authored states, they will usually
-generate much better results.
+If the agents start from React habits, they will ask the wrong questions. If they start from signals, boundaries, and authored states, they will usually generate much better results.
 
 ---
 
-## Working Definition
+## Working definition
 
-For visually rich Astro sites, **LiteShip** is best understood as:
+For visually rich Astro sites, LiteShip is best understood as:
 
-> a perception-aware authored state system that **casts** design intent into the
-> cheapest runtime capable of delivering it
+> a perception-aware authored state system that casts design intent into the cheapest runtime capable of delivering it
 
 That is the theory to keep fixed while everything else changes.

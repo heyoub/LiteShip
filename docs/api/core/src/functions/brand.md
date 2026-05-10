@@ -8,7 +8,7 @@
 
 > **brand**\<`T`, `B`\>(`value`): `T` & `{ readonly [K in symbol]: true }`
 
-Defined in: [core/src/brands.ts:58](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L58)
+Defined in: core/src/brands.ts:58
 
 Generic brand factory
 

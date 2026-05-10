@@ -8,7 +8,7 @@
 
 > **detect**(): `Effect`\<[`ExtendedDetectionResult`](../interfaces/ExtendedDetectionResult.md)\>
 
-Defined in: [detect/src/detect.ts:551](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/detect.ts#L551)
+Defined in: detect/src/detect.ts:551
 
 Run a full device capability detection sweep.
 All probes are synchronous with internal error handling -- gracefully

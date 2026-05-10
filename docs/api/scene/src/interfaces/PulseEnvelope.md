@@ -6,7 +6,7 @@
 
 # Interface: PulseEnvelope
 
-Defined in: [scene/src/sugar/envelope.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L22)
+Defined in: scene/src/sugar/envelope.ts:22
 
 Pulse envelope (periodic, amplitude-scaled).
 
@@ -16,7 +16,7 @@ Pulse envelope (periodic, amplitude-scaled).
 
 > `readonly` **\_t**: `"envelope"`
 
-Defined in: [scene/src/sugar/envelope.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L24)
+Defined in: scene/src/sugar/envelope.ts:24
 
 Discriminant tag.
 
@@ -26,7 +26,7 @@ Discriminant tag.
 
 > `readonly` **amplitude**: `number`
 
-Defined in: [scene/src/sugar/envelope.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L30)
+Defined in: scene/src/sugar/envelope.ts:30
 
 Peak amplitude (0–1 range, may exceed 1 for overdrive).
 
@@ -36,7 +36,7 @@ Peak amplitude (0–1 range, may exceed 1 for overdrive).
 
 > `readonly` **curve**: `"pulse"`
 
-Defined in: [scene/src/sugar/envelope.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L26)
+Defined in: scene/src/sugar/envelope.ts:26
 
 Curve kind — pulse.
 
@@ -46,6 +46,6 @@ Curve kind — pulse.
 
 > `readonly` **period**: [`BeatHandle`](BeatHandle.md)
 
-Defined in: [scene/src/sugar/envelope.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L28)
+Defined in: scene/src/sugar/envelope.ts:28
 
 Period of the pulse in beats.

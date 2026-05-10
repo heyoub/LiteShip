@@ -8,7 +8,7 @@
 
 > `const` **UIQuality**: `object`
 
-Defined in: [core/src/ui-quality.ts:86](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ui-quality.ts#L86)
+Defined in: core/src/ui-quality.ts:86
 
 UIQuality — adaptive-bitrate-style UI fidelity gate.
 

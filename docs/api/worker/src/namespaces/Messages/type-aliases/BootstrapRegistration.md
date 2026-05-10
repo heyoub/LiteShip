@@ -8,6 +8,6 @@
 
 > **BootstrapRegistration** = `BootstrapQuantizerRegistration`
 
-Defined in: [worker/src/messages.ts:338](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/messages.ts#L338)
+Defined in: worker/src/messages.ts:338
 
 Single quantizer bootstrap registration.

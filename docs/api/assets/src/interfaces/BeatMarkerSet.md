@@ -6,7 +6,7 @@
 
 # Interface: BeatMarkerSet
 
-Defined in: [assets/src/analysis/beat-markers.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/beat-markers.ts#L16)
+Defined in: assets/src/analysis/beat-markers.ts:16
 
 Detected beat markers + overall BPM estimate.
 
@@ -16,7 +16,7 @@ Detected beat markers + overall BPM estimate.
 
 > `readonly` **beats**: readonly `number`[]
 
-Defined in: [assets/src/analysis/beat-markers.ts:18](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/beat-markers.ts#L18)
+Defined in: assets/src/analysis/beat-markers.ts:18
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [assets/src/analysis/beat-markers.ts:18](https://github.com/TheFreeB
 
 > `readonly` **bpm**: `number`
 
-Defined in: [assets/src/analysis/beat-markers.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/analysis/beat-markers.ts#L17)
+Defined in: assets/src/analysis/beat-markers.ts:17

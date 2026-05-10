@@ -8,7 +8,7 @@
 
 > `const` **World**: `object`
 
-Defined in: [core/src/ecs.ts:360](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L360)
+Defined in: core/src/ecs.ts:360
 
 World namespace — construct the ECS world that ticks systems over entities.
 

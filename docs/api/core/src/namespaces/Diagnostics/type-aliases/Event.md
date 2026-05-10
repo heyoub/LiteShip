@@ -8,6 +8,6 @@
 
 > **Event** = [`DiagnosticEvent`](../../../interfaces/DiagnosticEvent.md)
 
-Defined in: [core/src/diagnostics.ts:181](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/diagnostics.ts#L181)
+Defined in: core/src/diagnostics.ts:181
 
 Alias for [DiagnosticEvent](../../../interfaces/DiagnosticEvent.md).

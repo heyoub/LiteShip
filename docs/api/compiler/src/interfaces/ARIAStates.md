@@ -6,7 +6,7 @@
 
 # Interface: ARIAStates
 
-Defined in: [compiler/src/dispatch.ts:36](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/dispatch.ts#L36)
+Defined in: compiler/src/dispatch.ts:36
 
 ARIA compile input — per-state attribute map plus the currently-active state.
 
@@ -19,7 +19,7 @@ avoid flooding the DOM with unused `aria-*` values.
 
 > `readonly` **currentState**: `string`
 
-Defined in: [compiler/src/dispatch.ts:40](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/dispatch.ts#L40)
+Defined in: compiler/src/dispatch.ts:40
 
 Name of the state whose ARIA attributes should be emitted.
 
@@ -29,6 +29,6 @@ Name of the state whose ARIA attributes should be emitted.
 
 > `readonly` **states**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [compiler/src/dispatch.ts:38](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/dispatch.ts#L38)
+Defined in: compiler/src/dispatch.ts:38
 
 Per-state ARIA attribute maps keyed by state name.

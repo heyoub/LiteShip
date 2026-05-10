@@ -8,7 +8,7 @@
 
 > **isDerived**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: [core/src/index.ts:218](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L218)
+Defined in: core/src/index.ts:218
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Derived](../namespaces/Derived/README.md).
 

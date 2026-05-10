@@ -8,7 +8,7 @@
 
 > `const` **Physical**: `object`
 
-Defined in: [web/src/index.ts:79](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/index.ts#L79)
+Defined in: web/src/index.ts:79
 
 Physical DOM-state helpers for save/restore across morphs and hot
 reloads. Captures focus, selection, scroll, and IME composition so a

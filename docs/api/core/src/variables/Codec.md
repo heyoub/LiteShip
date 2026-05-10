@@ -8,7 +8,7 @@
 
 > `const` **Codec**: `object`
 
-Defined in: [core/src/codec.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/codec.ts#L31)
+Defined in: core/src/codec.ts:31
 
 Codec — typed encode/decode wrapper over `effect`'s `Schema.Codec`.
 Gives a single call site for schema-driven validation so consumers don't

@@ -8,7 +8,7 @@
 
 > **Shape**\<`N`, `Axes`\> = `TokenDef`\<`N`, `Axes`\>
 
-Defined in: [core/src/token.ts:188](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/token.ts#L188)
+Defined in: core/src/token.ts:188
 
 Structural shape of a token definition parameterized by its name `N` and axis tuple `Axes`.
 

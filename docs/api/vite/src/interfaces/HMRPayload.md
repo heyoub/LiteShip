@@ -6,7 +6,7 @@
 
 # Interface: HMRPayload
 
-Defined in: [vite/src/hmr.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/hmr.ts#L28)
+Defined in: vite/src/hmr.ts:28
 
 Shape of the HMR payload the czap Vite plugin ships over the Vite
 dev-server WebSocket. Handled by [handleHMR](../functions/handleHMR.md) on the client.
@@ -17,7 +17,7 @@ dev-server WebSocket. Handled by [handleHMR](../functions/handleHMR.md) on the c
 
 > `readonly` **boundary**: `string`
 
-Defined in: [vite/src/hmr.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/hmr.ts#L32)
+Defined in: vite/src/hmr.ts:32
 
 Boundary id whose compiled output changed.
 
@@ -27,7 +27,7 @@ Boundary id whose compiled output changed.
 
 > `readonly` `optional` **css?**: `string`
 
-Defined in: [vite/src/hmr.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/hmr.ts#L34)
+Defined in: vite/src/hmr.ts:34
 
 New compiled CSS (omitted when only uniforms changed).
 
@@ -37,7 +37,7 @@ New compiled CSS (omitted when only uniforms changed).
 
 > `readonly` **type**: `"czap:update"`
 
-Defined in: [vite/src/hmr.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/hmr.ts#L30)
+Defined in: vite/src/hmr.ts:30
 
 Message discriminator. Always `'czap:update'`.
 
@@ -47,6 +47,6 @@ Message discriminator. Always `'czap:update'`.
 
 > `readonly` `optional` **uniforms?**: `Record`\<`string`, `number`\>
 
-Defined in: [vite/src/hmr.ts:36](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/hmr.ts#L36)
+Defined in: vite/src/hmr.ts:36
 
 New shader-uniform values (omitted when only CSS changed).

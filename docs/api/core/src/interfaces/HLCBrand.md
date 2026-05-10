@@ -6,7 +6,7 @@
 
 # Interface: HLCBrand
 
-Defined in: [core/src/brands.ts:51](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L51)
+Defined in: core/src/brands.ts:51
 
 Hybrid Logical Clock
 
@@ -16,7 +16,7 @@ Hybrid Logical Clock
 
 > `readonly` **counter**: `number`
 
-Defined in: [core/src/brands.ts:53](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L53)
+Defined in: core/src/brands.ts:53
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/brands.ts:53](https://github.com/TheFreeBatteryFactory/cza
 
 > `readonly` **node\_id**: `string`
 
-Defined in: [core/src/brands.ts:54](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L54)
+Defined in: core/src/brands.ts:54
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [core/src/brands.ts:54](https://github.com/TheFreeBatteryFactory/cza
 
 > `readonly` **wall\_ms**: `number`
 
-Defined in: [core/src/brands.ts:52](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/brands.ts#L52)
+Defined in: core/src/brands.ts:52

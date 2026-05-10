@@ -8,6 +8,6 @@
 
 > **Shape** = [`SlotRegistryShape`](../../../interfaces/SlotRegistryShape.md)
 
-Defined in: [web/src/slot/registry.ts:353](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/slot/registry.ts#L353)
+Defined in: web/src/slot/registry.ts:353
 
 Structural type of a slot registry instance.

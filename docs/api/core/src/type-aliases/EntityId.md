@@ -8,7 +8,7 @@
 
 > **EntityId** = `string` & `object`
 
-Defined in: [core/src/ecs.ts:14](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L14)
+Defined in: core/src/ecs.ts:14
 
 Nominal-typed identifier for an ECS entity — a branded string minted via the [EntityId](../variables/EntityId.md) helper.
 

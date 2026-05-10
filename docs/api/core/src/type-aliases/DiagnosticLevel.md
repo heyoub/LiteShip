@@ -8,6 +8,6 @@
 
 > **DiagnosticLevel** = `"warn"` \| `"error"`
 
-Defined in: [core/src/diagnostics.ts:12](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/diagnostics.ts#L12)
+Defined in: core/src/diagnostics.ts:12
 
 Severity level for a [DiagnosticEvent](../interfaces/DiagnosticEvent.md).

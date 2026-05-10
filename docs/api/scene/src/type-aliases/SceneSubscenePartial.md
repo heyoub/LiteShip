@@ -8,7 +8,7 @@
 
 > **SceneSubscenePartial** = `Omit`\<[`SceneContract`](../interfaces/SceneContract.md), `"bpm"` \| `"fps"`\> & `object`
 
-Defined in: [scene/src/include.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/include.ts#L17)
+Defined in: scene/src/include.ts:17
 
 Partial sub-scene declaration — the parent supplies the missing
 `bpm` / `fps` defaults via [Scene.subscene](../variables/Scene.md#subscene). Any explicit

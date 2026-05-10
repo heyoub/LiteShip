@@ -26,10 +26,10 @@ Per-frame hot paths use dense `Part` stores (`Part.dense('Opacity', N)`, `Part.d
 ## Supporting evidence
 
 - `packages/core/src/ecs.ts` (existing, line 184 `World.make`)
-- `packages/scene/src/compile.ts` — introduced with this ADR
-- `packages/scene/src/systems/*.ts` — 6 canonical systems (VideoSystem, AudioSystem, TransitionSystem, EffectSystem, SyncSystem, PassThroughMixer)
-- `examples/scenes/intro.ts` — reference music-video scene proving end-to-end composition
-- `tests/integration/scene-intro-example.test.ts` — validates 6-entity world compilation + structural determinism
+- `packages/scene/src/compile.ts`: introduced with this ADR
+- `packages/scene/src/systems/*.ts`: 6 canonical systems (VideoSystem, AudioSystem, TransitionSystem, EffectSystem, SyncSystem, PassThroughMixer)
+- `examples/scenes/intro.ts`: reference music-video scene proving end-to-end composition
+- `tests/integration/scene-intro-example.test.ts`: validates 6-entity world compilation + structural determinism
 
 ## References
 

@@ -8,7 +8,7 @@
 
 > **plugin**(`config?`): `Plugin`
 
-Defined in: [vite/src/plugin.ts:67](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/plugin.ts#L67)
+Defined in: vite/src/plugin.ts:67
 
 Create the czap Vite plugin.
 

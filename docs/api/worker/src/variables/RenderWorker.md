@@ -8,7 +8,7 @@
 
 > `const` **RenderWorker**: `object`
 
-Defined in: [worker/src/render-worker.ts:441](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/render-worker.ts#L441)
+Defined in: worker/src/render-worker.ts:441
 
 Factory namespace for the render worker.
 

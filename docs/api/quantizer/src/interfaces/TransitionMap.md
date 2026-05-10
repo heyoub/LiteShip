@@ -6,7 +6,7 @@
 
 # Interface: TransitionMap\<_S\>
 
-Defined in: [quantizer/src/transition.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/transition.ts#L32)
+Defined in: quantizer/src/transition.ts:32
 
 State-transition map keyed by `"from->to"` literal or `"*"` wildcard.
 
@@ -31,6 +31,6 @@ Exact `"from->to"` transition key.
 
 > `readonly` `optional` **\*?**: [`TransitionConfig`](TransitionConfig.md)
 
-Defined in: [quantizer/src/transition.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/transition.ts#L34)
+Defined in: quantizer/src/transition.ts:34
 
 Wildcard fallback applied when no exact `from->to` key matches.

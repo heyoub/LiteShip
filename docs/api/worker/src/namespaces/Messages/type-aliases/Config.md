@@ -8,6 +8,6 @@
 
 > **Config** = [`WorkerConfig`](../../../interfaces/WorkerConfig.md)
 
-Defined in: [worker/src/messages.ts:334](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/worker/src/messages.ts#L334)
+Defined in: worker/src/messages.ts:334
 
 Tunable worker construction knobs.

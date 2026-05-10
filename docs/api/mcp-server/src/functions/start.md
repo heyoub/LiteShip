@@ -8,7 +8,7 @@
 
 > **start**(`opts?`): `Promise`\<`void`\>
 
-Defined in: [mcp-server/src/start.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/start.ts#L16)
+Defined in: mcp-server/src/start.ts:16
 
 Start the MCP server on the requested transport.
 

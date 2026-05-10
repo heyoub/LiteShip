@@ -8,7 +8,7 @@
 
 > **imageDecoder**(`bytes`): `Promise`\<[`DecodedImage`](../interfaces/DecodedImage.md)\>
 
-Defined in: [assets/src/decoders/image.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/assets/src/decoders/image.ts#L16)
+Defined in: assets/src/decoders/image.ts:16
 
 Probe an image buffer for format and dimensions.
 

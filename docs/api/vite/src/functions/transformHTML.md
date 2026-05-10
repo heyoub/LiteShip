@@ -8,7 +8,7 @@
 
 > **transformHTML**(`source`, `fromFile`, `projectRoot`): `Promise`\<`string`\>
 
-Defined in: [vite/src/html-transform.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/vite/src/html-transform.ts#L25)
+Defined in: vite/src/html-transform.ts:25
 
 Transform HTML source, replacing `data-czap="name"` with resolved boundary JSON.
 

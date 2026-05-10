@@ -8,7 +8,7 @@
 
 > `const` **TypedRef**: `object`
 
-Defined in: [core/src/typed-ref.ts:65](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/typed-ref.ts#L65)
+Defined in: core/src/typed-ref.ts:65
 
 TypedRef — schema-plus-content-hash pointer used by the receipt pipeline.
 Lets a receipt reference a payload by its content address without embedding

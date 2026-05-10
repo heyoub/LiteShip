@@ -6,7 +6,7 @@
 
 # Interface: EdgeTierResult
 
-Defined in: [edge/src/edge-tier.ts:25](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/edge-tier.ts#L25)
+Defined in: edge/src/edge-tier.ts:25
 
 Outcome of an edge-side tier detection sweep.
 
@@ -20,7 +20,7 @@ code paths from `@czap/detect`.
 
 > `readonly` **capLevel**: [`CapLevel`](#)
 
-Defined in: [edge/src/edge-tier.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/edge-tier.ts#L27)
+Defined in: edge/src/edge-tier.ts:27
 
 Highest [CapLevel](#) the device qualifies for.
 
@@ -30,7 +30,7 @@ Highest [CapLevel](#) the device qualifies for.
 
 > `readonly` **designTier**: `DesignTier`
 
-Defined in: [edge/src/edge-tier.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/edge-tier.ts#L31)
+Defined in: edge/src/edge-tier.ts:31
 
 Visual fidelity tier permitted for this device.
 
@@ -40,6 +40,6 @@ Visual fidelity tier permitted for this device.
 
 > `readonly` **motionTier**: [`MotionTier`](../../../quantizer/src/type-aliases/MotionTier.md)
 
-Defined in: [edge/src/edge-tier.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/edge/src/edge-tier.ts#L29)
+Defined in: edge/src/edge-tier.ts:29
 
 Motion complexity tier permitted for this device.

@@ -6,7 +6,7 @@
 
 # Interface: ReceiptSubject
 
-Defined in: [core/src/receipt.ts:15](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/receipt.ts#L15)
+Defined in: core/src/receipt.ts:15
 
 The logical entity a receipt describes: an effect, a run, an artifact, or an intent.
 
@@ -16,7 +16,7 @@ The logical entity a receipt describes: an effect, a run, an artifact, or an int
 
 > `readonly` **id**: `string`
 
-Defined in: [core/src/receipt.ts:17](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/receipt.ts#L17)
+Defined in: core/src/receipt.ts:17
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [core/src/receipt.ts:17](https://github.com/TheFreeBatteryFactory/cz
 
 > `readonly` **type**: `"run"` \| `"effect"` \| `"artifact"` \| `"intent"`
 
-Defined in: [core/src/receipt.ts:16](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/receipt.ts#L16)
+Defined in: core/src/receipt.ts:16

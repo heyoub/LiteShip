@@ -8,7 +8,7 @@
 
 > `const` **TokenJSCompiler**: `object`
 
-Defined in: [compiler/src/token-js.ts:102](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/token-js.ts#L102)
+Defined in: compiler/src/token-js.ts:102
 
 Token JS compiler namespace.
 

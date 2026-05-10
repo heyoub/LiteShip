@@ -8,7 +8,7 @@
 
 > **Shape**\<`V`\> = `ThemeDef`\<`V`\>
 
-Defined in: [core/src/theme.ts:151](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/theme.ts#L151)
+Defined in: core/src/theme.ts:151
 
 Structural shape of a [Theme](../../../variables/Theme.md) definition, parameterized by its variant tuple `V`.
 

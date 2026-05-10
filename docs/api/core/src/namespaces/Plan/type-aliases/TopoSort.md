@@ -8,6 +8,6 @@
 
 > **TopoSort** = `TopoSortResult`
 
-Defined in: [core/src/plan.ts:314](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/plan.ts#L314)
+Defined in: core/src/plan.ts:314
 
 Alias for `TopoSortResult`.

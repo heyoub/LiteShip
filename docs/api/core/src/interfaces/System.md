@@ -6,7 +6,7 @@
 
 # Interface: System
 
-Defined in: [core/src/ecs.ts:159](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L159)
+Defined in: core/src/ecs.ts:159
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/src/ecs.ts:159](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` `optional` **\_denseSystem?**: `undefined`
 
-Defined in: [core/src/ecs.ts:162](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L162)
+Defined in: core/src/ecs.ts:162
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [core/src/ecs.ts:162](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **name**: `string`
 
-Defined in: [core/src/ecs.ts:160](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L160)
+Defined in: core/src/ecs.ts:160
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [core/src/ecs.ts:160](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **query**: readonly `string`[]
 
-Defined in: [core/src/ecs.ts:161](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L161)
+Defined in: core/src/ecs.ts:161
 
 ## Methods
 
@@ -38,7 +38,7 @@ Defined in: [core/src/ecs.ts:161](https://github.com/TheFreeBatteryFactory/czap/
 
 > **execute**(`entities`, `world?`): `Effect`\<`void`\>
 
-Defined in: [core/src/ecs.ts:164](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/ecs.ts#L164)
+Defined in: core/src/ecs.ts:164
 
 Second argument is the world — use it to write computed output components back.
 

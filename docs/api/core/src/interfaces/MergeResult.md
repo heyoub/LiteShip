@@ -6,7 +6,7 @@
 
 # Interface: MergeResult
 
-Defined in: [core/src/dag.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L31)
+Defined in: core/src/dag.ts:31
 
 Result of a DAG merge: the updated graph, the hashes that were newly added, and whether a fork was observed.
 
@@ -16,7 +16,7 @@ Result of a DAG merge: the updated graph, the hashes that were newly added, and 
 
 > `readonly` **added**: readonly `string`[]
 
-Defined in: [core/src/dag.ts:33](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L33)
+Defined in: core/src/dag.ts:33
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/src/dag.ts:33](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **dag**: [`ReceiptDAG`](ReceiptDAG.md)
 
-Defined in: [core/src/dag.ts:32](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L32)
+Defined in: core/src/dag.ts:32
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [core/src/dag.ts:32](https://github.com/TheFreeBatteryFactory/czap/b
 
 > `readonly` **forked**: `boolean`
 
-Defined in: [core/src/dag.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/dag.ts#L34)
+Defined in: core/src/dag.ts:34

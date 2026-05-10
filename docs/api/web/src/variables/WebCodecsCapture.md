@@ -8,7 +8,7 @@
 
 > `const` **WebCodecsCapture**: `object`
 
-Defined in: [web/src/capture/webcodecs.ts:239](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/capture/webcodecs.ts#L239)
+Defined in: web/src/capture/webcodecs.ts:239
 
 WebCodecsCapture -- module object + namespace for browser-native video capture.
 

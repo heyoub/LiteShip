@@ -6,7 +6,7 @@
 
 # Interface: AIDimension
 
-Defined in: [compiler/src/ai-manifest.ts:22](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L22)
+Defined in: compiler/src/ai-manifest.ts:22
 
 Named dimension of UI state (e.g. `theme`, `layout`, `density`).
 
@@ -19,7 +19,7 @@ group); `exclusive: false` allows multiple concurrent states (a flag set).
 
 > `readonly` **current**: `string`
 
-Defined in: [compiler/src/ai-manifest.ts:26](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L26)
+Defined in: compiler/src/ai-manifest.ts:26
 
 Currently-active state (must be in `states`).
 
@@ -29,7 +29,7 @@ Currently-active state (must be in `states`).
 
 > `readonly` **description**: `string`
 
-Defined in: [compiler/src/ai-manifest.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L30)
+Defined in: compiler/src/ai-manifest.ts:30
 
 Human-readable description surfaced to the LLM.
 
@@ -39,7 +39,7 @@ Human-readable description surfaced to the LLM.
 
 > `readonly` **exclusive**: `boolean`
 
-Defined in: [compiler/src/ai-manifest.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L28)
+Defined in: compiler/src/ai-manifest.ts:28
 
 Whether only one state can be active at a time.
 
@@ -49,6 +49,6 @@ Whether only one state can be active at a time.
 
 > `readonly` **states**: readonly `string`[]
 
-Defined in: [compiler/src/ai-manifest.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L24)
+Defined in: compiler/src/ai-manifest.ts:24
 
 Allowed state names.

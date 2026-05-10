@@ -8,7 +8,7 @@
 
 > `const` **CanonicalCbor**: `object`
 
-Defined in: [core/src/cbor.ts:194](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/cbor.ts#L194)
+Defined in: core/src/cbor.ts:194
 
 Canonical CBOR encoder namespace (ADR-0001 pattern).
 

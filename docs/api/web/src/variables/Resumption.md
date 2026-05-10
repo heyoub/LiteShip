@@ -8,7 +8,7 @@
 
 > `const` **Resumption**: `object`
 
-Defined in: [web/src/stream/resumption.ts:344](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/stream/resumption.ts#L344)
+Defined in: web/src/stream/resumption.ts:344
 
 SSE resumption protocol namespace.
 

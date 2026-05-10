@@ -8,6 +8,6 @@
 
 > **WGSLStates** = `Readonly`\<`Record`\<`string`, `Readonly`\<`Record`\<`string`, `number`\>\>\>\>
 
-Defined in: [compiler/src/dispatch.ts:28](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/dispatch.ts#L28)
+Defined in: compiler/src/dispatch.ts:28
 
 Per-state WGSL uniform values keyed by state name (numeric only).

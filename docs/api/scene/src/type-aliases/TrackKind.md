@@ -8,6 +8,6 @@
 
 > **TrackKind** = `_TrackKind`
 
-Defined in: [scene/src/contract.ts:13](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/contract.ts#L13)
+Defined in: scene/src/contract.ts:13
 
 Closed set of track kinds.

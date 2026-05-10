@@ -8,7 +8,7 @@
 
 > **BoundarySpec**: `object`
 
-Defined in: [core/src/boundary.ts:314](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/boundary.ts#L314)
+Defined in: core/src/boundary.ts:314
 
 BoundarySpec namespace — helpers for working with the optional activation filter on a boundary.
 

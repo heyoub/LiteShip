@@ -8,7 +8,7 @@
 
 > **cssVarsFromState**(`state`): `Record`\<`string`, `string`\>
 
-Defined in: [remotion/src/hooks.ts:30](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/remotion/src/hooks.ts#L30)
+Defined in: remotion/src/hooks.ts:30
 
 Convert `CompositeState.outputs.css` into a flat CSS custom property map.
 

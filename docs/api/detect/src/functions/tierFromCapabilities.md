@@ -8,7 +8,7 @@
 
 > **tierFromCapabilities**(`caps`): [`CapLevel`](#)
 
-Defined in: [detect/src/tiers.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/detect/src/tiers.ts#L24)
+Defined in: detect/src/tiers.ts:24
 
 Determine the highest capability level the device can support based on
 its detected hardware and preference characteristics.

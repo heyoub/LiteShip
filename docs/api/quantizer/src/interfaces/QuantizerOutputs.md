@@ -6,7 +6,7 @@
 
 # Interface: QuantizerOutputs\<B\>
 
-Defined in: [quantizer/src/quantizer.ts:95](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L95)
+Defined in: quantizer/src/quantizer.ts:95
 
 Per-target output tables keyed by boundary state.
 
@@ -27,7 +27,7 @@ skip that target during dispatch.
 
 > `readonly` `optional` **ai?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `unknown`\>\>
 
-Defined in: [quantizer/src/quantizer.ts:105](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L105)
+Defined in: quantizer/src/quantizer.ts:105
 
 AI-facing signals per state (free-form; consumed by LLMAdapter).
 
@@ -37,7 +37,7 @@ AI-facing signals per state (free-form; consumed by LLMAdapter).
 
 > `readonly` `optional` **aria?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `string`\>\>
 
-Defined in: [quantizer/src/quantizer.ts:103](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L103)
+Defined in: quantizer/src/quantizer.ts:103
 
 ARIA attribute map per state (string values only).
 
@@ -47,7 +47,7 @@ ARIA attribute map per state (string values only).
 
 > `readonly` `optional` **css?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `string` \| `number`\>\>
 
-Defined in: [quantizer/src/quantizer.ts:97](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L97)
+Defined in: quantizer/src/quantizer.ts:97
 
 CSS property map per state (values are raw CSS, e.g. `'16px'` or `1`).
 
@@ -57,7 +57,7 @@ CSS property map per state (values are raw CSS, e.g. `'16px'` or `1`).
 
 > `readonly` `optional` **glsl?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `number`\>\>
 
-Defined in: [quantizer/src/quantizer.ts:99](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L99)
+Defined in: quantizer/src/quantizer.ts:99
 
 GLSL uniform values per state (numeric only).
 
@@ -67,6 +67,6 @@ GLSL uniform values per state (numeric only).
 
 > `readonly` `optional` **wgsl?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `number`\>\>
 
-Defined in: [quantizer/src/quantizer.ts:101](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/quantizer/src/quantizer.ts#L101)
+Defined in: quantizer/src/quantizer.ts:101
 
 WGSL uniform values per state (numeric only).

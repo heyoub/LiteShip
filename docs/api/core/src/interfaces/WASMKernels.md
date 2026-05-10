@@ -6,7 +6,7 @@
 
 # Interface: WASMKernels
 
-Defined in: [core/src/wasm-dispatch.ts:24](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-dispatch.ts#L24)
+Defined in: core/src/wasm-dispatch.ts:24
 
 Kernel functions available from both WASM and TS fallback.
 
@@ -16,7 +16,7 @@ Kernel functions available from both WASM and TS fallback.
 
 > **batchBoundaryEval**(`thresholds`, `values`): `Uint32Array`
 
-Defined in: [core/src/wasm-dispatch.ts:36](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-dispatch.ts#L36)
+Defined in: core/src/wasm-dispatch.ts:36
 
 Batch boundary evaluation. For each value, returns the index of the
 highest threshold where `value >= threshold`.
@@ -42,7 +42,7 @@ Thresholds must be sorted ascending.
 
 > **blendNormalize**(`weights`): `Float32Array`
 
-Defined in: [core/src/wasm-dispatch.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-dispatch.ts#L42)
+Defined in: core/src/wasm-dispatch.ts:42
 
 Normalize weights in-place so positive values sum to 1.0.
 Negative weights clamped to 0. Returns the (modified) input array.
@@ -63,7 +63,7 @@ Negative weights clamped to 0. Returns the (modified) input array.
 
 > **springCurve**(`stiffness`, `damping`, `mass`, `samples`): `Float32Array`
 
-Defined in: [core/src/wasm-dispatch.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/wasm-dispatch.ts#L29)
+Defined in: core/src/wasm-dispatch.ts:29
 
 Sample a spring easing at `samples` evenly-spaced points in [0, 1].
 Returns Float32Array of length `samples + 1`.

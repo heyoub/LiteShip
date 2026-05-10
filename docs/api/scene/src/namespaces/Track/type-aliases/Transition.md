@@ -8,6 +8,6 @@
 
 > **Transition** = [`TransitionTrack`](../../../interfaces/TransitionTrack.md)
 
-Defined in: [scene/src/track.ts:118](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/track.ts#L118)
+Defined in: scene/src/track.ts:118
 
 Transition helper return.

@@ -8,7 +8,7 @@
 
 > **stateAtFrame**(`frames`, `frameIndex`): `CompositeState`
 
-Defined in: [remotion/src/hooks.ts:61](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/remotion/src/hooks.ts#L61)
+Defined in: remotion/src/hooks.ts:61
 
 Look up the `CompositeState` for a given frame index from precomputed
 frames.

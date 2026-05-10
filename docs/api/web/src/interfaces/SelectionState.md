@@ -6,7 +6,7 @@
 
 # Interface: SelectionState
 
-Defined in: [web/src/types.ts:84](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L84)
+Defined in: web/src/types.ts:84
 
 Text selection state.
 
@@ -16,7 +16,7 @@ Text selection state.
 
 > `readonly` **direction**: `string`
 
-Defined in: [web/src/types.ts:88](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L88)
+Defined in: web/src/types.ts:88
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [web/src/types.ts:88](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **elementPath**: `string`
 
-Defined in: [web/src/types.ts:85](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L85)
+Defined in: web/src/types.ts:85
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [web/src/types.ts:85](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **end**: `number`
 
-Defined in: [web/src/types.ts:87](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L87)
+Defined in: web/src/types.ts:87
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [web/src/types.ts:87](https://github.com/TheFreeBatteryFactory/czap/
 
 > `readonly` **start**: `number`
 
-Defined in: [web/src/types.ts:86](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/web/src/types.ts#L86)
+Defined in: web/src/types.ts:86

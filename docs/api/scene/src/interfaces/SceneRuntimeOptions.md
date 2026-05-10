@@ -6,7 +6,7 @@
 
 # Interface: SceneRuntimeOptions
 
-Defined in: [scene/src/runtime.ts:100](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L100)
+Defined in: scene/src/runtime.ts:100
 
 Options accepted by [SceneRuntime.build](../variables/SceneRuntime.md#build).
 
@@ -16,7 +16,7 @@ Options accepted by [SceneRuntime.build](../variables/SceneRuntime.md#build).
 
 > `readonly` `optional` **mixSink?**: (`receipt`) => `void`
 
-Defined in: [scene/src/runtime.ts:108](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L108)
+Defined in: scene/src/runtime.ts:108
 
 Mix-receipt sink for PassThroughMixer. Defaults to a bounded ring
 (last [DEFAULT\_MIX\_RECEIPT\_CAP](#) receipts) accessible via
@@ -38,6 +38,6 @@ Mix-receipt sink for PassThroughMixer. Defaults to a bounded ring
 
 > `readonly` `optional` **sampleRate?**: `number`
 
-Defined in: [scene/src/runtime.ts:102](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/runtime.ts#L102)
+Defined in: scene/src/runtime.ts:102
 
 Audio sample rate fed to AudioSystem. Defaults to 48_000.

@@ -8,7 +8,7 @@
 
 > `const` **ComponentCSSCompiler**: `object`
 
-Defined in: [compiler/src/component-css.ts:60](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/component-css.ts#L60)
+Defined in: compiler/src/component-css.ts:60
 
 Component CSS compiler namespace.
 

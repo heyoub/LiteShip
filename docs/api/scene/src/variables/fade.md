@@ -8,7 +8,7 @@
 
 > `const` **fade**: `object`
 
-Defined in: [scene/src/sugar/envelope.ts:34](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/sugar/envelope.ts#L34)
+Defined in: scene/src/sugar/envelope.ts:34
 
 Fade constructors.
 

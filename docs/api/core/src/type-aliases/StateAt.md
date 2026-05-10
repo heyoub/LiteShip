@@ -8,7 +8,7 @@
 
 > **StateAt**\<`_Value`, `_Boundary`\> = `string`
 
-Defined in: [core/src/type-utils.ts:21](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/type-utils.ts#L21)
+Defined in: core/src/type-utils.ts:21
 
 Resolve which state a value falls into at the type level (runtime only)
 

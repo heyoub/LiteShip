@@ -8,7 +8,7 @@
 
 > `const` **StyleCSSCompiler**: `object`
 
-Defined in: [compiler/src/style-css.ts:201](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/style-css.ts#L201)
+Defined in: compiler/src/style-css.ts:201
 
 Style CSS compiler namespace.
 

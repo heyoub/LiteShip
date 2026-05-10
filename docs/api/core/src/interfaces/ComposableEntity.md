@@ -6,7 +6,7 @@
 
 # Interface: ComposableEntity\<T\>
 
-Defined in: [core/src/composable.ts:42](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/composable.ts#L42)
+Defined in: core/src/composable.ts:42
 
 Content-addressed entity: the identity is an FNV-1a hash over its components,
 so two entities with structurally equal components share the same `id`.
@@ -23,7 +23,7 @@ so two entities with structurally equal components share the same `id`.
 
 > `readonly` **\_tag**: `"ComposableEntity"`
 
-Defined in: [core/src/composable.ts:45](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/composable.ts#L45)
+Defined in: core/src/composable.ts:45
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [core/src/composable.ts:45](https://github.com/TheFreeBatteryFactory
 
 > `readonly` **components**: `T`
 
-Defined in: [core/src/composable.ts:44](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/composable.ts#L44)
+Defined in: core/src/composable.ts:44
 
 ***
 
@@ -39,4 +39,4 @@ Defined in: [core/src/composable.ts:44](https://github.com/TheFreeBatteryFactory
 
 > `readonly` **id**: `ContentAddress`
 
-Defined in: [core/src/composable.ts:43](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/composable.ts#L43)
+Defined in: core/src/composable.ts:43

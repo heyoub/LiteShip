@@ -8,6 +8,6 @@
 
 > **Response** = [`JsonRpcResponse`](../../../type-aliases/JsonRpcResponse.md)
 
-Defined in: [mcp-server/src/jsonrpc.ts:236](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/mcp-server/src/jsonrpc.ts#L236)
+Defined in: mcp-server/src/jsonrpc.ts:236
 
 Wire-shape response (§5).

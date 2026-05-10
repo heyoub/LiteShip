@@ -8,6 +8,6 @@
 
 > **Config** = [`RuntimeCoordinatorConfig`](../../../interfaces/RuntimeCoordinatorConfig.md)
 
-Defined in: [core/src/runtime-coordinator.ts:227](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/runtime-coordinator.ts#L227)
+Defined in: core/src/runtime-coordinator.ts:227
 
 Alias for `RuntimeCoordinatorConfig`.

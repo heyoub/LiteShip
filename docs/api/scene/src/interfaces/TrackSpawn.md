@@ -6,7 +6,7 @@
 
 # Interface: TrackSpawn
 
-Defined in: [scene/src/compile.ts:27](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/compile.ts#L27)
+Defined in: scene/src/compile.ts:27
 
 One compiled track — the components the runtime should spawn for it.
 The `trackId` is preserved from the contract so downstream code can
@@ -18,7 +18,7 @@ cross-reference (e.g. transition `between` refs).
 
 > `readonly` **components**: `Readonly`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [scene/src/compile.ts:31](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/compile.ts#L31)
+Defined in: scene/src/compile.ts:31
 
 Component seed map passed to `world.spawn(...)` when [SceneRuntime](../namespaces/SceneRuntime/README.md) builds the ECS world.
 
@@ -28,6 +28,6 @@ Component seed map passed to `world.spawn(...)` when [SceneRuntime](../namespace
 
 > `readonly` **trackId**: [`TrackId`](../type-aliases/TrackId.md)\<`TrackKind`\>
 
-Defined in: [scene/src/compile.ts:29](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/scene/src/compile.ts#L29)
+Defined in: scene/src/compile.ts:29
 
 The phantom-kinded id of the source track.

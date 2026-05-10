@@ -8,7 +8,7 @@
 
 > `const` **AIManifestCompiler**: `object`
 
-Defined in: [compiler/src/ai-manifest.ts:596](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/compiler/src/ai-manifest.ts#L596)
+Defined in: compiler/src/ai-manifest.ts:596
 
 AI manifest compiler namespace.
 
