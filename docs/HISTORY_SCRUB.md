@@ -71,4 +71,41 @@ Re-run the discovery greps. They must be clean for the paths you care about.
 Use `git push --force-with-lease` only with team agreement. Everyone with an old
 clone must reset or re-clone.
 
+## Completion log
+
+The pre-public scrub for the v0.1.0 publish was executed 2026-05-10. What it covered:
+
+- [x] **Blob substitution**: every occurrence of the prior maintainer's
+      Windows username inside file content (across all 82 commits) replaced
+      with `<username>` via `git filter-repo --replace-text`. Affected
+      strings included `C:\Users\…`, `c:\Users\…`, `C:/Users/…`,
+      `/c/Users/…`, and the path-encoded `C--Users-…` form used by
+      sandbox tooling.
+- [x] **Commit-message substitution**: same string scrubbed from every
+      commit message via `git filter-repo --replace-message`. Four prior
+      commits had referenced the username inside changelog-style prose;
+      all four are now `<username>`.
+- [x] **Identity collapse**: the four committer/author identities present
+      in pre-scrub history (`Heyoub <hello@forgestack.app>`,
+      `Eassa Ayoub <hello@heyoub.dev>`, `Cursor Agent
+      <cursoragent@cursor.com>`, `Claude <noreply@anthropic.com>`)
+      collapsed via `git filter-repo --mailmap` to two:
+      `heyoub <eassa@heyoub.dev>` for human + tooling commits, and
+      `Claude <noreply@anthropic.com>` preserved for AI-attributed
+      commits per standard practice. The web-merge committer
+      `GitHub <noreply@github.com>` is preserved (GitHub-side
+      identity, not maintainer-controlled).
+- [x] **Verification**: `git log --all -p | grep -ci eayou` and
+      `git log --format=%B | grep -ci eayou` both report `0` after
+      the scrub. `git log --format='%an <%ae>' | sort -u` reports
+      only the two intended author identities.
+- [x] **Force-push**: rewritten history pushed to
+      `claude/prepare-for-release-fhytA` with
+      `git push --force-with-lease`. There were no public clones at
+      the time of the scrub, so blast radius was limited to the
+      maintainer's local working copies.
+
+If a future scrub is needed, restart from "Discover" above with the new
+target string. The completion log applies only to the v0.1.0 wave.
+
 See also [RELEASING.md](./RELEASING.md).
