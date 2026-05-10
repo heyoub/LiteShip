@@ -54,7 +54,7 @@ all **15** `@czap/*` packages (including type-only `@czap/_spine`) land on npm a
 - Untracked stale build artifacts (`scripts/test-*.{js,d.ts}`,
   `tests/integration/astro/.astro/*.d.ts`, `.claude/settings.local.json`,
   `czap.code-workspace`).
-- Sanitized hardcoded `c:\Users\<username>\…` paths from `AGENTS.md` and the
-  spawn-quoting test fixture.
+- Sanitized hardcoded Windows `C:\Users\<username>\…` paths from `AGENTS.md`
+  and the spawn-quoting test fixture.
 
 ---

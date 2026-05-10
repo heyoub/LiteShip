@@ -216,11 +216,11 @@ Startup steering now follows a generic `paired-truth` model:
 
 ### Per-phase wall-time ranges
 
-Total across all 32 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (per the README's gauntlet snapshot).
+Total across all 32 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Linux x64, 8 vCPU (per the README's gauntlet snapshot).
 
 `scripts/gauntlet.ts` writes `benchmarks/gauntlet-phase-timings.json` after every run (success or failure), so the live ledger for a 3am operator is the latest artifact, not this static table. Re-run `pnpm run gauntlet:full` and the artifact updates automatically. The numbers below are a captured snapshot from one Linux run, useful as anchors when the artifact isn't fresh.
 
-Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are measured wall times from the captured run; phases 12 onward are marked `see artifact` (the captured run failed at `test:e2e` because the sandbox lacked Playwright dep-install). The phase numbers below match `scripts/gauntlet.ts`'s `await run(...)` order.
+Captured 2026-05-10 on Linux x64, 8 vCPU (Node 22). Phases 1–11 are measured wall times from the captured run; phases 12 onward are marked `see artifact` (the captured run failed at `test:e2e` because the sandbox lacked Playwright dep-install). The phase numbers below match `scripts/gauntlet.ts`'s `await run(...)` order.
 
 | Phase # | Name | Command | Wall time | Source |
 | --- | --- | --- | --- | --- |

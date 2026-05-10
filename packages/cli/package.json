@@ -20,6 +20,7 @@
     "typescript"
   ],
   "type": "module",
+  "sideEffects": false,
   "bin": {
     "czap": "./bin/czap.mjs"
   },
@@ -45,10 +46,8 @@
   "dependencies": {
     "@czap/core": "workspace:*",
     "@czap/scene": "workspace:*",
-    "@czap/assets": "workspace:*"
-  },
-  "peerDependencies": {
-    "effect": ">=4.0.0-beta.0"
+    "@czap/assets": "workspace:*",
+    "effect": ">=4.0.0-beta.32 <5"
   },
   "engines": {
     "node": ">=22.0.0"

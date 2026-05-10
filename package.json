@@ -14,7 +14,8 @@
   "type": "module",
   "packageManager": "pnpm@10.32.1",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
   },
   "scripts": {
     "build": "tsc --build packages/core packages/quantizer packages/compiler packages/web packages/detect packages/edge packages/worker packages/vite packages/astro packages/remotion packages/scene packages/assets packages/cli packages/mcp-server",

@@ -193,11 +193,11 @@ pnpm run gauntlet:full    # full release-grade gate (~22min)
 
 Other lanes (`test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify`) are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty-two phases (see `docs/STATUS.md` for the full ordered list), fifteen to twenty-two minutes end-to-end depending on cold caches and machine speed (recent local: 14m47s on Cursor Cloud Linux). It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
+`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty-two phases (see `docs/STATUS.md` for the full ordered list), fifteen to twenty-two minutes end-to-end depending on cold caches and machine speed (recent local: 14m47s on Linux x64, 8 vCPU). It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
 
 ## Latest gauntlet benchmark snapshot
 
-Fresh local run on 2026-05-09 (Cursor Cloud Linux, Node 22, pnpm 10):
+Fresh local run on 2026-05-09 (Linux x64, 8 vCPU, Node 22, pnpm 10):
 
 - `pnpm run gauntlet:full` passed end-to-end in 14m47s.
 - `flex:verify` passed: `project is 10/10 by every rating dimension`.
