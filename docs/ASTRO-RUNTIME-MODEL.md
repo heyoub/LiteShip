@@ -121,6 +121,25 @@ These are not interchangeable. They represent different escalation levels.
 
 Use when a surface needs adaptive state tracking tied to authored boundaries.
 
+The shape of an authored Astro page using LiteShip is small. Boundaries are imported as plain TypeScript values; the `Satellite` shell wraps the markup the boundary should drive, and `client:satellite` is the directive that wires the boundary evaluator on the client. Static HTML and compiled CSS carry the rest.
+
+```astro
+---
+// src/pages/index.astro
+import { Satellite } from '@czap/astro/Satellite';
+import { heroLayout } from '../boundaries.js';
+---
+
+<Satellite boundary={heroLayout} client:satellite>
+  <section class="hero">
+    <h1>The hull is in the water.</h1>
+    <p>Drag the window edge; the layout re-trims at the named bearings.</p>
+  </section>
+</Satellite>
+```
+
+The compiled CSS for `.hero` (emitted by the Vite plugin from a paired `Style` definition) carries the cross-state rules. The directive's only runtime job is to evaluate `heroLayout` against the live viewport and apply the resolved state to the satellite's `data-czap-*` attributes; the CSS does the visible work without round-tripping through JavaScript.
+
 ### `stream`
 
 Use when server-originated streamed content becomes part of the visual surface.

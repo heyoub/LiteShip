@@ -103,8 +103,8 @@ zero/missing-runtime file counts used by downstream feedback checks.
 
 `pnpm run report:runtime-seams` must run after a fresh `pnpm run coverage:merge`.
 If the seam report reads stale merged coverage, the hotspot story is wrong even
-when the code is fine. This ordering is now constitutional repo truth, not a
-soft convention.
+when the code is fine. This ordering is required and enforced by the gauntlet
+sequence, not optional.
 
 `pnpm run bench:gate` writes `benchmarks/directive-gate.json`, evaluates
 median overhead across five replicates, and only fails a hard-gated pair when

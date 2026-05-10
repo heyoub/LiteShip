@@ -199,7 +199,7 @@ without duplicating the logic in each layer. By the way, the boundary's content 
 
 The working deck should stay as light as the workload allows.
 
-This is the opposite of a framework that raises every sail at the dock and reefs them later when something tears.
+This is the opposite of a framework that raises every sail at the dock and reefs them later.
 
 The intended order is:
 
@@ -348,19 +348,17 @@ This is the part many systems treat as fallback. In LiteShip, it is part of the 
 
 ---
 
-## Capability and taste
+## Capability and authored choice
 
-LiteShip is not only about trim on the working line. It is also about taste.
-
-A visually rich site should not merely "respond." It should choose.
+LiteShip enforces escalation costs but doesn't make state choices for the author. A visually rich site shouldn't merely "respond" to every signal it receives; it should choose which signals matter and which states to project.
 
 The system is strongest when authored with:
 
 - few but meaningful states
-- distinct names
-- intentional escalation of runtime cost
-- a coherent token system
-- motion that reflects meaning, not decoration
+- distinct names that describe behavior, not scale
+- intentional escalation of runtime cost (CSS by default, directive only when needed, off-deck only when justified)
+- a coherent token system that other states can reach into
+- motion gated by `motionTier` rather than always-on
 
 The best outcome is not a maximal runtime. The best outcome is a small set of well-named states delivering the right output at the lowest necessary cost.
 
@@ -386,4 +384,4 @@ If the agents start from React habits, they will ask the wrong questions. If the
 
 For visually rich Astro sites, LiteShip is best understood as:
 
-> a signal-aware authored state system that casts named-state outputs into the cheapest runtime capable of delivering them.
+> a signal-aware authored state system that casts named-state outputs onto whichever rung of the runtime escalation ladder (CSS → satellite → stream → worker → wasm → gpu) actually carries the surface meaning.

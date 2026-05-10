@@ -10,7 +10,9 @@ This is about construction, not migration. It assumes the mental model in [ASTRO
 
 ## What it feels like to author
 
-You start by naming the few states a surface actually has. *Stacked, split, cinematic.* You don't pick numbers yet; you pick names. Then you write a boundary that says where one becomes the next, with hysteresis where you'd want some grace. Then you write the styles for each named state, and you move on. The CSS variable, the GLSL preamble, and the ARIA attribute all come out of that one boundary without you authoring them three times; the AI manifest is its own structured artifact authored alongside, sharing the same state vocabulary. When you drag the window edge, the CSS re-paints; if you wired a shader in, the uniform changes the same tick; a screen reader sees the same state your styles do.
+You start by naming the few states a surface actually has. *Stacked, split, cinematic.* You don't pick numbers yet; you pick names. Then you write a boundary that says where one becomes the next, with hysteresis where you'd want some grace. Then you write the styles for each named state, and you move on.
+
+The CSS variable, the GLSL preamble, and the ARIA attribute all come out of that one boundary without you authoring them three times. The AI manifest is its own structured artifact authored alongside, sharing the same state vocabulary. When you drag the window edge, the CSS re-paints; if you wired a shader in, the uniform changes the same tick; a screen reader sees the same state your styles do.
 
 ---
 

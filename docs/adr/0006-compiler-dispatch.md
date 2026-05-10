@@ -39,6 +39,8 @@ A new compiler that maps a boundary to a target output joins `CompilerDef` and g
 
 Implementation note: `ConfigCompiler` is implemented inline inside `dispatch.ts` rather than as a separate file. It is the smallest of the six target-emission compilers and emits a structured config record rather than a serialized output string; a separate file would be ceremony without payload. New compilers with non-trivial transformation logic should follow the file-per-compiler pattern (`css.ts`, `glsl.ts`, `wgsl.ts`, `aria.ts`, `ai-manifest.ts`).
 
+Designing the input-states type: the existing arms (`CSSStates`, `GLSLStates`, `WGSLStates`, `ARIAStates`) are the canonical pattern. Each is `{ readonly [S in StateUnion<B> & string]: <per-state shape> }`, where the per-state shape is whatever the target needs (a CSS property bag for `CSSStates`, a uniform-value record for `GLSLStates`, an attribute bag for `ARIAStates`). Define the new states type the same way in your compiler's source file, then wire it into the union arm and the `case` branch in `dispatch.ts`.
+
 ## References
 
 - `packages/compiler/src/dispatch.ts`: canonical dispatch + `CompilerDef` union

@@ -10,7 +10,7 @@ From one definition, the system can emit a CSS variable, a GLSL preamble, an ARI
 
 *LiteShip — powered by the CZAP engine (Content-Zoned Adaptive Projection, "see-zap"), distributed as `@czap/*` packages on npm.*
 
-This is a real pre-1.0 hull being hardened on dogfooded sites and a CRM UI, not a toy or a research artifact. Naming vocabulary across every doc lives in [docs/GLOSSARY.md](./docs/GLOSSARY.md).
+This is a real pre-1.0 hull being hardened on dogfooded sites and a CRM UI. Naming vocabulary across every doc lives in [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 
 ## Quick start
 
@@ -72,7 +72,7 @@ This is not a replacement for media queries (use them where they're enough), CSS
 
 ## What's in the box
 
-The packages you import in the Quick Start above are the smallest useful set:
+The packages you install in the Quick Start above are the smallest useful set for authoring + casting end-to-end. The Quick Start snippet imports from `@czap/core`; you reach for `@czap/quantizer` to evaluate boundaries against live signals (`Q.from()`) and `@czap/compiler` to cast a boundary to a target output (`CSSCompiler.compile()` and friends).
 
 | Package | Description |
 | --- | --- |
@@ -137,7 +137,7 @@ Trust is set explicitly, not by permission default.
 - Runtime endpoints stay same-origin unless you set an allowlist for cross-origin paths.
 - Artifact IDs are validated as single path segments. No smuggled traversal.
 - LLM rendering defaults to text-safe; HTML flows route through the shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`).
-- The runtime carries no `eval` and no `new Function`. Code that arrives at runtime doesn't execute.
+- The runtime carries no `eval` and no `new Function`. Untrusted text never becomes executable JavaScript at runtime. (WASM bytecode does run at runtime, sandboxed by the host's WASM runtime; see `packages/core/src/wasm-fallback.ts` for the no-WASM path.)
 - The Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions.
 
 Full posture and trust-boundary detail in [SECURITY.md](./SECURITY.md) and [docs/STATUS.md](./docs/STATUS.md).
