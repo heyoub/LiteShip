@@ -208,41 +208,20 @@ Startup steering now follows a generic `paired-truth` model:
 
 ### Per-phase wall-time ranges
 
-Typical wall-time ranges, not contractual budgets. Slower hardware will exceed these and that is not a regression. Total across all 29 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (README:170).
+Total across all 29 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (per the README's gauntlet snapshot).
+
+For per-run, per-phase truth, `pnpm run gauntlet:full --verbose` prints timing per phase; that is the live ledger and the right answer for a 3am operator. The static numbers below cover only the four phases that have a recorded datapoint in some checked-in source — they are typical, not contractual; slower hardware will exceed them and that is not a regression.
 
 | Phase # | Name | Command | Typical range | Source |
 | --- | --- | --- | --- | --- |
-| 1 | build | `pnpm run build` | varies | no per-phase datapoint in any source |
-| 2 | capsule:compile | `pnpm run capsule:compile` | varies | no per-phase datapoint in any source |
-| 3 | typecheck | `pnpm run typecheck` | varies | no per-phase datapoint in any source |
-| 4 | lint | `pnpm run lint` | varies | no per-phase datapoint in any source |
-| 5 | docs:check | `pnpm run docs:check` | varies | no per-phase datapoint in any source |
-| 6 | invariants | `pnpm exec tsx scripts/check-invariants.ts` | varies | no per-phase datapoint in any source |
-| 7 | test | `pnpm test` | ~75s | README:173 inline comment on the `pnpm test` script |
-| 8 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | STATUS.md "Coverage timing (2026-04-23)" block |
-| 9 | test:vite | `pnpm run test:vite` | varies | no per-phase datapoint in any source |
-| 10 | test:astro | `pnpm run test:astro` | varies | no per-phase datapoint in any source |
-| 11 | test:tailwind | `pnpm run test:tailwind` | varies | no per-phase datapoint in any source |
-| 12 | test:e2e | `pnpm run test:e2e` | varies | no per-phase datapoint in any source |
-| 13 | test:e2e:stress | `pnpm run test:e2e:stress` | varies | no per-phase datapoint in any source |
-| 14 | test:e2e:stream-stress | `pnpm run test:e2e:stream-stress` | varies | no per-phase datapoint in any source |
-| 15 | test:flake | `pnpm run test:flake` | varies | no per-phase datapoint in any source |
-| 16 | test:redteam | `pnpm run test:redteam` | varies | no per-phase datapoint in any source |
-| 17 | bench | `pnpm run bench` | varies | no per-phase datapoint in any source |
-| 18 | bench:gate | `pnpm run bench:gate` | varies | no per-phase datapoint in any source |
-| 19 | bench:reality | `pnpm run bench:reality` | varies | no per-phase datapoint in any source |
-| 20 | package:smoke | `pnpm run package:smoke` | varies | no per-phase datapoint in any source |
+| 7 | test | `pnpm test` | ~75s | README inline comment on the `pnpm test` script |
+| 8 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | "Coverage timing (2026-04-23)" block earlier in this doc |
 | 21 | coverage:node | `pnpm run coverage:node` | ~38s | `scripts/gauntlet.ts` orchestration comment |
-| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | STATUS.md "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" |
-| 23 | report:runtime-seams | `pnpm run report:runtime-seams` | varies | no per-phase datapoint in any source |
-| 24 | audit | `pnpm run audit` | varies | no per-phase datapoint in any source |
-| 25 | report:satellite-scan | `pnpm run report:satellite-scan` | varies | no per-phase datapoint in any source |
-| 26 | feedback:verify | `pnpm run feedback:verify` | varies | no per-phase datapoint in any source |
-| 27 | runtime:gate | `pnpm run runtime:gate` | varies | no per-phase datapoint in any source |
-| 28 | capsule:verify | `pnpm run capsule:verify` | varies | no per-phase datapoint in any source |
-| 29 | flex:verify | `pnpm run flex:verify` | varies | no per-phase datapoint in any source |
+| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" earlier in this doc |
 
-For per-run truth, `pnpm run gauntlet:full --verbose` prints per-phase timings; that is the live ledger.
+Phase 8 is the only phase with a meaningfully bimodal cost — the cold path on a fresh `node_modules/.vite-browser` cache crosses ten minutes. If your CI image rebuilds the Vite browser optimizer cache from scratch, plan around that; if it persists the cache, you stay at the ~10s warm cost.
+
+The other 25 phases have no per-phase datapoint checked in. Their wall times come out of the `--verbose` output, which is the canonical source.
 
 ---
 
