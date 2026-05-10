@@ -52,7 +52,7 @@ For package-by-package import guidance, read [`PACKAGE-SURFACES.md`](./PACKAGE-S
 
 ## Graceful degradation, not silent ceilings
 
-`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:145`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:83`). The pattern repeats: pick the right-shaped optimization for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
+`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:145`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:83`). The pattern repeats: pick the right-shaped fast path for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
 
 ## Architectural decisions
 

@@ -37,6 +37,8 @@ The compiler package also ships a separate tier of standalone compilers that ope
 
 A new compiler that maps a boundary to a target output joins `CompilerDef` and goes through `dispatch()`. A new compiler that operates on a Token, Theme, Style, or Component primitive ships standalone, alongside the existing six in `packages/compiler/src/`.
 
+Implementation note: `ConfigCompiler` is implemented inline inside `dispatch.ts` rather than as a separate file. It is the smallest of the six target-emission compilers and emits a structured config record rather than a serialized output string; a separate file would be ceremony without payload. New compilers with non-trivial transformation logic should follow the file-per-compiler pattern (`css.ts`, `glsl.ts`, `wgsl.ts`, `aria.ts`, `ai-manifest.ts`).
+
 ## References
 
 - `packages/compiler/src/dispatch.ts`: canonical dispatch + `CompilerDef` union

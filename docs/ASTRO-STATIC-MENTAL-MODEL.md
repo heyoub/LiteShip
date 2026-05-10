@@ -6,7 +6,7 @@ How to think with LiteShip when building visually rich Astro websites. The CZAP 
 
 Naming: [GLOSSARY.md](./GLOSSARY.md).
 
-This is not a migration guide and not a product comparison. It's a mental model for authoring.
+This is not a migration guide and not a product comparison. It's a mental model for authoring; for the concrete shape of the authoring loop (what you actually type and what comes out), read [AUTHORING-MODEL.md](./AUTHORING-MODEL.md) alongside this doc.
 
 The right question is not:
 
@@ -360,7 +360,7 @@ The system is strongest when authored with:
 - a coherent token system
 - motion that reflects meaning, not decoration
 
-The best outcome is not a maximal runtime. The best outcome is a sharp aesthetic decision delivered at the lowest necessary cost.
+The best outcome is not a maximal runtime. The best outcome is a small set of well-named states delivering the right output at the lowest necessary cost.
 
 ---
 
@@ -384,4 +384,4 @@ If the agents start from React habits, they will ask the wrong questions. If the
 
 For visually rich Astro sites, LiteShip is best understood as:
 
-> a signal-aware authored state system that casts design intent into the cheapest runtime capable of delivering it.
+> a signal-aware authored state system that casts named-state outputs into the cheapest runtime capable of delivering them.

@@ -37,13 +37,13 @@ maintainer discretion if the fix is trivial to backport.
 
 Trust is set explicitly, not by permission default:
 
-- **Runtime URL allowlist.** Runtime URLs are same-origin by default; cross-origin requires explicit allowlist policy before the line is run. SSRF protections reject private/link-local IPs even when an allowlist is configured.
-- **Artifact ID validation.** IDs are validated as single path segments, preventing path-traversal attempts via runtime URL construction.
-- **HTML trust pipeline.** Stream and LLM HTML flows route through a shared trust gate with three modes: `text` (default, no HTML), `sanitized-html` (strips executable markup), and explicit `trusted-html` (caller asserts).
-- **Theme/CSS sanitization.** Theme compilation rejects unsafe prefixes (e.g. attempts to escape custom-property scoping) and CSS-breaking token values.
-- **Boundary state surface.** Boundary state application is locked to `--czap-*` custom properties, `aria-*`, and `role`. Arbitrary attribute injection is rejected.
-- **Bootstrap snapshot hardening.** The `__CZAP_DETECT__` snapshot is non-enumerable, frozen, and intentionally minimal. Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions.
-- **No eval, no new Function.** The runtime does not generate code at voyage time.
+- **Runtime URL allowlist.** Runtime URLs are same-origin by default; cross-origin requires explicit allowlist policy before the line is run. SSRF protections reject private/link-local IPs (`isPrivateOrReservedIP` in `packages/web/src/security/runtime-url.ts:187`); the rejection runs as part of the same resolver that enforces the allowlist, so it cannot be bypassed by allowlisting an absolute URL whose hostname resolves to a private range.
+- **Artifact ID validation.** IDs are validated as single path segments (`packages/web/src/stream/sse-pure.ts`, `buildUrl`), preventing path-traversal attempts via runtime URL construction.
+- **HTML trust pipeline.** Stream and LLM HTML flows route through a shared trust gate (`packages/web/src/security/html-trust.ts`) with three modes: `text` (default, no HTML), `sanitized-html` (strips a tag-name blocklist plus event-handler attributes and `javascript:` / `data:text/html` `src`/`href` values), and explicit `trusted-html` (caller asserts via an opt-in flag, otherwise downgrades to `sanitized-html`). The DOM morph default at `packages/web/src/morph/diff-pure.ts:23` routes through this same pipeline (`policy: 'sanitized-html'`); there is no third unguarded `innerHTML` path. The sanitizer is bespoke (not DOMPurify) and is exercised by `tests/regression/red-team-runtime.test.ts`; for high-assurance deployments, an independent audit against known parser-differential and mutation-XSS vectors is recommended before relying on it as the sole defense.
+- **Theme/CSS sanitization.** Theme compilation (`compileTheme` in `packages/edge/src/theme-compiler.ts`) rejects unsafe prefixes (e.g. attempts to escape custom-property scoping) and CSS-breaking token values.
+- **Boundary state surface.** Boundary state application (`packages/astro/src/runtime/boundary.ts`) filters CSS keys to `--czap-*` and DOM attributes to `role` / `aria-*`. Arbitrary attribute injection is rejected at the application layer.
+- **Bootstrap snapshot hardening.** The `__CZAP_DETECT__` snapshot is non-enumerable, frozen, and intentionally minimal. Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions (`packages/astro/src/runtime/globals.ts`).
+- **No eval, no new Function.** The runtime does not generate code at runtime. Verified by grep across `packages/*/src/`; the discipline is enforced by code review, not by an ESLint rule today (a `no-eval` / `no-new-func` rule is on the roadmap).
 
 ## CSP and Trusted Types
 
@@ -57,7 +57,7 @@ Runtime code is compatible with strict CSP policies in the sense that LiteShip i
 
 ### Trusted Types
 
-LiteShip writes to `innerHTML` in two sanctioned places: the templated HTML-fragment helper in `packages/web/src/morph/html-trust.ts` and the LLM session HTML sink at `packages/astro/src/runtime/llm-session.ts`. Both are gated by the shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`), but both are still raw `innerHTML` assignments. Under Trusted Types enforcement those assignments throw unless the host installs a `TrustedHTML` policy.
+LiteShip writes to `innerHTML` in two sanctioned places: the templated HTML-fragment helper at `packages/web/src/security/html-trust.ts` (`createHtmlFragment`, used by the DOM morph and slot-injection paths) and the LLM session HTML sink at `packages/astro/src/runtime/llm-session.ts`. Both are gated by the shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`), but both are still raw `innerHTML` assignments. Under Trusted Types enforcement those assignments throw unless the host installs a `TrustedHTML` policy.
 
 A minimal host-side recipe:
 
