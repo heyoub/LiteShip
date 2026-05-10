@@ -60,7 +60,7 @@ This is the mechanics layer:
 - boundaries, tokens, themes, styles
 - naming and composition rules
 
-### If the question is "How does Astro actually host and run this?"
+### If the question is "How does Astro host and run this?"
 
 Read [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md).
 
@@ -168,7 +168,7 @@ For agents and grep-first humans, here is where the canonical answer lives:
 | How do I extend an existing type union? | The pattern is grep-first today; see CONTRIBUTING.md "Architecture changes" and the affected `_spine/*.d.ts` file |
 | Where is the canonical CI workflow? | `.github/workflows/ci.yml` (truth-linux job runs `pnpm run gauntlet:full`) |
 | Where is the red-team regression suite? | `tests/regression/red-team-runtime.test.ts` |
-| What does `flex:verify` actually check? | `scripts/flex-verify.ts` (7 dimensions; rolled up by gauntlet phase 29) |
+| What does `flex:verify` check? | `scripts/flex-verify.ts` (7 dimensions; gauntlet's final phase rollup) |
 
 ---
 

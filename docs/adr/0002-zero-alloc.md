@@ -14,7 +14,7 @@ Per-frame hot paths allocate zero objects. Four mechanisms:
 
 1. **Pooled composite state.** `CompositorStatePool` hands out pre-allocated `CompositeState` instances; compositor writes in place; renderer returns them (`packages/core/src/compositor-pool.ts`).
 2. **Bitmap-backed dirty tracking.** `DirtyFlags` is a bitmask, not a `Set` (`packages/core/src/dirty.ts`).
-3. **Float64Array dense ECS storage.** Contiguous typed arrays with index-wrapping writes (`packages/core/src/ecs.ts`, `_makeDenseStore` L60–92).
+3. **Float64Array dense ECS storage.** Contiguous typed arrays with index-wrapping writes (`packages/core/src/ecs.ts`, `_makeDenseStore` from L61).
 4. **Microtask batching.** Dirty marks accumulate within a microtask, then flush once: one evaluate → one quantize → one compile → one DOM write per coalesced burst (`compositor.ts`).
 
 The per-frame inner loop is plain JS. Effect is used only for setup/teardown (scoped resources), never inside rAF.

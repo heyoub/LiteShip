@@ -25,7 +25,7 @@ Per-frame hot paths use dense `Part` stores (`Part.dense('Opacity', N)`, `Part.d
 
 ## Supporting evidence
 
-- `packages/core/src/ecs.ts` (existing, line 184 `World.make`)
+- `packages/core/src/ecs.ts` (`_makeWorld` at L187; namespace export `World.make` is wired downstream of this declaration)
 - `packages/scene/src/compile.ts`: introduced with this ADR
 - `packages/scene/src/systems/*.ts`: 6 canonical systems (VideoSystem, AudioSystem, TransitionSystem, EffectSystem, SyncSystem, PassThroughMixer)
 - `examples/scenes/intro.ts`: reference music-video scene proving end-to-end composition

@@ -7,7 +7,7 @@
 
 The CZAP compiler casts adaptive UI definitions to multiple output targets: CSS, GLSL, WGSL, ARIA, AI function-call manifest, config template (six targets today, more expected). All targets share a uniform invocation surface through `dispatch(def: CompilerDef)` in `packages/compiler/src/dispatch.ts`: a discriminated union over `_tag: 'CSSCompiler' | 'GLSLCompiler' | 'WGSLCompiler' | 'ARIACompiler' | 'AICompiler' | 'ConfigCompiler'`.
 
-CSS is the most frequently-used target. The engine explicitly supports plugin extensibility: third-party compilers should be first-class citizens, not second-class. The compile path runs at Vite build/HMR time, Astro SSR time, and edge theme-cache warm time. Never per frame or per render tick. Compilation outputs are content-addressed via FNV-1a + CBOR (see `fnv.ts`, `typed-ref.ts`, `memo-cache.ts`); identical definitions compile once and are cached by hash.
+CSS is the most frequently-used target. Plugin extensibility matters: third-party compilers register through the same `dispatch()` table as built-in compilers, share the same content-address cache, and inherit the same bench-gate threshold. The compile path runs at Vite build/HMR time, Astro SSR time, and edge theme-cache warm time. Never per frame or per render tick. Compilation outputs are content-addressed via FNV-1a + CBOR (see `fnv.ts`, `typed-ref.ts`, `memo-cache.ts`); identical definitions compile once and are cached by hash.
 
 ## Decision
 

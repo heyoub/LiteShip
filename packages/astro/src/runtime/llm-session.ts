@@ -1,7 +1,7 @@
 import type { Receipt, UIFrame } from '@czap/core';
 import {
   LLMChunkNormalization,
-  resolveHtmlString,
+  createHtmlFragment,
   type HtmlPolicy,
   type LLMChunk,
   type ToolCallAccumulator,
@@ -109,10 +109,16 @@ function replaceWithText(target: HTMLElement, text: string): void {
 }
 
 function writeHtml(target: HTMLElement, html: string, htmlPolicy: HtmlPolicy, allowTrustedHtml: boolean): void {
-  target.innerHTML = resolveHtmlString(html, {
+  // Route through createHtmlFragment so the assignment goes via the
+  // shared trust pipeline's Trusted-Types-aware `assignInnerHTML` helper
+  // rather than a raw `target.innerHTML = ...` (which throws under
+  // `require-trusted-types-for 'script'` enforcement). See SECURITY.md
+  // "CSP and Trusted Types" for the recipe.
+  const fragment = createHtmlFragment(html, {
     policy: htmlPolicy,
     allowTrustedHtml,
   });
+  target.replaceChildren(fragment);
 }
 
 /**

@@ -179,7 +179,7 @@ Startup steering now follows a generic `paired-truth` model:
 - Capsule catalog closure -- any new assembly arm proposal must go through an ADR amendment with first concrete instance in the same PR (ADR-0008). Governance watch, not a bench watch.
 - `ReceiptDAG.nodes` has no pruning, TTL, or max-size guard; per-session DAGs grow until `tracker.reset()` on session close. Bounded by user behavior in normal flows, but worth a future `linearizeFrom`-or-pruning policy if long-lived LLM sessions become common. Not a bench watch; a memory-shape watch.
 
-`pnpm run gauntlet:full` is the canonical sequential order:
+`pnpm run gauntlet:full` is the canonical sequential order (counted directly against `await run(...)` calls in `scripts/gauntlet.ts`):
 
 1. `pnpm run build`
 2. `pnpm run capsule:compile`
@@ -188,36 +188,39 @@ Startup steering now follows a generic `paired-truth` model:
 5. `pnpm run docs:check`
 6. `pnpm exec tsx scripts/check-invariants.ts`
 7. `pnpm test`
-8. `pnpm run coverage:browser` (background, overlaps phases 9-20)
-9. `pnpm run test:vite`
-10. `pnpm run test:astro`
-11. `pnpm run test:tailwind`
-12. `pnpm run test:e2e`
-13. `pnpm run test:e2e:stress`
-14. `pnpm run test:e2e:stream-stress`
-15. `pnpm run test:flake`
-16. `pnpm run test:redteam`
-17. `pnpm run bench`
-18. `pnpm run bench:gate`
+8. `pnpm run test:vite`
+9. `pnpm run test:astro`
+10. `pnpm run test:tailwind`
+11. `pnpm run test:e2e`
+12. `pnpm run test:e2e:stress`
+13. `pnpm run test:e2e:stream-stress`
+14. `pnpm run test:flake`
+15. `pnpm run test:redteam`
+16. `pnpm run bench`
+17. `pnpm run bench:gate`
+18. `pnpm run bench:trend`
 19. `pnpm run bench:reality`
 20. `pnpm run package:smoke`
-21. `pnpm run coverage:node`
-22. `pnpm run coverage:merge` (waits for background browser coverage)
-23. `pnpm run report:runtime-seams`
-24. `pnpm run audit`
-25. `pnpm run report:satellite-scan`
-26. `pnpm run feedback:verify`
-27. `pnpm run runtime:gate`
-28. `pnpm run capsule:verify`
-29. `pnpm run flex:verify`
+21. `rimraf coverage/subprocess-raw` (wipe before tracked coverage)
+22. `pnpm run coverage:node:tracked`
+23. `pnpm run coverage:browser`
+24. `tsx scripts/merge-subprocess-v8.ts`
+25. `tsx scripts/merge-coverage.ts`
+26. `pnpm run report:runtime-seams`
+27. `pnpm run audit`
+28. `pnpm run report:satellite-scan`
+29. `pnpm run feedback:verify`
+30. `pnpm run runtime:gate`
+31. `pnpm run capsule:verify`
+32. `pnpm run flex:verify`
 
 ### Per-phase wall-time ranges
 
-Total across all 29 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (per the README's gauntlet snapshot).
+Total across all 32 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (per the README's gauntlet snapshot).
 
 `scripts/gauntlet.ts` writes `benchmarks/gauntlet-phase-timings.json` after every run (success or failure), so the live ledger for a 3am operator is the latest artifact, not this static table. Re-run `pnpm run gauntlet:full` and the artifact updates automatically. The numbers below are a captured snapshot from one Linux run, useful as anchors when the artifact isn't fresh.
 
-Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are measured wall times from the captured run; phases 12 onward are sourced from prior STATUS / README claims where available, otherwise marked `see artifact`.
+Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are measured wall times from the captured run; phases 12 onward are marked `see artifact` (the captured run failed at `test:e2e` because the sandbox lacked Playwright dep-install). The phase numbers below match `scripts/gauntlet.ts`'s `await run(...)` order.
 
 | Phase # | Name | Command | Wall time | Source |
 | --- | --- | --- | --- | --- |
@@ -228,34 +231,37 @@ Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are meas
 | 5 | docs:check | `pnpm run docs:check` | 39.7s | captured run (TypeDoc regen + diff) |
 | 6 | invariants | `pnpm exec tsx scripts/check-invariants.ts` | 987ms | captured run |
 | 7 | test | `pnpm test` | 1m7s | captured run (~75s claim from README) |
-| 8 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | "Coverage timing (2026-04-23)" block earlier in this doc |
-| 9 | test:vite | `pnpm run test:vite` | 3.1s | captured run |
-| 10 | test:astro | `pnpm run test:astro` | 6.9s | captured run |
-| 11 | test:tailwind | `pnpm run test:tailwind` | 2.3s | captured run |
-| 12 | test:e2e | `pnpm run test:e2e` | see artifact | Playwright-dep-dependent; varies by browser-deps install state |
-| 13 | test:e2e:stress | `pnpm run test:e2e:stress` | see artifact | 10x repeat-each WebCodecs capture |
-| 14 | test:e2e:stream-stress | `pnpm run test:e2e:stream-stress` | see artifact | 10x repeat-each stream reconnect |
-| 15 | test:flake | `pnpm run test:flake` | see artifact | repeated runs of runtime-sensitive tests |
-| 16 | test:redteam | `pnpm run test:redteam` | see artifact | Linux fast (~seconds); browser red-team is separate |
-| 17 | bench | `pnpm run bench` | see artifact | full bench sweep |
-| 18 | bench:gate | `pnpm run bench:gate` | see artifact | replicated 5-run statistical gate |
+| 8 | test:vite | `pnpm run test:vite` | 3.1s | captured run |
+| 9 | test:astro | `pnpm run test:astro` | 6.9s | captured run |
+| 10 | test:tailwind | `pnpm run test:tailwind` | 2.3s | captured run |
+| 11 | test:e2e | `pnpm run test:e2e` | 6.5s | captured run (failed downstream — Playwright dep-install gap) |
+| 12 | test:e2e:stress | `pnpm run test:e2e:stress` | see artifact | 10x repeat-each WebCodecs capture |
+| 13 | test:e2e:stream-stress | `pnpm run test:e2e:stream-stress` | see artifact | 10x repeat-each stream reconnect |
+| 14 | test:flake | `pnpm run test:flake` | see artifact | repeated runs of runtime-sensitive tests |
+| 15 | test:redteam | `pnpm run test:redteam` | see artifact | Linux fast (~seconds); browser red-team is separate |
+| 16 | bench | `pnpm run bench` | see artifact | full bench sweep |
+| 17 | bench:gate | `pnpm run bench:gate` | see artifact | replicated 5-run statistical gate |
+| 18 | bench:trend | `pnpm run bench:trend` | see artifact | rolling-median drift gate; skips until 3 historical fingerprints exist |
 | 19 | bench:reality | `pnpm run bench:reality` | see artifact | browser cold-start evidence lane |
 | 20 | package:smoke | `pnpm run package:smoke` | see artifact | per-package pack/install/export cycle |
-| 21 | coverage:node | `pnpm run coverage:node` | ~38s | `scripts/gauntlet.ts` orchestration comment |
-| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" |
-| 23 | report:runtime-seams | `pnpm run report:runtime-seams` | see artifact | derived from coverage + bench |
-| 24 | audit | `pnpm run audit` | see artifact | structural + integrity + surface |
-| 25 | report:satellite-scan | `pnpm run report:satellite-scan` | see artifact | derived synthesis |
-| 26 | feedback:verify | `pnpm run feedback:verify` | see artifact | provenance / contradiction check |
-| 27 | runtime:gate | `pnpm run runtime:gate` | see artifact | final fail-closed enforcement |
-| 28 | capsule:verify | `pnpm run capsule:verify` | see artifact | runs all generated tests + benches |
-| 29 | flex:verify | `pnpm run flex:verify` | see artifact | 7-dimension acceptance roll-up |
+| 21 | coverage:wipe-subprocess | `rimraf coverage/subprocess-raw` | <1s | filesystem cleanup before tracked coverage |
+| 22 | coverage:node:tracked | `pnpm run coverage:node:tracked` | ~38s | `scripts/gauntlet.ts` orchestration comment for `coverage:node` |
+| 23 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | "Coverage timing (2026-04-23)" block earlier in this doc |
+| 24 | merge-subprocess-v8 | `tsx scripts/merge-subprocess-v8.ts` | see artifact | merges subprocess v8 coverage frames |
+| 25 | coverage:merge | `tsx scripts/merge-coverage.ts` | ~40s + browser pass | "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" |
+| 26 | report:runtime-seams | `pnpm run report:runtime-seams` | see artifact | derived from coverage + bench |
+| 27 | audit | `pnpm run audit` | see artifact | structural + integrity + surface |
+| 28 | report:satellite-scan | `pnpm run report:satellite-scan` | see artifact | derived synthesis |
+| 29 | feedback:verify | `pnpm run feedback:verify` | see artifact | provenance / contradiction check |
+| 30 | runtime:gate | `pnpm run runtime:gate` | see artifact | final fail-closed enforcement |
+| 31 | capsule:verify | `pnpm run capsule:verify` | see artifact | runs all generated tests + benches |
+| 32 | flex:verify | `pnpm run flex:verify` | see artifact | 7-dimension acceptance roll-up |
 
-Phase 8 is the only phase with a meaningfully bimodal cost — the cold path on a fresh `node_modules/.vite-browser` cache crosses ten minutes. If your CI image rebuilds the Vite browser optimizer cache from scratch, plan around that; if it persists the cache, you stay at the ~10s warm cost.
+Phase 23 (`coverage:browser`) is the only phase with a meaningfully bimodal cost — the cold path on a fresh `node_modules/.vite-browser` cache crosses ten minutes. If your CI image rebuilds the Vite browser optimizer cache from scratch, plan around that; if it persists the cache, you stay at the ~10s warm cost.
 
 For the canonical, current truth, read `benchmarks/gauntlet-phase-timings.json` after a fresh `pnpm run gauntlet:full`. The snapshot above is a reference anchor, not the live ledger.
 
-**For 3am operators without a local repo:** the `truth-linux` job in `.github/workflows/ci.yml` uploads `benchmarks/` (including `gauntlet-phase-timings.json`) as the `truth-artifacts-linux` artifact on every push to `main` and every pull request. That artifact carries all 29 phases measured under CI conditions and is the single source of truth without needing to re-run anything locally — find the most recent successful CI run on the relevant branch in the GitHub Actions UI, download the artifact, read the JSON. The static table above is for orientation; the artifact is for decisions.
+**For 3am operators without a local repo:** the `truth-linux` job in `.github/workflows/ci.yml` uploads `benchmarks/` (including `gauntlet-phase-timings.json`) as the `truth-artifacts-linux` artifact on every push to `main` and every pull request. That artifact carries all 32 phases measured under CI conditions and is the single source of truth without needing to re-run anything locally — find the most recent successful CI run on the relevant branch in the GitHub Actions UI, download the artifact, read the JSON. The static table above is for orientation; the artifact is for decisions.
 
 ---
 
@@ -357,7 +363,7 @@ Current LLM steady-state steering from fresh local runtime seams:
 - `llm-runtime-steady` remains diagnostic-only unless a future policy change promotes it
 - bench artifacts now emit replicate exceedance rate plus directive-to-baseline
   `p75` / `p99` ratios
-- long text-session slope and mixed text/tool-session slope are now first-class
+- long text-session slope and mixed text/tool-session slope are now exported as first-class metrics in `reports/runtime-seams.json`
   early-warning signals for scheduler drift and buffering churn
 - if mixed-session slope rises materially faster than long-text slope, investigate
   tool-call delta normalization or flush churn before touching parser internals

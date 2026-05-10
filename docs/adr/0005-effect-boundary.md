@@ -35,7 +35,7 @@ Phase B §5.7 audit outcome:
 | 3. Event-handler grounding | `signal.ts` ×6, `zap.ts` ×1, `timeline.ts` ×3, `detect.ts` ×1, `astro/stream.ts` ×2, `blend.ts` ×1, `video.ts` ×2, `quantizer.ts` ×1 | Sanctioned seam — kept + documented. |
 | 4. State-machine wrapping | `sse.ts` — **refactored**, 17 → 0 runSync sites | Converted to plain-JS reducer (single mutable `machine` record). All 2481 tests pass. |
 | 5. Resource cleanup | `wire.ts` ×2 (`Queue.shutdown.pipe(runSync)`) | Inherent — finalizer seam. |
-| 6. Hot-path reads | `compositor.ts:206` (quantizer.state fallback), `compositor.ts:265` (SubscriptionRef.set for `changes` Stream) | `stateSync` added to `AnimatedQuantizer` — fallback only reached by bespoke Quantizers. `changes` Stream publish is the one unavoidable seam — consumers rely on `Stream<CompositeState>` contract. |
+| 6. Hot-path reads | `compositor.ts:207` (quantizer.state fallback), `compositor.ts:272` (SubscriptionRef.set for `changes` Stream) | `stateSync` added to `AnimatedQuantizer` — fallback only reached by bespoke Quantizers. `changes` Stream publish is the one unavoidable seam — consumers rely on `Stream<CompositeState>` contract. |
 
 **Production `Effect.runSync` count:** 35 → 21 (17 eliminated by SSE refactor). All remaining sites are category-classified and policy-justified.
 

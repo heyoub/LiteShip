@@ -11,7 +11,7 @@ Active priorities:
 1. Keep runtime correctness and hotspot coverage moving until the remaining low-branch runtime files are no longer structural laggards.
 2. Keep security defaults fail-closed for HTML, URL, selector, style, and boundary-state surfaces.
 3. Keep CI truth aligned with the canonical local gauntlet.
-4. Keep packaging truth aligned with what will actually ship to consumers.
+4. Keep packaging truth aligned with what ships to consumers.
 5. Keep dogfooding friction feeding back into LiteShip tests, telemetry, and docs instead of app-local hacks.
 
 ## Already Promoted

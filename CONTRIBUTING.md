@@ -28,7 +28,7 @@ install (`pnpm exec playwright install` if needed).
 
 ## The gauntlet, your release gate
 
-`pnpm run gauntlet:full` is the contract: the full shake-down cruise. It runs ~30 phases:
+`pnpm run gauntlet:full` is the contract: the full shake-down cruise. It runs 32 phases (see `docs/STATUS.md` for the canonical ordered list):
 
 - build, capsule:compile, typecheck, lint, docs:check, invariants
 - the full vitest test surface (unit + component + property + integration)

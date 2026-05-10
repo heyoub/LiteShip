@@ -64,8 +64,6 @@ Main surfaces:
 - `Receipt`
 - `DAG`
 
-This is the package that defines the system's language.
-
 ---
 
 ## `@czap/quantizer`
@@ -88,8 +86,6 @@ Main surfaces:
 - `Transition`
 - `AnimatedQuantizer`
 - `MemoCache`
-
-This is the package for runtime state selection and transition behavior.
 
 ---
 
@@ -121,8 +117,6 @@ Main surfaces:
 - `StyleCSSCompiler`
 - `ComponentCSSCompiler`
 - `dispatch`
-
-This is the projection layer from semantic state to concrete target.
 
 ---
 
@@ -158,8 +152,6 @@ Main surfaces:
 - `LLMAdapter`
 - `createAudioProcessor`
 
-This is the package that touches the browser most directly.
-
 ---
 
 ## `@czap/detect`
@@ -183,8 +175,6 @@ Main surfaces:
 - `designTierFromCapabilities`
 - `motionTierFromCapabilities`
 - `capSetFromCapabilities`
-
-This is the package for deciding what the runtime is allowed to do.
 
 ---
 
@@ -222,8 +212,6 @@ Main surfaces:
 - `loadVirtualModule`
 - `handleHMR`
 
-This is the package that turns authored CSS into runtime-ready CSS.
-
 ---
 
 ## `@czap/astro`
@@ -253,8 +241,6 @@ Host-owned shared runtime surfaces:
 - `@czap/astro/runtime` slot bootstrap and swap reinit helpers
 - `@czap/astro/runtime` wasm runtime configuration and loading
 - internal runtime adapters for `satellite`, `stream`, `llm`, `worker`, and `wasm`
-
-This is the package that makes Astro a LiteShip-aware host.
 
 ---
 

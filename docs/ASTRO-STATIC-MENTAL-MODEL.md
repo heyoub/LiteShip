@@ -8,7 +8,7 @@ Naming: [GLOSSARY.md](./GLOSSARY.md).
 
 This is not a migration guide and not a product comparison. It's a mental model for authoring; for the concrete shape of the authoring loop (what you actually type and what comes out), read [AUTHORING-MODEL.md](./AUTHORING-MODEL.md) alongside this doc.
 
-In one paragraph: you name the few states a surface actually has (*stacked, split, cinematic*), write a boundary that says where one becomes the next with hysteresis where you'd want some grace, write the styles for each named state, and move on. The CSS variable, the GLSL preamble, and the ARIA attribute all come out of that one boundary; the AI manifest is its own structured artifact authored alongside, sharing the same state vocabulary. Drag the window edge: the CSS re-paints, the shader uniform changes the same tick, the screen reader sees the same state your styles do.
+In one paragraph: you name the few states a surface has (*stacked, split, cinematic*), write a boundary that says where one becomes the next with hysteresis where you'd want some grace, write the styles for each named state, and move on. The CSS variable, the GLSL preamble, and the ARIA attribute all come out of that one boundary; the AI manifest is its own structured artifact authored alongside, sharing the same state vocabulary. Drag the window edge: the CSS re-paints, the shader uniform changes the same tick, the screen reader sees the same state your styles do.
 
 The right question is not:
 
@@ -77,7 +77,7 @@ If React tends to make authors think in terms of component-local state, LiteShip
 
 A boundary defines where one named state becomes another.
 
-This is not raw breakpoint logic. It is a semantic partition of experience.
+A boundary names where one experience becomes another, not where one number becomes another. The threshold values are an implementation detail; the named states are the contract.
 
 Example:
 
@@ -149,7 +149,6 @@ A style is where the author says:
 - in `split`, use these properties
 - in `cinematic`, use these properties
 
-This is the authored visual behavior.
 
 The important shift is:
 
@@ -227,7 +226,6 @@ In practice, the Astro side of the model is:
 3. let CSS and compiled outputs carry as much of the experience as possible
 4. use directives where the experience truly needs runtime adaptation
 
-That is why the combination makes sense for static visual sites.
 
 ---
 

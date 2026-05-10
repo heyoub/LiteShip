@@ -5,7 +5,7 @@
 
 ## Context
 
-`packages/_spine/` contains 13 `.d.ts` files (~90K+ lines) with comprehensive branded-type contracts for every package. Until this ADR, `_spine` had zero runtime imports: 100% type duplication between `_spine` and each implementation package's `brands.ts`. Classic Island Syndrome, documented in `docs/sixsigma/threads/thread-04-spine-runtime-gap.md`.
+`packages/_spine/` contains 13 `.d.ts` files (~90K+ lines) with comprehensive branded-type contracts for every package. Until this ADR, `_spine` had zero runtime imports: 100% type duplication between `_spine` and each implementation package's `brands.ts`. Classic Island Syndrome.
 
 The capsule factory needs a canonical type source. Declaring capsule contracts that themselves duplicate types across `_spine` and implementation packages would inherit the duplication.
 
