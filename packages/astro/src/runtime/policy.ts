@@ -139,33 +139,83 @@ export function normalizeRuntimeSecurityPolicy(policy?: RuntimeSecurityPolicy): 
 }
 
 /**
- * Normalise `policy` and write it to `window.__CZAP_RUNTIME_POLICY__`
- * so every directive sees the same configuration. Called once during
- * bootstrap by the integration's injected boot script.
+ * Module-private source of truth for the active runtime policy. Lives
+ * in a closure no external script can `Object.defineProperty` past;
+ * the window global is a discoverable broadcast and a cross-bundle
+ * bridge, not the canonical store. Production callers always go
+ * through `configureRuntimePolicy` / `readRuntimePolicy`, both of
+ * which read the closure first.
  *
- * The value object is frozen at every nesting level (see
- * `normalizeRuntimeSecurityPolicy`); the descriptor remains
- * `configurable: true` so the integration can re-bootstrap on HMR
- * and test harnesses can refresh policy state between cases. An
- * attacker with script execution on the page can redefine the global
- * via `Object.defineProperty`; that is acknowledged in SECURITY.md
- * and is out of scope for this layer (it requires a primary CSP
- * compromise to reach).
+ * @internal
+ */
+let _currentPolicy: NormalizedRuntimeSecurityPolicy | null = null;
+
+/**
+ * Tracks whether the cross-bundle window broadcast has been published.
+ * The broadcast happens once per realm with `configurable: false` so
+ * an attacker with script execution cannot redefine the property on
+ * later loaders. Subsequent `configureRuntimePolicy` calls (HMR,
+ * tests) update the module-private store but skip a re-broadcast,
+ * which would throw against the locked descriptor. The broadcast is
+ * informational; consumers in the same module-graph see updates
+ * through the closure regardless.
+ *
+ * @internal
+ */
+let _windowGlobalPublished = false;
+
+/**
+ * Normalise `policy` and install it as the active runtime configuration.
+ *
+ * The first call in a given realm publishes the value to
+ * `window.__CZAP_RUNTIME_POLICY__` with `configurable: false` and
+ * `writable: false`, so an attacker cannot redefine the global via
+ * `Object.defineProperty` to install a permissive policy. Subsequent
+ * calls (HMR, test re-initialisation) update the module-private store
+ * only — the window global stays locked at the first published value.
+ *
+ * Production callers run `configureRuntimePolicy` once during the
+ * integration boot script. Test harnesses re-call it freely; reads
+ * via `readRuntimePolicy()` return the latest configured value
+ * because the module-private store is checked first.
  */
 export function configureRuntimePolicy(policy?: RuntimeSecurityPolicy): NormalizedRuntimeSecurityPolicy {
   const normalized = normalizeRuntimeSecurityPolicy(policy);
-  return writeRuntimeGlobal('__CZAP_RUNTIME_POLICY__', normalized);
+  _currentPolicy = normalized;
+
+  if (!_windowGlobalPublished) {
+    writeRuntimeGlobal('__CZAP_RUNTIME_POLICY__', normalized, { configurable: false });
+    _windowGlobalPublished = true;
+  }
+
+  return normalized;
 }
 
 /**
- * Read the installed runtime policy from `window`. Falls back to the
- * default normalised policy when nothing was configured (e.g. in
- * tests).
+ * Read the active runtime policy. Prefers the module-private store
+ * (the canonical source of truth), falls back to the cross-bundle
+ * window broadcast for consumers loaded as a separate bundle, and
+ * finally to a default normalised policy when nothing has been
+ * configured (e.g. in tests that haven't called
+ * `configureRuntimePolicy` yet).
  */
 export function readRuntimePolicy(): NormalizedRuntimeSecurityPolicy {
+  if (_currentPolicy) return _currentPolicy;
   return (
     readRuntimeGlobal('__CZAP_RUNTIME_POLICY__', isNormalizedRuntimeSecurityPolicy) ?? normalizeRuntimeSecurityPolicy()
   );
+}
+
+/**
+ * Reset the module-private policy store to its uninitialised state.
+ * Test-only: production code must not call this. The window-global
+ * broadcast is intentionally NOT cleared (the descriptor is
+ * non-configurable and cannot be redefined within a single realm).
+ *
+ * @internal
+ */
+export function _resetRuntimePolicyForTests(): void {
+  _currentPolicy = null;
 }
 
 /** Convenience accessor for the endpoint sub-policy. */
