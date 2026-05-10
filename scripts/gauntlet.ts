@@ -15,6 +15,7 @@
  */
 
 import { execSync, spawn } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -156,6 +157,44 @@ function formatDuration(ms: number): string {
   return `${min}m${sec}s`;
 }
 
+/**
+ * Write step timings to `benchmarks/gauntlet-phase-timings.json` so the doc
+ * can reference real per-phase numbers instead of guessing. Called from both
+ * the success and failure paths so partial runs still produce data.
+ */
+function writePhaseTimingsArtifact(totalDurationMs: number, status: 'passed' | 'failed', failedPhase?: string): void {
+  try {
+    const benchmarksDir = resolve(ROOT, 'benchmarks');
+    mkdirSync(benchmarksDir, { recursive: true });
+    const artifact = {
+      _tag: 'GauntletPhaseTimings',
+      _version: 1,
+      timestamp: new Date().toISOString(),
+      status,
+      failedPhase: failedPhase ?? null,
+      environment: {
+        platform: process.platform,
+        arch: process.arch,
+        nodeVersion: process.version,
+        ci: Boolean(process.env.CI),
+      },
+      totalDurationMs,
+      totalDurationFormatted: formatDuration(totalDurationMs),
+      phases: stepResults.map((step, index) => ({
+        index: index + 1,
+        name: step.command,
+        durationMs: step.durationMs,
+        durationFormatted: formatDuration(step.durationMs),
+      })),
+    };
+    writeFileSync(resolve(benchmarksDir, 'gauntlet-phase-timings.json'), JSON.stringify(artifact, null, 2) + '\n');
+  } catch (err) {
+    // Artifact write failures are diagnostic, not fatal — the gauntlet's
+    // pass/fail signal is the printed summary, not this side file.
+    console.warn(`  (could not write gauntlet-phase-timings.json: ${err instanceof Error ? err.message : String(err)})`);
+  }
+}
+
 async function main() {
   const gauntletStart = Date.now();
 
@@ -230,13 +269,17 @@ async function main() {
       console.log(`    ${step.command.padEnd(48)} ${formatDuration(step.durationMs)}`);
     }
     console.log('');
+    writePhaseTimingsArtifact(totalDuration, 'passed');
   } catch (error) {
     const totalDuration = Date.now() - gauntletStart;
+    const errMsg = error instanceof Error ? error.message : String(error);
+    const failedPhase = stepResults.length > 0 ? stepResults[stepResults.length - 1]!.command : undefined;
     console.error(`\n${'='.repeat(60)}`);
     console.error('  GAUNTLET FAILED');
     console.error(`${'='.repeat(60)}`);
-    console.error(`\n  ${error instanceof Error ? error.message : String(error)}`);
+    console.error(`\n  ${errMsg}`);
     console.error(`\n  Failed after ${formatDuration(totalDuration)}\n`);
+    writePhaseTimingsArtifact(totalDuration, 'failed', failedPhase);
     process.exit(1);
   }
 }

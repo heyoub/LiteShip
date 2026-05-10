@@ -17,15 +17,15 @@ Current first-class support target (tier-1, CI-gated):
 - Chromium + Firefox + WebKit shared-runtime browser lane
 - Chromium-first capability coverage where browser APIs are intentionally not uniform, including WebCodecs capture
 
-macOS (tier-2, best-effort):
+macOS (tier-2, best-effort, real CI signal):
 
-macOS is not CI-gated. No `macos-*` runner is in the workflow. The toolchain is POSIX + Node 22 + Playwright, so it may work, but no automated regression catches macOS-specific drift. Known divergence areas:
+`macos-smoke` runs every PR on `macos-latest` via `.github/workflows/ci.yml`. The job is `continue-on-error: true`, so a macOS regression will not block merge to main; it surfaces as a yellow check, not silence. The smoke covers: build, typecheck, lint, invariants, test, test:vite, test:astro, test:tailwind, test:redteam, package:smoke. Playwright-browser-dependent lanes (`test:e2e`, `coverage:browser`) stay Linux-only because Playwright dep install on macOS is a separate path. Known divergence areas the smoke does not catch:
 
-- Playwright `--with-deps` uses apt on Linux; macOS requires Homebrew or a manual dep path. Install behavior may differ.
 - Vite filesystem watchers use FSEvents on APFS vs inotify / ReadDirectoryChangesW on ext4 / NTFS; HMR behavior under `@czap/vite` may differ.
-- Worker startup on Apple Silicon is faster than the Linux baseline the bench gates are calibrated against; hard gates should still pass but distributions will differ.
+- Worker startup on Apple Silicon is faster than the Linux baseline the bench gates are calibrated against; hard gates should still pass, distributions will differ.
+- The `coverage:browser` lane is Linux-only; merged coverage on macOS is partial.
 
-macOS-specific issues are welcome. Patches that do not break the tier-1 paths will be accepted. Promotion to tier-1 requires a `macos-*` CI runner in the workflow, not a promise.
+Promotion path to tier-1 (drop `continue-on-error`, add to `ci-summary` needs): `macos-smoke` green for a full release cycle on a fresh `macos-latest` image. Promotion is gated by signal, not by promise.
 
 Current security/default-trust posture:
 
@@ -210,18 +210,45 @@ Startup steering now follows a generic `paired-truth` model:
 
 Total across all 29 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (per the README's gauntlet snapshot).
 
-For per-run, per-phase truth, `pnpm run gauntlet:full --verbose` prints timing per phase; that is the live ledger and the right answer for a 3am operator. The static numbers below cover only the four phases that have a recorded datapoint in some checked-in source — they are typical, not contractual; slower hardware will exceed them and that is not a regression.
+`scripts/gauntlet.ts` writes `benchmarks/gauntlet-phase-timings.json` after every run (success or failure), so the live ledger for a 3am operator is the latest artifact, not this static table. Re-run `pnpm run gauntlet:full` and the artifact updates automatically. The numbers below are a captured snapshot from one Linux run, useful as anchors when the artifact isn't fresh.
 
-| Phase # | Name | Command | Typical range | Source |
+Captured 2026-05-10 on Cursor Cloud Linux (Node 22, x64). Phases 1–11 are measured wall times from the captured run; phases 12 onward are sourced from prior STATUS / README claims where available, otherwise marked `see artifact`.
+
+| Phase # | Name | Command | Wall time | Source |
 | --- | --- | --- | --- | --- |
-| 7 | test | `pnpm test` | ~75s | README inline comment on the `pnpm test` script |
+| 1 | build | `pnpm run build` | 1.3s | captured run |
+| 2 | capsule:compile | `pnpm run capsule:compile` | 10.2s | captured run |
+| 3 | typecheck | `pnpm run typecheck` | 4.2s | captured run |
+| 4 | lint | `pnpm run lint` | 5.1s | captured run |
+| 5 | docs:check | `pnpm run docs:check` | 39.7s | captured run (TypeDoc regen + diff) |
+| 6 | invariants | `pnpm exec tsx scripts/check-invariants.ts` | 987ms | captured run |
+| 7 | test | `pnpm test` | 1m7s | captured run (~75s claim from README) |
 | 8 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | "Coverage timing (2026-04-23)" block earlier in this doc |
+| 9 | test:vite | `pnpm run test:vite` | 3.1s | captured run |
+| 10 | test:astro | `pnpm run test:astro` | 6.9s | captured run |
+| 11 | test:tailwind | `pnpm run test:tailwind` | 2.3s | captured run |
+| 12 | test:e2e | `pnpm run test:e2e` | see artifact | Playwright-dep-dependent; varies by browser-deps install state |
+| 13 | test:e2e:stress | `pnpm run test:e2e:stress` | see artifact | 10x repeat-each WebCodecs capture |
+| 14 | test:e2e:stream-stress | `pnpm run test:e2e:stream-stress` | see artifact | 10x repeat-each stream reconnect |
+| 15 | test:flake | `pnpm run test:flake` | see artifact | repeated runs of runtime-sensitive tests |
+| 16 | test:redteam | `pnpm run test:redteam` | see artifact | Linux fast (~seconds); browser red-team is separate |
+| 17 | bench | `pnpm run bench` | see artifact | full bench sweep |
+| 18 | bench:gate | `pnpm run bench:gate` | see artifact | replicated 5-run statistical gate |
+| 19 | bench:reality | `pnpm run bench:reality` | see artifact | browser cold-start evidence lane |
+| 20 | package:smoke | `pnpm run package:smoke` | see artifact | per-package pack/install/export cycle |
 | 21 | coverage:node | `pnpm run coverage:node` | ~38s | `scripts/gauntlet.ts` orchestration comment |
-| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" earlier in this doc |
+| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" |
+| 23 | report:runtime-seams | `pnpm run report:runtime-seams` | see artifact | derived from coverage + bench |
+| 24 | audit | `pnpm run audit` | see artifact | structural + integrity + surface |
+| 25 | report:satellite-scan | `pnpm run report:satellite-scan` | see artifact | derived synthesis |
+| 26 | feedback:verify | `pnpm run feedback:verify` | see artifact | provenance / contradiction check |
+| 27 | runtime:gate | `pnpm run runtime:gate` | see artifact | final fail-closed enforcement |
+| 28 | capsule:verify | `pnpm run capsule:verify` | see artifact | runs all generated tests + benches |
+| 29 | flex:verify | `pnpm run flex:verify` | see artifact | 7-dimension acceptance roll-up |
 
 Phase 8 is the only phase with a meaningfully bimodal cost — the cold path on a fresh `node_modules/.vite-browser` cache crosses ten minutes. If your CI image rebuilds the Vite browser optimizer cache from scratch, plan around that; if it persists the cache, you stay at the ~10s warm cost.
 
-The other 25 phases have no per-phase datapoint checked in. Their wall times come out of the `--verbose` output, which is the canonical source.
+For the canonical, current truth, read `benchmarks/gauntlet-phase-timings.json` after a fresh `pnpm run gauntlet:full`. The snapshot above is a reference anchor, not the live ledger.
 
 ---
 

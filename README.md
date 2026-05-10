@@ -124,15 +124,15 @@ LiteShip is greenfield-first. There is no migration guide for porting an existin
 | Vite / Astro | 8 / 6 | same — no known gap |
 | Browsers | Chromium + Firefox + WebKit | same — no known gap |
 
-**Windows + Linux are tier-1.** Every push and pull request runs the full `gauntlet:full` on Linux (`truth-linux`) and a broad smoke sweep on Windows (`windows-smoke`) via `.github/workflows/ci.yml`. Automated regression catches OS-specific drift before merge. WebCodecs capture and related browser-specific paths are Chromium-first.
+**Windows + Linux are tier-1.** Every push and pull request runs the full `gauntlet:full` on Linux (`truth-linux`) and a broad smoke sweep on Windows (`windows-smoke`) via `.github/workflows/ci.yml`. Both jobs are required for merge. Automated regression catches OS-specific drift before it lands. WebCodecs capture and related browser-specific paths are Chromium-first.
 
-**macOS is tier-2.** macOS is POSIX, ships Node 22, and Playwright supports it, so the toolchain probably works. It is not CI-gated; no runner in the workflow is `macos-*`. Known areas where macOS may differ from the tested paths:
+**macOS is tier-2: best-effort with a real CI signal.** A `macos-smoke` job runs on every push and pull request via `.github/workflows/ci.yml` (build, typecheck, lint, invariants, test, test:vite/astro/tailwind, test:redteam, package:smoke). The job is `continue-on-error: true` — a macOS regression won't block merge to main, but it surfaces in the PR check list as a real yellow signal, not as silence. Known areas where macOS may differ from the gated paths:
 
-- **Playwright browser-dep install** — the workflow uses `apt-get` on Linux and Playwright's own install step on Windows; on macOS the equivalent is Homebrew or a manual Playwright dep path.
+- **Playwright browser-dep install** — the smoke job runs the test suites that don't depend on Playwright browsers; full `test:e2e` and `coverage:browser` lanes stay Linux-only because Playwright dep install on macOS is a separate path.
 - **Vite filesystem watchers** — chokidar takes different code paths on APFS (FSEvents) vs ext4 / NTFS. HMR watch behavior under `@czap/vite` may differ.
 - **Bench-gate distributions on Apple Silicon** — worker startup is faster than the Linux baseline some bench pairs are calibrated against. Hard gates should still pass; the numeric distributions will look different.
 
-Contributors are welcome to file macOS-specific issues; the project will accept patches that don't break the tier-1 paths. macOS will not be promoted to tier-1 until a `macos-*` runner is in `.github/workflows/ci.yml`.
+Promotion path: macOS moves to tier-1 (drop `continue-on-error`, add to `ci-summary` needs) when `macos-smoke` has been green for a full release cycle on a fresh `macos-latest` image. Contributors are welcome to file macOS-specific issues against the smoke job's logs.
 
 ## Documentation
 

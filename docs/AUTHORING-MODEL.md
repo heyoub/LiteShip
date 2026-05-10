@@ -33,6 +33,8 @@ The CSS variable, the GLSL preamble, and the ARIA attribute all come out of that
 
 ## The main authoring objects
 
+> The four things you author: a *boundary* (where state changes), *tokens* (the design materials), *themes* (palettes that swap together), and *styles* (what each state looks like).
+
 There are four primary authored definition types:
 
 - `Boundary`
@@ -112,6 +114,8 @@ Style guidance:
 
 ## The authoring order
 
+> Pick names before numbers, signals before states, states before styles. The order keeps the authored layer about *what the surface means* rather than *what numbers happened to fall out of CSS*.
+
 When building a new surface, the clean order is:
 
 1. name the signal
@@ -129,6 +133,8 @@ Starting from signals and states keeps the authored layer semantic; starting fro
 ---
 
 ## Naming rules
+
+> State names describe *behavior* (`stacked`, `cinematic`), not size (`large`, `medium`). Token names describe *role* (`accent`, `surface`), not the implementation value (`blue-500`). Boundary identifiers name the *surface* (`heroLayout`), not the primitive type (`mainBoundary`).
 
 ### State names
 
@@ -182,6 +188,8 @@ Avoid IDs that merely restate the primitive type:
 ---
 
 ## Example shapes
+
+> Working code for each of the four primitives. Skim if you're getting the feel for the shapes; copy when you're authoring a real surface.
 
 ### Boundary
 
@@ -276,6 +284,8 @@ export const heroShell = Style.make({
 
 ## File organization
 
+> One file per primitive type at the surface level: `boundaries.ts`, `tokens.ts`, `themes.ts`, `styles.ts`. The Vite plugin expects this shape; you can deviate, but you'll lose the convention-driven HMR behavior.
+
 The cleanest repo-level shape is convention-driven:
 
 - `boundaries.ts`
@@ -303,6 +313,8 @@ This works because authored definitions live in TypeScript, while emitted style 
 ---
 
 ## Authoring surfaces in CSS
+
+> CSS files reference your authored definitions through `@token`, `@theme`, `@style`, and `@quantize` blocks; the Vite plugin compiles those down at build/HMR time. This is how a stylesheet stays declarative while still reading from one canonical state vocabulary.
 
 The Vite layer transforms authored blocks through four phases:
 
@@ -346,6 +358,8 @@ The value of this model is that authored semantics remain centralized in the def
 
 ## Outputs as contracts
 
+> One authored state map drives many output targets (CSS variable, GLSL uniform, ARIA attribute) without you authoring the state logic separately for each. Define state once at the boundary; let compilers project it.
+
 A single authored state may need to drive several targets:
 
 - CSS custom properties
@@ -363,6 +377,8 @@ The projection is content-addressed: the boundary's FNV-1a hash (over the canoni
 ---
 
 ## Authoring for accessibility
+
+> Boundaries that drive layout drive ARIA from the same definition. Author your `aria-expanded` / `aria-hidden` per state once on the boundary; the screen reader sees the same state your styles do, no second sync to maintain.
 
 Boundaries that drive layout almost always drive an a11y story too. The ARIA compiler (`packages/compiler/src/aria.ts`) takes the same boundary and a per-state attribute map; it validates that every key starts with `aria-` or is exactly `role`, drops anything else with a diagnostic warning, and emits the attributes via `applyBoundaryState` (`packages/astro/src/runtime/boundary.ts`) onto the same satellite element the CSS variable lives on. So the screen reader and the styled element observe the same boundary identity.
 
@@ -408,6 +424,8 @@ A few rules of thumb:
 
 ## Runtime escalation
 
+> Default to CSS; reach for a client directive only when the surface needs to observe live signals; reach for a worker / WASM / GPU only when the visual meaning depends on it. Author the surface so it stays valid even when the host runs at the lowest tier.
+
 A surface should always choose the cheapest runtime that preserves its intent.
 
 Authoring rule:
@@ -423,6 +441,8 @@ The authored design should remain valid under capability ceilings.
 ---
 
 ## What not to do
+
+> Five common mistakes that make the system fight you instead of working with you. The fix for each is "move that decision back to the boundary / token / theme layer where it belongs."
 
 ### Do not author too many states
 
