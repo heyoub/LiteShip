@@ -6,8 +6,11 @@
 
 # Type Alias: MotionTier
 
-> **MotionTier** = `"none"` \| `"transitions"` \| `"animations"` \| `"physics"` \| `"compute"`
+> **MotionTier** = `_MotionTier`
 
-Defined in: core/dist/ui-quality.d.ts:20
+Defined in: core/dist/ui-quality.d.ts:17
 
-Motion tier to normalized device capability score (0-1).
+Motion tier — re-anchored from `@czap/_spine` (the canonical declaration
+per ADR-0010). The ladder runs from lowest capability (`none`, forced by
+`prefers-reduced-motion: reduce` regardless of GPU tier) to highest
+(`compute`, which unlocks the Rust/WASM kernels).

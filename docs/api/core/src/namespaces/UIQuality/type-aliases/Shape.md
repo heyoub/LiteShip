@@ -8,6 +8,6 @@
 
 > **Shape** = `UIQualityEvaluatorShape`
 
-Defined in: core/src/ui-quality.ts:95
+Defined in: core/src/ui-quality.ts:102
 
 Structural shape of a UIQuality evaluator.

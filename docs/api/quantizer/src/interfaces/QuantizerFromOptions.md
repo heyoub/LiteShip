@@ -27,7 +27,7 @@ Spring config that drives CSS easing generation for CSS outputs.
 
 ### tier?
 
-> `readonly` `optional` **tier?**: [`MotionTier`](../type-aliases/MotionTier.md)
+> `readonly` `optional` **tier?**: `MotionTier`
 
 Defined in: quantizer/src/quantizer.ts:140
 

@@ -8,7 +8,7 @@
 
 > `const` **UIQuality**: `object`
 
-Defined in: core/src/ui-quality.ts:86
+Defined in: core/src/ui-quality.ts:93
 
 UIQuality — adaptive-bitrate-style UI fidelity gate.
 

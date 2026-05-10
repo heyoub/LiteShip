@@ -8,7 +8,7 @@
 
 > **sanitizeHTML**(`html`): `string`
 
-Defined in: web/src/security/html-trust.ts:254
+Defined in: web/src/security/html-trust.ts:265
 
 Convenience wrapper that always applies the `sanitized-html` policy.
 Use when a caller just wants the "clean the markup" behaviour without

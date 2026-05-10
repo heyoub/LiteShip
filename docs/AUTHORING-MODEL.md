@@ -8,6 +8,21 @@ Naming: [GLOSSARY.md](./GLOSSARY.md).
 
 This is about construction, not migration. It assumes the mental model in [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md).
 
+## First-time reader vocabulary
+
+For designers, brand directors, and agency PMs reading alongside an engineer. Engineering-fluent readers can skip this section.
+
+- **signal** — a continuously changing value the system watches, such as viewport width, device capability tier, or the OS dark-mode flag.
+- **boundary** — a definition that carves a continuous signal into a small set of named states (e.g. `stacked / split / cinematic`), so the rest of the system only ever sees discrete labels, not raw numbers.
+- **hysteresis** — a deliberate gap between the threshold where a state turns on and the threshold where it turns off, like a thermostat's dead-band that prevents the heater from flickering on and off when the temperature hovers near the setpoint.
+- **named state** — one of the discrete labels a boundary assigns to a region of the signal; authors write styles and behaviors for names, not for numbers.
+- **content-addressed** — a way of identifying a definition by a fingerprint of its actual contents, so any change to the definition automatically produces a new fingerprint and nothing downstream can silently drift out of sync.
+- **quantize** — the step that reads a live signal, evaluates the boundary, and resolves which named state is currently active.
+- **cast** — to take an authored named state and emit it into a specific output format: a CSS custom property, a GLSL shader uniform, an ARIA attribute, and so on; always carries a target.
+- **output target** — the concrete surface a cast writes to, such as a CSS file, a WebGL shader, an accessibility tree attribute, or an AI manifest.
+
+For the full prose-register authority across this corpus, see [GLOSSARY.md](./GLOSSARY.md).
+
 ## What it feels like to author
 
 You start by naming the few states a surface actually has. *Stacked, split, cinematic.* You don't pick numbers yet; you pick names. Then you write a boundary that says where one becomes the next, with hysteresis where you'd want some grace. Then you write the styles for each named state, and you move on.

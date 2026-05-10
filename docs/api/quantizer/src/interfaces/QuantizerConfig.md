@@ -69,7 +69,7 @@ Spring config driving CSS easing injection.
 
 ### tier?
 
-> `readonly` `optional` **tier?**: [`MotionTier`](../type-aliases/MotionTier.md)
+> `readonly` `optional` **tier?**: `MotionTier`
 
 Defined in: quantizer/src/quantizer.ts:165
 

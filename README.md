@@ -116,11 +116,23 @@ LiteShip is greenfield-first. There is no migration guide for porting an existin
 
 ## Support matrix
 
-- Node.js 22, pnpm 10
-- Vite 8, Astro 6
-- Windows + Linux, PowerShell + bash
-- Chromium + Firefox + WebKit (shared runtime + browser test matrix)
-- Chromium-first WebCodecs capture and related browser-specific paths
+| Dimension | Tier-1 (CI-gated) | Tier-2 (best-effort) |
+| --- | --- | --- |
+| OS | Windows + Linux | macOS |
+| Shell | PowerShell + bash | zsh / bash on macOS |
+| Node.js | 22, pnpm 10 | same — no known gap |
+| Vite / Astro | 8 / 6 | same — no known gap |
+| Browsers | Chromium + Firefox + WebKit | same — no known gap |
+
+**Windows + Linux are tier-1.** Every push and pull request runs the full `gauntlet:full` on Linux (`truth-linux`) and a broad smoke sweep on Windows (`windows-smoke`) via `.github/workflows/ci.yml`. Automated regression catches OS-specific drift before merge. WebCodecs capture and related browser-specific paths are Chromium-first.
+
+**macOS is tier-2.** macOS is POSIX, ships Node 22, and Playwright supports it, so the toolchain probably works. It is not CI-gated; no runner in the workflow is `macos-*`. Known areas where macOS may differ from the tested paths:
+
+- **Playwright browser-dep install** — the workflow uses `apt-get` on Linux and Playwright's own install step on Windows; on macOS the equivalent is Homebrew or a manual Playwright dep path.
+- **Vite filesystem watchers** — chokidar takes different code paths on APFS (FSEvents) vs ext4 / NTFS. HMR watch behavior under `@czap/vite` may differ.
+- **Bench-gate distributions on Apple Silicon** — worker startup is faster than the Linux baseline some bench pairs are calibrated against. Hard gates should still pass; the numeric distributions will look different.
+
+Contributors are welcome to file macOS-specific issues; the project will accept patches that don't break the tier-1 paths. macOS will not be promoted to tier-1 until a `macos-*` runner is in `.github/workflows/ci.yml`.
 
 ## Documentation
 

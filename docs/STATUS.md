@@ -8,14 +8,24 @@ Current browser lane: shared-runtime suites run against a Chromium + Firefox + W
 
 Product naming for prose elsewhere: [GLOSSARY.md](./GLOSSARY.md). Tables below stay operational. Identifiers like `host-wired` and `pnpm exec czap` are literal gate vocabulary, not marketing rename targets.
 
-Current first-class support target:
+Current first-class support target (tier-1, CI-gated):
 
 - Node 22 + pnpm 10
 - Vite 8 + Astro 6
-- Windows + Linux
+- Windows + Linux (`windows-latest` smoke sweep + `ubuntu-latest` full gauntlet via `.github/workflows/ci.yml`)
 - PowerShell + bash
 - Chromium + Firefox + WebKit shared-runtime browser lane
 - Chromium-first capability coverage where browser APIs are intentionally not uniform, including WebCodecs capture
+
+macOS (tier-2, best-effort):
+
+macOS is not CI-gated. No `macos-*` runner is in the workflow. The toolchain is POSIX + Node 22 + Playwright, so it may work, but no automated regression catches macOS-specific drift. Known divergence areas:
+
+- Playwright `--with-deps` uses apt on Linux; macOS requires Homebrew or a manual dep path. Install behavior may differ.
+- Vite filesystem watchers use FSEvents on APFS vs inotify / ReadDirectoryChangesW on ext4 / NTFS; HMR behavior under `@czap/vite` may differ.
+- Worker startup on Apple Silicon is faster than the Linux baseline the bench gates are calibrated against; hard gates should still pass but distributions will differ.
+
+macOS-specific issues are welcome. Patches that do not break the tier-1 paths will be accepted. Promotion to tier-1 requires a `macos-*` CI runner in the workflow, not a promise.
 
 Current security/default-trust posture:
 
@@ -195,6 +205,44 @@ Startup steering now follows a generic `paired-truth` model:
 27. `pnpm run runtime:gate`
 28. `pnpm run capsule:verify`
 29. `pnpm run flex:verify`
+
+### Per-phase wall-time ranges
+
+Typical wall-time ranges, not contractual budgets. Slower hardware will exceed these and that is not a regression. Total across all 29 phases: 15–22 minutes end-to-end; recent local datapoint 14m47s on Cursor Cloud Linux (README:170).
+
+| Phase # | Name | Command | Typical range | Source |
+| --- | --- | --- | --- | --- |
+| 1 | build | `pnpm run build` | varies | no per-phase datapoint in any source |
+| 2 | capsule:compile | `pnpm run capsule:compile` | varies | no per-phase datapoint in any source |
+| 3 | typecheck | `pnpm run typecheck` | varies | no per-phase datapoint in any source |
+| 4 | lint | `pnpm run lint` | varies | no per-phase datapoint in any source |
+| 5 | docs:check | `pnpm run docs:check` | varies | no per-phase datapoint in any source |
+| 6 | invariants | `pnpm exec tsx scripts/check-invariants.ts` | varies | no per-phase datapoint in any source |
+| 7 | test | `pnpm test` | ~75s | README:173 inline comment on the `pnpm test` script |
+| 8 | coverage:browser | `pnpm run coverage:browser` | ~10s warm / ~19m cold | STATUS.md "Coverage timing (2026-04-23)" block |
+| 9 | test:vite | `pnpm run test:vite` | varies | no per-phase datapoint in any source |
+| 10 | test:astro | `pnpm run test:astro` | varies | no per-phase datapoint in any source |
+| 11 | test:tailwind | `pnpm run test:tailwind` | varies | no per-phase datapoint in any source |
+| 12 | test:e2e | `pnpm run test:e2e` | varies | no per-phase datapoint in any source |
+| 13 | test:e2e:stress | `pnpm run test:e2e:stress` | varies | no per-phase datapoint in any source |
+| 14 | test:e2e:stream-stress | `pnpm run test:e2e:stream-stress` | varies | no per-phase datapoint in any source |
+| 15 | test:flake | `pnpm run test:flake` | varies | no per-phase datapoint in any source |
+| 16 | test:redteam | `pnpm run test:redteam` | varies | no per-phase datapoint in any source |
+| 17 | bench | `pnpm run bench` | varies | no per-phase datapoint in any source |
+| 18 | bench:gate | `pnpm run bench:gate` | varies | no per-phase datapoint in any source |
+| 19 | bench:reality | `pnpm run bench:reality` | varies | no per-phase datapoint in any source |
+| 20 | package:smoke | `pnpm run package:smoke` | varies | no per-phase datapoint in any source |
+| 21 | coverage:node | `pnpm run coverage:node` | ~38s | `scripts/gauntlet.ts` orchestration comment |
+| 22 | coverage:merge | `pnpm run coverage:merge` | ~40s + browser pass | STATUS.md "coverage:merge wall time is dominated by coverage:node (~40s) plus the coverage:browser pass" |
+| 23 | report:runtime-seams | `pnpm run report:runtime-seams` | varies | no per-phase datapoint in any source |
+| 24 | audit | `pnpm run audit` | varies | no per-phase datapoint in any source |
+| 25 | report:satellite-scan | `pnpm run report:satellite-scan` | varies | no per-phase datapoint in any source |
+| 26 | feedback:verify | `pnpm run feedback:verify` | varies | no per-phase datapoint in any source |
+| 27 | runtime:gate | `pnpm run runtime:gate` | varies | no per-phase datapoint in any source |
+| 28 | capsule:verify | `pnpm run capsule:verify` | varies | no per-phase datapoint in any source |
+| 29 | flex:verify | `pnpm run flex:verify` | varies | no per-phase datapoint in any source |
+
+For per-run truth, `pnpm run gauntlet:full --verbose` prints per-phase timings; that is the live ledger.
 
 ---
 

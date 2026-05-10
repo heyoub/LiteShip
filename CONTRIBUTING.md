@@ -105,6 +105,101 @@ readable.
 The gauntlet runs all of these in sequence. Most PRs only need the fast
 loop (`pnpm test`) until they touch something the larger lanes cover.
 
+## Writing a regression test
+
+### File-location convention
+
+| Directory | What lives there |
+| --------- | ---------------- |
+| `tests/unit/` | Per-module correctness; one file per logical surface |
+| `tests/property/` | Invariant proofs via fast-check |
+| `tests/regression/` | Named bugs that must never re-appear |
+| `tests/integration/` | Cross-package wiring |
+| `tests/component/` | Isolated component rendering |
+
+When you fix a bug, the regression test goes in `tests/regression/`. Name the file after the surface, not the ticket: `boundary-threshold.test.ts`, not `issue-412.test.ts`.
+
+### The vitest pattern
+
+```ts
+import { describe, test, expect } from 'vitest';
+import { Boundary } from '@czap/core';
+
+describe('Boundary.evaluate threshold edge', () => {
+  test('exact threshold value resolves to the upper state', () => {
+    const b = Boundary.make({
+      input: 'viewport.width',
+      at: [[0, 'mobile'], [768, 'tablet']] as const,
+    });
+    expect(Boundary.evaluate(b, 768)).toBe('tablet');
+  });
+});
+```
+
+Add `// @vitest-environment jsdom` at the top of any file that touches the DOM (`parseHTML`, `document.createElement`, style reads, aria attributes). Without it, vitest runs under Node and `document` is undefined.
+
+### The fast-check property-test pattern
+
+Use `fc.assert(fc.property(...))` to state what must hold for *all* valid inputs, not just the ones you thought of:
+
+```ts
+import fc from 'fast-check';
+
+test('evaluate never returns a state name outside the boundary definition', () => {
+  fc.assert(
+    fc.property(
+      fc.uniqueArray(fc.integer({ min: 0, max: 10000 }), { minLength: 2, maxLength: 6 }),
+      fc.integer({ min: 0, max: 10000 }),
+      (rawThresholds, value) => {
+        const sorted = rawThresholds.sort((a, b) => a - b);
+        const pairs = sorted.map((t, i) => [t, `s${i}`] as const);
+        const b = Boundary.make({ input: 'x', at: pairs as never });
+        const validStates = pairs.map(([, name]) => name);
+        return validStates.includes(Boundary.evaluate(b, value) as (typeof validStates)[number]);
+      },
+    ),
+  );
+});
+```
+
+fast-check runs 100 trials by default and shrinks failing inputs automatically. Put property tests in `tests/property/` when the invariant is general; put them in `tests/regression/` when they pin a specific bug.
+
+### Worked example
+
+**Bug:** after a refactor of `boundary.ts`, `Boundary.evaluate` was using `>` instead of `>=` on threshold comparisons, so `value === threshold` resolved to the state *below* the crossing rather than the state *at or above* it.
+
+**Regression test** (`tests/regression/boundary-threshold.test.ts`):
+
+```ts
+import { describe, test, expect } from 'vitest';
+import { Boundary } from '@czap/core';
+
+describe('regression: Boundary.evaluate exact-threshold resolution', () => {
+  const b = Boundary.make({
+    input: 'viewport.width',
+    at: [[0, 'mobile'], [768, 'tablet'], [1280, 'desktop']] as const,
+  });
+
+  test('value exactly at threshold resolves to the upper state, not the lower', () => {
+    expect(Boundary.evaluate(b, 768)).toBe('tablet');
+    expect(Boundary.evaluate(b, 1280)).toBe('desktop');
+  });
+
+  test('value one below threshold stays in the lower state', () => {
+    expect(Boundary.evaluate(b, 767)).toBe('mobile');
+    expect(Boundary.evaluate(b, 1279)).toBe('tablet');
+  });
+});
+```
+
+**Fix sketch:** the conditional in `packages/core/src/boundary.ts` near the threshold loop changed from `value > threshold` back to `value >= threshold`: one character, confirmed by the test turning green.
+
+The test now lives permanently in `tests/regression/` and runs on every `pnpm test` invocation.
+
+### Gauntlet integration
+
+Worth noting: `pnpm test` is phase 7 of `pnpm run gauntlet:full` and covers the full vitest surface including `tests/regression/`; see [docs/STATUS.md](./docs/STATUS.md) for the complete phase list.
+
 ## Architecture changes
 
 Architectural decisions live in [`docs/adr/`](./docs/adr). New ADRs follow

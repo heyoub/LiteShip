@@ -6,7 +6,7 @@
 
 # Function: motionTierFromCapabilities()
 
-> **motionTierFromCapabilities**(`caps`): [`MotionTier`](../../../quantizer/src/type-aliases/MotionTier.md)
+> **motionTierFromCapabilities**(`caps`): `MotionTier`
 
 Defined in: detect/src/tiers.ts:100
 
@@ -22,4 +22,4 @@ WebGPU availability unlocks the `compute` tier.
 
 ## Returns
 
-[`MotionTier`](../../../quantizer/src/type-aliases/MotionTier.md)
+`MotionTier`

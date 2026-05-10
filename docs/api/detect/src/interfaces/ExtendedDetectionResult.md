@@ -74,7 +74,7 @@ Visual fidelity tier derived from display metadata.
 
 ### motionTier
 
-> `readonly` **motionTier**: [`MotionTier`](../../../quantizer/src/type-aliases/MotionTier.md)
+> `readonly` **motionTier**: `MotionTier`
 
 Defined in: detect/src/detect.ts:148
 

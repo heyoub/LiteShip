@@ -38,7 +38,7 @@ Visual fidelity tier permitted for this device.
 
 ### motionTier
 
-> `readonly` **motionTier**: [`MotionTier`](../../../quantizer/src/type-aliases/MotionTier.md)
+> `readonly` **motionTier**: `MotionTier`
 
 Defined in: edge/src/edge-tier.ts:29
 
