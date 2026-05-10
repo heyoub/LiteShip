@@ -54,27 +54,53 @@ const cssVar = Token.cssVar(primary);
 
 The `hysteresis: 20` in there is a half-width dead-zone, by the way. Cross a threshold and you stay across until the signal moves past the next half-tick. No flicker at 768.0001px when the user is dragging the window edge.
 
-A full walkthrough (clone, install, rig a hello-world boundary, cast to CSS, hydrate through Astro) lives at [docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md).
+A full walkthrough (clone, install, rig a hello-world boundary, cast to CSS, hydrate through Astro) lives at [docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md). For the shape of day-to-day authoring (what you actually type, what comes out, how the rest of the pipeline reads it), [docs/AUTHORING-MODEL.md](./docs/AUTHORING-MODEL.md) opens with a one-paragraph "what it feels like to author" before the reference.
+
+## What you can stop hand-rolling
+
+The pattern LiteShip absorbs is the one most projects re-implement, in pieces, by hand:
+
+- the breakpoint table for layout (CSS media queries)
+- the theme switcher for colors (CSS variable rebinding plus a JS toggle)
+- the ARIA attribute that mirrors the layout state (separate hand-write, easy to forget)
+- the GLSL uniform that mirrors the same state on hosts that ship a shader
+- the TypeScript discriminated union that lets the rest of your app `switch` on the same state
+
+Hand-rolled, those drift the moment one of them falls behind. Authored as a single boundary, they emit from one definition every time. The boundary is content-addressed (FNV-1a + canonical CBOR per [ADR-0003](./docs/adr/0003-content-addressing.md)); change the definition, every output recomputes against the same hash.
+
+This is not a replacement for media queries (use them where they're enough), CSS custom properties (use them where you control the keyspace), or design-token systems (LiteShip *is* one, and also the projection layer above them). It's the rig that ties them together so they stay in agreement.
 
 ## What's in the box
 
+The packages you import in the Quick Start above are the smallest useful set:
+
 | Package | Description |
 | --- | --- |
-| [`@czap/_spine`](./packages/_spine) | Type-only declaration spine referenced by published `.d.ts` from `@czap/core` / `@czap/scene` |
 | [`@czap/core`](./packages/core) | Primitives: Boundary, Token, Style, Theme, Signal, Compositor, ECS, HLC, DAG, Plan, AVBridge |
 | [`@czap/quantizer`](./packages/quantizer) | `Q.from()` builder, boundary evaluation, animated transitions, motion-tier gating |
 | [`@czap/compiler`](./packages/compiler) | Multi-target output: CSS, GLSL, WGSL, ARIA, AI, Tailwind v4 |
-| [`@czap/web`](./packages/web) | DOM runtime: Morph, SlotRegistry, SSE client, Physical state, LLM adapter, AudioWorklet |
-| [`@czap/detect`](./packages/detect) | Device capability probes, GPU tier, design/motion-tier mapping |
+
+Add a host integration when you wire LiteShip into a build pipeline:
+
+| Package | Description |
+| --- | --- |
 | [`@czap/vite`](./packages/vite) | Vite 8 plugin: `@token` / `@theme` / `@style` / `@quantize` CSS transforms + HMR |
 | [`@czap/astro`](./packages/astro) | Astro 6 integration: `Satellite` component + `client:satellite` directive |
 | [`@czap/edge`](./packages/edge) | CDN-edge: Client Hints, tier detection, KV boundary cache, theme compilation |
+
+Reach for the rest only when the surface meaning justifies the runtime escalation:
+
+| Package | Description |
+| --- | --- |
+| [`@czap/web`](./packages/web) | DOM runtime: Morph, SlotRegistry, SSE client, Physical state, LLM adapter, AudioWorklet |
+| [`@czap/detect`](./packages/detect) | Device capability probes, GPU tier, design/motion-tier mapping |
 | [`@czap/worker`](./packages/worker) | Off-thread: SPSC ring buffer, compositor worker, render worker, OffscreenCanvas |
 | [`@czap/remotion`](./packages/remotion) | Remotion adapter: React hooks + composition helpers |
 | [`@czap/scene`](./packages/scene) | ECS-backed scene composition + timeline authoring |
 | [`@czap/assets`](./packages/assets) | Asset capsules + analysis projections (audio waveform, beat markers, ...) |
 | [`@czap/cli`](./packages/cli) | `czap` CLI: AI-first JSON I/O with human-pretty TTY mode |
 | [`@czap/mcp-server`](./packages/mcp-server) | Model Context Protocol server for AI tooling integration |
+| [`@czap/_spine`](./packages/_spine) | Type-only declaration spine referenced by published `.d.ts` from `@czap/core` / `@czap/scene` |
 
 Plus `crates/czap-compute/`: a Rust `#![no_std]` WASM crate (spring, boundary, blend kernels) for the working-line compute escape hatch.
 

@@ -2,6 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-04-21
+**Audience:** Contributors who add a new primitive that needs identity, or who change how identity is hashed. Read it if your code computes a `ContentAddress`.
 
 ## Context
 

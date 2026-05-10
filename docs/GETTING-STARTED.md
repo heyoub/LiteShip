@@ -168,8 +168,20 @@ The `client:satellite` directive hydrates only the boundary evaluator (not a who
 
 ## Troubleshooting
 
+### Setup and tooling
+
 **PowerShell shows `Γåô` / `Γ£ô` mojibake in logs.** Your terminal is decoding the repo tooling's UTF-8 output as cp437. Use `Out-File -Encoding utf8` or run `chcp 65001` first.
 
 **Tests hang in browser mode.** Make sure Playwright browsers are installed: `pnpm exec playwright install`.
+
+### First-boundary authoring
+
+**The same value evaluates to different states each call.** You probably reused a state name across the threshold list. `Boundary.make` requires unique state names; passing `[[0, 'small'], [768, 'small']]` throws at construction with a `CzapValidationError`. If the error fires at runtime in a hot path, the boundary was constructed lazily inside a render function — hoist it out.
+
+**The CSS doesn't update when the window resizes.** Two usual suspects: the `Satellite` shell is hydrating with the wrong directive (boundaries need `client:satellite`; `client:visible` or `client:idle` won't wire the boundary evaluator), or the CSS was generated against a stale boundary id (rebuild after editing the boundary; content addresses change with the definition, so old emitted CSS keys won't match the new id).
+
+**The boundary state flickers when dragging the window edge near a threshold.** Add or increase `hysteresis`. The default is zero (no dead-zone). A value of 16–24 px is enough to absorb display jitter on most setups; the algorithm is a half-width dead-zone, so `hysteresis: 20` requires the signal to move 10px past the threshold before committing the transition.
+
+**`Boundary.evaluate` returns the wrong state for a value at exactly a threshold.** That's by design: thresholds are inclusive lower bounds. A boundary with `[[0, 'mobile'], [768, 'tablet']]` returns `'tablet'` for `768`, not `'mobile'`. If you need exclusive bounds, offset the threshold by 1.
 
 Found a different issue? Open one at [github.com/TheFreeBatteryFactory/czap/issues](https://github.com/TheFreeBatteryFactory/czap/issues).

@@ -104,9 +104,9 @@ Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
 
 ---
 
-## Recommended Reading Order
+## Reading paths by reader
 
-For a theory-first understanding:
+### If you're new (theory-first arc)
 
 1. [GLOSSARY.md](./GLOSSARY.md): LiteShip / CZAP / `@czap/*` + prose register (short; read once)
 2. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
@@ -117,13 +117,29 @@ For a theory-first understanding:
 7. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md)
 8. [STATUS.md](./STATUS.md)
 
-For implementation work:
+### If you're authoring with LiteShip in your app
 
-1. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md)
-2. [AUTHORING-MODEL.md](./AUTHORING-MODEL.md)
-3. [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md)
-4. [STATUS.md](./STATUS.md)
-5. tests and package source
+1. [GETTING-STARTED.md](./GETTING-STARTED.md): clone to a runnable boundary in ten minutes
+2. [AUTHORING-MODEL.md](./AUTHORING-MODEL.md): the shape of day-to-day authoring
+3. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md): which package owns what you need to import
+4. [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md): when escalation makes sense
+5. tests and package source for exact behavior
+
+### If you're contributing to LiteShip
+
+1. [ARCHITECTURE.md](./ARCHITECTURE.md): the package DAG and where things live
+2. [ADR-0001 namespace pattern](./adr/0001-namespace-pattern.md) + [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md): the load-bearing conventions
+3. [AUDIT.md](./AUDIT.md): the advisory pipeline that watches for drift
+4. [STATUS.md](./STATUS.md): live gates, watch items, runtime seam hotspots
+5. [../CONTRIBUTING.md](../CONTRIBUTING.md): the gauntlet, PR conventions, code style
+
+### If you're operating LiteShip in production
+
+1. [../SECURITY.md](../SECURITY.md): trust boundaries, CSP requirements, Trusted Types policy
+2. [STATUS.md](./STATUS.md): current bench posture, watch items, security defaults
+3. [AUDIT.md](./AUDIT.md): the codebase-audit signal, what to expect in a release artifact
+4. [RELEASING.md](./RELEASING.md): publish, tags, GitHub releases
+5. [HISTORY_SCRUB.md](./HISTORY_SCRUB.md): pre-public discovery checklist
 
 ---
 

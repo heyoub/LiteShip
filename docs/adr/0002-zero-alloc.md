@@ -2,6 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-04-21
+**Audience:** Contributors editing the per-frame compositor path, dirty-tracking, or scene-system code. Skip if you're only authoring boundaries.
 
 ## Context
 

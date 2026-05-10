@@ -94,15 +94,16 @@ It runs as phase 16 of `pnpm run gauntlet:full` (see [STATUS.md](./docs/STATUS.m
 
 For accepted vulnerabilities:
 
-1. We acknowledge receipt (≤ 72 hours)
-2. We confirm reproducibility and assess severity (≤ 7 days)
-3. We ship a fix or mitigation (≤ 14 days for high-severity)
-4. We publish a GitHub Security Advisory crediting the reporter (unless
-   they request anonymity)
+1. We acknowledge receipt (≤ 72 hours).
+2. We confirm reproducibility and assess severity (≤ 7 days). Severity uses CVSS 3.1 base score bands: Critical 9.0–10.0, High 7.0–8.9, Medium 4.0–6.9, Low 0.1–3.9. Pre-1.0 means we will sometimes resolve a finding with a breaking change instead of a workaround; we'll communicate which path before we ship.
+3. We ship a fix or mitigation on a severity-keyed timeline:
+   - Critical: ≤ 7 days
+   - High: ≤ 14 days
+   - Medium: ≤ 30 days
+   - Low: addressed in the next regular release cycle
+4. We publish a GitHub Security Advisory crediting the reporter (unless they request anonymity), and add a regression to `tests/regression/red-team-runtime.test.ts` so the same shape can't re-enter without a test failure.
 
-For findings we determine are not vulnerabilities (e.g. expected behavior,
-out-of-scope, host-application responsibility), we'll explain that
-reasoning in the advisory thread.
+For findings we determine are not vulnerabilities (e.g. expected behavior, out-of-scope, host-application responsibility), we'll explain that reasoning in the advisory thread.
 
 ## Scope notes
 

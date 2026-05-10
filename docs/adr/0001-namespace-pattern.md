@@ -2,6 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-04-21
+**Audience:** Contributors adding a new primitive or surface module. Skip if you only consume the public API.
 
 ## Context
 
