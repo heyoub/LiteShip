@@ -170,4 +170,80 @@ describe('red-team runtime regressions', () => {
     expect(element.getAttribute('onclick')).toBeNull();
     expect(element.getAttribute('style')).not.toContain('display:none');
   });
+
+  test('strips <base href> origin-hijack vector', () => {
+    const sanitized = resolveHtmlString(
+      '<p>safe</p><base href="https://attacker.example/"><a href="/relative">link</a>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('base')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('safe');
+  });
+
+  test('strips <meta http-equiv> CSP/refresh override', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><meta http-equiv="refresh" content="0;url=https://attacker.example/"><meta http-equiv="content-security-policy" content="default-src *">',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('meta')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('ok');
+  });
+
+  test('strips <link rel> stylesheet/prefetch injection', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><link rel="stylesheet" href="https://attacker.example/evil.css"><link rel="prefetch" href="https://attacker.example/track">',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('link')).toBeNull();
+  });
+
+  test('strips <form> with javascript: action and formaction', () => {
+    const sanitized = resolveHtmlString(
+      '<form action="javascript:alert(1)"><button formaction="javascript:alert(2)">go</button></form>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('form')).toBeNull();
+  });
+
+  test('strips <noscript> mXSS re-serialization vector', () => {
+    const sanitized = resolveHtmlString(
+      '<p>ok</p><noscript><img src="x" onerror="alert(1)"></noscript>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('noscript')).toBeNull();
+    expect(container.querySelector('p')?.textContent).toBe('ok');
+  });
+
+  test('strips javascript: in formaction/action/ping attributes on surviving elements', () => {
+    const sanitized = resolveHtmlString(
+      '<a href="/safe" ping="javascript:alert(1)">link</a><button formaction="javascript:alert(2)">x</button>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('a')?.getAttribute('ping')).toBeNull();
+    expect(container.querySelector('button')?.getAttribute('formaction')).toBeNull();
+    expect(container.querySelector('a')?.getAttribute('href')).toBe('/safe');
+  });
+
+  test('strips data: javascript variants on url-sink attributes', () => {
+    const sanitized = resolveHtmlString(
+      '<a href="data:application/x-javascript,alert(1)">x</a><iframe src="data:text/javascript,alert(2)"></iframe>',
+      { policy: 'sanitized-html' },
+    );
+    const container = document.createElement('div');
+    container.innerHTML = sanitized;
+    expect(container.querySelector('a')?.getAttribute('href')).toBeNull();
+    expect(container.querySelector('iframe')).toBeNull();
+  });
 });

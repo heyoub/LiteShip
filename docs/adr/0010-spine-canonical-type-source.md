@@ -36,6 +36,4 @@ The capsule factory needs a canonical type source. Declaring capsule contracts t
 
 ## References
 
-- `docs/superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md` §4.5
-- `docs/sixsigma/threads/thread-04-spine-runtime-gap.md`
 - `docs/adr/0008-capsule-assembly-catalog.md` (paired factory ADR)

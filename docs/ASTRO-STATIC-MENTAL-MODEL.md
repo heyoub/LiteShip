@@ -49,11 +49,9 @@ The UI should usually not be continuous. It should move through named, intention
 - `preview`
 - `full`
 
-That is the center of the system:
+The grammar is:
 
 `signal -> boundary -> state -> outputs`
-
-Once this is clear, the rest of the architecture follows.
 
 ---
 
@@ -199,7 +197,7 @@ without duplicating the logic in each layer. By the way, the boundary's content 
 
 The working deck should stay as light as the workload allows.
 
-This is the opposite of a framework that raises every sail at the dock and reefs them later.
+Cheaper runtimes carry the surface unless authored intent demands escalation.
 
 The intended order is:
 
@@ -230,8 +228,6 @@ In practice, the Astro side of the model is:
 4. use directives where the experience truly needs runtime adaptation
 
 That is why the combination makes sense for static visual sites.
-
-Astro gives the document. LiteShip gives the adaptive visual logic.
 
 ---
 
@@ -306,7 +302,7 @@ LiteShip centers:
 - compiled outputs
 - capability-aware runtime selection
 
-That means the main design object is no longer "the component." It is "the authored behavior of a surface."
+The main design object is the authored behavior of a surface, not the component.
 
 This is a good fit for brand sites, editorial sites, launch pages, and other highly visual work where the page is choreography more than application.
 
@@ -359,8 +355,6 @@ The system is strongest when authored with:
 - intentional escalation of runtime cost (CSS by default, directive only when needed, off-deck only when justified)
 - a coherent token system that other states can reach into
 - motion gated by `motionTier` rather than always-on
-
-The best outcome is not a maximal runtime. The best outcome is a small set of well-named states delivering the right output at the lowest necessary cost.
 
 ---
 

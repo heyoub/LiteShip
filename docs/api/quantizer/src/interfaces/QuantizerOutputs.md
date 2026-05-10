@@ -25,7 +25,7 @@ skip that target during dispatch.
 
 ### ai?
 
-> `readonly` `optional` **ai?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `unknown`\>\>
+> `readonly` `optional` **ai?**: `OutputsFor`\<`B`, `Record`\<`string`, `unknown`\>\>
 
 Defined in: quantizer/src/quantizer.ts:105
 
@@ -35,7 +35,7 @@ AI-facing signals per state (free-form; consumed by LLMAdapter).
 
 ### aria?
 
-> `readonly` `optional` **aria?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `string`\>\>
+> `readonly` `optional` **aria?**: `OutputsFor`\<`B`, `Record`\<`string`, `string`\>\>
 
 Defined in: quantizer/src/quantizer.ts:103
 
@@ -45,7 +45,7 @@ ARIA attribute map per state (string values only).
 
 ### css?
 
-> `readonly` `optional` **css?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `string` \| `number`\>\>
+> `readonly` `optional` **css?**: `OutputsFor`\<`B`, `Record`\<`string`, `string` \| `number`\>\>
 
 Defined in: quantizer/src/quantizer.ts:97
 
@@ -55,7 +55,7 @@ CSS property map per state (values are raw CSS, e.g. `'16px'` or `1`).
 
 ### glsl?
 
-> `readonly` `optional` **glsl?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `number`\>\>
+> `readonly` `optional` **glsl?**: `OutputsFor`\<`B`, `Record`\<`string`, `number`\>\>
 
 Defined in: quantizer/src/quantizer.ts:99
 
@@ -65,7 +65,7 @@ GLSL uniform values per state (numeric only).
 
 ### wgsl?
 
-> `readonly` `optional` **wgsl?**: [`OutputsFor`](../../../core/src/type-aliases/OutputsFor.md)\<`B`, `Record`\<`string`, `number`\>\>
+> `readonly` `optional` **wgsl?**: `OutputsFor`\<`B`, `Record`\<`string`, `number`\>\>
 
 Defined in: quantizer/src/quantizer.ts:101
 

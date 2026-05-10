@@ -5,8 +5,13 @@
  * @module
  */
 
-// Brands
-export { brand, SignalInput, ThresholdValue, StateName, ContentAddress, TokenRef, Millis } from './brands.js';
+// Brands — sanctioned constructors. The lower-level `brand` factory is
+// intentionally NOT re-exported here; it is the unsafe escape-hatch used
+// by `brands.ts` itself to define the sanctioned set, and exposing it on
+// the public surface would let consumers forge any brand. Code that
+// genuinely needs to mint a new brand should import from `@czap/core/brands`
+// directly and document the use site.
+export { SignalInput, ThresholdValue, StateName, ContentAddress, TokenRef, Millis } from './brands.js';
 export type { HLC as HLCBrand } from './brands.js';
 
 // FNV-1a hash utility
@@ -16,14 +21,24 @@ export { fnv1a, fnv1aBytes } from './fnv.js';
 export { CanonicalCbor } from './cbor.js';
 
 // Type utilities
-export type { Prettify, StateUnion, StateAt, OutputsFor, BoundaryCrossing } from './type-utils.js';
+export type {
+  Prettify,
+  StateUnion,
+  OutputsFor,
+  BoundaryCrossing,
+  EffectValue,
+  EffectError,
+  RequireAtLeastOne,
+  DeepReadonly,
+} from './type-utils.js';
 
 // Tuple utilities
 export { tupleMap } from './tuple.js';
 
-// Boundary
+// Boundary. `BoundarySpec` is exported as a value+type pair (see the
+// namespace-object pattern in ADR-0001); consumers who want only the type
+// can `import type { BoundarySpec } from '@czap/core'`.
 export { Boundary, BoundarySpec } from './boundary.js';
-export type { BoundarySpec as BoundarySpecType } from './boundary.js';
 
 // Token
 export { Token } from './token.js';

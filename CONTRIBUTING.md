@@ -114,10 +114,21 @@ change that:
 - alters a public package surface,
 - changes a runtime contract (capsule kind, receipt envelope, plan IR),
 - adds a new compile target or runtime adapter,
+- adds a value to a publicly-exported type union (e.g. extending `MotionTier`, `UIQualityTier`, `OutputTarget`),
 - shifts the trust boundary or security posture,
 
 …draft an ADR alongside the code change. The Architecture rating dimension
 in `flex:verify` checks the canonical ADR set is present.
+
+**Extending a public type union** (e.g. adding `'chaotic'` to `MotionTier`) ripples wider than it looks because exhaustive `Record<Tier, …>` tables and any `satisfies` checks downstream stop compiling until every branch is updated. The blast-radius checklist:
+
+1. Update the canonical declaration in `packages/_spine/*.d.ts` first (per ADR-0010).
+2. Update the runtime definition in the owning `packages/*/src/*.ts` file (e.g. `packages/core/src/ui-quality.ts` for `MotionTier`).
+3. Find every `Record<TheUnion, …>` in the repo and add the new arm. Common offenders: `TIER_TARGETS`, `DEVICE_CAPABILITY_SCORES`, capability-mapping functions.
+4. Update any test that asserts an exhaustive list of values (typed as `T[]`, not `satisfies T[]` — TypeScript widens the manual list).
+5. Document the semantic position in the ladder (or orthogonality) in the owning file's JSDoc.
+
+The framework does not currently dedupe these declarations across `_spine` and the runtime module; the duplication is intentional under ADR-0010 (spine is the canonical type source; runtime modules carry the value-side). If you find a third copy somewhere, that's a bug — file an issue.
 
 ## Issues vs feature requests
 

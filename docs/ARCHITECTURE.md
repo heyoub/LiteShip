@@ -13,7 +13,7 @@ Prose vocabulary: [GLOSSARY.md](./GLOSSARY.md).
 
 ## System shape
 
-Core grammar: `signal -> boundary -> named state -> target output`. `@czap/core` owns the language; host packages rig it to browsers, Astro, edge, workers, video, CLI, and AI-tooling surfaces. Worth noting: the grammar holds across all of them. No host gets to invent its own boundary semantics; every projection target reads the same content-addressed definition.
+Core grammar: `signal -> boundary -> named state -> target output`. `@czap/core` owns the language; host packages rig it to browsers, Astro, edge, workers, video, CLI, and AI-tooling surfaces. Worth noting: the grammar holds across all of them. Hosts do not define boundary semantics; every projection target reads the same content-addressed definition.
 
 ## Package DAG
 
@@ -52,11 +52,11 @@ For package-by-package import guidance, read [`PACKAGE-SURFACES.md`](./PACKAGE-S
 
 ## Graceful degradation, not silent ceilings
 
-`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:145`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:83`). The pattern repeats: pick the right-shaped fast path for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
+`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:146`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:86`). The pattern repeats: pick the right-shaped fast path for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
 
 ## Architectural decisions
 
-See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADRs:
+See [`docs/adr/README.md`](./adr/README.md) for the full index. The accepted set:
 
 - [0001 — Namespace pattern + branded types](./adr/0001-namespace-pattern.md)
 - [0002 — Zero-allocation hot path discipline](./adr/0002-zero-alloc.md)
@@ -64,6 +64,10 @@ See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADR
 - [0004 — Plan IR vs RuntimeCoordinator split](./adr/0004-plan-coordinator.md)
 - [0005 — Effect boundary rules](./adr/0005-effect-boundary.md)
 - [0006 — Compiler dispatch tagged union](./adr/0006-compiler-dispatch.md)
+- [0007 — Adapter vs peer framing (Remotion / Edge)](./adr/0007-adapter-vs-peer-framing.md)
+- [0008 — Capsule assembly catalog (7 arms + closure rule)](./adr/0008-capsule-assembly-catalog.md)
+- [0009 — ECS as scene composition substrate](./adr/0009-ecs-scene-composition.md)
+- [0010 — Spine as canonical type source](./adr/0010-spine-canonical-type-source.md)
 
 ## Where to start
 

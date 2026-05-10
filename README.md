@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@czap/core.svg)](https://www.npmjs.com/package/@czap/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-LiteShip rigs continuous signals into a small set of named bearings and casts each bearing to whatever surface the host runs. Viewport width slides as the user drags. Network latency wobbles. The dark-mode toggle fires at 11pm whether the user clicks it or the OS does it for them. All of that comes in continuous; your UI only really needs a few states out: mobile/tablet/desktop, light/dark, reduced/full-motion. The rig is in between.
+LiteShip rigs continuous signals into a small set of named bearings and casts each bearing to whatever surface the host runs. Viewport width slides as the user drags. Network latency wobbles. The dark-mode toggle fires at 11pm whether the user clicks it or the OS does it for them. All of that comes in continuous; your UI only needs a few states out: mobile/tablet/desktop, light/dark, reduced/full-motion. The rig is in between.
 
 From one definition, the system can emit a CSS variable, a GLSL preamble, an ARIA attribute on the body, an AI manifest, and a TypeScript union. Same boundary, five surfaces, content-addressed via FNV-1a + canonical CBOR (see [ADR-0003](./docs/adr/0003-content-addressing.md)). No silent drift between projection layers.
 
@@ -104,6 +104,16 @@ Reach for the rest only when the surface meaning justifies the runtime escalatio
 
 Plus `crates/czap-compute/`: a Rust `#![no_std]` WASM crate (spring, boundary, blend kernels) for the working-line compute escape hatch.
 
+## Frameworks and stacks
+
+LiteShip's primary host integration is Astro 6 (`@czap/astro`). The core authoring layer (`@czap/core`, `@czap/quantizer`, `@czap/compiler`) is framework-portable: it produces CSS strings, GLSL preambles, ARIA records, and TypeScript unions from boundary definitions, and any framework can spread those onto its own elements. `@czap/vite` plugs the same `@token` / `@theme` / `@style` / `@quantize` CSS transforms into any Vite-based stack (React, Solid, Svelte, Vue, vanilla). The Astro-specific surfaces (the `Satellite` component, `client:satellite` directive, `czapMiddleware`) are additive — you don't need them to use the authoring + casting layer.
+
+Mobile and PWA: viewport, motion-preference, GPU tier, and network-condition signals all flow through the same boundary primitive. The framework is presentation-focused and doesn't ship offline-first / service-worker / manifest tooling; pair LiteShip with whatever PWA stack your host already uses.
+
+## Migration posture
+
+LiteShip is greenfield-first. There is no migration guide for porting an existing React + Tailwind + CSS Modules site, and no automated import path for existing design-token JSON. The right adoption shape is per-surface: pick one section, author it the LiteShip way (signal → boundary → states → styles → compiled output), let media queries and CSS custom properties keep working everywhere else. The framework's "this is not a replacement for media queries" clause means co-existence is the supported model: LiteShip emits `data-czap-state`-keyed selectors that stack alongside existing rules; conflicts resolve via normal CSS specificity. `TokenTailwindCompiler` produces Tailwind v4 token files from LiteShip definitions (one direction); ingesting an existing Tailwind config back into LiteShip is not currently tooled.
+
 ## Support matrix
 
 - Node.js 22, pnpm 10
@@ -166,7 +176,7 @@ pnpm run gauntlet:full    # full release-grade gate (~22min)
 
 Other lanes (`test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify`) are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty phases, fifteen to twenty-two minutes from first cast-off to final receipt depending on cold caches and machine speed (recent local: 14m47s on Cursor Cloud Linux). It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
+`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty phases, fifteen to twenty-two minutes end-to-end depending on cold caches and machine speed (recent local: 14m47s on Cursor Cloud Linux). It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
 
 ## Latest gauntlet benchmark snapshot
 

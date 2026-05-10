@@ -632,6 +632,5 @@ spine, fixture, and documentation files.
 - Packages moved from root to `packages/`
 - Tests moved from `test/` to `tests/` (unit/bench/e2e/integration)
 - Demo moved from `demo/remotion` to `examples/remotion-demo`
-- Docs moved to `docs/` (ARCHITECTURE.md, CHANGELOG.md, STATUS.md)
+- Docs moved to `docs/` (ARCHITECTURE.md, STATUS.md, plus the rest); `CHANGELOG.md` was subsequently moved back to the repo root
 - Scripts extracted to `scripts/*.ts`
-- Bun upgraded to 1.3.11 (canary)

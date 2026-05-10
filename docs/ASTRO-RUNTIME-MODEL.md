@@ -26,7 +26,6 @@ LiteShip should own:
 - authored visual state outputs
 - media, worker, and shader runtime behavior where needed
 
-This division is important.
 
 ---
 
@@ -126,7 +125,7 @@ The shape of an authored Astro page using LiteShip is small. Boundaries are impo
 ```astro
 ---
 // src/pages/index.astro
-import { Satellite } from '@czap/astro/Satellite';
+import Satellite from '@czap/astro/Satellite';
 import { heroLayout } from '../boundaries.js';
 ---
 
@@ -138,7 +137,49 @@ import { heroLayout } from '../boundaries.js';
 </Satellite>
 ```
 
-The compiled CSS for `.hero` (emitted by the Vite plugin from a paired `Style` definition) carries the cross-state rules. The directive's only runtime job is to evaluate `heroLayout` against the live viewport and apply the resolved state to the satellite's `data-czap-*` attributes; the CSS does the visible work without round-tripping through JavaScript.
+The corresponding `boundaries.js` is plain TypeScript:
+
+```ts
+// src/boundaries.ts
+import { Boundary } from '@czap/core';
+
+export const heroLayout = Boundary.make({
+  input: 'viewport.width',
+  at: [
+    [0, 'stacked'],
+    [760, 'split'],
+    [1180, 'cinematic'],
+  ] as const,
+  hysteresis: 40,
+});
+```
+
+And the compiled CSS the Vite plugin emits for `.hero` (from a paired `Style.make({...})` definition) looks like:
+
+```css
+.hero { display: grid; gap: var(--czap-space-section); }
+[data-czap-state="stacked"] .hero { grid-template-columns: 1fr; }
+[data-czap-state="split"] .hero { grid-template-columns: 1.1fr 0.9fr; }
+[data-czap-state="cinematic"] .hero { grid-template-columns: 1.2fr 0.8fr; min-height: 80vh; }
+```
+
+The directive's only runtime job is to evaluate `heroLayout` against the live viewport and write the resolved state to the satellite's `data-czap-state` attribute; the CSS attribute selectors do the visible work without round-tripping through JavaScript.
+
+For request-time SSR you can resolve an initial state on the server so first paint already reflects the right bearing:
+
+```ts
+// src/middleware.ts
+import { resolveInitialState } from '@czap/astro';
+import { heroLayout } from './boundaries.js';
+
+export const onRequest = async (context, next) => {
+  const initial = resolveInitialState(heroLayout, context.request);
+  context.locals.heroState = initial;
+  return next();
+};
+```
+
+The shell then renders with the resolved state baked into `data-czap-state`; the client directive picks up where the server left off, no flash on hydration.
 
 ### `stream`
 
@@ -171,8 +212,6 @@ The correct Astro posture is:
 3. attach LiteShip runtime only where authored behavior needs it
 4. escalate to worker, gpu, or wasm only where meaning requires it
 
-That is the host model.
-
 Astro gives the page a strong server-rendered base. LiteShip adds stateful adaptive behavior without forcing every surface into a general-purpose app runtime.
 
 ---
@@ -202,8 +241,6 @@ The ideal sequence is:
 5. client directives refine or continue the experience where needed
 6. richer runtimes take over only where they add real value
 
-That sequence is the correct model to preserve.
-
 Following that order keeps server-rendered HTML the baseline and limits client runtime to surfaces that actually need it. If everything assumes maximum runtime from the start, the server-rendered base is doing less work than it could.
 
 ---
@@ -212,6 +249,4 @@ Following that order keeps server-rendered HTML the baseline and limits client r
 
 Inside Astro, LiteShip should be understood as:
 
-> an adaptive authored runtime layered on top of an HTML-first document host
-
-That is the frame to keep stable while building.
+> an adaptive authored runtime layered on top of an HTML-first document host.

@@ -118,8 +118,11 @@ plan graph, ECS, capsule factory).
 - [CellKind](type-aliases/CellKind.md)
 - [ChainValidationError](type-aliases/ChainValidationError.md)
 - [ContentAddress](type-aliases/ContentAddress.md)
+- [DeepReadonly](type-aliases/DeepReadonly.md)
 - [DiagnosticLevel](type-aliases/DiagnosticLevel.md)
 - [EdgeType](type-aliases/EdgeType.md)
+- [EffectError](type-aliases/EffectError.md)
+- [EffectValue](type-aliases/EffectValue.md)
 - [EntityId](type-aliases/EntityId.md)
 - [FrameType](type-aliases/FrameType.md)
 - [GapStrategy](type-aliases/GapStrategy.md)
@@ -132,12 +135,12 @@ plan graph, ECS, capsule factory).
 - [Primitive](type-aliases/Primitive.md)
 - [PrimitiveKind](type-aliases/PrimitiveKind.md)
 - [Priority](type-aliases/Priority.md)
+- [RequireAtLeastOne](type-aliases/RequireAtLeastOne.md)
 - [RuntimePhase](type-aliases/RuntimePhase.md)
 - [SignalInput](type-aliases/SignalInput.md)
 - [SignalSource](type-aliases/SignalSource.md)
 - [SignalSourceType](type-aliases/SignalSourceType.md)
 - [Site](type-aliases/Site.md)
-- [StateAt](type-aliases/StateAt.md)
 - [StateName](type-aliases/StateName.md)
 - [StateUnion](type-aliases/StateUnion.md)
 - [ThresholdValue](type-aliases/ThresholdValue.md)
@@ -225,7 +228,6 @@ plan graph, ECS, capsule factory).
 
 ## Functions
 
-- [brand](functions/brand.md)
 - [defineCapsule](functions/defineCapsule.md)
 - [defineConfig](functions/defineConfig.md)
 - [fnv1a](functions/fnv1a.md)
@@ -237,9 +239,3 @@ plan graph, ECS, capsule factory).
 - [isWire](functions/isWire.md)
 - [isZap](functions/isZap.md)
 - [tupleMap](functions/tupleMap.md)
-
-## References
-
-### BoundarySpecType
-
-Renames and re-exports [BoundarySpec](variables/BoundarySpec.md)

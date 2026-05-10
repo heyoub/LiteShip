@@ -29,11 +29,19 @@ export function readRuntimeGlobal<T>(name: string, guard: (v: unknown) => v is T
 }
 
 /**
- * Write a named `window` global as a non-enumerable, configurable
- * property. `options.writable` defaults to `false` so the value is
- * lock-down by default.
+ * Write a named `window` global as a non-enumerable property.
+ *
+ * `options.writable` defaults to `false` so the value is lock-down by default.
+ * `options.configurable` defaults to `true` so HMR and bootstrap re-runs can
+ * replace the global; security-critical globals (e.g. `__CZAP_RUNTIME_POLICY__`)
+ * should pass `configurable: false` to prevent post-install redefinition by
+ * any later script on the page.
  */
-export function writeRuntimeGlobal<T>(name: string, value: T, options?: { readonly writable?: boolean }): T {
+export function writeRuntimeGlobal<T>(
+  name: string,
+  value: T,
+  options?: { readonly writable?: boolean; readonly configurable?: boolean },
+): T {
   const win = runtimeWindow();
   if (!win) {
     return value;
@@ -41,7 +49,7 @@ export function writeRuntimeGlobal<T>(name: string, value: T, options?: { readon
 
   Object.defineProperty(win, name, {
     value,
-    configurable: true,
+    configurable: options?.configurable ?? true,
     enumerable: false,
     writable: options?.writable ?? false,
   });

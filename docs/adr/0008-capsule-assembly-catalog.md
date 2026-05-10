@@ -43,8 +43,7 @@ Each arm has a typed contract (`CapsuleContract<K, In, Out, R>`), a factory (`de
 ## References
 
 - [LiteShip vocabulary](../GLOSSARY.md): product / engine / `@czap/*` naming
-- `docs/superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md` §4
-- `docs/sixsigma/actions/six-sigma-action-plan.md` (motivating research)
+- `docs/adr/0007-adapter-vs-peer-framing.md` (paired adapter framing ADR)
 - `docs/adr/0010-spine-canonical-type-source.md` (paired bridge ADR)
 
 ### Capsule detection is type-directed (2026-04-24 amendment)

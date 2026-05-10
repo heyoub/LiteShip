@@ -109,7 +109,7 @@ When building a new surface, the clean order is:
 
 This order matters because it keeps authored behavior semantic.
 
-If you start from CSS declarations, the system becomes accidental. If you start from signals and states, the system becomes legible.
+Starting from signals and states keeps the authored layer semantic; starting from CSS first inverts the order and the partition leaks into selectors.
 
 ---
 
@@ -343,7 +343,51 @@ Do not duplicate the state logic for each target. Instead:
 - let the boundary define state
 - let compilers project the state into each target
 
-This is what gives LiteShip coherence across presentation layers. By the way, the projection is content-addressed: the boundary's FNV-1a hash is the contract every compiler reads from. CSS, GLSL, and ARIA can't drift on each other because they're emitted from the same canonical definition.
+The projection is content-addressed: the boundary's FNV-1a hash (over the canonical CBOR encoding) is the contract every compiler reads from. CSS, GLSL, and ARIA can't drift because they're emitted from the same canonical definition.
+
+---
+
+## Authoring for accessibility
+
+Boundaries that drive layout almost always drive an a11y story too. The ARIA compiler (`packages/compiler/src/aria.ts`) takes the same boundary and a per-state attribute map; it validates that every key starts with `aria-` or is exactly `role`, drops anything else with a diagnostic warning, and emits the attributes via `applyBoundaryState` (`packages/astro/src/runtime/boundary.ts`) onto the same satellite element the CSS variable lives on. So the screen reader and the styled element observe the same boundary identity.
+
+Two concrete patterns:
+
+```ts
+// A disclosure surface: states correspond to expanded/collapsed; aria-expanded
+// flips with the layout.
+import { ARIACompiler } from '@czap/compiler';
+import { disclosureBoundary } from './boundaries.js';
+
+const aria = ARIACompiler.compile(disclosureBoundary, {
+  collapsed: { 'aria-expanded': 'false', 'aria-hidden': 'true' },
+  expanded: { 'aria-expanded': 'true', 'aria-hidden': 'false' },
+});
+```
+
+```ts
+// A reduced-motion-aware surface: when motionTier is 'none', the boundary
+// pins to a still state and the live-region announces transitions instead of
+// animating them.
+import { Boundary } from '@czap/core';
+import { motionTierFromCapabilities } from '@czap/detect';
+
+export const heroMotion = Boundary.make({
+  input: 'motion.tier',
+  at: [
+    [0, 'still'], // motionTier === 'none'
+    [1, 'subtle'],
+    [2, 'full'],
+  ] as const,
+});
+```
+
+A few rules of thumb:
+
+- The state vocabulary is the contract. Whatever names appear in the boundary are the same names the ARIA author keys into; if you rename a state, both surfaces update from the one definition. There is no separate "ARIA state" concept to keep in sync.
+- Pair a `motionTier`-driven boundary with `prefers-reduced-motion`. `motionTierFromCapabilities` (`packages/detect/src/tiers.ts`) returns `'none'` unconditionally when `caps.prefersReducedMotion` is true, regardless of GPU tier — author for the `'none'` case explicitly (still imagery, `aria-live="polite"` announcements for state transitions, no transform/translate animations).
+- Never stash arbitrary attributes through the ARIA compiler. The validator drops anything that isn't `aria-*` or `role`; that's intentional. Use `data-*` attributes via your own template if you need extra DOM hooks.
+- Boundary state is applied as `data-czap-state` on the satellite, so CSS attribute selectors keyed on `[data-czap-state="expanded"]` and ARIA attributes resolve from the same evaluator on the same element. There is no two-write race; both are written synchronously inside `applyBoundaryState`.
 
 ---
 

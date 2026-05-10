@@ -8,7 +8,7 @@
 
 > `const` **Token**: `TokenFactory` & `object`
 
-Defined in: core/src/token.ts:129
+Defined in: core/src/token.ts:136
 
 Token namespace -- design token primitive for adaptive rendering.
 

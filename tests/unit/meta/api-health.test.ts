@@ -173,13 +173,16 @@ const API_REGISTRY: Record<string, { methods: string[]; values?: string[] }> = {
 
 // ── Standalone function exports ─────────────────────────────────────
 const STANDALONE_FUNCTIONS = [
-  'brand',
+  // `brand` removed from main entry — it is the unsafe escape-hatch the
+  // sanctioned brand constructors compose with, and exposing it on the public
+  // surface lets consumers forge any brand. Tests that need it import from
+  // the source module directly.
+  // `isSchemaError` removed from main entry — was an orphan re-export of
+  // effect/Schema. Consumers can import directly from 'effect/Schema'.
   'isCell',
   'isDerived',
   'isZap',
   'isWire',
-  // `isSchemaError` removed from main entry — was an orphan re-export of
-  // effect/Schema. Consumers can import directly from 'effect/Schema'.
   'fnv1a',
   'fnv1aBytes',
   'isValidationError',

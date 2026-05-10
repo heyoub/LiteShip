@@ -63,6 +63,13 @@ function deterministicId(
  * Axes are sorted alphabetically and joined with ':' to form the lookup key.
  * Falls back to the token's fallback value if no match is found.
  *
+ * The optional type parameter `T` lets callers narrow the return value when
+ * they know the value shape; without it, the return is `unknown` (the
+ * underlying `TokenDef.values` is `Record<string, unknown>` because token
+ * values can be any JSON shape — colors as strings, spacing as numbers,
+ * shadow records as objects). Pass `Token.tap<string>(...)` for a color
+ * token, etc.
+ *
  * @example
  * ```ts
  * const token = Token.make({
@@ -71,16 +78,16 @@ function deterministicId(
  *   values: { 'light': '#000', 'dark': '#fff' },
  *   fallback: '#888',
  * });
- * const value = Token.tap(token, { theme: 'dark' });
- * // value === '#fff'
+ * const value = Token.tap<string>(token, { theme: 'dark' });
+ * // value === '#fff' (typed as string)
  * ```
  */
-function _tap(token: TokenDef, axisValues: Record<string, string>): unknown {
+function _tap<T = unknown>(token: TokenDef, axisValues: Record<string, string>): T {
   const key = [...token.axes]
     .sort()
     .map((axis) => axisValues[axis] ?? '')
     .join(':');
-  return token.values[key] ?? token.fallback;
+  return (token.values[key] ?? token.fallback) as T;
 }
 
 /**

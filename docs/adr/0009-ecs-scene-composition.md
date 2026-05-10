@@ -33,6 +33,5 @@ Per-frame hot paths use dense `Part` stores (`Part.dense('Opacity', N)`, `Part.d
 
 ## References
 
-- `docs/superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md` §5
-- `docs/adr/0002-zero-alloc.md`
-- `docs/adr/0008-capsule-assembly-catalog.md`
+- `docs/adr/0002-zero-alloc.md` — zero-alloc discipline that scene tick inherits
+- `docs/adr/0008-capsule-assembly-catalog.md` — capsule arm catalog this ADR adds `sceneComposition` to

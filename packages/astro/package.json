@@ -69,7 +69,9 @@
       "types": "./dist/runtime/index.d.ts",
       "import": "./dist/runtime/index.js",
       "development": "./src/runtime/index.ts"
-    }
+    },
+    "./Satellite": "./src/Satellite.astro",
+    "./Satellite.astro": "./src/Satellite.astro"
   },
   "files": [
     "dist",

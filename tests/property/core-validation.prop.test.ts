@@ -6,7 +6,12 @@
 
 import { describe, test } from 'vitest';
 import fc from 'fast-check';
-import { CzapValidationError, isValidationError, brand } from '@czap/core';
+import { CzapValidationError, isValidationError } from '@czap/core';
+// `brand` is the generic brand factory used by `@czap/core` itself to
+// define the sanctioned brand constructors. It is intentionally not on
+// the public package surface; tests that exercise its zero-cost identity
+// property import it from the source module directly.
+import { brand } from '../../packages/core/src/brands.js';
 
 describe('Core validation properties', () => {
   test('ValidationError type guard boolean invariant', () => {

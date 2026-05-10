@@ -8,7 +8,7 @@
 
 > **BoundaryCrossing**\<`S`\> = `object`
 
-Defined in: core/src/type-utils.ts:29
+Defined in: core/src/type-utils.ts:26
 
 Discriminated union of boundary crossings
 
@@ -24,7 +24,7 @@ Discriminated union of boundary crossings
 
 > `readonly` **from**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: core/src/type-utils.ts:30
+Defined in: core/src/type-utils.ts:27
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: core/src/type-utils.ts:30
 
 > `readonly` **timestamp**: [`HLCBrand`](../interfaces/HLCBrand.md)
 
-Defined in: core/src/type-utils.ts:32
+Defined in: core/src/type-utils.ts:29
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: core/src/type-utils.ts:32
 
 > `readonly` **to**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: core/src/type-utils.ts:31
+Defined in: core/src/type-utils.ts:28
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: core/src/type-utils.ts:31
 
 > `readonly` **value**: `number`
 
-Defined in: core/src/type-utils.ts:33
+Defined in: core/src/type-utils.ts:30

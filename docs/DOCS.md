@@ -99,7 +99,7 @@ Read [ROADMAP.md](./ROADMAP.md).
 
 ### If the question is "What changed?"
 
-Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
+Read [CHANGELOG.md](../CHANGELOG.md). For shipping npm/GitHub releases, see
 [RELEASING.md](./RELEASING.md).
 
 ---
@@ -140,6 +140,35 @@ Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
 3. [AUDIT.md](./AUDIT.md): the codebase-audit signal, what to expect in a release artifact
 4. [RELEASING.md](./RELEASING.md): publish, tags, GitHub releases
 5. [HISTORY_SCRUB.md](./HISTORY_SCRUB.md): pre-public discovery checklist
+
+---
+
+## Discovery index (file paths for common queries)
+
+For agents and grep-first humans, here is where the canonical answer lives:
+
+| Question | File |
+|---|---|
+| Where is `Boundary` defined? | `packages/core/src/boundary.ts` (re-exported from `packages/core/src/index.ts`) |
+| Where is `Token` defined? | `packages/core/src/token.ts` |
+| Where is `Style` defined? | `packages/core/src/style.ts` |
+| Where is `Theme` defined? | `packages/core/src/theme.ts` |
+| Where does the canonical CBOR encoder live? | `packages/core/src/cbor.ts` (consumed by every primitive's `deterministicId`) |
+| Where is the FNV-1a hash? | `packages/core/src/fnv.ts` |
+| Where is the SPSC ring buffer? | `packages/worker/src/spsc-ring.ts` |
+| Where is the compositor pool? | `packages/core/src/compositor-pool.ts` |
+| Where is `DirtyFlags`? | `packages/core/src/dirty.ts` |
+| Where is the HTML sanitizer? | `packages/web/src/security/html-trust.ts` |
+| Where is the SSRF / private-IP guard? | `packages/web/src/security/runtime-url.ts` |
+| Where is the runtime policy global written? | `packages/astro/src/runtime/policy.ts`, via `globals.ts` |
+| Where does `client:satellite` register? | `packages/astro/src/integration.ts` |
+| Where is the `Satellite` Astro component? | `packages/astro/src/Satellite.astro` (default export from `@czap/astro/Satellite`) |
+| How do I add a new compile target? | `docs/adr/0006-compiler-dispatch.md`, then `packages/compiler/src/dispatch.ts` |
+| How do I add a new primitive? | `docs/adr/0001-namespace-pattern.md`, then mirror the existing primitive shape in `packages/core/src/` |
+| How do I extend an existing type union? | The pattern is grep-first today; see CONTRIBUTING.md "Architecture changes" and the affected `_spine/*.d.ts` file |
+| Where is the canonical CI workflow? | `.github/workflows/ci.yml` (truth-linux job runs `pnpm run gauntlet:full`) |
+| Where is the red-team regression suite? | `tests/regression/red-team-runtime.test.ts` |
+| What does `flex:verify` actually check? | `scripts/flex-verify.ts` (7 dimensions; rolled up by gauntlet phase 29) |
 
 ---
 

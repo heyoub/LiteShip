@@ -8,12 +8,16 @@
 
 > **createHtmlFragment**(`html`, `options?`): `DocumentFragment`
 
-Defined in: web/src/security/html-trust.ts:121
+Defined in: web/src/security/html-trust.ts:236
 
 Parse `html` under `options.policy` and return a `DocumentFragment`
 ready to be appended to the live DOM. Dangerous elements
-(`<script>`, `<iframe>`, etc.) and attributes (`on*`, `srcdoc`,
-javascript/data URLs) are stripped when the effective policy is
+(`<script>`, `<iframe>`, `<base>`, `<meta>`, `<link>`, `<form>`,
+`<noscript>`, `<svg>`, `<math>`, `<style>`, `<object>`, `<embed>`)
+and attributes (`on*`, `srcdoc`, `style`, `javascript:` /
+`data:text/html` URLs in url-sink attributes including `href`,
+`src`, `action`, `formaction`, `ping`, `background`, `cite`,
+`data`, `poster`) are stripped when the effective policy is
 `sanitized-html`.
 
 ## Parameters

@@ -17,9 +17,6 @@ export type Prettify<T> = { [K in keyof T]: T[K] } & {};
 /** Extract literal union of state names from a Boundary.Shape */
 export type StateUnion<B extends Boundary.Shape> = B['states'][number];
 
-/** Resolve which state a value falls into at the type level (runtime only) */
-export type StateAt<_Value extends number, _Boundary extends Boundary.Shape> = string;
-
 /** Generate valid output shapes per state */
 export type OutputsFor<B extends Boundary.Shape, T> = {
   readonly [S in StateUnion<B>]: T;

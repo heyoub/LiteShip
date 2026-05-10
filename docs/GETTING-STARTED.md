@@ -146,7 +146,7 @@ Then in any `.astro` page:
 
 ```astro
 ---
-import { Satellite } from '@czap/astro/Satellite';
+import Satellite from '@czap/astro/Satellite';
 ---
 
 <Satellite boundary={viewport} client:satellite>

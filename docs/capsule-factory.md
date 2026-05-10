@@ -2,7 +2,7 @@
 
 Part of LiteShip: the CZAP engine's capsule and scene assembly. Vocabulary: [GLOSSARY.md](./GLOSSARY.md).
 
-Landed by spec [`2026-04-23-capsule-factory-video-stack-design.md`](./superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md).
+Landed by spec `2026-04-23-capsule-factory-video-stack-design.md` (the spec itself was an internal design document; the resulting decisions live in ADRs 0007, 0008, 0009, and 0010 in this repo).
 
 ## Capsule factory
 

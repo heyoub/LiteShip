@@ -4,6 +4,14 @@
  * through after an opt-in). Backs `@czap/web`'s DOM morph and slot
  * injection so callers never touch `innerHTML` directly.
  *
+ * When the host installs a Trusted Types policy named `czap` (see
+ * `SECURITY.md` for the recipe), all `innerHTML` assignments below
+ * route through `policy.createHTML(html)` so the runtime is
+ * compatible with `require-trusted-types-for 'script'`. If no
+ * policy is installed (or Trusted Types isn't supported), the
+ * assignments fall through to direct string assignment, which is
+ * the standard non-TT behavior.
+ *
  * @module
  */
 import type { HtmlPolicy } from '../types.js';
@@ -24,7 +32,105 @@ export interface HtmlTrustOptions {
   readonly allowTrustedHtml?: boolean;
 }
 
-const DANGEROUS_TAGS = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'OBJECT', 'EMBED', 'SVG', 'MATH']);
+/**
+ * Tags that are stripped wholesale under `sanitized-html`. The list covers:
+ * - direct script execution (`SCRIPT`)
+ * - inline style injection (`STYLE`)
+ * - sub-document embeds (`IFRAME`, `OBJECT`, `EMBED`)
+ * - foreign-content namespaces that change parser semantics (`SVG`, `MATH`)
+ * - origin and resource hijack vectors (`BASE` for href rebasing,
+ *   `META` for `http-equiv` refresh / CSP overrides)
+ * - executable preload / fallback paths (`LINK` for `rel=stylesheet`/`prefetch`,
+ *   `NOSCRIPT` for re-serialization mXSS, `FORM` for `formaction`/`action` sinks)
+ */
+const DANGEROUS_TAGS = new Set([
+  'SCRIPT',
+  'STYLE',
+  'IFRAME',
+  'OBJECT',
+  'EMBED',
+  'SVG',
+  'MATH',
+  'BASE',
+  'META',
+  'LINK',
+  'NOSCRIPT',
+  'FORM',
+]);
+
+/** Attribute names that can route a navigation/load to a `javascript:` or `data:` scheme. */
+const URL_SINK_ATTRIBUTES = new Set([
+  'href',
+  'src',
+  'xlink:href',
+  'action',
+  'formaction',
+  'ping',
+  'background',
+  'cite',
+  'data',
+  'poster',
+]);
+
+let trustedTypesPolicy: { createHTML(input: string): string } | null | undefined;
+
+/**
+ * Look up (or create) the `czap` Trusted Types policy. Returns `null`
+ * when Trusted Types is unavailable or unsupported. The lookup is
+ * cached after the first call.
+ *
+ * Hosts that install their own `czap` policy (see SECURITY.md) get
+ * picked up via `trustedTypes.getPolicy?.('czap')`. If the host hasn't
+ * installed one but Trusted Types is enforced via CSP, this helper
+ * creates a passthrough policy so the runtime's HTML sinks don't
+ * throw at first projection.
+ */
+function getTrustedTypesPolicy(): { createHTML(input: string): string } | null {
+  if (trustedTypesPolicy !== undefined) return trustedTypesPolicy;
+
+  const tt = (globalThis as { trustedTypes?: TrustedTypePolicyFactoryLike }).trustedTypes;
+  if (!tt || typeof tt.createPolicy !== 'function') {
+    trustedTypesPolicy = null;
+    return null;
+  }
+
+  const existing = tt.getPolicy?.('czap');
+  if (existing) {
+    trustedTypesPolicy = existing;
+    return existing;
+  }
+
+  try {
+    trustedTypesPolicy = tt.createPolicy('czap', {
+      createHTML: (input: string) => input,
+    });
+    return trustedTypesPolicy;
+  } catch {
+    // Policy creation can fail under restrictive CSP (e.g. policy already
+    // exists with a different definition, or `trusted-types` directive
+    // disallows the name). Fall back to null so the assignment proceeds
+    // with the raw string — which will throw under enforcement, signalling
+    // the host to install a `czap` policy.
+    trustedTypesPolicy = null;
+    return null;
+  }
+}
+
+interface TrustedTypePolicyFactoryLike {
+  createPolicy?(
+    name: string,
+    rules: { createHTML: (input: string) => string },
+  ): { createHTML(input: string): string };
+  getPolicy?(name: string): { createHTML(input: string): string } | null;
+}
+
+function assignInnerHTML(target: { innerHTML: string }, html: string): void {
+  const policy = getTrustedTypesPolicy();
+  // The policy's createHTML returns a TrustedHTML on real implementations.
+  // Cast to string for the assignment; the DOM accepts TrustedHTML where
+  // string is typed.
+  target.innerHTML = policy ? (policy.createHTML(html) as unknown as string) : html;
+}
 
 function escapeHtml(raw: string): string {
   return raw
@@ -56,8 +162,13 @@ function isDangerousAttribute(name: string, value: string): boolean {
     return true;
   }
 
-  if (normalizedValue.startsWith('javascript:') || normalizedValue.startsWith('data:text/html')) {
-    return lowerName === 'href' || lowerName === 'src' || lowerName === 'xlink:href';
+  if (
+    normalizedValue.startsWith('javascript:') ||
+    normalizedValue.startsWith('data:text/html') ||
+    normalizedValue.startsWith('data:application/x-javascript') ||
+    normalizedValue.startsWith('data:text/javascript')
+  ) {
+    return URL_SINK_ATTRIBUTES.has(lowerName);
   }
 
   return false;
@@ -97,13 +208,13 @@ function createTemplate(html: string, options?: HtmlTrustOptions): HTMLTemplateE
 
   switch (policy) {
     case 'text':
-      template.innerHTML = escapeHtml(html);
+      assignInnerHTML(template, escapeHtml(html));
       break;
     case 'trusted-html':
-      template.innerHTML = html;
+      assignInnerHTML(template, html);
       break;
     case 'sanitized-html':
-      template.innerHTML = html;
+      assignInnerHTML(template, html);
       sanitizeElementTree(template.content);
       break;
   }
@@ -114,8 +225,12 @@ function createTemplate(html: string, options?: HtmlTrustOptions): HTMLTemplateE
 /**
  * Parse `html` under `options.policy` and return a `DocumentFragment`
  * ready to be appended to the live DOM. Dangerous elements
- * (`<script>`, `<iframe>`, etc.) and attributes (`on*`, `srcdoc`,
- * javascript/data URLs) are stripped when the effective policy is
+ * (`<script>`, `<iframe>`, `<base>`, `<meta>`, `<link>`, `<form>`,
+ * `<noscript>`, `<svg>`, `<math>`, `<style>`, `<object>`, `<embed>`)
+ * and attributes (`on*`, `srcdoc`, `style`, `javascript:` /
+ * `data:text/html` URLs in url-sink attributes including `href`,
+ * `src`, `action`, `formaction`, `ping`, `background`, `cite`,
+ * `data`, `poster`) are stripped when the effective policy is
  * `sanitized-html`.
  */
 export function createHtmlFragment(html: string, options?: HtmlTrustOptions): DocumentFragment {
@@ -138,4 +253,15 @@ export function resolveHtmlString(html: string, options?: HtmlTrustOptions): str
  */
 export function sanitizeHTML(html: string): string {
   return resolveHtmlString(html, { policy: 'sanitized-html' });
+}
+
+/**
+ * Reset the cached Trusted Types policy lookup. Test-only helper.
+ * Production code never calls this; the cache is set on first read
+ * and held for the lifetime of the runtime.
+ *
+ * @internal
+ */
+export function _resetTrustedTypesPolicyCacheForTests(): void {
+  trustedTypesPolicy = undefined;
 }

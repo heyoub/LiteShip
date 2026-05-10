@@ -27,6 +27,16 @@ Vocabulary for prose across this repository. Technical identifiers (`Boundary`, 
 
 *next-generation, leverage, robust, powerful, seamless, blazingly fast, cutting-edge, world-class, enterprise-grade, paradigm-shifting, game-changing, revolutionary, unleash, supercharge, harness the power of.* Replace with concrete behavior, or cut.
 
+## Translator notes
+
+A few terms in this corpus are polysemous; future i18n / machine-translation work should treat them as terms-of-art and pin the meaning rather than translate by surface form:
+
+- **cast** — verb only, "project a definition into a target output surface" (CSS, GLSL, ARIA, etc.). Not the noun (theatrical cast) and not type-coercion (`as` casting). Always carries a target.
+- **rig** — both verb ("rig a boundary") and noun ("the rig is in between"). The system that ties continuous signals to named bearings. Not the unrelated rigging-of-results sense.
+- **surface** — noun, "a runtime target the compiler emits to" (CSS surface, ARIA surface). Not the verb sense (something coming to attention).
+- **bearing** — noun, "a named discrete state a boundary partitions to" (one of `mobile/tablet/desktop`, etc.). Not the mechanical-bearing or the comportment sense.
+- **trim** — runtime-cost language: "kept the working deck trim" = "kept the runtime cost low."
+
 ## Drift check
 
 After editing docs, run the sweep: mixed boundary verbs (*wire* vs *rig*), banned words, accidental rename of `@czap/*` or public APIs. The glossary holds; the prose comes back to it.

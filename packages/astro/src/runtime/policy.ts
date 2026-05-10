@@ -142,6 +142,15 @@ export function normalizeRuntimeSecurityPolicy(policy?: RuntimeSecurityPolicy): 
  * Normalise `policy` and write it to `window.__CZAP_RUNTIME_POLICY__`
  * so every directive sees the same configuration. Called once during
  * bootstrap by the integration's injected boot script.
+ *
+ * The value object is frozen at every nesting level (see
+ * `normalizeRuntimeSecurityPolicy`); the descriptor remains
+ * `configurable: true` so the integration can re-bootstrap on HMR
+ * and test harnesses can refresh policy state between cases. An
+ * attacker with script execution on the page can redefine the global
+ * via `Object.defineProperty`; that is acknowledged in SECURITY.md
+ * and is out of scope for this layer (it requires a primary CSP
+ * compromise to reach).
  */
 export function configureRuntimePolicy(policy?: RuntimeSecurityPolicy): NormalizedRuntimeSecurityPolicy {
   const normalized = normalizeRuntimeSecurityPolicy(policy);

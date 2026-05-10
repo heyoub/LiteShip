@@ -8,7 +8,7 @@
 
 > **isDerived**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: core/src/index.ts:218
+Defined in: core/src/index.ts:233
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Derived](../namespaces/Derived/README.md).
 

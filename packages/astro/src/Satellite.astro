@@ -1,0 +1,39 @@
+---
+/**
+ * Satellite -- the canonical adaptive shell for an Astro page.
+ *
+ * Wraps a `<div>` with `data-czap-*` attributes derived from a Boundary
+ * (and optionally a Component or initial state), so the `client:satellite`
+ * directive can hydrate the boundary evaluator on the client. CSS
+ * transitions handle visual changes; the directive's only runtime job
+ * is to evaluate live signals and update `data-czap-state`.
+ *
+ * @example
+ * ```astro
+ * ---
+ * import Satellite from '@czap/astro/Satellite';
+ * import { heroLayout } from '../boundaries.js';
+ * ---
+ *
+ * <Satellite boundary={heroLayout} client:satellite>
+ *   <section class="hero">...</section>
+ * </Satellite>
+ * ```
+ *
+ * Composition note: this component is a thin shell over `satelliteAttrs()`
+ * (`packages/astro/src/Satellite.ts`). When you need to attach satellite
+ * attributes to an element other than a `<div>` (e.g. a `<section>` or
+ * `<main>`), import `satelliteAttrs` directly and spread it onto your
+ * element of choice.
+ */
+
+import { satelliteAttrs, type SatelliteProps } from './Satellite.js';
+
+export interface Props extends SatelliteProps {}
+
+const attrs = satelliteAttrs(Astro.props);
+---
+
+<div {...attrs}>
+  <slot />
+</div>

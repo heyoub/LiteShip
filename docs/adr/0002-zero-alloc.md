@@ -25,7 +25,7 @@ The per-frame inner loop is plain JS. Effect is used only for setup/teardown (sc
 - `DirtyFlags` skips unchanged quantizers: **50–80% recompute elimination** typical.
 - `CompositorStatePool` caps at `COMPOSITOR_POOL_CAP` (`defaults.ts`); beyond cap, `acquire()` returns a fresh instance. Documented tradeoff, not silent fallback.
 - `DirtyFlags` caps at `DIRTY_FLAGS_MAX`; beyond cap, full recomputation runs. Crossing the cap is a signal to rearchitect.
-- Dense stores throw `RangeError` at capacity (`ecs.ts:87-88`); callers size for their workload.
+- Dense stores throw `RangeError` at capacity (`ecs.ts:88-89`); callers size for their workload.
 - `DenseStore.view()` Float64Array shares layout with the WASM escape-hatch input buffer. Zero-copy across the JS/WASM tier boundary.
 
 ## Evidence
@@ -64,8 +64,7 @@ Tasks 33-35 added two additive ECS primitives that these systems use ergonomical
 
 ### Additional references
 
-- `docs/superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md` §5.3, §7
-- `docs/adr/0009-ecs-scene-composition.md`
+- `docs/adr/0009-ecs-scene-composition.md` — paired ADR for the scene composition substrate
 - `packages/scene/src/systems/*.ts` — canonical scene systems
 
 ## Amendment (2026-04-24): Scene runtime tick cadence

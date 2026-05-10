@@ -8,7 +8,7 @@
 
 > **resolveHtmlString**(`html`, `options?`): `string`
 
-Defined in: web/src/security/html-trust.ts:130
+Defined in: web/src/security/html-trust.ts:245
 
 Serialise `html` back to string form after applying the effective
 policy. Useful for host code that must hand cleaned markup to another

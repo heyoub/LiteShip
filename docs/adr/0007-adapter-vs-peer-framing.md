@@ -38,6 +38,5 @@ The repo compiler's harness template for `siteAdapter` emits round-trip tests (n
 
 ## References
 
-- `docs/superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md` §4
-- `docs/adr/0008-capsule-assembly-catalog.md`
+- `docs/adr/0008-capsule-assembly-catalog.md` — paired catalog ADR
 - https://www.remotion.dev/docs/license
