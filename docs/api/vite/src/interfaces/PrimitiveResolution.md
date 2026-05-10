@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [vite/src](../README.md) / PrimitiveResolution
+[LiteShip](../../../modules.md) / [vite/src](../README.md) / PrimitiveResolution
 
 # Interface: PrimitiveResolution\<K\>
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [vite/src](../README.md) / QuantizeBlock
+[LiteShip](../../../modules.md) / [vite/src](../README.md) / QuantizeBlock
 
 # Interface: QuantizeBlock
 

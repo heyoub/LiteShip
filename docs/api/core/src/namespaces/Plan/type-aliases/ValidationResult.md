@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Plan](../README.md) / ValidationResult
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Plan](../README.md) / ValidationResult
 
 # Type Alias: ValidationResult
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [compiler/src](../README.md) / GLSLCompiler
+[LiteShip](../../../modules.md) / [compiler/src](../README.md) / GLSLCompiler
 
 # Variable: GLSLCompiler
 

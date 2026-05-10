@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / WebCodecsCapture
+[LiteShip](../../../modules.md) / [web/src](../README.md) / WebCodecsCapture
 
 # Variable: WebCodecsCapture
 

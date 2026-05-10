@@ -1,14 +1,14 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / isWire
+[LiteShip](../../../modules.md) / [core/src](../README.md) / isWire
 
 # Function: isWire()
 
 > **isWire**\<`T`\>(`p`): `p is Shape<T, never>`
 
-Defined in: [core/src/index.ts:220](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L220)
+Defined in: [core/src/index.ts:222](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L222)
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Wire](../namespaces/Wire/README.md).
 

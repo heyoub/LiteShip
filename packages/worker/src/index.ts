@@ -1,5 +1,6 @@
 /**
- * `@czap/worker` -- off-main-thread compositor and render workers.
+ * `@czap/worker` — **LiteShip** off-deck crew: compositor and render workers
+ * that keep the main thread trim while boundaries and media stay live.
  *
  * This package ships:
  *

@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [AVRenderer](../README.md) / FrameOutput
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [AVRenderer](../README.md) / FrameOutput
 
 # Type Alias: FrameOutput
 

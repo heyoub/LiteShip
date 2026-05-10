@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [astro/src](../README.md) / QuantizeProps
+[LiteShip](../../../modules.md) / [astro/src](../README.md) / QuantizeProps
 
 # Interface: QuantizeProps\<B\>
 

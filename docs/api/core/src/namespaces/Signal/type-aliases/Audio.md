@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Signal](../README.md) / Audio
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Signal](../README.md) / Audio
 
 # Type Alias: Audio
 

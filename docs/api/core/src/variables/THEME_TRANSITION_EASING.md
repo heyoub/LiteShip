@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / THEME\_TRANSITION\_EASING
+[LiteShip](../../../modules.md) / [core/src](../README.md) / THEME\_TRANSITION\_EASING
 
 # Variable: THEME\_TRANSITION\_EASING
 

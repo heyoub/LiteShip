@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [compiler/src](../README.md) / TokenJSCompiler
+[LiteShip](../../../modules.md) / [compiler/src](../README.md) / TokenJSCompiler
 
 # Variable: TokenJSCompiler
 

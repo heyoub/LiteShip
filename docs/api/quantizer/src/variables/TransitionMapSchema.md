@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / TransitionMapSchema
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / TransitionMapSchema
 
 # Variable: TransitionMapSchema
 

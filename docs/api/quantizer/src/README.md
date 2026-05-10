@@ -1,12 +1,14 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / quantizer/src
+[LiteShip](../../modules.md) / quantizer/src
 
 # quantizer/src
 
-`@czap/quantizer` -- boundary detection, multi-target output dispatch, animated transitions.
+`@czap/quantizer` — **LiteShip** quantizer: **rigged** boundary evaluation,
+live state, animated transitions between bearings, and motion-tier gating on
+the working line.
 
 ## Namespaces
 

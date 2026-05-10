@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [VideoRenderer](../README.md) / Shape
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [VideoRenderer](../README.md) / Shape
 
 # Type Alias: Shape
 

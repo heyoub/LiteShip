@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [detect/src](../README.md) / capSetFromCapabilities
+[LiteShip](../../../modules.md) / [detect/src](../README.md) / capSetFromCapabilities
 
 # Function: capSetFromCapabilities()
 

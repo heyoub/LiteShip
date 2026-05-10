@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [edge/src](../../../README.md) / [EdgeHostAdapter](../README.md) / CacheStatus
+[LiteShip](../../../../../modules.md) / [edge/src](../../../README.md) / [EdgeHostAdapter](../README.md) / CacheStatus
 
 # Type Alias: CacheStatus
 

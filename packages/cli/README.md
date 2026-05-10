@@ -1,6 +1,6 @@
 # `@czap/cli`
 
-The `czap` CLI: JSON-first machine interface with a human-friendly TTY mode.
+The `czap` CLI ships with **LiteShip** — JSON-first machine interface for the **CZAP** engine, human-friendly TTY mode. Naming: [../../docs/GLOSSARY.md](../../docs/GLOSSARY.md).
 
 ## Install
 

@@ -1,8 +1,6 @@
 /**
- * `@czap/compiler` -- Multi-target output generation from BoundaryDefs.
- *
- * Takes boundary definitions and state-specific output values,
- * compiles to target-specific output formats (CSS, GLSL, WGSL, ARIA, AI).
+ * `@czap/compiler` — **CZAP** projection targets: turns boundary definitions
+ * and per-bearing values into **cast** output (CSS, GLSL, WGSL, ARIA, AI, …).
  *
  * @module
  */

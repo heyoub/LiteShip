@@ -1,12 +1,13 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / worker/src
+[LiteShip](../../modules.md) / worker/src
 
 # worker/src
 
-`@czap/worker` -- off-main-thread compositor and render workers.
+`@czap/worker` — **LiteShip** off-deck crew: compositor and render workers
+that keep the main thread trim while boundaries and media stay live.
 
 This package ships:
 

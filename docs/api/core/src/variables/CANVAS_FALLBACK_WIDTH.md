@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / CANVAS\_FALLBACK\_WIDTH
+[LiteShip](../../../modules.md) / [core/src](../README.md) / CANVAS\_FALLBACK\_WIDTH
 
 # Variable: CANVAS\_FALLBACK\_WIDTH
 

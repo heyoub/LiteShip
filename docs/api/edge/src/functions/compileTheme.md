@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [edge/src](../README.md) / compileTheme
+[LiteShip](../../../modules.md) / [edge/src](../README.md) / compileTheme
 
 # Function: compileTheme()
 

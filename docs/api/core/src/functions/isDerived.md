@@ -1,14 +1,14 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / isDerived
+[LiteShip](../../../modules.md) / [core/src](../README.md) / isDerived
 
 # Function: isDerived()
 
 > **isDerived**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: [core/src/index.ts:216](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L216)
+Defined in: [core/src/index.ts:218](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L218)
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Derived](../namespaces/Derived/README.md).
 

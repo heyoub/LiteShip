@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [worker/src](../../../README.md) / [CompositorWorker](../README.md) / StartupTelemetry
+[LiteShip](../../../../../modules.md) / [worker/src](../../../README.md) / [CompositorWorker](../README.md) / StartupTelemetry
 
 # Type Alias: StartupTelemetry
 

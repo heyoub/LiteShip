@@ -1,8 +1,10 @@
-# czap in Astro
+# LiteShip in Astro
 
 ## Purpose
 
-This document explains how `czap` sits inside an Astro site.
+This document explains how **LiteShip** sits inside an Astro site — where the document host ends and the **CZAP** runtime begins. Imports stay on **`@czap/*`**; export names like `czapMiddleware()` stay literal.
+
+Naming: [GLOSSARY.md](./GLOSSARY.md).
 
 It is not a routing guide and not a content-model guide.
 It is about runtime responsibility.
@@ -18,7 +20,7 @@ Astro should own:
 - server rendering
 - content composition
 
-`czap` should own:
+**LiteShip** should own:
 
 - adaptive state logic
 - capability-aware escalation
@@ -28,7 +30,7 @@ Astro should own:
 This division is important.
 
 Astro is the document host.
-`czap` is the adaptive surface engine.
+**LiteShip** is the adaptive surface engine.
 
 ---
 
@@ -51,15 +53,15 @@ These form the Astro host layer.
 
 ## Integration
 
-`integration()` is the framework-level entry point.
+`integration()` is the **Astro integration** entry point — the host-level hook that registers transforms and **rigs** detection alongside Astro’s lifecycle.
 
 It is responsible for:
 
-- registering the Vite plugin path that understands authored `czap` blocks
-- wiring client-side detection support
-- connecting Astro lifecycle behavior to `czap` assumptions
+- registering the Vite plugin path that understands authored `@token` / `@theme` / `@style` / `@quantize` transforms
+- rigging client-side detection support
+- connecting Astro lifecycle behavior to LiteShip’s assumptions
 
-Use it when the site itself is a `czap`-aware Astro host.
+Use it when the site itself is a **LiteShip-aware** Astro host.
 
 ---
 
@@ -92,7 +94,7 @@ The server can often choose a useful initial state from:
 - capability hints
 - authored fallback rules
 
-This is one of the strongest reasons to pair `czap` with Astro.
+This is one of the strongest reasons to pair **LiteShip** with Astro.
 
 The system is allowed to be intelligent before hydration.
 
@@ -103,7 +105,7 @@ The system is allowed to be intelligent before hydration.
 `satelliteAttrs()` expresses the shell contract that client directives and
 runtime code understand.
 
-This matters because `czap` runtime behavior is DOM-and-attribute based.
+This matters because **LiteShip** runtime behavior is DOM-and-attribute based.
 
 The shell is not a virtual tree abstraction.
 It is real HTML with semantic `data-czap-*` meaning attached.
@@ -163,20 +165,20 @@ The correct Astro posture is:
 
 1. emit real HTML
 2. let CSS carry as much as possible
-3. attach `czap` runtime only where authored behavior needs it
+3. attach **LiteShip** runtime only where authored behavior needs it
 4. escalate to worker, gpu, or wasm only where meaning requires it
 
 That is the host model.
 
 Astro gives the page a strong server-rendered base.
-`czap` adds stateful adaptive behavior without forcing every surface into a
+**LiteShip** adds stateful adaptive behavior without forcing every surface into a
 general-purpose app runtime.
 
 ---
 
 ## Capability Ceilings
 
-A key czap invariant is that authored intent degrades gracefully under
+A key **LiteShip** invariant is that authored intent degrades gracefully under
 capability ceilings (see [ADR-0002](./adr/0002-zero-alloc.md) for the
 cheapest-valid-default discipline).
 
@@ -212,7 +214,7 @@ wasted.
 
 ## Working Definition
 
-Inside Astro, `czap` should be understood as:
+Inside Astro, **LiteShip** should be understood as:
 
 > an adaptive authored runtime layered on top of an HTML-first document host
 

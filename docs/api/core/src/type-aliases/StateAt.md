@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / StateAt
+[LiteShip](../../../modules.md) / [core/src](../README.md) / StateAt
 
 # Type Alias: StateAt\<_Value, _Boundary\>
 

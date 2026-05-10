@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [vite/src](../README.md) / PrimitiveShape
+[LiteShip](../../../modules.md) / [vite/src](../README.md) / PrimitiveShape
 
 # Type Alias: PrimitiveShape\<K\>
 

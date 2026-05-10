@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [assets/src](../README.md) / audioDecoder
+[LiteShip](../../../modules.md) / [assets/src](../README.md) / audioDecoder
 
 # Function: audioDecoder()
 

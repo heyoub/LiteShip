@@ -1,4 +1,6 @@
-# Capsule Factory + Video Stack (2026-04-23)
+# Capsule factory + video stack (2026-04-23)
+
+Part of **LiteShip** — the **CZAP** engine’s capsule and scene assembly. Vocabulary: [GLOSSARY.md](./GLOSSARY.md).
 
 Landed by spec [`2026-04-23-capsule-factory-video-stack-design.md`](./superpowers/specs/2026-04-23-capsule-factory-video-stack-design.md).
 
@@ -28,6 +30,6 @@ Landed by spec [`2026-04-23-capsule-factory-video-stack-design.md`](./superpower
 
 ## Spine as Canonical Types
 
-- `packages/_spine/*.d.ts` is now wired into project references + vitest aliases.
+- `packages/_spine/*.d.ts` is now referenced from project references + vitest aliases.
 - `packages/core/src/brands.ts` re-exports branded types FROM `_spine`. Runtime constructors remain in the implementation packages.
 - ADR-0010 documents the closure of the Spine Runtime Gap (sixsigma Island #1).

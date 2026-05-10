@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / LiveQuantizer
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / LiveQuantizer
 
 # Interface: LiveQuantizer\<B, O\>
 

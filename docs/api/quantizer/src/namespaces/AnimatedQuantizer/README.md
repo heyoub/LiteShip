@@ -1,8 +1,8 @@
-[**czap**](../../../../README.md)
+[**LiteShip**](../../../../README.md)
 
 ***
 
-[czap](../../../../README.md) / [quantizer/src](../../README.md) / AnimatedQuantizer
+[LiteShip](../../../../modules.md) / [quantizer/src](../../README.md) / AnimatedQuantizer
 
 # AnimatedQuantizer
 

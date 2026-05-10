@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [mcp-server/src](../README.md) / parse
+[LiteShip](../../../modules.md) / [mcp-server/src](../README.md) / parse
 
 # Variable: parse
 

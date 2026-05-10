@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [astro/src](../README.md) / resolveInitialState
+[LiteShip](../../../modules.md) / [astro/src](../README.md) / resolveInitialState
 
 # Function: resolveInitialState()
 

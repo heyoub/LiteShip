@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [assets/src](../README.md) / DecodedVideo
+[LiteShip](../../../modules.md) / [assets/src](../README.md) / DecodedVideo
 
 # Interface: DecodedVideo
 

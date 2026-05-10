@@ -1,7 +1,10 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / @czap/\_spine
+[LiteShip](../../modules.md) / @czap/\_spine
 
 # @czap/\_spine
+
+Type-only **LiteShip** spine — shared branded contracts for `@czap/core` and
+`@czap/scene` published `.d.ts`.

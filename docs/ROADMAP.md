@@ -1,4 +1,4 @@
-# czap Roadmap
+# LiteShip roadmap
 
 > Verified against the 2026-04-08 hardening wave. See `docs/STATUS.md` for live counts, gate totals, coverage numbers, and current telemetry watch items.
 
@@ -12,7 +12,7 @@ Active priorities:
 2. Keep security defaults fail-closed for HTML, URL, selector, style, and boundary-state surfaces.
 3. Keep CI truth aligned with the canonical local gauntlet.
 4. Keep packaging truth aligned with what will actually ship to consumers.
-5. Keep dogfooding friction feeding back into framework tests, telemetry, and docs instead of app-local hacks.
+5. Keep dogfooding friction feeding back into LiteShip tests, telemetry, and docs instead of app-local hacks.
 
 ## Already Promoted
 
@@ -90,16 +90,16 @@ Spec `2026-04-23-capsule-factory-video-stack-design.md` shipped with 5 atomic ph
 
 ## Product-Adjacent Future Epics
 
-These are real future framework directions, but they are not promises for the current hardening wave.
+These are real future **LiteShip** / **CZAP** directions, but they are not promises for the current hardening wave.
 
 ### Component-local data loading
 
 Goal:
-- define a host-safe, boundary-aware data-loading model that does not accidentally turn `czap` into an RPC framework
+- define a host-safe, boundary-aware data-loading model that does not accidentally turn **LiteShip** into an RPC layer
 
 Entry criteria:
 - current runtime/security/package hardening wave is stable
-- dogfooded apps show repeated loader patterns that belong in the framework
+- dogfooded apps show repeated loader patterns that belong in **LiteShip** core
 
 **Assembly mapping:** cachedProjection capsules keyed on (url, params, auth-scope). Scenes and hosts reference loaders by capsule id; the factory emits decode + cache-invalidation harnesses.
 
@@ -114,10 +114,10 @@ Entry criteria:
 
 **Assembly mapping:** receiptedMutation capsules at site: ['edge'], paired with policyGate capsules for authorization.
 
-### Plugin-as-a-framework sidecar
+### Plugin-as-integration sidecar
 
 Goal:
-- make the Vite/Astro integration path feel like a coherent framework sidecar without collapsing package boundaries
+- make the Vite/Astro integration path feel like a coherent **sidecar** without collapsing package boundaries
 
 Entry criteria:
 - package smoke, CI truth, and support-matrix policy stay stable across dogfooding
@@ -129,7 +129,7 @@ Entry criteria:
 - built-in auth/session system
 - ORM/storage/queue stack
 - RPC/server-action mutation layer
-- backend/router framework expansion
+- backend/router stack expansion
 - stateful edge AI substrate implementation
 - component-local data loading implementation
 
@@ -142,5 +142,5 @@ This hardening wave is done when:
 - red-team findings are fixed or deliberately justified
 - package distribution is proven
 - CI truth matches local truth
-- dogfooding no longer produces structural framework feedback
+- dogfooding no longer produces structural product feedback
 - remaining work is genuinely micro-optimization or speculative enhancement

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / DiagnosticLevel
+[LiteShip](../../../modules.md) / [core/src](../README.md) / DiagnosticLevel
 
 # Type Alias: DiagnosticLevel
 

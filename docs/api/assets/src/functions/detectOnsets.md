@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [assets/src](../README.md) / detectOnsets
+[LiteShip](../../../modules.md) / [assets/src](../README.md) / detectOnsets
 
 # Function: detectOnsets()
 

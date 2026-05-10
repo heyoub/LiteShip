@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [astro/src](../README.md) / CzapLocals
+[LiteShip](../../../modules.md) / [astro/src](../README.md) / CzapLocals
 
 # Interface: CzapLocals
 

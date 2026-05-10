@@ -1,6 +1,6 @@
-# czap Audit Loop
+# LiteShip audit loop
 
-`czap` now ships a repo-native audit lane that extends the existing build, typecheck,
+The monorepo ships a native audit lane that extends the existing build, typecheck,
 coverage, benchmark, and runtime-seam feedback loops.
 
 This audit is advisory-first in the first wave. It is designed to surface structural
@@ -44,7 +44,7 @@ failing the lane by default.
 - per-file `roadTo100`, blocking signals, evidence refs, protocol coverage, and manual review status
 - protocol-gap posture against the repo's high-integrity construction model
 - framework-blueprint delta against the current architecture
-- a ranked strike board of low-score files and high-leverage architecture opportunities
+- a ranked strike board of low-score files and high-signal architecture opportunities
 
 ## Rule Categories
 
@@ -89,7 +89,7 @@ failing the lane by default.
 The audit intentionally classifies a few known patterns instead of treating them as
 repo failures:
 
-- Astro client directives keep default exports because that is how Astro wires them
+- Astro client directives keep default exports because that is how Astro **binds** them
 - `packages/vite/src/virtual-modules.ts` is allowed to expose documented placeholder
   stubs for bundler/type-checker compatibility
 - The GPU directive's current WebGPU/WGSL gap is treated as an explicitly documented

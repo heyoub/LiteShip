@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / DIRTY\_FLAGS\_MAX
+[LiteShip](../../../modules.md) / [core/src](../README.md) / DIRTY\_FLAGS\_MAX
 
 # Variable: DIRTY\_FLAGS\_MAX
 

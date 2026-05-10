@@ -1,14 +1,14 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / isCell
+[LiteShip](../../../modules.md) / [core/src](../README.md) / isCell
 
 # Function: isCell()
 
 > **isCell**\<`T`\>(`p`): `p is Shape<T>`
 
-Defined in: [core/src/index.ts:214](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L214)
+Defined in: [core/src/index.ts:216](https://github.com/TheFreeBatteryFactory/czap/blob/main/packages/core/src/index.ts#L216)
 
 Narrow a [Primitive](../type-aliases/Primitive.md) to a [Cell](../namespaces/Cell/README.md).
 

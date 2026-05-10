@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [remotion/src](../README.md) / stateAtFrame
+[LiteShip](../../../modules.md) / [remotion/src](../README.md) / stateAtFrame
 
 # Function: stateAtFrame()
 

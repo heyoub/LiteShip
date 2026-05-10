@@ -1,14 +1,16 @@
-# czap Documentation Map
+# LiteShip documentation map
 
 This file is the shortest route to the right document.
 
 Use it as the entry point for humans and agents.
 
+Shared vocabulary (LiteShip / CZAP / `@czap/*`): [GLOSSARY.md](./GLOSSARY.md).
+
 ---
 
 ## Start Here
 
-### If the question is "What is czap?"
+### If the question is "What is LiteShip?"
 
 Read [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md), then
 [ARCHITECTURE.md](./ARCHITECTURE.md).
@@ -20,7 +22,7 @@ Together these explain the ontology and the package shape:
 - named states
 - outputs
 - package DAG
-- compiler targets
+- projection targets
 - Vite and Astro positioning
 - scene, asset, CLI, and MCP surfaces
 
@@ -62,7 +64,7 @@ This is the mechanics layer:
 
 Read [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md).
 
-This is the framework-host layer:
+This is the **LiteShip** host layer (Astro + CZAP runtime):
 
 - integration
 - middleware
@@ -106,13 +108,14 @@ Read [CHANGELOG.md](./CHANGELOG.md). For shipping npm/GitHub releases, see
 
 For a theory-first understanding:
 
-1. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
-2. [ARCHITECTURE.md](./ARCHITECTURE.md)
-3. [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md) + [ADR-0004 plan/coordinator](./adr/0004-plan-coordinator.md)
-4. [AUTHORING-MODEL.md](./AUTHORING-MODEL.md)
-5. [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md)
-6. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md)
-7. [STATUS.md](./STATUS.md)
+1. [GLOSSARY.md](./GLOSSARY.md) — LiteShip / CZAP / `@czap/*` + prose register (short; read once)
+2. [ASTRO-STATIC-MENTAL-MODEL.md](./ASTRO-STATIC-MENTAL-MODEL.md)
+3. [ARCHITECTURE.md](./ARCHITECTURE.md)
+4. [ADR-0002 zero-alloc](./adr/0002-zero-alloc.md) + [ADR-0004 plan/coordinator](./adr/0004-plan-coordinator.md)
+5. [AUTHORING-MODEL.md](./AUTHORING-MODEL.md)
+6. [ASTRO-RUNTIME-MODEL.md](./ASTRO-RUNTIME-MODEL.md)
+7. [PACKAGE-SURFACES.md](./PACKAGE-SURFACES.md)
+8. [STATUS.md](./STATUS.md)
 
 For implementation work:
 

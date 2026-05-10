@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Diagnostics](../README.md) / Level
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Diagnostics](../README.md) / Level
 
 # Type Alias: Level
 

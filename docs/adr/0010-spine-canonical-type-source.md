@@ -15,7 +15,7 @@ The capsule factory needs a canonical type source. Declaring capsule contracts t
 - Implementation packages (starting with `packages/core/src/brands.ts`) re-export types FROM `_spine` via the `import type X as _X` + `export type X = _X` aliasing pattern (required to avoid `isolatedModules` conflicts with same-named const constructor exports) and keep only their runtime constructors.
 - `CapsuleContract` imports its structural types (e.g. `ContentAddress`) from `@czap/_spine`.
 - A `TypeValidator` helper in `packages/core/src/capsule.ts` uses `_spine`-derived schemas for runtime validation of capsule inputs via `Schema.decodeUnknownEffect`.
-- `_spine` is wired into `tsconfig.json` project references (first entry, since it is a declaration-only dependency-free package) and `vitest.shared.ts` aliases (`'@czap/_spine'` → `packages/_spine/index.d.ts`).
+- `_spine` is referenced from `tsconfig.json` project references (first entry, since it is a declaration-only dependency-free package) and `vitest.shared.ts` aliases (`'@czap/_spine'` → `packages/_spine/index.d.ts`).
 - `packages/core/tsconfig.json` carries a `paths` mapping for `@czap/_spine` so `tsc --build` resolves the import during composite builds.
 
 ## Consequences

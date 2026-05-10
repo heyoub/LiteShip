@@ -28,7 +28,7 @@ we'll communicate which path before we ship.
 
 ## Supported versions
 
-czap is pre-1.0. The latest minor release on the `main` branch is the
+LiteShip is pre-1.0. The latest minor release on the `main` branch is the
 only supported line. Older versions may receive security fixes at
 maintainer discretion if the fix is trivial to backport.
 
@@ -39,11 +39,10 @@ maintainer discretion if the fix is trivial to backport.
 
 ## Security posture (summary)
 
-The runtime is hardened around explicit trust boundaries instead of
-permissive defaults:
+Trust is **tensioned** around explicit boundaries instead of permissive defaults:
 
 - **Runtime URL allowlist** — runtime URLs are same-origin by default;
-  cross-origin requires explicit allowlist policy. SSRF protections reject
+  cross-origin requires explicit allowlist policy before the line is run. SSRF protections reject
   private/link-local IPs even when an allowlist is configured.
 - **Artifact ID validation** — IDs are validated as single path segments,
   preventing path-traversal attempts via runtime URL construction.
@@ -60,8 +59,8 @@ permissive defaults:
   non-enumerable, frozen, and intentionally minimal. Astro integration
   publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime
   endpoint and HTML trust decisions.
-- **No eval, no new Function** — runtime code does not generate code at
-  runtime.
+- **No eval, no new Function** — the runtime does not generate code at
+  voyage time.
 
 ## CSP and Trusted Types
 
@@ -69,7 +68,7 @@ permissive defaults:
   `new Function`).
 - Astro integration injects bootstrap scripts; a strict
   `Content-Security-Policy` requires hashes or nonces at the host layer.
-- czap does not auto-install a Trusted Types policy. Host applications
+- LiteShip does not auto-install a Trusted Types policy. Host applications
   enforcing Trusted Types should keep routing future HTML sinks through
   the shared runtime trust surfaces rather than ad-hoc DOM writes.
 
@@ -108,7 +107,7 @@ In scope:
 - The runtime trust gate and HTML sanitization paths
 
 Out of scope (not because they don't matter, but because they're not
-czap's surface):
+**LiteShip’s** published security surface):
 
 - Vulnerabilities in upstream dependencies (please report to those
   maintainers; we'll bump if a fix is available)

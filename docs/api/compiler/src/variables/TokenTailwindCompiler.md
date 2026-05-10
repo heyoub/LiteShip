@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [compiler/src](../README.md) / TokenTailwindCompiler
+[LiteShip](../../../modules.md) / [compiler/src](../README.md) / TokenTailwindCompiler
 
 # Variable: TokenTailwindCompiler
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / CellEnvelope
+[LiteShip](../../../modules.md) / [core/src](../README.md) / CellEnvelope
 
 # Interface: CellEnvelope\<K, T\>
 

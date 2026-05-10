@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [astro/src](../README.md) / IntegrationConfig
+[LiteShip](../../../modules.md) / [astro/src](../README.md) / IntegrationConfig
 
 # Interface: IntegrationConfig
 

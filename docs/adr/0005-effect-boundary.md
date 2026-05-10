@@ -5,7 +5,7 @@
 
 ## Context
 
-czap uses Effect v4 for async composition, resource lifecycle, and streams. Effect has runtime overhead; per-frame compute and event handlers must be sync. We need explicit categories for where Effect is used and where it isn't.
+LiteShip uses Effect v4 for async composition, resource lifecycle, and streams. Effect has runtime overhead; per-frame compute and event handlers must be sync. We need explicit categories for where Effect is used and where it isn't.
 
 ## Decision
 

@@ -1,6 +1,6 @@
 # `@czap/mcp-server`
 
-Model Context Protocol (MCP) server that forwards tool calls to the czap CLI.
+Model Context Protocol (MCP) server that forwards tool calls to the `czap` CLI (LiteShip tooling). Vocabulary: [../../docs/GLOSSARY.md](../../docs/GLOSSARY.md).
 
 ## Install
 

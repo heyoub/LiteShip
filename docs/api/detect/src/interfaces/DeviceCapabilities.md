@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [detect/src](../README.md) / DeviceCapabilities
+[LiteShip](../../../modules.md) / [detect/src](../README.md) / DeviceCapabilities
 
 # Interface: DeviceCapabilities
 

@@ -1,5 +1,6 @@
 /**
- * `@czap/remotion` -- Remotion adapter for czap video rendering.
+ * `@czap/remotion` — **LiteShip** Remotion adapter: video timeline + shader
+ * surfaces driven by `CompositeState` from the **CZAP** `VideoRenderer`.
  *
  * Provides React hooks and composition helpers to consume
  * `CompositeState` from `@czap/core`'s `VideoRenderer` in Remotion projects.

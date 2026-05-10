@@ -1,15 +1,15 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / web/src
+[LiteShip](../../modules.md) / web/src
 
 # web/src
 
-`@czap/web` -- DOM runtime for the czap framework.
+`@czap/web` — DOM runtime for **LiteShip**: stitches **CZAP** projections
+(CSS, streamed HTML, LLM chunks, workers) into a live browser document.
 
-This package stitches the compiled czap outputs into a live browser
-document. It ships:
+It ships:
 
 - [Morph](variables/Morph.md): idiomorph-style DOM diffing that preserves focus,
   scroll, and form state across re-renders.

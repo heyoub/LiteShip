@@ -1,4 +1,4 @@
-/** @czap/mcp-server — thin MCP server over czap's capsule factory dispatch. */
+/** `@czap/mcp-server` — MCP bridge for **LiteShip**; forwards tools to the `czap` CLI + capsule factory. */
 
 export { start } from './start.js';
 export type { StartOpts } from './start.js';

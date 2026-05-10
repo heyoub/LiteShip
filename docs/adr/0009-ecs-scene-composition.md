@@ -7,7 +7,7 @@
 
 Scene composition needs a structure that is (a) declaratively authored, (b) statically walkable for verification, (c) flexible enough to model video tracks, audio tracks, transitions, effects, and sync anchors without forcing a nested hierarchy, and (d) performant on a per-frame hot path.
 
-czap already ships an ECS (`packages/core/src/ecs.ts`) with content-addressed entity ids, dense `Float64Array`-backed component stores (zero-allocation per tick), regular + dense system flavors, and four existing test lanes (`tests/unit/core/ecs-dense.test.ts`, `tests/integration/ecs-composition.integration.test.ts`, `tests/property/ecs-composable.prop.test.ts`, `tests/component/ecs-composable-world.test.ts`). Before this ADR it was used only for runtime bookkeeping.
+`@czap/core` already ships an ECS (`packages/core/src/ecs.ts`) with content-addressed entity ids, dense `Float64Array`-backed component stores (zero-allocation per tick), regular + dense system flavors, and four existing test lanes (`tests/unit/core/ecs-dense.test.ts`, `tests/integration/ecs-composition.integration.test.ts`, `tests/property/ecs-composable.prop.test.ts`, `tests/component/ecs-composable-world.test.ts`). Before this ADR it was used only for runtime bookkeeping.
 
 ## Decision
 

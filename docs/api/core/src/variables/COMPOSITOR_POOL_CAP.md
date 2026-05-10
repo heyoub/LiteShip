@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / COMPOSITOR\_POOL\_CAP
+[LiteShip](../../../modules.md) / [core/src](../README.md) / COMPOSITOR\_POOL\_CAP
 
 # Variable: COMPOSITOR\_POOL\_CAP
 

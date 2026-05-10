@@ -1,8 +1,10 @@
-# czap Authoring Model
+# LiteShip authoring model
 
 ## Purpose
 
-This document explains how to author with `czap`.
+This document explains how to author with **LiteShip** — the **CZAP** engine’s rigging surface, shipped as **`@czap/*`** packages.
+
+Naming: [GLOSSARY.md](./GLOSSARY.md).
 
 It is about construction, not migration.
 It assumes the mental model in
@@ -345,7 +347,7 @@ Instead:
 - let the boundary define state
 - let compilers project the state into each target
 
-This is what gives `czap` coherence across presentation layers.
+This is what gives **LiteShip** coherence across presentation layers.
 
 ---
 
@@ -392,7 +394,7 @@ The visual effect should justify the runtime.
 
 ## Working Definition
 
-Authoring in `czap` means:
+Authoring in **LiteShip** means:
 
 - defining semantic partitions of reality
 - naming the states those partitions produce

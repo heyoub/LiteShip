@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Diagnostics](../README.md) / Payload
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Diagnostics](../README.md) / Payload
 
 # Type Alias: Payload
 

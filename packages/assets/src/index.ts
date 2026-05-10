@@ -1,4 +1,4 @@
-/** Asset capsules + analysis projections for czap. */
+/** `@czap/assets` — **LiteShip** asset capsules and cached analysis projections (waveform, beats, onsets). */
 
 export { defineAsset, AssetRef, getAssetRegistry } from './contract.js';
 // `resetAssetRegistry` is intentionally NOT re-exported here — it mutates

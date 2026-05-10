@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / OutputsFor
+[LiteShip](../../../modules.md) / [core/src](../README.md) / OutputsFor
 
 # Type Alias: OutputsFor\<B, T\>
 

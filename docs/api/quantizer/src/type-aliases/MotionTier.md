@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / MotionTier
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / MotionTier
 
 # Type Alias: MotionTier
 

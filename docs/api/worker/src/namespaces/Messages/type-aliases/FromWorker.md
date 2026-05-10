@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [worker/src](../../../README.md) / [Messages](../README.md) / FromWorker
+[LiteShip](../../../../../modules.md) / [worker/src](../../../README.md) / [Messages](../README.md) / FromWorker
 
 # Type Alias: FromWorker
 

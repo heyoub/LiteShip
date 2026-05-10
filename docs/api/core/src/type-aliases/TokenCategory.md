@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / TokenCategory
+[LiteShip](../../../modules.md) / [core/src](../README.md) / TokenCategory
 
 # Type Alias: TokenCategory
 

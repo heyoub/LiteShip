@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / TransitionConfig
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / TransitionConfig
 
 # Interface: TransitionConfig
 

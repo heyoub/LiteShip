@@ -1,8 +1,8 @@
 /**
- * `@czap/web` -- DOM runtime for the czap framework.
+ * `@czap/web` — DOM runtime for **LiteShip**: stitches **CZAP** projections
+ * (CSS, streamed HTML, LLM chunks, workers) into a live browser document.
  *
- * This package stitches the compiled czap outputs into a live browser
- * document. It ships:
+ * It ships:
  *
  * - {@link Morph}: idiomorph-style DOM diffing that preserves focus,
  *   scroll, and form state across re-renders.

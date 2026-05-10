@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [astro/src](../README.md) / czapMiddleware
+[LiteShip](../../../modules.md) / [astro/src](../README.md) / czapMiddleware
 
 # Function: czapMiddleware()
 

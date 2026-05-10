@@ -1,8 +1,8 @@
-# Package Surfaces
+# Package surfaces
 
 ## Purpose
 
-This document maps the main package surfaces in the repo.
+This document maps the main **`@czap/*`** compartments in the repo — the hull sections you import from.
 
 It answers:
 
@@ -11,6 +11,8 @@ It answers:
 - when to reach for it
 
 It is a public-surface map, not a source dump.
+
+Product naming for surrounding docs: [GLOSSARY.md](./GLOSSARY.md).
 
 ---
 
@@ -260,7 +262,7 @@ Host-owned shared runtime surfaces:
 - `@czap/astro/runtime` wasm runtime configuration and loading
 - internal runtime adapters for `satellite`, `stream`, `llm`, `worker`, and `wasm`
 
-This is the package that makes Astro a `czap`-aware host.
+This is the package that makes Astro a **LiteShip-aware** host.
 
 ---
 
@@ -357,7 +359,7 @@ If the problem is:
 
 - semantic authored definitions -> `@czap/core`
 - live quantized state -> `@czap/quantizer`
-- compile to output targets -> `@czap/compiler`
+- **cast** to output targets -> `@czap/compiler`
 - browser runtime behavior -> `@czap/web`
 - capability decisions -> `@czap/detect`
 - authored CSS in Vite -> `@czap/vite`

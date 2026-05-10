@@ -5,7 +5,7 @@
 
 ## Context
 
-The compositor runs a fixed sequence of phases per tick: `compute-discrete` → `compute-blend` → `emit-css` → `emit-glsl` → `emit-aria`. A first-pass implementation would hardcode this as a method on the compositor. But czap's ambitions (audio graphs, AV pipelines, render graphs, future `@czap/remotion` composition) need the same kind of scheduler over **different** phase vocabularies. Hardcoding the compositor's phases into the scheduler forecloses reuse; inlining the scheduler into each domain duplicates it.
+The compositor runs a fixed sequence of phases per tick: `compute-discrete` → `compute-blend` → `emit-css` → `emit-glsl` → `emit-aria`. A first-pass implementation would hardcode this as a method on the compositor. But the CZAP engine’s ambitions (audio graphs, AV pipelines, render graphs, future `@czap/remotion` composition) need the same kind of scheduler over **different** phase vocabularies. Hardcoding the compositor's phases into the scheduler forecloses reuse; inlining the scheduler into each domain duplicates it.
 
 ## Decision
 

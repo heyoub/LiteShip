@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [remotion/src](../README.md) / useCompositeState
+[LiteShip](../../../modules.md) / [remotion/src](../README.md) / useCompositeState
 
 # Function: useCompositeState()
 

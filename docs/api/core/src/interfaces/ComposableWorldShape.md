@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / ComposableWorldShape
+[LiteShip](../../../modules.md) / [core/src](../README.md) / ComposableWorldShape
 
 # Interface: ComposableWorldShape\<Schema\>
 

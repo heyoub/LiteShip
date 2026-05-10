@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [BlendTree](../README.md) / Node
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [BlendTree](../README.md) / Node
 
 # Type Alias: Node\<T\>
 

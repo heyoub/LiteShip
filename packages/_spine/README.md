@@ -1,6 +1,8 @@
 # `@czap/_spine`
 
-Type-only declaration spine for czap. Published `.d.ts` from `@czap/core` and
+Type-only declaration spine for LiteShip. Vocabulary: [../../docs/GLOSSARY.md](../../docs/GLOSSARY.md).
+
+Published `.d.ts` from `@czap/core` and
 `@czap/scene` reference symbols defined here so consumers' `tsc` can resolve
 branded contracts without pulling runtime JavaScript from this package.
 

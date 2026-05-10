@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / Priority
+[LiteShip](../../../modules.md) / [core/src](../README.md) / Priority
 
 # Type Alias: Priority
 

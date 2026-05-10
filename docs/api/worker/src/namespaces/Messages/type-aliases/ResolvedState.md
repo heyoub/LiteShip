@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [worker/src](../../../README.md) / [Messages](../README.md) / ResolvedState
+[LiteShip](../../../../../modules.md) / [worker/src](../../../README.md) / [Messages](../README.md) / ResolvedState
 
 # Type Alias: ResolvedState
 

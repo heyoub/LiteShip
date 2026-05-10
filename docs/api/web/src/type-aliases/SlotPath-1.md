@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / SlotPath
+[LiteShip](../../../modules.md) / [web/src](../README.md) / SlotPath
 
 # Type Alias: SlotPath
 

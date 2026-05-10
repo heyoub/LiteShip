@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [quantizer/src](../../../README.md) / [AnimatedQuantizer](../README.md) / Shape
+[LiteShip](../../../../../modules.md) / [quantizer/src](../../../README.md) / [AnimatedQuantizer](../README.md) / Shape
 
 # Type Alias: Shape\<B\>
 

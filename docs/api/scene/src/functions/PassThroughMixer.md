@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [scene/src](../README.md) / PassThroughMixer
+[LiteShip](../../../modules.md) / [scene/src](../README.md) / PassThroughMixer
 
 # Function: PassThroughMixer()
 

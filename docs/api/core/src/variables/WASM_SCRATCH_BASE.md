@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / WASM\_SCRATCH\_BASE
+[LiteShip](../../../modules.md) / [core/src](../README.md) / WASM\_SCRATCH\_BASE
 
 # Variable: WASM\_SCRATCH\_BASE
 

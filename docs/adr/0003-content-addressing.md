@@ -5,7 +5,7 @@
 
 ## Context
 
-czap primitives — Boundaries, Quantizer configs, Receipts, GenFrames, Tokens, Themes — need stable identity that **tracks definition changes**. The framework's caching (edge KV, HMR memoization, compositor reconciliation) depends on being able to ask "is this definition the same one I already processed?" without structural walks. The same definition on two different machines (dev laptop and edge worker) must produce the same identifier. Changing any field of a definition must change the identifier.
+CZAP primitives — Boundaries, Quantizer configs, Receipts, GenFrames, Tokens, Themes — need stable identity that **tracks definition changes**. Caching (edge KV, HMR memoization, compositor reconciliation) depends on being able to ask "is this definition the same one I already processed?" without structural walks. The same definition on two different machines (dev laptop and edge worker) must produce the same identifier. Changing any field of a definition must change the identifier.
 
 ## Decision
 

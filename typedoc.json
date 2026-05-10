@@ -1,5 +1,6 @@
 {
   "$schema": "https://typedoc.org/schema.json",
+  "name": "LiteShip",
   "entryPoints": [
     "packages/core/src/index.ts",
     "packages/quantizer/src/index.ts",
@@ -20,7 +21,7 @@
   "entryPointStrategy": "expand",
   "out": "docs/api",
   "plugin": ["typedoc-plugin-markdown"],
-  "readme": "none",
+  "readme": "docs/TYPEDOC_README.md",
   "excludePrivate": true,
   "excludeInternal": true,
   "excludeExternals": true,

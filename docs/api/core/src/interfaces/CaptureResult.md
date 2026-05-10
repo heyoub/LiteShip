@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / CaptureResult
+[LiteShip](../../../modules.md) / [core/src](../README.md) / CaptureResult
 
 # Interface: CaptureResult
 

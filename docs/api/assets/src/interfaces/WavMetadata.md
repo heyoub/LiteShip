@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [assets/src](../README.md) / WavMetadata
+[LiteShip](../../../modules.md) / [assets/src](../README.md) / WavMetadata
 
 # Interface: WavMetadata
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / SlotRegistry
+[LiteShip](../../../modules.md) / [web/src](../README.md) / SlotRegistry
 
 # Variable: SlotRegistry
 

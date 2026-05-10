@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Boundary](../README.md) / Spec
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Boundary](../README.md) / Spec
 
 # Type Alias: Spec
 

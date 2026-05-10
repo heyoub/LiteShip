@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / captureVideo
+[LiteShip](../../../modules.md) / [web/src](../README.md) / captureVideo
 
 # Function: captureVideo()
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / ChunkParser
+[LiteShip](../../../modules.md) / [web/src](../README.md) / ChunkParser
 
 # Type Alias: ChunkParser
 

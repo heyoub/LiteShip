@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / TokenRef
+[LiteShip](../../../modules.md) / [core/src](../README.md) / TokenRef
 
 # Variable: TokenRef
 

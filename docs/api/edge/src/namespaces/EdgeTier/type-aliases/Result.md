@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [edge/src](../../../README.md) / [EdgeTier](../README.md) / Result
+[LiteShip](../../../../../modules.md) / [edge/src](../../../README.md) / [EdgeTier](../README.md) / Result
 
 # Type Alias: Result
 

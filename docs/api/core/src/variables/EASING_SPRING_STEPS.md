@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / EASING\_SPRING\_STEPS
+[LiteShip](../../../modules.md) / [core/src](../README.md) / EASING\_SPRING\_STEPS
 
 # Variable: EASING\_SPRING\_STEPS
 

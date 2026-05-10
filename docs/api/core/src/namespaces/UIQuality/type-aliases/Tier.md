@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [UIQuality](../README.md) / Tier
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [UIQuality](../README.md) / Tier
 
 # Type Alias: Tier
 

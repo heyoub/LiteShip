@@ -1,8 +1,8 @@
-# Getting Started with czap
+# Getting started with LiteShip
 
-This walkthrough takes you from a fresh clone to a runnable boundary that
-compiles to CSS, hydrates via Astro, and updates as you change a slider.
-~10 minutes end-to-end on a fast machine.
+This walkthrough is the first voyage: clone, **rig** a runnable boundary, **cast** it to CSS, hydrate through Astro, and watch the surface **re-trim** as you move a slider. About ten minutes end-to-end on a fast machine.
+
+LiteShip / CZAP / `@czap/*` naming: [GLOSSARY.md](./GLOSSARY.md).
 
 ## Prerequisites
 
@@ -17,6 +17,8 @@ git clone https://github.com/TheFreeBatteryFactory/czap.git
 cd czap
 pnpm install
 ```
+
+The remote path still reads `czap` on GitHub; **LiteShip** is the product name, **CZAP** the engine, **`@czap/*`** the packages ([GLOSSARY.md](./GLOSSARY.md)).
 
 The first install pulls workspace dependencies + Playwright browsers. Takes
 a minute or two; subsequent installs are seconds.
@@ -103,9 +105,9 @@ You should see the three boundary evaluations print, then the token's CSS
 variable name and dark-theme value, then `true`. If `tsx` is not on
 PATH for some reason, `pnpm install` at the repo root pulls it in.
 
-## 5. Compile to CSS
+## 5. Cast to CSS
 
-The boundary above doesn't *do* anything until something compiles it. Add
+The boundary above doesn't *do* anything until something **casts** it. Add
 the CSS compiler — note that `compile()` takes the boundary, a per-state
 property map, and an optional selector:
 
@@ -135,9 +137,9 @@ console.log(result.raw);
 ```
 
 You'll get a CSS block keyed by the boundary states — ready to paste into
-a stylesheet, or wire through Astro / Vite for hot reload.
+a stylesheet, or **rig** through Astro / Vite for hot reload.
 
-## 6. Wire it into Astro (optional, full pipeline)
+## 6. Rig it into Astro (optional, full pipeline)
 
 If you want the runtime hydration story:
 
@@ -183,7 +185,7 @@ without round-tripping through JavaScript.
 ## Troubleshooting
 
 **PowerShell shows `Γåô` / `Γ£ô` mojibake in logs** — your terminal is
-decoding czap's UTF-8 output as cp437. Use `Out-File -Encoding utf8` or
+decoding the repo tooling's UTF-8 output as cp437. Use `Out-File -Encoding utf8` or
 run `chcp 65001` first.
 
 **Tests hang in browser mode** — make sure Playwright browsers are

@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [worker/src](../../../README.md) / [Messages](../README.md) / BootstrapRegistration
+[LiteShip](../../../../../modules.md) / [worker/src](../../../README.md) / [Messages](../README.md) / BootstrapRegistration
 
 # Type Alias: BootstrapRegistration
 

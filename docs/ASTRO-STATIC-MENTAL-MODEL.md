@@ -1,11 +1,13 @@
-# czap for Astro Static Sites
+# LiteShip for Astro static sites
 
 ## Purpose
 
-This document explains how to think with `czap` when building visually rich
-Astro websites.
+This document explains how to think with **LiteShip** when building visually rich
+Astro websites. The **CZAP** engine is what evaluates boundaries, **casts** styles, and keeps the working deck trim; you still install and import **`@czap/*`** packages.
 
-It is not a migration guide and not a framework comparison. It is a mental
+Naming: [GLOSSARY.md](./GLOSSARY.md).
+
+It is not a migration guide and not a product comparison against other stacks. It is a mental
 model for authoring.
 
 The right question is not:
@@ -19,14 +21,14 @@ The right questions are:
 - "What outputs should those states drive?"
 - "What is the cheapest runtime that can deliver the effect?"
 
-`czap` is strongest when the site is visual, adaptive, media-aware, and mostly
+**LiteShip** is strongest when the site is visual, adaptive, media-aware, and mostly
 about presentation rather than application logic.
 
 ---
 
 ## Core Idea
 
-`czap` quantizes continuous reality into discrete visual states.
+The CZAP engine **tensions** continuous reality into discrete visual bearings.
 
 Reality is continuous:
 
@@ -75,7 +77,7 @@ Signals are not presentation.
 They are observations.
 
 If React tends to make authors think in terms of component-local state,
-`czap` starts earlier, at the level of environment and perception.
+**LiteShip** starts earlier, at the level of environment and perception.
 
 ### 2. Boundaries
 
@@ -148,7 +150,7 @@ They are explicit token-space variants.
 
 ### 5. Styles
 
-Styles define what each state emits.
+Styles define what each named bearing **casts** — the properties **projected** when that state is active.
 
 A style is where the author says:
 
@@ -161,7 +163,7 @@ This is the authored visual behavior.
 The important shift is:
 
 - React often computes UI by re-running component logic
-- `czap` computes UI by selecting named authored outputs
+- **LiteShip** selects UI by choosing named, authored outputs
 
 That produces a more deliberate visual system.
 
@@ -171,7 +173,7 @@ A satellite is the shell that binds authored definitions to real DOM.
 
 For Astro, this matters a lot.
 Astro wants HTML first.
-`czap` fits that well because the shell is fundamentally DOM-and-attribute
+**LiteShip** fits that posture because the shell is fundamentally DOM-and-attribute
 based, not virtual-DOM dependent.
 
 Satellites are the bridge between:
@@ -182,7 +184,7 @@ Satellites are the bridge between:
 
 ### 7. Outputs
 
-The same state can compile to multiple targets:
+The same state can **cast** to multiple projection targets:
 
 - CSS
 - GLSL
@@ -193,7 +195,7 @@ The same state can compile to multiple targets:
 This is one of the system's deepest ideas.
 
 A boundary is not "for CSS only."
-It is a shared semantic contract that multiple runtimes can consume.
+It is a shared semantic contract — one **rigged** partition — that multiple runtimes consume.
 
 That means a single authored decision can drive:
 
@@ -208,47 +210,47 @@ without duplicating the logic in each layer.
 
 ## The Runtime Model
 
-The runtime should always be as cheap as the effect allows.
+The working deck should stay as light as the journey allows.
 
-This is the opposite of a framework that hydrates first and optimizes later.
+This is the opposite of a framework that raises every sail at the dock and reefs them later when something tears.
 
 The intended order is:
 
 1. pure HTML and CSS if possible
 2. client directive only where needed
-3. off-thread work only where justified
+3. off-deck work only where justified
 4. GPU or media pipelines only where the visual payoff warrants it
 
 This matters most for static websites because a rich site is still often a
-performance-sensitive site.
+trim-sensitive site.
 
 The homepage can be visually ambitious without turning into a JavaScript app.
 
-`czap` is designed around that constraint.
+**LiteShip** is **trimmed** around that constraint.
 
 ---
 
 ## The Astro Model
 
-Astro is a strong host for `czap` because Astro already assumes:
+Astro is a strong host for **LiteShip** because Astro already assumes:
 
 - server-rendered HTML first
 - limited client runtime
 - selective enhancement
 
-`czap` slots into that worldview naturally.
+**LiteShip** slots into that worldview naturally.
 
 In practice, the Astro side of the model is:
 
 1. render semantic HTML
 2. attach `data-czap-*` meaning to shells
-3. allow CSS and compiled outputs to carry as much of the experience as possible
+3. let CSS and compiled outputs carry as much of the experience as possible
 4. use directives where the experience truly needs runtime adaptation
 
 That is why the combination makes sense for static visual sites.
 
 Astro gives the document.
-`czap` gives the adaptive visual logic.
+**LiteShip** gives the adaptive visual logic.
 
 ---
 
@@ -318,7 +320,7 @@ React centers:
 - local state
 - prop flow
 
-`czap` centers:
+**LiteShip** centers:
 
 - signals
 - boundaries
@@ -370,13 +372,13 @@ Does it need GPU?
 What is the graceful version of the same experience?
 
 This is the part many systems treat as fallback.
-In `czap`, it is part of the authored model.
+In **LiteShip**, it is part of the authored model.
 
 ---
 
 ## Capability and Taste
 
-`czap` is not only about performance.
+**LiteShip** is not only about trim on the working line.
 It is also about taste.
 
 A visually rich site should not merely "respond."
@@ -406,7 +408,7 @@ share one mental model:
 - define tokens and themes as the material language
 - define styles as named-state outputs
 - let Astro own the document
-- let `czap` own adaptive visual behavior
+- let **LiteShip** own adaptive visual behavior
 - prefer the cheapest runtime that preserves intent
 
 If the agents start from React habits, they will ask the wrong questions.
@@ -417,9 +419,9 @@ generate much better results.
 
 ## Working Definition
 
-For visually rich Astro sites, `czap` is best understood as:
+For visually rich Astro sites, **LiteShip** is best understood as:
 
-> a perception-aware authored state system that compiles design intent into the
+> a perception-aware authored state system that **casts** design intent into the
 > cheapest runtime capable of delivering it
 
 That is the theory to keep fixed while everything else changes.

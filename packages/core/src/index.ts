@@ -1,5 +1,7 @@
 /**
- * `@czap/core` — constraint-based adaptive rendering primitives.
+ * `@czap/core` — **LiteShip** primitives for the **CZAP** engine: boundaries,
+ * tokens, styles, themes, signals, and working-deck coordination (compositor,
+ * plan graph, ECS, capsule factory).
  * @module
  */
 
@@ -207,7 +209,7 @@ import type { Derived as _Derived } from './derived.js';
 import type { Zap as _Zap } from './zap.js';
 import type { Wire as _Wire } from './wire.js';
 
-/** Union of the four reactive primitives czap exposes to user code. */
+/** Union of the four reactive primitives the CZAP graph exposes to user code. */
 export type Primitive<T> = _Cell.Shape<T> | _Derived.Shape<T> | _Zap.Shape<T> | _Wire.Shape<T>;
 
 /** Narrow a {@link Primitive} to a {@link Cell}. */

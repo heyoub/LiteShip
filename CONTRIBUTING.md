@@ -1,8 +1,10 @@
-# Contributing to czap
+# Contributing to LiteShip
 
-Thanks for considering a contribution. czap is pre-1.0 and intentionally
+Thanks for considering a contribution. LiteShip is pre-1.0 and intentionally
 greenfield — we'd rather break things now than later — so most of the
 guidance here is about keeping the gauntlet honest, not gatekeeping.
+
+Ontology for prose and docs: [docs/GLOSSARY.md](./docs/GLOSSARY.md). The git remote and directory name may still read `czap`; **`@czap/*`** on npm is the package line.
 
 ## Quick start (development)
 
@@ -28,7 +30,7 @@ install (`pnpm exec playwright install` if needed).
 
 ## The gauntlet — your release gate
 
-`pnpm run gauntlet:full` is the contract. It runs ~30 phases:
+`pnpm run gauntlet:full` is the contract — the full shake-down cruise. It runs ~30 phases:
 
 - build, capsule:compile, typecheck, lint, docs:check, invariants
 - the full vitest test surface (unit + component + property + integration)
@@ -128,7 +130,7 @@ in `flex:verify` checks the canonical ADR set is present.
 - **Bug** — open a GitHub issue with: gauntlet phase, command, exit code,
   log tail (the relevant ~50 lines, not the whole 22-min log)
 - **Feature** — open a discussion or issue with: what you're trying to do,
-  what czap doesn't currently let you do, what shape an answer might have
+  what LiteShip doesn't currently let you do, what shape an answer might have
 - **Security** — read [SECURITY.md](./SECURITY.md) and follow the private
   reporting path
 

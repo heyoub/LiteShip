@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [Store](../README.md) / Effectful
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [Store](../README.md) / Effectful
 
 # Type Alias: Effectful\<S, Msg, E, R\>
 

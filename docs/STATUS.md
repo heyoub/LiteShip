@@ -1,9 +1,12 @@
-# czap -- Status & Remaining Work
+# LiteShip — status and remaining work
 
 Last updated: 2026-05-07
+
 Coverage stack standardized on Vitest 4.1.2 + Playwright browser mode.
 Current node lane: run `pnpm test` for the fresh pass/fail and file-count truth.
 Current browser lane: shared-runtime suites run against a Chromium + Firefox + WebKit matrix, with capability-specific browser tests remaining Chromium-first where the platform surface is intentionally non-uniform.
+
+Product naming for prose elsewhere: [GLOSSARY.md](./GLOSSARY.md). Tables below stay operational — identifiers like `host-wired` and `pnpm exec czap` are literal gate vocabulary, not marketing rename targets.
 
 Current first-class support target:
 
@@ -31,7 +34,7 @@ Current browser-security posture:
 
 - runtime code avoids `eval` and `new Function`
 - strict CSP currently requires host-provided hashes or nonces for Astro-injected bootstrap scripts
-- Trusted Types are not auto-installed by the framework; hosts that enforce them should keep HTML sinks routed through the shared runtime trust surfaces
+- Trusted Types are not auto-installed by LiteShip; hosts that enforce them should keep HTML sinks routed through the shared runtime trust surfaces
 
 ---
 
@@ -428,7 +431,7 @@ Merged thresholds currently enforced:
   emitted correctly; notifications no longer get responses.
 - **Real generative property tests** — vacuous `() => true` tests
   replaced with `fc.property` over schema-derived arbitraries OR
-  honest `it.skip` with TODO when no run handler is wired.
+  honest `it.skip` with TODO when no run handler is **set**.
 - **Beat-binding sceneComposition** — BeatMarkerProjection output
   reaches SyncSystem via pure ECS data flow; no closure sidecar.
 - **Scoped SceneContext** — `Scene.subscene(parent, partial)` fills

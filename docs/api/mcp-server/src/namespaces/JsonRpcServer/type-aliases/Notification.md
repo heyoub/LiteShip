@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [mcp-server/src](../../../README.md) / [JsonRpcServer](../README.md) / Notification
+[LiteShip](../../../../../modules.md) / [mcp-server/src](../../../README.md) / [JsonRpcServer](../README.md) / Notification
 
 # Type Alias: Notification
 

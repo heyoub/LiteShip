@@ -4,6 +4,8 @@ Remotion adapter: React hooks + composition helpers.
 
 ## Docs
 
+- [Naming & vocabulary](../../docs/GLOSSARY.md) — LiteShip, CZAP, `@czap/*`
+
 - [API reference](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/api/remotion/) — generated from source TSDoc
 - [Architecture index](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/ARCHITECTURE.md)
 - [ADRs](https://github.com/TheFreeBatteryFactory/czap/tree/main/docs/adr/)
@@ -14,4 +16,4 @@ Remotion adapter: React hooks + composition helpers.
 pnpm add @czap/remotion
 ```
 
-## Part of [czap](https://github.com/TheFreeBatteryFactory/czap#readme)
+## Part of [LiteShip](https://github.com/TheFreeBatteryFactory/czap#readme)

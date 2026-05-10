@@ -1,4 +1,9 @@
-/** Scene composition capsule — typed timeline authoring over czap's ECS. */
+/**
+ * `@czap/scene` — **LiteShip** scene stack: typed timeline authoring over the
+ * ECS substrate in `@czap/core`.
+ *
+ * @module
+ */
 
 export type {
   SceneContract,

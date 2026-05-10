@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / BoundaryCrossing
+[LiteShip](../../../modules.md) / [core/src](../README.md) / BoundaryCrossing
 
 # Type Alias: BoundaryCrossing\<S\>
 

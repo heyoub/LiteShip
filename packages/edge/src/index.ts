@@ -1,6 +1,6 @@
 /**
- * `@czap/edge` -- Edge pipeline for server-side tier detection, boundary
- * caching, and theme compilation.
+ * `@czap/edge` — **LiteShip** edge-station: server-side tier detection,
+ * content-addressed boundary cache, and theme **casting** for first paint.
  *
  * Parses HTTP Client Hints headers into device capabilities, maps them
  * to the same tier lattice used on the client, and provides helpers for

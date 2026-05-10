@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / QuantizerOutputsSchema
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / QuantizerOutputsSchema
 
 # Variable: QuantizerOutputsSchema
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / DiagnosticsSink
+[LiteShip](../../../modules.md) / [core/src](../README.md) / DiagnosticsSink
 
 # Interface: DiagnosticsSink
 

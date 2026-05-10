@@ -5,7 +5,7 @@
 
 ## Context
 
-The compositor runs at 60–120 fps. GC pauses inside rAF show up as jank; per-frame allocation compounds across thousands of frames/sec and every downstream app inherits the pressure. Effect's runtime adds non-trivial per-call overhead, unsuitable for the frame loop. czap's default is the cheapest valid output for the detected tier — the per-frame inner loop cannot allocate.
+The compositor runs at 60–120 fps. GC pauses inside rAF show up as jank; per-frame allocation compounds across thousands of frames/sec and every downstream app inherits the pressure. Effect's runtime adds non-trivial per-call overhead, unsuitable for the frame loop. The CZAP engine’s default is the cheapest valid output for the detected tier — the per-frame inner loop cannot allocate.
 
 ## Decision
 
@@ -37,7 +37,7 @@ The per-frame inner loop is plain JS. Effect is used only for setup/teardown (sc
 ## Rejected alternatives
 
 - **Per-frame allocation with GC tuning** — brittle, engine-dependent.
-- **Copy-on-write immutable state** — doubles per-frame allocation for no framework benefit.
+- **Copy-on-write immutable state** — doubles per-frame allocation for no product benefit.
 
 ## References
 
@@ -46,7 +46,7 @@ The per-frame inner loop is plain JS. Effect is used only for setup/teardown (sc
 
 ## Amendment (2026-04-23): Dense ECS Systems in Scene Playback
 
-Scene playback in `@czap/scene` uses czap's dense `Part` stores for per-frame position/opacity/volume/audioPhase. Each dense system reads its query store's `Float64Array` view directly and mutates in place. This matches the pool/dirty-flags/frame-budget discipline already in force for the compositor hot path.
+Scene playback in `@czap/scene` uses the dense `Part` stores from `@czap/core` for per-frame position/opacity/volume/audioPhase. Each dense system reads its query store's `Float64Array` view directly and mutates in place. This matches the pool/dirty-flags/frame-budget discipline already in force for the compositor working line.
 
 The scene compiler (`packages/scene/src/compile.ts`) spawns one ECS entity per declared track at world-construction time with component seeds produced by the Track helpers. During playback, no system allocates per tick.
 

@@ -1,8 +1,8 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / mcp-server/src
+[LiteShip](../../modules.md) / mcp-server/src
 
 # mcp-server/src
 

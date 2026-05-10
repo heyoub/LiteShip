@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [scene/src](../README.md) / BeatComponent
+[LiteShip](../../../modules.md) / [scene/src](../README.md) / BeatComponent
 
 # Interface: BeatComponent
 

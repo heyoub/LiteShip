@@ -1,12 +1,14 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / core/src
+[LiteShip](../../modules.md) / core/src
 
 # core/src
 
-`@czap/core` — constraint-based adaptive rendering primitives.
+`@czap/core` — **LiteShip** primitives for the **CZAP** engine: boundaries,
+tokens, styles, themes, signals, and working-deck coordination (compositor,
+plan graph, ECS, capsule factory).
 
 ## Namespaces
 

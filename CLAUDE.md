@@ -1,8 +1,10 @@
-# czap -- Claude Code Instructions
+# LiteShip — Claude Code instructions
 
 ## What Is This
 
-Constraint-based adaptive rendering framework. Quantize continuous signals into discrete states, compile to CSS/GLSL/WGSL/ARIA/AI, detect device capabilities, serve via Vite 8, hydrate via Astro 6. Generative UI pipeline treats LLM streaming as adaptive media. Off-thread compositor via Web Workers. WASM escape hatch for batch compute.
+**LiteShip** is the product: constraint-shaped adaptive projection — quantize continuous signals into discrete bearings, **cast** to CSS/GLSL/WGSL/ARIA/AI, detect device capabilities, serve via Vite 8, hydrate via Astro 6. The **CZAP** engine (*Content-Zoned Adaptive Projection*) is the technical core; **`@czap/*`** is the npm namespace (unchanged). Generative UI treats LLM streaming as adaptive media. Off-thread compositor via Web Workers. WASM escape hatch for batch compute.
+
+Naming for prose: [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 
 ## Commands
 
@@ -76,7 +78,8 @@ CompositorStatePool (ring buffer), DirtyFlags (bitmask), FrameBudget (priority l
 
 ## Key Files
 
-- `docs/ARCHITECTURE.md` -- Full system architecture, dependency DAG, compilation pipeline
+- `docs/GLOSSARY.md` -- LiteShip / CZAP / `@czap/*` naming and prose register
+- `docs/ARCHITECTURE.md` -- Full system architecture, dependency DAG, projection pipeline
 - `docs/adr/0002-zero-alloc.md` -- Zero-allocation hot path discipline (pool, dirty flags, dense ECS, microtask batching)
 - `docs/adr/0004-plan-coordinator.md` -- Plan IR vs RuntimeCoordinator split (per-tick phase sequencing)
 - `docs/STATUS.md` -- Test gates, known limitations, future work
@@ -88,5 +91,5 @@ CompositorStatePool (ring buffer), DirtyFlags (bitmask), FrameBudget (priority l
 - `pnpm test -- --reporter=verbose` for detailed output
 - `pnpm test -- tests/unit/compositor.test.ts` to run single file
 - Property tests use `fc.assert(fc.property(...))` from fast-check
-- Integration tests in `tests/integration/` verify cross-package wiring
+- Integration tests in `tests/integration/` verify cross-package rigging
 - Some tests use `Effect.runSync(Effect.scoped(...))` for scoped resources

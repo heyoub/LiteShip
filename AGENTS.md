@@ -1,4 +1,4 @@
-# czap — Agent Instructions
+# LiteShip — agent instructions
 
 This file is the entry point for AI coding tools that read `AGENTS.md` (Codex,
 some shell-out integrations). The substantive instructions are identical to
@@ -10,3 +10,5 @@ canonical document avoids drift between two near-identical guides.
 
 If you're an agent that prefers `AGENTS.md` over `CLAUDE.md`, treat the two
 files as equivalent: anything in `CLAUDE.md` applies to you.
+
+Public naming: **LiteShip** (product), **CZAP** (engine), **`@czap/*`** (packages) — [docs/GLOSSARY.md](./docs/GLOSSARY.md).

@@ -1,7 +1,8 @@
-# czap Architecture
+# LiteShip architecture
 
-czap is a constraint-based adaptive rendering framework. This document is a
-**slim structural index**; deeper explanation lives in the linked docs.
+LiteShip is a constraint-shaped adaptive projection stack — **powered by the CZAP engine** (*Content-Zoned Adaptive Projection*), **distributed as `@czap/*`**. This document is a **slim structural index**; deeper explanation lives in the linked docs.
+
+Prose vocabulary: [GLOSSARY.md](./GLOSSARY.md).
 
 - **Mental model** — [`ASTRO-STATIC-MENTAL-MODEL.md`](./ASTRO-STATIC-MENTAL-MODEL.md),
   [`AUTHORING-MODEL.md`](./AUTHORING-MODEL.md), and
@@ -14,7 +15,7 @@ czap is a constraint-based adaptive rendering framework. This document is a
 ## System Shape
 
 Core grammar: `signal -> boundary -> named state -> target output`.
-`@czap/core` owns the language; host packages wire it to browsers, Astro, edge,
+`@czap/core` owns the language; host packages **rig** it to browsers, Astro, edge,
 workers, video, CLI, and AI-tooling surfaces.
 
 ## Package DAG
@@ -67,9 +68,9 @@ See [`docs/adr/README.md`](./adr/README.md) for the full index. Foundational ADR
 ## Where to start
 
 - New contributors: read the [mental model](./ASTRO-STATIC-MENTAL-MODEL.md),
-  [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
-- Framework usage: [api/core/](./api/core/) -> Boundary, Token, Style, Theme.
-- Adding a compile target: [ADR-0006](./adr/0006-compiler-dispatch.md) + `packages/compiler/src/dispatch.ts`.
+  [GLOSSARY](./GLOSSARY.md), [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
+- Using primitives: [api/core/](./api/core/) → Boundary, Token, Style, Theme.
+- Adding a projection target: [ADR-0006](./adr/0006-compiler-dispatch.md) + `packages/compiler/src/dispatch.ts`.
 - Off-thread / WASM: [ADR-0002](./adr/0002-zero-alloc.md) + `packages/worker/` + `crates/czap-compute/`.
 
 ## Capsule Factory + Video Stack (2026-04-23)

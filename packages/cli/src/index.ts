@@ -1,3 +1,3 @@
-/** czap CLI dispatch — projects the capsule catalog into JSON-in/JSON-out commands. */
+/** `czap` CLI — **LiteShip** command surface; **casts** the capsule catalog into JSON-in / JSON-out verbs. */
 
 export { run } from './dispatch.js';

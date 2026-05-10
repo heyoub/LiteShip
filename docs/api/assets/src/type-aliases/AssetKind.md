@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [assets/src](../README.md) / AssetKind
+[LiteShip](../../../modules.md) / [assets/src](../README.md) / AssetKind
 
 # Type Alias: AssetKind
 

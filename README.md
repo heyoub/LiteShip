@@ -1,14 +1,16 @@
-# czap
+# LiteShip
 
 [![CI](https://github.com/TheFreeBatteryFactory/czap/actions/workflows/ci.yml/badge.svg)](https://github.com/TheFreeBatteryFactory/czap/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@czap/core.svg)](https://www.npmjs.com/package/@czap/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Constraint-based adaptive rendering for the web. Quantize continuous signals into discrete states, compile to CSS / GLSL / WGSL / ARIA / AI, run off-thread.
+> Constraint-shaped adaptive projection for the web: continuous signals tensioned into named bearings, cast to CSS / GLSL / WGSL / ARIA / AI, with heavy work sent off the working deck.
 
-`czap` is a TypeScript-first frontend framework that treats UI state as **boundaries between continuous signals and discrete responses**. Hover position, scroll progress, viewport width, network latency, GPU tier, motion preference — all of these are continuous inputs. Most UI just wants to react to a small set of *states* derived from them. czap formalizes that boundary, compiles it to your output target, and keeps the runtime off the main thread.
+**LiteShip** is a TypeScript-first vessel for interfaces that **re-trim with intent**. UI state is **rigged as boundaries** between continuous signals and discrete responses — hover, scroll, viewport width, network latency, GPU tier, motion preference. Those inputs stay continuous; surfaces usually need a small set of **named bearings** derived from them. The **CZAP** engine (*Content-Zoned Adaptive Projection*, pronounced “see-zap”) formalizes each boundary, **casts** definitions to the host’s projection targets, and keeps the hot path lean while workers handle earned load.
 
-It's a real pre-1.0 framework being hardened against dogfooded sites and a CRM UI — not a toy or a research artifact.
+*LiteShip — powered by the CZAP engine, distributed as `@czap/*` packages on npm.*
+
+This is a real pre-1.0 hull being hardened on dogfooded sites and a CRM UI — not a toy or a research artifact. Naming vocabulary for all docs: [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 
 ## Quick start
 
@@ -54,7 +56,7 @@ const value = Token.tap(primary, { theme: 'dark' });
 const cssVar = Token.cssVar(primary);
 ```
 
-A full walkthrough — clone → install → run a hello-world boundary that compiles to CSS and hydrates via Astro — lives at [docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md).
+A full walkthrough — clone → install → rig a hello-world boundary, **cast** it to CSS, and hydrate through Astro — lives at [docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md).
 
 ## What's in the box
 
@@ -76,7 +78,7 @@ A full walkthrough — clone → install → run a hello-world boundary that com
 | [`@czap/cli`](./packages/cli) | `czap` CLI — AI-first JSON I/O with human-pretty TTY mode |
 | [`@czap/mcp-server`](./packages/mcp-server) | Model Context Protocol server for AI tooling integration |
 
-Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary, blend kernels) for the hot-path compute escape hatch.
+Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary, blend kernels) for the working-line compute escape hatch.
 
 ## Support matrix
 
@@ -94,9 +96,10 @@ Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary
 - **[docs/ASTRO-RUNTIME-MODEL.md](./docs/ASTRO-RUNTIME-MODEL.md)** — how Astro hosts the runtime, directives, and escalation path
 - **[docs/PACKAGE-SURFACES.md](./docs/PACKAGE-SURFACES.md)** — package-by-package import and ownership map
 - **[docs/DOCS.md](./docs/DOCS.md)** — full documentation map
+- **[docs/GLOSSARY.md](./docs/GLOSSARY.md)** — LiteShip / CZAP / `@czap/*` naming + prose register
 - **[docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** — package and system architecture
 - **[docs/adr/](./docs/adr)** — architecture decision records (numbered, indexed)
-- **[docs/api/](./docs/api)** — generated API reference (typedoc) for every package
+- **[docs/api/](./docs/api)** — generated API reference (typedoc) for every package; intro text in [docs/TYPEDOC_README.md](./docs/TYPEDOC_README.md)
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** — dev environment, PR conventions, gauntlet workflow
 - **[SECURITY.md](./SECURITY.md)** — vulnerability reporting, supported versions, security posture summary
 - **[CHANGELOG.md](./CHANGELOG.md)** — release history
@@ -105,27 +108,27 @@ Plus `crates/czap-compute/` — a Rust `#![no_std]` WASM crate (spring, boundary
 
 ## Security posture (summary)
 
-The runtime is hardened around explicit trust boundaries instead of permissive defaults:
+Trust is **tensioned**: explicit boundaries instead of permissive defaults.
 
-- runtime URLs same-origin by default; cross-origin requires an explicit allowlist policy
-- artifact IDs validated as single path segments
-- LLM rendering defaults to text-safe; HTML flows route through a shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`)
-- runtime code avoids `eval` and `new Function`
-- Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions
+- Runtime endpoints stay same-origin unless you **set** an allowlist for cross-origin lines.
+- Artifact IDs are validated as single path segments — no smuggled traversal.
+- LLM rendering defaults to text-safe; HTML flows use the shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`).
+- The runtime carries no `eval` and no `new Function` — the deck stays clean of code that arrives mid-voyage.
+- Astro integration publishes a frozen `__CZAP_RUNTIME_POLICY__` snapshot for runtime endpoint and HTML trust decisions.
 
 Full posture and trust-boundary detail: see [SECURITY.md](./SECURITY.md) and [docs/STATUS.md](./docs/STATUS.md).
 
 ## Scope and non-goals
 
-`czap` is intentionally not, in the current wave:
+LiteShip is intentionally not, in the current wave:
 
-- a built-in auth / session framework
+- a built-in auth / session stack
 - an ORM / storage / queue stack
 - an RPC / server-action mutation layer
-- a backend / router framework
+- a backend / router stack
 - a stateful edge AI runtime substrate
 
-Pre-1.0 break policy is intentionally aggressive. If an API or internal contract is going to be painful later, the preference is to break it now while the framework is still greenfield.
+Pre-1.0 break policy is intentionally aggressive. If an API or internal contract is going to be painful later, the preference is to break it now while the hull is still in greenfield fit-out.
 
 ## Working in this repo
 
@@ -139,7 +142,7 @@ pnpm run gauntlet:full    # full release-grade gate (~22min)
 
 Other lanes — `test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify` — are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-`pnpm run gauntlet:full` is the one that matters before a release: 30 phases, ~22 minutes, ends with `flex:verify PASSED — project is 10/10 by every rating dimension` or it fails.
+`pnpm run gauntlet:full` is the full shake-down cruise before a release: 30 phases, ~22 minutes, ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
 
 ## Latest gauntlet benchmark snapshot
 
@@ -174,7 +177,7 @@ For run-by-run truth (current test counts, coverage totals, benchmark posture, w
 
 ## Appendix: Windows / PowerShell log capture
 
-The gauntlet emits UTF-8 (vitest reporter glyphs, JSON receipts). PowerShell's `>` redirect writes UTF-16 LE by default, and viewers using cp437 then mis-render unicode arrows (`↓`, `✓`) as `Γåô` / `Γ£ô` mojibake. To capture clean logs:
+The gauntlet emits UTF-8 (vitest reporter glyphs, JSON receipts). PowerShell's `>` redirect writes UTF-16 LE by default, and viewers using cp437 then mis-render unicode arrows (`↓`, `✓`) as `Γåô` / `Γ£ô` mojibake against the repo's UTF-8 stream. To capture clean logs:
 
 ```powershell
 pnpm run gauntlet:full | Out-File -Encoding utf8 .log

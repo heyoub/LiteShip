@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / UIQualityTier
+[LiteShip](../../../modules.md) / [core/src](../README.md) / UIQualityTier
 
 # Type Alias: UIQualityTier
 

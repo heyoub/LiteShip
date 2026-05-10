@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [core/src](../../../README.md) / [SpeculativeEvaluator](../README.md) / Result
+[LiteShip](../../../../../modules.md) / [core/src](../../../README.md) / [SpeculativeEvaluator](../README.md) / Result
 
 # Type Alias: Result\<B\>
 

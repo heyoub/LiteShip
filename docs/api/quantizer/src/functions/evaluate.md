@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [quantizer/src](../README.md) / evaluate
+[LiteShip](../../../modules.md) / [quantizer/src](../README.md) / evaluate
 
 # Function: evaluate()
 

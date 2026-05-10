@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [scene/src](../README.md) / SceneBeat
+[LiteShip](../../../modules.md) / [scene/src](../README.md) / SceneBeat
 
 # Type Alias: SceneBeat
 

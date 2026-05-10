@@ -1,5 +1,6 @@
 /**
- * `@czap/detect` -- Device capability detection + branded tier mapping.
+ * `@czap/detect` — **LiteShip** capability probes: device signals mapped to
+ * the `CapLevel` lattice and motion/design tiers in `@czap/core`.
  *
  * Probes browser APIs for GPU tier, CPU cores, memory, input modality,
  * motion preferences, color scheme, viewport dimensions, DPR, and

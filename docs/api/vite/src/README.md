@@ -1,13 +1,14 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / vite/src
+[LiteShip](../../modules.md) / vite/src
 
 # vite/src
 
-`@czap/vite` -- Vite 8 plugin that turns `@czap` CSS at-rule blocks
-into native CSS and wires HMR for czap primitives.
+`@czap/vite` — **LiteShip** Vite 8 plugin: turns `@token` / `@theme` /
+`@style` / `@quantize` at-rule blocks into native CSS and **rigs** HMR for
+`@czap/*` definitions.
 
 The plugin hooks into Vite's `resolveId`, `load`, `transform`, and
 `handleHotUpdate` phases:

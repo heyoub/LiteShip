@@ -1,23 +1,9 @@
-**czap**
+**LiteShip**
 
 ***
 
-# czap
+# LiteShip API reference
 
-## Modules
+This tree is generated from **TSDoc** on the **`@czap/*`** packages — the compartments that implement the **CZAP** engine (*Content-Zoned Adaptive Projection*). **LiteShip** is the product name; imports and package scopes stay `@czap/*`.
 
-- [@czap/\_spine](@czap/_spine/README.md)
-- [assets/src](assets/src/README.md)
-- [astro/src](astro/src/README.md)
-- [cli/src](cli/src/README.md)
-- [compiler/src](compiler/src/README.md)
-- [core/src](core/src/README.md)
-- [detect/src](detect/src/README.md)
-- [edge/src](edge/src/README.md)
-- [mcp-server/src](mcp-server/src/README.md)
-- [quantizer/src](quantizer/src/README.md)
-- [remotion/src](remotion/src/README.md)
-- [scene/src](scene/src/README.md)
-- [vite/src](vite/src/README.md)
-- [web/src](web/src/README.md)
-- [worker/src](worker/src/README.md)
+Human-readable naming for prose: [docs/GLOSSARY.md](https://github.com/TheFreeBatteryFactory/czap/blob/main/docs/GLOSSARY.md).

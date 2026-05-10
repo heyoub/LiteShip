@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [mcp-server/src](../README.md) / JsonRpcId
+[LiteShip](../../../modules.md) / [mcp-server/src](../README.md) / JsonRpcId
 
 # Type Alias: JsonRpcId
 

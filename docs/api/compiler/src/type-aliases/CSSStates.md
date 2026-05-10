@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [compiler/src](../README.md) / CSSStates
+[LiteShip](../../../modules.md) / [compiler/src](../README.md) / CSSStates
 
 # Type Alias: CSSStates
 

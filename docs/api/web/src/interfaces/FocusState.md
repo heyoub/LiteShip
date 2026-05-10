@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / FocusState
+[LiteShip](../../../modules.md) / [web/src](../README.md) / FocusState
 
 # Interface: FocusState
 

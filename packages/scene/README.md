@@ -1,6 +1,6 @@
 # `@czap/scene`
 
-ECS-backed scene composition and timeline authoring for czap capsules.
+ECS-backed scene composition and timeline authoring for LiteShip capsules. Vocabulary: [../../docs/GLOSSARY.md](../../docs/GLOSSARY.md).
 
 ## Install
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / SSE\_BUFFER\_SIZE
+[LiteShip](../../../modules.md) / [core/src](../README.md) / SSE\_BUFFER\_SIZE
 
 # Variable: SSE\_BUFFER\_SIZE
 

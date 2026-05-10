@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / DEFAULT\_TARGET\_FPS
+[LiteShip](../../../modules.md) / [core/src](../README.md) / DEFAULT\_TARGET\_FPS
 
 # Variable: DEFAULT\_TARGET\_FPS
 

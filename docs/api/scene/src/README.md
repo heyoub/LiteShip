@@ -1,10 +1,13 @@
-[**czap**](../../README.md)
+[**LiteShip**](../../README.md)
 
 ***
 
-[czap](../../README.md) / scene/src
+[LiteShip](../../modules.md) / scene/src
 
 # scene/src
+
+`@czap/scene` — **LiteShip** scene stack: typed timeline authoring over the
+ECS substrate in `@czap/core`.
 
 ## Namespaces
 

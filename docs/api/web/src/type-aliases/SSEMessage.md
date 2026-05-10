@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [web/src](../README.md) / SSEMessage
+[LiteShip](../../../modules.md) / [web/src](../README.md) / SSEMessage
 
 # Type Alias: SSEMessage
 

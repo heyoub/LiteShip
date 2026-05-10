@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [scene/src](../../../README.md) / [Track](../README.md) / Effect
+[LiteShip](../../../../../modules.md) / [scene/src](../../../README.md) / [Track](../README.md) / Effect
 
 # Type Alias: Effect
 

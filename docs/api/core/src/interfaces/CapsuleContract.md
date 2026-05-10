@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [core/src](../README.md) / CapsuleContract
+[LiteShip](../../../modules.md) / [core/src](../README.md) / CapsuleContract
 
 # Interface: CapsuleContract\<K, In, Out, R\>
 

@@ -1,8 +1,8 @@
-[**czap**](../../../README.md)
+[**LiteShip**](../../../README.md)
 
 ***
 
-[czap](../../../README.md) / [detect/src](../README.md) / GPUTier
+[LiteShip](../../../modules.md) / [detect/src](../README.md) / GPUTier
 
 # Type Alias: GPUTier
 

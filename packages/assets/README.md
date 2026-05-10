@@ -1,6 +1,6 @@
 # `@czap/assets`
 
-Asset capsules and analysis projections for czap (audio waveform, beat markers, onsets).
+Asset capsules and analysis projections for LiteShip (audio waveform, beat markers, onsets). Vocabulary: [../../docs/GLOSSARY.md](../../docs/GLOSSARY.md).
 
 ## Install
 

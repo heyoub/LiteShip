@@ -1,8 +1,8 @@
-[**czap**](../../../../../README.md)
+[**LiteShip**](../../../../../README.md)
 
 ***
 
-[czap](../../../../../README.md) / [scene/src](../../../README.md) / [BeatBinding](../README.md) / Component
+[LiteShip](../../../../../modules.md) / [scene/src](../../../README.md) / [BeatBinding](../README.md) / Component
 
 # Type Alias: Component
 
