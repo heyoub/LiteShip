@@ -162,6 +162,7 @@ Startup steering now follows a generic `paired-truth` model:
 - raw bench formatter tone is an operator-experience watch item; the output should stay honest without implying release danger where the verified gate posture is green.
 - partial pasted transcripts are not authoritative; fresh shell output plus verified artifacts are the source of truth.
 - Capsule catalog closure -- any new assembly arm proposal must go through an ADR amendment with first concrete instance in the same PR (ADR-0008). Governance watch, not a bench watch.
+- `ReceiptDAG.nodes` has no pruning, TTL, or max-size guard; per-session DAGs grow until `tracker.reset()` on session close. Bounded by user behavior in normal flows, but worth a future `linearizeFrom`-or-pruning policy if long-lived LLM sessions become common. Not a bench watch — a memory-shape watch.
 
 `pnpm run gauntlet:full` is the canonical sequential order:
 

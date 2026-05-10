@@ -140,6 +140,7 @@ export const Compositor: CompositorFactory = {
       let dirty: DirtyFlags.Shape<string> | null = null;
       let recomputeAll = false;
       let previousState: CompositeState = emptyCompositeState();
+      let priorPreviousState: CompositeState | null = null;
       let batchScheduled = false;
       function rebuildDirtyFlags(): void {
         if (nameList.length > MAX_DIRTY_KEYS) {
@@ -261,8 +262,15 @@ export const Compositor: CompositorFactory = {
           dirty.clearAll();
         }
 
+        // Two-slot rotation: the most-recently-published state stays readable for one
+        // more tick (so consumers who hold a reference returned from compute() see live
+        // data until the *next-next* publish). Without this rotation, every tick takes
+        // the overflow path in CompositorStatePool.acquire and the pool grows unboundedly.
+        const releasable = priorPreviousState;
+        priorPreviousState = previousState;
         previousState = state;
         Effect.runSync(SubscriptionRef.set(stateRef, state));
+        if (releasable && releasable !== state) pool.release(releasable);
         return state;
       }
 
