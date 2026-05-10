@@ -8,7 +8,7 @@
 
 > **Shape**\<`N`, `Axes`\> = `TokenDef`\<`N`, `Axes`\>
 
-Defined in: core/src/token.ts:188
+Defined in: core/src/token.ts:189
 
 Structural shape of a token definition parameterized by its name `N` and axis tuple `Axes`.
 

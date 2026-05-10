@@ -6,7 +6,7 @@
 
 LiteShip rigs continuous signals into a small set of named bearings and casts each bearing to whatever surface the host runs. Viewport width slides as the user drags. Network latency wobbles. The dark-mode toggle fires at 11pm whether the user clicks it or the OS does it for them. All of that comes in continuous; your UI only really needs a few states out: mobile/tablet/desktop, light/dark, reduced/full-motion. The rig is in between.
 
-From one definition, the system can emit a CSS variable, a GLSL preamble, an ARIA attribute on the body, an AI manifest, and a TypeScript union. Same boundary, five surfaces, content-addressed, no drift.
+From one definition, the system can emit a CSS variable, a GLSL preamble, an ARIA attribute on the body, an AI manifest, and a TypeScript union. Same boundary, five surfaces, content-addressed via FNV-1a + canonical CBOR (see [ADR-0003](./docs/adr/0003-content-addressing.md)). No silent drift between projection layers.
 
 *LiteShip — powered by the CZAP engine (Content-Zoned Adaptive Projection, "see-zap"), distributed as `@czap/*` packages on npm.*
 
@@ -140,7 +140,7 @@ pnpm run gauntlet:full    # full release-grade gate (~22min)
 
 Other lanes (`test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify`) are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty phases, around twenty-two minutes from first cast-off to final receipt. It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
+`pnpm run gauntlet:full` is the full shake-down cruise before a release. Thirty phases, fifteen to twenty-two minutes from first cast-off to final receipt depending on cold caches and machine speed (recent local: 14m47s on Cursor Cloud Linux). It ends with `flex:verify PASSED — project is 10/10 by every rating dimension`, or it fails and the vessel returns to dry-dock.
 
 ## Latest gauntlet benchmark snapshot
 

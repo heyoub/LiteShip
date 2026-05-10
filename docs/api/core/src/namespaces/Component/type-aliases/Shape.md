@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`, `SN`\> = `ComponentDef`\<`B`, `SN`\>
 
-Defined in: core/src/component.ts:97
+Defined in: core/src/component.ts:98
 
 Structural shape of a component definition, parameterized by its boundary and slot names.
 

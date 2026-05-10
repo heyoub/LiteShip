@@ -8,7 +8,8 @@
  */
 
 import type { ContentAddress } from './brands.js';
-import { fnv1a } from './fnv.js';
+import { CanonicalCbor } from './cbor.js';
+import { fnv1aBytes } from './fnv.js';
 import { CzapValidationError } from './validation-error.js';
 
 interface ThemeDef<V extends readonly string[] = readonly string[]> {
@@ -36,8 +37,8 @@ function deterministicId<V extends readonly string[]>(
   tokens: ThemeDef<V>['tokens'],
   meta: ThemeDef<V>['meta'] | undefined,
 ): ContentAddress {
-  return fnv1a(
-    JSON.stringify({
+  return fnv1aBytes(
+    CanonicalCbor.encode({
       _tag: 'ThemeDef',
       _version: 1,
       name,

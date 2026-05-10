@@ -8,7 +8,7 @@
 
 > `const` **Theme**: `ThemeFactory` & `object`
 
-Defined in: core/src/theme.ts:98
+Defined in: core/src/theme.ts:99
 
 Theme namespace -- theme primitive for constraint-based adaptive rendering.
 

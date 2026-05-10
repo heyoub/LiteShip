@@ -8,7 +8,7 @@
 
 > **Shape**\<`V`\> = `ThemeDef`\<`V`\>
 
-Defined in: core/src/theme.ts:151
+Defined in: core/src/theme.ts:152
 
 Structural shape of a [Theme](../../../variables/Theme.md) definition, parameterized by its variant tuple `V`.
 

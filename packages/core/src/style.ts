@@ -10,7 +10,8 @@
 import type { ContentAddress, Millis } from './brands.js';
 import type { Boundary } from './boundary.js';
 import type { StateUnion } from './type-utils.js';
-import { fnv1a } from './fnv.js';
+import { CanonicalCbor } from './cbor.js';
+import { fnv1aBytes } from './fnv.js';
 import { CzapValidationError } from './validation-error.js';
 
 /** Single `box-shadow` layer — compiled into a space-separated CSS value by {@link Style.tap}. */
@@ -62,8 +63,8 @@ function deterministicId<B extends Boundary.Shape>(
   states: StyleDef<B>['states'],
   transition: StyleDef['transition'] | undefined,
 ): ContentAddress {
-  return fnv1a(
-    JSON.stringify({
+  return fnv1aBytes(
+    CanonicalCbor.encode({
       _tag: 'StyleDef',
       _version: 1,
       boundaryId: boundary?.id ?? null,

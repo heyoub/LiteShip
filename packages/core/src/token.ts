@@ -8,7 +8,8 @@
  */
 
 import type { ContentAddress } from './brands.js';
-import { fnv1a } from './fnv.js';
+import { CanonicalCbor } from './cbor.js';
+import { fnv1aBytes } from './fnv.js';
 import { CzapValidationError } from './validation-error.js';
 
 /** Design-system category of a {@link Token} — governs compilation strategy and CSS property prefix. */
@@ -43,8 +44,8 @@ function deterministicId(
   values: Record<string, unknown>,
   fallback: unknown,
 ): ContentAddress {
-  return fnv1a(
-    JSON.stringify({
+  return fnv1aBytes(
+    CanonicalCbor.encode({
       _tag: 'TokenDef',
       _version: 1,
       name,

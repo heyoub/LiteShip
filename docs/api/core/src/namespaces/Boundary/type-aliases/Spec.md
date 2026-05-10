@@ -8,6 +8,6 @@
 
 > **Spec** = [`BoundarySpec`](../../../interfaces/BoundarySpec.md)
 
-Defined in: core/src/boundary.ts:360
+Defined in: core/src/boundary.ts:362
 
 Alias for [BoundarySpec](../../../variables/BoundarySpec.md).

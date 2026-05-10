@@ -9,7 +9,8 @@
 
 import type { SignalInput, ThresholdValue, ContentAddress } from './brands.js';
 import { SignalInput as mkSignalInput, ThresholdValue as mkThresholdValue } from './brands.js';
-import { fnv1a } from './fnv.js';
+import { CanonicalCbor } from './cbor.js';
+import { fnv1aBytes } from './fnv.js';
 import { CzapValidationError } from './validation-error.js';
 
 /** The core primitive. Source of truth for quantization boundaries. */
@@ -38,7 +39,8 @@ interface BoundaryFactory {
 
 /**
  * Compute the content address for a boundary synchronously.
- * Uses FNV-1a hash of the canonical JSON representation.
+ * FNV-1a hash of the RFC 8949 §4.2.1 canonical CBOR encoding (ADR-0003).
+ * Cross-machine stable: identical definitions produce byte-identical IDs.
  */
 function deterministicId(
   input: string,
@@ -47,8 +49,8 @@ function deterministicId(
   hysteresis?: number,
   spec?: BoundarySpec,
 ): ContentAddress {
-  return fnv1a(
-    JSON.stringify({
+  return fnv1aBytes(
+    CanonicalCbor.encode({
       _tag: 'BoundaryDef',
       _version: 1,
       input,

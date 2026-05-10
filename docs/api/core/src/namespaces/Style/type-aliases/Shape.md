@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`\> = `StyleDef`\<`B`\>
 
-Defined in: core/src/style.ts:247
+Defined in: core/src/style.ts:248
 
 Structural shape of a style definition parameterized by its governing [Boundary](../../../variables/Boundary.md).
 

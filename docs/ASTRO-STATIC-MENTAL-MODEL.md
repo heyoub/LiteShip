@@ -25,7 +25,7 @@ LiteShip is strongest when the site is visual, adaptive, media-aware, and mostly
 
 ## Core idea
 
-The CZAP engine tensions continuous reality into discrete visual bearings.
+The CZAP engine partitions continuous signals into discrete visual bearings, with hysteresis at every threshold to prevent flicker.
 
 Reality is continuous:
 
@@ -180,7 +180,7 @@ The same state can cast to multiple projection targets:
 - ARIA
 - AI / tool manifests
 
-This is one of the system's deepest ideas. A boundary is not "for CSS only." It is a shared semantic contract, one rigged partition that multiple runtimes consume.
+A boundary is not "for CSS only." It is a shared semantic contract, one rigged partition that multiple runtimes consume.
 
 That means a single authored decision can drive:
 
@@ -189,7 +189,7 @@ That means a single authored decision can drive:
 - accessibility labels
 - streamed content behavior
 
-without duplicating the logic in each layer. By the way, the boundary's content address (FNV-1a of the canonical CBOR encoding) means the same definition produces byte-identical IDs across runtimes. CSS, GLSL, and ARIA can't drift on you, because they're reading the same hash.
+without duplicating the logic in each layer. By the way, the boundary's content address (FNV-1a of the canonical CBOR encoding) means the same definition produces byte-identical IDs across runtimes. CSS, GLSL, and ARIA read from that one hash; the partition is shared, not duplicated.
 
 ---
 
@@ -219,8 +219,6 @@ Astro is a strong host for LiteShip because Astro already assumes:
 - server-rendered HTML first
 - limited client runtime
 - selective enhancement
-
-LiteShip slots into that worldview naturally.
 
 In practice, the Astro side of the model is:
 
@@ -386,6 +384,4 @@ If the agents start from React habits, they will ask the wrong questions. If the
 
 For visually rich Astro sites, LiteShip is best understood as:
 
-> a perception-aware authored state system that casts design intent into the cheapest runtime capable of delivering it
-
-That is the theory to keep fixed while everything else changes.
+> a signal-aware authored state system that casts design intent into the cheapest runtime capable of delivering it.

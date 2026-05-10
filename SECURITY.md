@@ -47,13 +47,38 @@ Trust is set explicitly, not by permission default:
 
 ## CSP and Trusted Types
 
-- Runtime code is compatible with strict CSP policies (no `eval`, no
-  `new Function`).
-- Astro integration injects bootstrap scripts; a strict
-  `Content-Security-Policy` requires hashes or nonces at the host layer.
-- LiteShip does not auto-install a Trusted Types policy. Host applications
-  enforcing Trusted Types should keep routing future HTML sinks through
-  the shared runtime trust surfaces rather than ad-hoc DOM writes.
+Runtime code is compatible with strict CSP policies in the sense that LiteShip itself does not call `eval` or `new Function`. Deploying under strict CSP still requires the host to make several deliberate decisions, and LiteShip does not abstract them.
+
+### Required directives for a host CSP
+
+- `script-src`: Astro injects bootstrap scripts. The host must add per-request hashes or nonces. There is no built-in nonce-threading API; the host plumbs the nonce into the Astro integration and keeps it consistent with the response header.
+- `worker-src`: the off-thread compositor, render worker, and audio processor are spawned from `blob:` URLs (`packages/worker/src/compositor-startup.ts`, `packages/worker/src/render-worker.ts`, `packages/web/src/audio/processor-bootstrap.ts`). A policy of `worker-src 'self'` will silently fail these workers; the host needs `worker-src blob:` (or `worker-src 'self' blob:`) for the off-thread paths to start. This is a real deployment-time decision, not a default we can ship for you.
+- `connect-src`: SSE and LLM endpoints. The host's allowlist policy (see "Runtime URL allowlist" above) must agree with the CSP `connect-src` list.
+
+### Trusted Types
+
+LiteShip writes to `innerHTML` in two sanctioned places: the templated HTML-fragment helper in `packages/web/src/morph/html-trust.ts` and the LLM session HTML sink at `packages/astro/src/runtime/llm-session.ts`. Both are gated by the shared trust pipeline (`text` / `sanitized-html` / explicit `trusted-html`), but both are still raw `innerHTML` assignments. Under Trusted Types enforcement those assignments throw unless the host installs a `TrustedHTML` policy.
+
+A minimal host-side recipe:
+
+```ts
+// In your application bootstrap, before any LiteShip runtime code runs:
+if (window.trustedTypes && window.trustedTypes.createPolicy) {
+  window.trustedTypes.createPolicy('czap', {
+    createHTML: (input) => input, // input is already sanitized by the LiteShip trust pipeline
+  });
+}
+```
+
+The policy name `czap` is what the runtime expects. The trust pipeline does the actual sanitization upstream of the policy callback; the policy is the Trusted Types attestation, not a second sanitizer.
+
+If the host enforces Trusted Types via the `require-trusted-types-for 'script'` CSP directive, install the policy first or the runtime will throw on first HTML projection.
+
+### Defaults summary
+
+- LiteShip itself: no `eval`, no `new Function`. Verified across `packages/*/src/` (no production runtime path uses them). The discipline is enforced by code review, not by an ESLint rule today; a follow-up to add `no-eval` and `no-new-func` ESLint rules is on the roadmap.
+- LiteShip itself: no auto-installed Trusted Types policy. The recipe above is the supported integration path.
+- LiteShip itself: no auto-set CSP. The host owns the policy.
 
 ## Red-team regression suite
 

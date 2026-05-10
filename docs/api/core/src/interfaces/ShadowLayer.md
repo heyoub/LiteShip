@@ -6,7 +6,7 @@
 
 # Interface: ShadowLayer
 
-Defined in: core/src/style.ts:17
+Defined in: core/src/style.ts:18
 
 Single `box-shadow` layer — compiled into a space-separated CSS value by [Style.tap](../variables/Style.md).
 
@@ -16,7 +16,7 @@ Single `box-shadow` layer — compiled into a space-separated CSS value by [Styl
 
 > `readonly` **blur**: `number`
 
-Defined in: core/src/style.ts:20
+Defined in: core/src/style.ts:21
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/style.ts:20
 
 > `readonly` **color**: `string`
 
-Defined in: core/src/style.ts:22
+Defined in: core/src/style.ts:23
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: core/src/style.ts:22
 
 > `readonly` `optional` **inset?**: `boolean`
 
-Defined in: core/src/style.ts:23
+Defined in: core/src/style.ts:24
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: core/src/style.ts:23
 
 > `readonly` `optional` **spread?**: `number`
 
-Defined in: core/src/style.ts:21
+Defined in: core/src/style.ts:22
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: core/src/style.ts:21
 
 > `readonly` **x**: `number`
 
-Defined in: core/src/style.ts:18
+Defined in: core/src/style.ts:19
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: core/src/style.ts:18
 
 > `readonly` **y**: `number`
 
-Defined in: core/src/style.ts:19
+Defined in: core/src/style.ts:20

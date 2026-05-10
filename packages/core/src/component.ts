@@ -10,7 +10,8 @@
 import type { ContentAddress } from './brands.js';
 import type { Boundary } from './boundary.js';
 import type { Style } from './style.js';
-import { fnv1a } from './fnv.js';
+import { CanonicalCbor } from './cbor.js';
+import { fnv1aBytes } from './fnv.js';
 
 /** Per-slot configuration on a component — whether the slot must be provided, plus optional description. */
 export interface SlotConfig {
@@ -49,8 +50,8 @@ function deterministicId<SlotNames extends readonly string[]>(
   slots: { readonly [K in SlotNames[number]]: SlotConfig },
   defaultSlot?: string,
 ): ContentAddress {
-  return fnv1a(
-    JSON.stringify({
+  return fnv1aBytes(
+    CanonicalCbor.encode({
       _tag: 'ComponentDef',
       _version: 1,
       name,

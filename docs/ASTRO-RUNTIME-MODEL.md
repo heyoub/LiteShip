@@ -26,7 +26,7 @@ LiteShip should own:
 - authored visual state outputs
 - media, worker, and shader runtime behavior where needed
 
-This division is important. Astro is the document host. LiteShip is the adaptive surface engine.
+This division is important.
 
 ---
 
@@ -86,7 +86,7 @@ The server can often choose a useful initial state from:
 - capability hints
 - authored fallback rules
 
-This is one of the strongest reasons to pair LiteShip with Astro. The system is allowed to be intelligent before hydration.
+This is one of the strongest reasons to pair LiteShip with Astro. Initial state can be resolved server-side from those signals; the client doesn't begin from an empty shell.
 
 ---
 
@@ -185,7 +185,7 @@ The ideal sequence is:
 
 That sequence is the correct model to preserve.
 
-If the site is authored with that order in mind, the system stays elegant. If everything assumes maximum runtime from the start, Astro's advantages are wasted.
+Following that order keeps server-rendered HTML the baseline and limits client runtime to surfaces that actually need it. If everything assumes maximum runtime from the start, the server-rendered base is doing less work than it could.
 
 ---
 

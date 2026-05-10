@@ -8,7 +8,7 @@
 
 > `const` **Component**: `ComponentFactory`
 
-Defined in: core/src/component.ts:71
+Defined in: core/src/component.ts:72
 
 Component — the content-addressed unit that binds a [Boundary](Boundary.md), a
 [Style](Style.md), and named slots into a single declaration compilers can

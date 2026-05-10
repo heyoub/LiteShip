@@ -29,9 +29,17 @@ Bench: `CSSCompiler.compile() -- direct` at 1660ns mean vs `dispatch() -- CSSCom
 - **Two-tier API (promoted direct + fallback dispatch):** Would save ~150ns on a cached path but bifurcates the public surface and relegates plugin compilers to second class. Architectural debt for a micro-optimization.
 - **Compile-time tag elision via generic specialization:** Possible via advanced TypeScript gymnastics, but the maintenance cost outweighs the benefit on a non-hot path.
 
+## Scope and the standalone-compiler tier
+
+`dispatch()` is the canonical entry for the six target-emission compilers — `CSSCompiler`, `GLSLCompiler`, `WGSLCompiler`, `ARIACompiler`, `AICompiler`, `ConfigCompiler` — each of which projects a boundary's named states to one downstream output target.
+
+The compiler package also ships a separate tier of standalone compilers that operate on a *single primitive* rather than a boundary-keyed state map: `TokenCSSCompiler`, `TokenJSCompiler`, `TokenTailwindCompiler`, `ThemeCSSCompiler`, `StyleCSSCompiler`, `ComponentCSSCompiler`. These are not arms of `CompilerDef`; they are direct call surfaces with their own input shapes. They do not share the `dispatch()` invariant because they don't share its input contract.
+
+A new compiler that maps a boundary to a target output joins `CompilerDef` and goes through `dispatch()`. A new compiler that operates on a Token, Theme, Style, or Component primitive ships standalone, alongside the existing six in `packages/compiler/src/`.
+
 ## References
 
 - `packages/compiler/src/dispatch.ts`: canonical dispatch + `CompilerDef` union
+- `packages/compiler/src/index.ts`: full export surface, including the standalone-compiler tier
 - `tests/bench/compiler.bench.ts`: direct vs dispatch bench pair
 - `scripts/bench-gate.ts`: hard-gate threshold enforcement
-- Spec: `docs/superpowers/specs/2026-04-21-flex-to-ten-gap-closure-design.md` §3

@@ -389,5 +389,3 @@ Authoring in LiteShip means:
 - naming the states those partitions produce
 - mapping those states to intentional outputs
 - letting the host and runtime choose the cheapest valid execution path
-
-That is the discipline the rest of the system is built to reward.

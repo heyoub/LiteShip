@@ -8,7 +8,7 @@
 
 > `const` **Boundary**: `BoundaryFactory` & `object`
 
-Defined in: core/src/boundary.ts:235
+Defined in: core/src/boundary.ts:237
 
 Boundary — core primitive of constraint-based adaptive rendering.
 

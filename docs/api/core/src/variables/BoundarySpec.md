@@ -8,7 +8,7 @@
 
 > **BoundarySpec**: `object`
 
-Defined in: core/src/boundary.ts:314
+Defined in: core/src/boundary.ts:316
 
 BoundarySpec namespace — helpers for working with the optional activation filter on a boundary.
 
