@@ -49,7 +49,7 @@
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {
-    "@czap/cli": "^0.1.0",
+    "@czap/cli": "workspace:^",
     "effect": ">=4.0.0-beta.32 <5"
   }
 }
