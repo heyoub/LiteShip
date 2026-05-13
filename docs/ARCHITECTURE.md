@@ -30,52 +30,49 @@ Plus `crates/czap-compute/`, the Rust `#![no_std]` WASM hot-path kernels.
 
 ## Packages
 
-| Package | API docs | Owns |
-|---|---|---|
-| @czap/_spine | [api/@czap/_spine/](./api/@czap/_spine/) | type spine |
-| @czap/core | [api/core/](./api/core/) | primitives and runtime coordination |
-| @czap/quantizer | [api/quantizer/](./api/quantizer/) | boundary evaluation and transitions |
-| @czap/compiler | [api/compiler/](./api/compiler/) | CSS / GLSL / WGSL / ARIA / AI / Tailwind output |
-| @czap/web | [api/web/](./api/web/) | DOM, SSE, morph, LLM, capture helpers |
-| @czap/detect | [api/detect/](./api/detect/) | capability and tier detection |
-| @czap/vite | [api/vite/](./api/vite/) | Vite transforms and HMR |
-| @czap/astro | [api/astro/](./api/astro/) | Astro integration and directives |
-| @czap/edge | [api/edge/](./api/edge/) | client hints, tiers, edge cache |
-| @czap/worker | [api/worker/](./api/worker/) | off-thread compositor / render workers |
-| @czap/remotion | [api/remotion/](./api/remotion/) | Remotion adapter |
-| @czap/scene | [api/scene/](./api/scene/) | ECS scene composition |
-| @czap/assets | [api/assets/](./api/assets/) | asset capsules and projections |
-| @czap/cli | [api/cli/](./api/cli/) | JSON-first CLI |
-| @czap/mcp-server | [api/mcp-server/](./api/mcp-server/) | MCP server |
+API docs per package live at [`docs/api/<name>/`](./api/); import guidance at [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md).
 
-For package-by-package import guidance, read [`PACKAGE-SURFACES.md`](./PACKAGE-SURFACES.md).
+- `@czap/_spine` — type spine
+- `@czap/core` — primitives + runtime coordination
+- `@czap/quantizer` — boundary evaluation + transitions
+- `@czap/compiler` — CSS / GLSL / WGSL / ARIA / AI / Tailwind output
+- `@czap/web` — DOM, SSE, morph, LLM, capture
+- `@czap/detect` — capability + tier detection
+- `@czap/vite` — Vite transforms + HMR
+- `@czap/astro` — Astro integration + directives
+- `@czap/edge` — client hints, tiers, edge cache
+- `@czap/worker` — off-thread compositor / render workers
+- `@czap/remotion` — Remotion adapter
+- `@czap/scene` — ECS scene composition
+- `@czap/assets` — asset capsules + projections
+- `@czap/cli` — JSON-first CLI
+- `@czap/mcp-server` — MCP server
 
-## Graceful degradation, not silent ceilings
+## Graceful degradation
 
-`DirtyFlags` is a 31-key bitmask fast-path; past 31 active quantizers, the compositor falls back to full recompute (`packages/core/src/compositor.ts:146`). Same with `Boundary.evaluate`, which unrolls for ≤4 thresholds and falls back to binary search above that (`packages/core/src/boundary.ts:86`). The pattern repeats: pick the right-shaped fast path for the regime that benefits, fall back honestly when the regime changes. No silent breakage at the edge of the fast path.
+Fast paths fall back honestly past their regime — `DirtyFlags` past 31 keys (`packages/core/src/compositor.ts:146`), `Boundary.evaluate` past 4 thresholds (`packages/core/src/boundary.ts:86`).
 
 ## Architectural decisions
 
-See [`docs/adr/README.md`](./adr/README.md) for the full index. The accepted set:
+Full index: [`docs/adr/README.md`](./adr/README.md). Accepted set:
 
-- [0001 — Namespace pattern + branded types](./adr/0001-namespace-pattern.md)
-- [0002 — Zero-allocation hot path discipline](./adr/0002-zero-alloc.md)
-- [0003 — Content addressing via FNV-1a + CBOR](./adr/0003-content-addressing.md)
-- [0004 — Plan IR vs RuntimeCoordinator split](./adr/0004-plan-coordinator.md)
-- [0005 — Effect boundary rules](./adr/0005-effect-boundary.md)
-- [0006 — Compiler dispatch tagged union](./adr/0006-compiler-dispatch.md)
-- [0007 — Adapter vs peer framing (Remotion / Edge)](./adr/0007-adapter-vs-peer-framing.md)
-- [0008 — Capsule assembly catalog (7 arms + closure rule)](./adr/0008-capsule-assembly-catalog.md)
-- [0009 — ECS as scene composition substrate](./adr/0009-ecs-scene-composition.md)
-- [0010 — Spine as canonical type source](./adr/0010-spine-canonical-type-source.md)
+- [0001](./adr/0001-namespace-pattern.md) — Namespace pattern + branded types
+- [0002](./adr/0002-zero-alloc.md) — Zero-allocation hot path
+- [0003](./adr/0003-content-addressing.md) — Content addressing via FNV-1a + CBOR
+- [0004](./adr/0004-plan-coordinator.md) — Plan IR vs RuntimeCoordinator
+- [0005](./adr/0005-effect-boundary.md) — Effect boundary rules
+- [0006](./adr/0006-compiler-dispatch.md) — Compiler dispatch tagged union
+- [0007](./adr/0007-adapter-vs-peer-framing.md) — Adapter vs peer framing
+- [0008](./adr/0008-capsule-assembly-catalog.md) — Capsule assembly catalog (7-arm closure)
+- [0009](./adr/0009-ecs-scene-composition.md) — ECS as scene composition substrate
+- [0010](./adr/0010-spine-canonical-type-source.md) — Spine as canonical type source
+- [0011](./adr/0011-ship-capsule.md) — ShipCapsule: content addressing crosses into release artifacts
+
+Capsule factory + video stack: [capsule-factory.md](./capsule-factory.md).
 
 ## Where to start
 
-- New contributors: read the [mental model](./ASTRO-STATIC-MENTAL-MODEL.md), [GLOSSARY](./GLOSSARY.md), [ADR-0001](./adr/0001-namespace-pattern.md), and [ADR-0002](./adr/0002-zero-alloc.md).
-- Using primitives: [api/core/](./api/core/) for Boundary, Token, Style, Theme.
-- Adding a projection target: [ADR-0006](./adr/0006-compiler-dispatch.md) and `packages/compiler/src/dispatch.ts`.
-- Off-thread / WASM: [ADR-0002](./adr/0002-zero-alloc.md), `packages/worker/`, and `crates/czap-compute/`.
-
-## Capsule factory and video stack (2026-04-23)
-
-Full details: [capsule-factory.md](./capsule-factory.md). Factory kernel, scene stack, assets, CLI / MCP, spine bridge.
+- New contributors: [mental model](./ASTRO-STATIC-MENTAL-MODEL.md), [GLOSSARY](./GLOSSARY.md), [ADR-0001](./adr/0001-namespace-pattern.md), [ADR-0002](./adr/0002-zero-alloc.md).
+- Using primitives: [api/core/](./api/core/).
+- Adding a projection target: [ADR-0006](./adr/0006-compiler-dispatch.md), `packages/compiler/src/dispatch.ts`.
+- Host integration: [HOSTING.md](./HOSTING.md).
