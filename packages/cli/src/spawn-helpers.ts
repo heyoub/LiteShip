@@ -8,5 +8,5 @@
  * @module
  */
 
-export { spawnArgv, quoteWindowsArg } from './lib/spawn.js';
-export type { SpawnArgvOpts, SpawnResult } from './lib/spawn.js';
+export { spawnArgv, spawnArgvCapture, quoteWindowsArg } from './lib/spawn.js';
+export type { SpawnArgvOpts, SpawnResult, SpawnCaptureOpts, SpawnCaptureResult } from './lib/spawn.js';

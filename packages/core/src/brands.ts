@@ -16,6 +16,8 @@ import type {
   ThresholdValue as _ThresholdValue,
   StateName as _StateName,
   ContentAddress as _ContentAddress,
+  IntegrityDigest as _IntegrityDigest,
+  AddressedDigest as _AddressedDigest,
   TokenRef as _TokenRef,
   Millis as _Millis,
 } from '@czap/_spine';
@@ -37,6 +39,15 @@ export type StateName<S extends string = string> = _StateName<S>;
  * Format: fnv1a:XXXXXXXX (8 hex digits). Computed from CBOR-canonical payload via FNV-1a hash.
  */
 export type ContentAddress = _ContentAddress;
+
+/**
+ * Cryptographic content digest brand. Format: `sha256:<64-hex>` or `blake3:<64-hex>`.
+ * The algorithmic complement to ContentAddress for external/release artifacts (ADR-0011).
+ */
+export type IntegrityDigest = _IntegrityDigest;
+
+/** Pair of identity hash + cryptographic digest over the same canonical bytes (ADR-0011). */
+export type AddressedDigest = _AddressedDigest;
 
 /** Branded token reference name */
 export type TokenRef<N extends string = string> = _TokenRef<N>;
@@ -67,6 +78,8 @@ export const ThresholdValue = (value: number): ThresholdValue => value as Thresh
 export const StateName = <S extends string>(value: S): StateName<S> => value as StateName<S>;
 /** Wrap a plain string as a {@link ContentAddress} — the one sanctioned cast site for this brand. */
 export const ContentAddress = (value: string): ContentAddress => value as ContentAddress;
+/** Wrap a plain string as an {@link IntegrityDigest} — the one sanctioned cast site for this brand. */
+export const IntegrityDigest = (value: string): IntegrityDigest => value as IntegrityDigest;
 /** Wrap a plain string as a {@link TokenRef} — the one sanctioned cast site for this brand. */
 export const TokenRef = <N extends string>(value: N): TokenRef<N> => value as TokenRef<N>;
 /** Wrap a plain number as a {@link Millis} — the one sanctioned cast site for this brand. */

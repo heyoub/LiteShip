@@ -29,12 +29,47 @@ gh release create v0.1.0 --title "v0.1.0" --notes-file RELEASE_NOTES_v0.1.0.md
 
 ## Publish packages
 
-Publish only `packages/*` workspaces:
+Publish via `czap ship`, which mints a `ShipCapsule` for every `packages/*` workspace before handing the tarballs to `pnpm publish` (ADR-0011). Dry-run first so the receipts and `pnpm publish --dry-run` outputs are both observable without uploading:
 
 ```bash
-pnpm --filter "./packages/*" -r publish --dry-run --no-git-checks --access public
-pnpm --filter "./packages/*" -r publish --no-git-checks --access public
+pnpm exec czap ship --filter "./packages/*" --dry-run
+pnpm exec czap ship --filter "./packages/*"
 ```
+
+The dry-run still writes `<pkg>-<version>.shipcapsule.cbor` next to each `<pkg>-<version>.tgz` in the package directories. Inspect either with `pnpm exec czap verify <tarball> --capsule <cbor>` before going live.
+
+## Attach ShipCapsules to the GitHub Release
+
+After publish, attach every capsule to the GitHub release so downstream consumers can verify their npm-downloaded tarballs against a non-npm-hosted receipt:
+
+```bash
+gh release upload v0.1.0 packages/*/czap-*-0.1.0.shipcapsule.cbor
+```
+
+The `.tgz` files in `packages/*/` after ship are intermediate (npm has the canonical copy). Clean them up once the release is final:
+
+```bash
+rm -f packages/*/czap-*-0.1.0.tgz
+```
+
+## Verifying a published package (consumer side)
+
+Anyone with the published `.tgz` and the GitHub-attached `.shipcapsule.cbor` can verify locally:
+
+```bash
+pnpm pack @czap/core@0.1.0   # or download the .tgz from npm directly
+gh release download v0.1.0 -p 'czap-core-0.1.0.shipcapsule.cbor'
+pnpm exec czap verify czap-core-0.1.0.tgz --capsule czap-core-0.1.0.shipcapsule.cbor
+```
+
+Verdicts and exit codes:
+
+| Verdict | Exit | Meaning |
+|---|---|---|
+| `Verified` | 0 | Tarball manifest matches the capsule. |
+| `Mismatch` | 2 | Tarball differs from the capsule. |
+| `Incomplete` | 3 | Capsule is malformed or non-canonical. |
+| `Unknown` | 4 | No capsule supplied — verification declined, not refused. |
 
 ## Tag
 

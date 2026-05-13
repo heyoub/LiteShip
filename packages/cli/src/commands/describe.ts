@@ -90,6 +90,21 @@ const COMMANDS: readonly CommandDescriptor[] = [
   },
   { name: 'gauntlet', description: 'Run the full gauntlet', args: {}, outputs: 'GauntletReceipt' },
   {
+    name: 'ship',
+    description: 'Mint ShipCapsule(s) for one or more packages and (unless --dry-run) hand off to pnpm publish (ADR-0011)',
+    args: {
+      filter: 'string (optional, package path or @scope/name)',
+      'dry-run': 'boolean (optional, write capsules + .tgz only, do not publish)',
+    },
+    outputs: 'ShipReceipt (one per package)',
+  },
+  {
+    name: 'verify',
+    description: 'Locally verify a tarball against its ShipCapsule (ADR-0011 §verify; no network, no registry)',
+    args: { tarball: 'string', capsule: 'string (--capsule <path>)' },
+    outputs: 'ShipVerifyReceipt',
+  },
+  {
     name: 'mcp',
     description: 'Start the MCP server (stdio default; --http=PORT for HTTP)',
     args: { http: 'string (optional, port number)' },

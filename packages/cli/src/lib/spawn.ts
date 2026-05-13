@@ -33,6 +33,23 @@ export interface SpawnArgvOpts {
   readonly stderrCapBytes?: number;
   /** Override stdio. Defaults to ['ignore', 'inherit', 'pipe']. */
   readonly stdio?: 'inherit' | 'pipe' | readonly ('ignore' | 'inherit' | 'pipe')[];
+  /** Working directory for the spawned process. Defaults to process.cwd(). */
+  readonly cwd?: string;
+}
+
+/** Result of a one-shot spawnArgvCapture invocation. */
+export interface SpawnCaptureResult {
+  readonly exitCode: number;
+  readonly stdout: string;
+  readonly stderr: string;
+}
+
+/** Options for spawnArgvCapture. */
+export interface SpawnCaptureOpts {
+  /** Working directory for the spawned process. Defaults to process.cwd(). */
+  readonly cwd?: string;
+  /** Maximum bytes retained per stream. Defaults to 1 MiB. */
+  readonly captureBytes?: number;
 }
 
 /** Live handle on a running spawn — used by withSpawned. */
@@ -113,6 +130,7 @@ export function spawnArgv(command: string, args: readonly string[], opts: SpawnA
     const proc = spawn(launcher.command, launcher.args as string[], {
       stdio,
       shell: false,
+      cwd: opts.cwd,
       // On Windows the cmd.exe launcher needs verbatim args so Node doesn't
       // re-escape the command tail and break exit-code propagation.
       windowsVerbatimArguments: process.platform === 'win32',
@@ -128,6 +146,49 @@ export function spawnArgv(command: string, args: readonly string[], opts: SpawnA
       resolvePromise({
         exitCode: code ?? 1,
         stderrTail: Buffer.concat(stderrChunks as unknown as Uint8Array[]).toString('utf8'),
+      });
+    });
+  });
+}
+
+/**
+ * Run a subprocess and fully capture stdout + stderr to strings, with an
+ * optional `cwd`. Used by ship/verify where the publisher needs the
+ * subprocess output (pnpm pack's tarball path, pnpm publish --dry-run's
+ * notice block) as a byte sequence to hash. Like spawnArgv, never throws
+ * on nonzero exit — callers branch on `exitCode`.
+ */
+export function spawnArgvCapture(
+  command: string,
+  args: readonly string[],
+  opts: SpawnCaptureOpts = {},
+): Promise<SpawnCaptureResult> {
+  const cap = opts.captureBytes ?? 1_048_576;
+  const launcher = resolveLauncher(command, args);
+  return new Promise((resolvePromise, rejectPromise) => {
+    const proc = spawn(launcher.command, launcher.args as string[], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      shell: false,
+      cwd: opts.cwd,
+      windowsVerbatimArguments: process.platform === 'win32',
+      // CRITICAL: do not set `env` — children must inherit NODE_V8_COVERAGE.
+    });
+    const stdoutChunks: Buffer[] = [];
+    let stdoutBytes = 0;
+    const stderrChunks: Buffer[] = [];
+    let stderrBytes = 0;
+    proc.stdout?.on('data', (chunk: Buffer) => {
+      stdoutBytes = pushBoundedStderr(stdoutChunks, stdoutBytes, chunk, cap);
+    });
+    proc.stderr?.on('data', (chunk: Buffer) => {
+      stderrBytes = pushBoundedStderr(stderrChunks, stderrBytes, chunk, cap);
+    });
+    proc.on('error', rejectPromise);
+    proc.on('close', (code) => {
+      resolvePromise({
+        exitCode: code ?? 1,
+        stdout: Buffer.concat(stdoutChunks as unknown as Uint8Array[]).toString('utf8'),
+        stderr: Buffer.concat(stderrChunks as unknown as Uint8Array[]).toString('utf8'),
       });
     });
   });
