@@ -6,14 +6,16 @@
  * sorted uncompressed-manifest CBOR, never the raw `.tgz` bytes, since gzip
  * timestamps make those non-deterministic across publish runs.
  *
+ * Lives in `@czap/cli` (not `@czap/core`) because it imports `node:zlib`
+ * for gzip decoding; `@czap/core` must remain browser-bundleable for Astro
+ * runtime hydration.
+ *
  * @module
  */
 
 import { gunzipSync } from 'node:zlib';
 import { Effect } from 'effect';
-import type { AddressedDigest } from './brands.js';
-import { CanonicalCbor } from './cbor.js';
-import { AddressedDigest as AddressedDigestNs } from './addressed-digest.js';
+import { AddressedDigest, CanonicalCbor, type AddressedDigest as AddressedDigestType } from '@czap/core';
 
 const bytesToHex = (bytes: Uint8Array): string => {
   let out = '';
@@ -39,7 +41,6 @@ interface TarEntry {
   readonly bytes: Uint8Array;
 }
 
-// Decode a NUL-terminated ASCII field from a USTAR header.
 const decodeAsciiZ = (header: Uint8Array, offset: number, length: number): string => {
   let end = offset;
   const stop = offset + length;
@@ -49,7 +50,6 @@ const decodeAsciiZ = (header: Uint8Array, offset: number, length: number): strin
   return out;
 };
 
-// USTAR size field is octal in ASCII (NUL- or space-terminated).
 const decodeOctal = (header: Uint8Array, offset: number, length: number): number => {
   const text = decodeAsciiZ(header, offset, length).trim();
   if (text === '') return 0;
@@ -77,14 +77,12 @@ const parseTar = (bytes: Uint8Array): TarEntry[] => {
     const data = bytes.subarray(dataStart, dataStart + size);
 
     if (typeflag === 'L') {
-      // GNU long-name extension: next entry's name is in this entry's body.
       let end = data.length;
       while (end > 0 && data[end - 1] === 0) end--;
       let s = '';
       for (let i = 0; i < end; i++) s += String.fromCharCode(data[i]!);
       pendingLongPath = s;
     } else if (typeflag === 'x' || typeflag === 'g') {
-      // PAX header: scan for `path=...` records.
       let text = '';
       for (let i = 0; i < data.length; i++) text += String.fromCharCode(data[i]!);
       const lines = text.split('\n');
@@ -120,7 +118,7 @@ const parseTar = (bytes: Uint8Array): TarEntry[] => {
  * Raw `.tgz` bytes are non-deterministic across publish runs (gzip mtime); the
  * manifest is.
  */
-export const tarballManifestAddress = (tarballBytes: Uint8Array): Effect.Effect<AddressedDigest, Error> =>
+export const tarballManifestAddress = (tarballBytes: Uint8Array): Effect.Effect<AddressedDigestType, Error> =>
   Effect.gen(function* () {
     const unzipped = yield* Effect.try({
       try: () => new Uint8Array(gunzipSync(tarballBytes)),
@@ -135,12 +133,12 @@ export const tarballManifestAddress = (tarballBytes: Uint8Array): Effect.Effect<
     }
     manifest.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
     const canonical = CanonicalCbor.encode(manifest);
-    return yield* AddressedDigestNs.of(canonical);
+    return yield* AddressedDigest.of(canonical);
   });
 
 /** Address a pnpm-lock.yaml (or equivalent) by its raw file bytes. YAML is its own normalization. */
-export const lockfileAddress = (lockfileBytes: Uint8Array): Effect.Effect<AddressedDigest, Error> =>
-  AddressedDigestNs.of(lockfileBytes);
+export const lockfileAddress = (lockfileBytes: Uint8Array): Effect.Effect<AddressedDigestType, Error> =>
+  AddressedDigest.of(lockfileBytes);
 
 /**
  * Address a workspace's set of package.json files. Hashes each file with
@@ -149,7 +147,7 @@ export const lockfileAddress = (lockfileBytes: Uint8Array): Effect.Effect<Addres
  */
 export const workspaceManifestAddress = (
   input: ReadonlyArray<{ relative_path: string; package_json_bytes: Uint8Array }>,
-): Effect.Effect<AddressedDigest, Error> =>
+): Effect.Effect<AddressedDigestType, Error> =>
   Effect.gen(function* () {
     const rows: { relative_path: string; sha256: string }[] = [];
     for (const item of input) {
@@ -160,7 +158,7 @@ export const workspaceManifestAddress = (
       a.relative_path < b.relative_path ? -1 : a.relative_path > b.relative_path ? 1 : 0,
     );
     const canonical = CanonicalCbor.encode(rows);
-    return yield* AddressedDigestNs.of(canonical);
+    return yield* AddressedDigest.of(canonical);
   });
 
 const ISO_TIMESTAMP_RE = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})/g;
@@ -189,8 +187,8 @@ export const normalizeDryRunOutput = (
 export const normalizedDryRunAddress = (
   rawStdout: string,
   normalizationContext: { repo_root_absolute_path: string },
-): Effect.Effect<AddressedDigest, Error> => {
+): Effect.Effect<AddressedDigestType, Error> => {
   const normalized = normalizeDryRunOutput(rawStdout, normalizationContext);
   const bytes = new TextEncoder().encode(normalized);
-  return AddressedDigestNs.of(bytes);
+  return AddressedDigest.of(bytes);
 };

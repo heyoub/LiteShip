@@ -219,15 +219,10 @@ export { Diagnostics } from './diagnostics.js';
 export type { DiagnosticEvent, DiagnosticLevel, DiagnosticPayload, DiagnosticsSink } from './diagnostics.js';
 
 // AddressedDigest + ShipCapsule (ADR-0011)
+// Browser-bundleable: pure type + crypto.subtle hashing. The Node-only
+// release-input manifest helpers (gzip/tar/yaml) live in @czap/cli.
 export { AddressedDigest } from './addressed-digest.js';
 export { ShipCapsule } from './ship-capsule.js';
-export {
-  tarballManifestAddress,
-  lockfileAddress,
-  workspaceManifestAddress,
-  normalizedDryRunAddress,
-  normalizeDryRunOutput,
-} from './ship-manifest.js';
 
 // Type guards
 import type { Cell as _Cell } from './cell.js';

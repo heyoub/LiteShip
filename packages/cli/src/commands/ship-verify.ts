@@ -20,7 +20,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Cause, Effect, Result } from 'effect';
-import { ShipCapsule, tarballManifestAddress, type ContentAddress } from '@czap/core';
+import { ShipCapsule, type ContentAddress } from '@czap/core';
+import { tarballManifestAddress } from '../ship-manifest.js';
 import { emit, emitError } from '../receipts.js';
 import type { ShipVerifyChecks, ShipVerifyReceipt } from '../receipts.js';
 

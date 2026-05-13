@@ -28,10 +28,10 @@ import {
   ContentAddress,
   IntegrityDigest,
   ShipCapsule,
-  tarballManifestAddress,
   type AddressedDigest,
   type HLCBrand as HLC,
 } from '@czap/core';
+import { tarballManifestAddress } from '../../packages/cli/src/ship-manifest.js';
 import { verify } from '../../packages/cli/src/commands/ship-verify.js';
 
 const REPO_ROOT = '/home/heyoub/Documents/code/LiteShip';

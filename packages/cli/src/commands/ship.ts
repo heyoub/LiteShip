@@ -21,15 +21,13 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { hostname } from 'node:os';
 import { Cause, Effect, Result } from 'effect';
+import { HLC, ShipCapsule, type AddressedDigest } from '@czap/core';
 import {
-  HLC,
-  ShipCapsule,
   lockfileAddress,
   normalizedDryRunAddress,
   tarballManifestAddress,
   workspaceManifestAddress,
-  type AddressedDigest,
-} from '@czap/core';
+} from '../ship-manifest.js';
 import { spawnArgv, spawnArgvCapture } from '../spawn-helpers.js';
 import { emit, emitError } from '../receipts.js';
 import type { ShipReceipt } from '../receipts.js';

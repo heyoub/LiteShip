@@ -22,7 +22,7 @@ import {
   workspaceManifestAddress,
   normalizeDryRunOutput,
   normalizedDryRunAddress,
-} from '@czap/core';
+} from '../../packages/cli/src/ship-manifest.js';
 
 const run = <A, E>(eff: Effect.Effect<A, E>) => Effect.runPromise(eff);
 const REPO_ROOT = '/home/heyoub/Documents/code/LiteShip';
