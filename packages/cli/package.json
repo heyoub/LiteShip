@@ -1,6 +1,6 @@
 {
   "name": "@czap/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "czap CLI — AI-first JSON I/O with human-pretty TTY mode",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

@@ -1,6 +1,6 @@
 {
   "name": "@czap/remotion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Remotion video adapter with React hooks",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

@@ -1,6 +1,6 @@
 {
   "name": "@czap/web",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DOM runtime: morph, slots, SSE, physical state, capture",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

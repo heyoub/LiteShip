@@ -1,6 +1,6 @@
 {
   "name": "@czap/quantizer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Boundary quantizer with animated transitions",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

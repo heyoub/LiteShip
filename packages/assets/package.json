@@ -1,6 +1,6 @@
 {
   "name": "@czap/assets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Asset capsules + analysis projections for czap",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

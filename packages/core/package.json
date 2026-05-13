@@ -1,6 +1,6 @@
 {
   "name": "@czap/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Constraint-based adaptive rendering primitives",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",
