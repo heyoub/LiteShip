@@ -195,12 +195,10 @@ const STANDALONE_FUNCTIONS = [
   'defineCapsule',
   'getCapsuleCatalog',
   // `resetCapsuleCatalog` lives at `@czap/core/testing` sub-path — see below.
-  // ShipCapsule release-input addressing helpers (ADR-0011)
-  'tarballManifestAddress',
-  'lockfileAddress',
-  'workspaceManifestAddress',
-  'normalizedDryRunAddress',
-  'normalizeDryRunOutput',
+  // ShipCapsule release-input addressing helpers (tarballManifestAddress,
+  // lockfileAddress, workspaceManifestAddress, normalizedDryRunAddress,
+  // normalizeDryRunOutput) live in @czap/cli per ADR-0011 — they import
+  // node:zlib and must stay out of the browser-bundleable @czap/core.
 ];
 
 // ── Error classes ───────────────────────────────────────────────────
