@@ -98,3 +98,59 @@ Untracking a file does not remove old blobs. See [HISTORY_SCRUB.md](./HISTORY_SC
 `@czap/cli` loads `@czap/mcp-server` only for the `czap mcp` subcommand (dynamic
 `import()`); add `@czap/mcp-server` when you use MCP mode. Ship matching versions
 whenever you publish either package.
+
+## v0.1.1+ — OIDC trusted publishing from GitHub Actions
+
+The v0.1.0 publish above was a manual local run because the packages didn't
+exist on npm yet (npm requires a package to exist before you can configure a
+trusted publisher). From v0.1.1 onward, releases run through
+`.github/workflows/release.yml`. No tokens. No `--otp`. No `~/.npmrc` auth.
+npm trusts the OIDC identity attestation that GitHub Actions issues to the
+workflow.
+
+### One-time trusted-publisher setup (per package, after v0.1.0 lands)
+
+For each of the 15 `@czap/*` packages, open
+`https://www.npmjs.com/package/@czap/<name>/access` and add a trusted publisher
+with these exact values:
+
+| Field | Value |
+|---|---|
+| Publisher | GitHub Actions |
+| Organization or user | `heyoub` |
+| Repository | `LiteShip` |
+| Workflow filename | `release.yml` |
+| Environment name | (leave blank) |
+
+Once all 15 have the trusted publisher configured, the workflow can publish
+any future version with zero auth setup.
+
+### Cutting a release
+
+1. Bump versions in every `packages/*/package.json` to the new minor (e.g. `0.1.1`).
+2. Update `CHANGELOG.md` with the new release block.
+3. Commit, open a PR, merge to `main`.
+4. Locally on `main`:
+   ```bash
+   git tag -a v0.1.1 -m "v0.1.1"
+   git push origin v0.1.1
+   ```
+5. The `Release (OIDC trusted publish)` workflow auto-fires on the tag. It runs
+   the full gauntlet first, then ships all 15 packages with `--provenance`,
+   then creates/updates the GitHub Release and attaches the ShipCapsules.
+
+### Hotfix or partial publish
+
+`workflow_dispatch` lets you run the release flow manually from the Actions
+tab. Toggle `dry-run: true` to mint capsules without uploading.
+
+### Why provenance
+
+`npm publish --provenance` writes a signed attestation linking the published
+artifact to the GitHub Actions run that built it. Consumers (and Sentinel,
+later) can verify the attestation chain end-to-end: npm signature → GHA
+identity → repo commit → ShipCapsule. The TanStack worm's lesson stuck:
+provenance alone isn't sufficient (the worm carried valid provenance over a
+hijacked pipeline), but provenance + an independently-verifiable
+content-addressed receipt (ShipCapsule on the GitHub Release) closes the
+"signed poison" gap.

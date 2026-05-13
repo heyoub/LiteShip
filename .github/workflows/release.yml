@@ -1,0 +1,152 @@
+name: Release (OIDC trusted publish)
+
+# Triggers on push of a v*.*.* tag. The tag itself is created by the
+# maintainer after a release commit lands on main:
+#   git tag -a v0.1.1 -m "v0.1.1"
+#   git push origin v0.1.1
+#
+# This workflow uses npm's OIDC trusted-publisher path. NO token in the
+# repo. NO --otp. NO 2FA gymnastics. npm trusts the identity attestation
+# from GitHub Actions because the trusted-publisher config (set on each
+# @czap/* package's npmjs.com settings page) names this exact workflow
+# file + repo + ref pattern.
+#
+# Trusted-publisher setup is per-package; see docs/RELEASING.md.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Mint capsules but skip pnpm publish handoff'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+permissions:
+  contents: write       # creating the GitHub Release + uploading capsule assets
+  id-token: write       # OIDC identity attestation for npm trusted publishing
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false   # never cancel a release mid-flight
+
+jobs:
+  release-certified:
+    name: Gauntlet (release-certification gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: pnpm run gauntlet:full
+        env:
+          CI: true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gauntlet-artifacts
+          path: |
+            coverage
+            reports
+            benchmarks
+
+  publish:
+    name: Publish 15 @czap/* packages via OIDC + attach ShipCapsules
+    needs: release-certified
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # czap ship reads git rev-parse HEAD + git status
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          # registry-url is required for OIDC; npm CLI uses it to thread the
+          # GHA-issued OIDC token to the registry on publish.
+          registry-url: 'https://registry.npmjs.org'
+
+      # Trusted publishing requires npm >= 11.5.1. setup-node ships an older
+      # npm; bump it on the runner before any publish step touches the wire.
+      - run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build
+
+      # ─── per-package ship loop ───────────────────────────────────────
+      # czap ship's bulk mode dies on already-published versions because
+      # its dry-run pre-check errors on "cannot publish over previously
+      # published 0.1.x". Looping per-package skips the bulk dry-run
+      # collision and lets pnpm publish itself report "already published"
+      # cleanly for any in-flight repeat. v0.1.1 workaround until
+      # ship.ts handles this gracefully (tracked in ROADMAP §4).
+      - name: czap ship + npm publish (per package, with provenance)
+        run: |
+          set -euo pipefail
+          DRY_RUN_FLAG=""
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          fi
+          for pkg in _spine core quantizer compiler web detect vite astro edge worker remotion scene assets cli mcp-server; do
+            echo "::group::@czap/$pkg"
+            node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" --provenance $DRY_RUN_FLAG
+            echo "::endgroup::"
+          done
+        env:
+          # No NPM_TOKEN here on purpose. OIDC is the auth.
+          NPM_CONFIG_PROVENANCE: 'true'
+
+      # ─── GitHub Release attachment ────────────────────────────────────
+      # The release record itself is auto-created by the release-please /
+      # changelog flow OR by the gh CLI here. For v0.1.x we use the tag
+      # name verbatim as the release name and upload the .shipcapsule.cbor
+      # assets so consumers can `czap verify` against a non-npm copy.
+      - name: Resolve version from tag
+        if: ${{ inputs.dry-run != 'true' }}
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        if: ${{ inputs.dry-run != 'true' }}
+        run: |
+          pnpm exec tsx scripts/extract-changelog-section.ts \
+            --version "${{ steps.ver.outputs.version }}" \
+            --out "RELEASE_NOTES_v${{ steps.ver.outputs.version }}.md"
+
+      - name: Create GitHub Release (if missing)
+        if: ${{ inputs.dry-run != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release create "${GITHUB_REF_NAME}" \
+              --title "${GITHUB_REF_NAME}" \
+              --notes-file "RELEASE_NOTES_v${{ steps.ver.outputs.version }}.md"
+          fi
+
+      - name: Attach ShipCapsules to GitHub Release
+        if: ${{ inputs.dry-run != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${GITHUB_REF_NAME}" \
+            packages/*/czap-*-${{ steps.ver.outputs.version }}.shipcapsule.cbor \
+            --clobber

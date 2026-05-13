@@ -77,6 +77,8 @@ interface ShipOptions {
   readonly cwd: string;
   readonly filter?: string;
   readonly dryRun: boolean;
+  readonly otp?: string;
+  readonly provenance: boolean;
 }
 
 /**
@@ -437,6 +439,12 @@ export async function ship(args: readonly string[]): Promise<number> {
   // workflow (we publish from a release branch, not main).
   const filterArgs = mintedNames.flatMap((n) => ['--filter', n]);
   const publishArgs = [...filterArgs, '-r', 'publish', '--access', 'public', '--no-git-checks'];
+  if (opts.otp !== undefined) {
+    publishArgs.push('--otp', opts.otp);
+  }
+  if (opts.provenance) {
+    publishArgs.push('--provenance');
+  }
   const publishRes = await spawnArgv('pnpm', publishArgs);
   if (publishRes.exitCode !== 0) {
     emitError('ship', `pnpm publish exited ${publishRes.exitCode}${publishRes.stderrTail ? `: ${publishRes.stderrTail.trim()}` : ''}`);
@@ -447,11 +455,17 @@ export async function ship(args: readonly string[]): Promise<number> {
 
 function parseArgs(args: readonly string[], cwd: string): ShipOptions {
   let filter: string | undefined;
+  let otp: string | undefined;
   let dryRun = false;
+  let provenance = false;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a === '--dry-run') {
       dryRun = true;
+      continue;
+    }
+    if (a === '--provenance') {
+      provenance = true;
       continue;
     }
     if (a === '--filter') {
@@ -466,10 +480,22 @@ function parseArgs(args: readonly string[], cwd: string): ShipOptions {
       filter = a.slice('--filter='.length);
       continue;
     }
+    if (a === '--otp') {
+      const next = args[i + 1];
+      if (next !== undefined) {
+        otp = next;
+        i++;
+      }
+      continue;
+    }
+    if (a.startsWith('--otp=')) {
+      otp = a.slice('--otp='.length);
+      continue;
+    }
     if (!a.startsWith('-') && filter === undefined) {
       // Positional package path/name.
       filter = a;
     }
   }
-  return { filter, dryRun, cwd };
+  return { filter, dryRun, otp, provenance, cwd };
 }
