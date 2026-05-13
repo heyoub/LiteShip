@@ -426,8 +426,11 @@ export async function ship(args: readonly string[]): Promise<number> {
   if (opts.dryRun) return 0;
 
   // Hand off to pnpm publish. Forward the user's filter so the same set
-  // of packages we addressed are the ones we upload.
-  const publishArgs = ['publish'];
+  // of packages we addressed are the ones we upload. `--access public`
+  // is required for scoped packages on a free npm org; `--no-git-checks`
+  // matches the documented release workflow (we publish from a release
+  // branch, not main).
+  const publishArgs = ['publish', '--access', 'public', '--no-git-checks'];
   if (opts.filter !== undefined) {
     publishArgs.push('--filter', opts.filter);
   }
