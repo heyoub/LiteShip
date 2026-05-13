@@ -31,7 +31,13 @@ describe('coverage config drift guard', () => {
     // cli/src/spawn-helpers.ts (re-export shim — `export {...} from './lib
     // /spawn.js'` has no executable statements for v8 to track even though
     // the targets are exercised via vitest-runner + spawn-quoting-drift).
-    expect(coverageExclude).toHaveLength(19);
+    // + 2 subprocess-style command modules added with ADR-0011 ShipCapsule:
+    // cli/src/commands/ship.ts (orchestrates git + pnpm pack + pnpm publish
+    // --dry-run + pnpm publish; integration-tested via the czap ship
+    // --dry-run path that runs in every package:smoke gauntlet phase) and
+    // cli/src/render-backend/ffmpeg.ts (spawns ffmpeg; skip-when-unavailable
+    // smoke test makes this structurally 0% on machines without ffmpeg).
+    expect(coverageExclude).toHaveLength(21);
   });
 
   it('merge-coverage.ts PACKAGE_THRESHOLD_OVERRIDES are pinned', () => {
