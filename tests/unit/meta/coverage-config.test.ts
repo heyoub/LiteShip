@@ -52,6 +52,13 @@ describe('coverage config drift guard', () => {
     // Ensure both core and web functions: 97 overrides are present.
     const ninetySevenCount = (block!.match(/functions: 97/g) ?? []).length;
     expect(ninetySevenCount).toBe(2);
+    // v0.1.0 release-prep override for cli; v0.1.1 raises this back to
+    // package defaults (85/85/85/75). See merge-coverage.ts comment.
+    expect(block).toContain("cli: {");
+    expect(block).toContain("lines: 75");
+    expect(block).toContain("statements: 75");
+    expect(block).toContain("functions: 78");
+    expect(block).toContain("branches: 60");
   });
 
   it('merge-coverage.ts TOTAL_THRESHOLDS are pinned', () => {

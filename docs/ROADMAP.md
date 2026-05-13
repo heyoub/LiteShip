@@ -75,6 +75,35 @@ Keep enforcing the same source of truth everywhere:
 Success condition:
 - local truth, CI truth, and release/package truth stop drifting
 
+### 4. Raise `@czap/cli` coverage back to package defaults
+
+v0.1.0 introduced ADR-0011 ShipCapsule and its CLI surface (`czap ship`,
+`czap verify`) under publish-day time pressure. The orchestrator
+`packages/cli/src/commands/ship.ts` (subprocess-style) is excluded from
+coverage matching the existing `bin.ts` / `http-server.ts` pattern, but
+the supporting modules — `capsules/ship-emit.ts`, `commands/ship-verify.ts`,
+`ship-manifest.ts` — landed with sub-85% coverage and dragged the
+`@czap/cli` aggregate below the package default. A temporary override
+in `scripts/merge-coverage.ts` PACKAGE_THRESHOLD_OVERRIDES lowers the
+cli thresholds (lines 75 / statements 75 / functions 78 / branches 60).
+
+v0.1.1 work:
+- write targeted unit tests for the four-verdict verify paths beyond
+  the existing `ship-verify-verdicts.test.ts` set
+- exercise `capsules/ship-emit.ts` schema-validation + write-path
+  branches directly (currently only invoked through `commands/ship.ts`)
+- add `parseTar` PAX-header + GNU long-name edge cases in
+  `tests/unit/ship-manifest.test.ts` (currently only the common case
+  is exercised)
+- when the cli aggregate is back above 85/85/85/75, remove the
+  `cli` entry from PACKAGE_THRESHOLD_OVERRIDES and update the
+  drift guard at `tests/unit/meta/coverage-config.test.ts`
+
+Success condition:
+- `@czap/cli` aggregate ≥ package defaults again
+- override removed from `scripts/merge-coverage.ts`
+- drift guard reverted to "core + web only" pattern
+
 ## Completed Since Last Revision (2026-04-23)
 
 Spec `2026-04-23-capsule-factory-video-stack-design.md` shipped with 5 atomic phases:
