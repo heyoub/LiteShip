@@ -8,6 +8,6 @@
 
 > **CSSStates** = `Readonly`\<`Record`\<`string`, `Readonly`\<`Record`\<`string`, `string`\>\>\>\>
 
-Defined in: compiler/src/dispatch.ts:24
+Defined in: [compiler/src/dispatch.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/dispatch.ts#L24)
 
 Per-state CSS property maps keyed by state name (values are CSS strings).

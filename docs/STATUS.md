@@ -605,7 +605,7 @@ happy path). Documented in JSDoc.
 
 ### 1. Fresh clone installs cleanly
 
-`git clone <czap-repo> && cd czap && pnpm install` must succeed with zero
+`git clone <liteship-repo> && cd LiteShip && pnpm install` must succeed with zero
 parent-repo assumptions. No paths that reach outside the repo root.
 
 ### 2. Root gates stay green

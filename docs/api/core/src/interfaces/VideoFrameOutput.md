@@ -6,7 +6,7 @@
 
 # Interface: VideoFrameOutput
 
-Defined in: core/src/video.ts:34
+Defined in: [core/src/video.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L34)
 
 Single frame yielded by `VideoRenderer.frames()`: frame index, timestamp,
 normalized progress, and the [CompositeState](CompositeState.md) snapshot captured at that tick.
@@ -17,7 +17,7 @@ normalized progress, and the [CompositeState](CompositeState.md) snapshot captur
 
 > `readonly` **frame**: `number`
 
-Defined in: core/src/video.ts:35
+Defined in: [core/src/video.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L35)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: core/src/video.ts:35
 
 > `readonly` **progress**: `number`
 
-Defined in: core/src/video.ts:37
+Defined in: [core/src/video.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L37)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: core/src/video.ts:37
 
 > `readonly` **state**: [`CompositeState`](CompositeState.md)
 
-Defined in: core/src/video.ts:38
+Defined in: [core/src/video.ts:38](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L38)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: core/src/video.ts:38
 
 > `readonly` **timestamp**: `number`
 
-Defined in: core/src/video.ts:36
+Defined in: [core/src/video.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L36)

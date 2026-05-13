@@ -6,7 +6,7 @@
 
 # Interface: TokenBlock
 
-Defined in: vite/src/token-transform.ts:22
+Defined in: [vite/src/token-transform.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L22)
 
 Parsed `@token` block: the token to emit and any inline overrides.
 
@@ -16,7 +16,7 @@ Parsed `@token` block: the token to emit and any inline overrides.
 
 > `readonly` **declarations**: `Record`\<`string`, `string`\>
 
-Defined in: vite/src/token-transform.ts:26
+Defined in: [vite/src/token-transform.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L26)
 
 Inline overrides (`{ cssProp: value }`).
 
@@ -26,7 +26,7 @@ Inline overrides (`{ cssProp: value }`).
 
 > `readonly` **line**: `number`
 
-Defined in: vite/src/token-transform.ts:30
+Defined in: [vite/src/token-transform.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L30)
 
 1-based line where the block begins.
 
@@ -36,7 +36,7 @@ Defined in: vite/src/token-transform.ts:30
 
 > `readonly` **sourceFile**: `string`
 
-Defined in: vite/src/token-transform.ts:28
+Defined in: [vite/src/token-transform.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L28)
 
 Absolute source file path.
 
@@ -46,6 +46,6 @@ Absolute source file path.
 
 > `readonly` **tokenName**: `string`
 
-Defined in: vite/src/token-transform.ts:24
+Defined in: [vite/src/token-transform.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L24)
 
 Named token (resolved against exported `TokenDef` values).

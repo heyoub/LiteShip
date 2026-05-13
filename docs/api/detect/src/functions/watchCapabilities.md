@@ -8,7 +8,7 @@
 
 > **watchCapabilities**(`onChange`): `Effect`\<`void`, `never`, [`Scope`](#)\>
 
-Defined in: detect/src/detect.ts:617
+Defined in: [detect/src/detect.ts:617](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L617)
 
 Watch for capability changes via matchMedia listeners and resize observer.
 Emits a fresh DetectionResult whenever viewport, color scheme, or

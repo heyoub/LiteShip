@@ -8,6 +8,6 @@
 
 > **AudioSync** = `AudioSyncShape`
 
-Defined in: core/src/scheduler.ts:160
+Defined in: [core/src/scheduler.ts:160](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/scheduler.ts#L160)
 
 Audio-synchronized scheduler bound to an [AVBridge](../../../variables/AVBridge.md).

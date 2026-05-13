@@ -8,7 +8,7 @@
 
 > `const` **Easing**: `EasingFns`
 
-Defined in: core/src/easing.ts:310
+Defined in: [core/src/easing.ts:310](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/easing.ts#L310)
 
 Easing -- pure math easing functions mapping t in [0,1] to value in [0,1].
 Includes standard CSS easings, cubic-bezier, spring physics, and CSS linear() export.

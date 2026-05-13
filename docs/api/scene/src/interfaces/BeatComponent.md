@@ -6,7 +6,7 @@
 
 # Interface: BeatComponent
 
-Defined in: scene/src/capsules/beat-binding.ts:24
+Defined in: [scene/src/capsules/beat-binding.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L24)
 
 Component shape for beat entities — what SyncSystem queries via `world.query('Beat')`.
 
@@ -16,7 +16,7 @@ Component shape for beat entities — what SyncSystem queries via `world.query('
 
 > `readonly` `optional` **anchorTrackId?**: `string`
 
-Defined in: scene/src/capsules/beat-binding.ts:29
+Defined in: [scene/src/capsules/beat-binding.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L29)
 
 Optional pointer back to the audio source track that anchored this beat.
 
@@ -26,7 +26,7 @@ Optional pointer back to the audio source track that anchored this beat.
 
 > `readonly` **kind**: `"beat"`
 
-Defined in: scene/src/capsules/beat-binding.ts:25
+Defined in: [scene/src/capsules/beat-binding.ts:25](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L25)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: scene/src/capsules/beat-binding.ts:25
 
 > `readonly` **strength**: `number`
 
-Defined in: scene/src/capsules/beat-binding.ts:27
+Defined in: [scene/src/capsules/beat-binding.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L27)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: scene/src/capsules/beat-binding.ts:27
 
 > `readonly` **timeMs**: `number`
 
-Defined in: scene/src/capsules/beat-binding.ts:26
+Defined in: [scene/src/capsules/beat-binding.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L26)

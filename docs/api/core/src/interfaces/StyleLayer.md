@@ -6,7 +6,7 @@
 
 # Interface: StyleLayer
 
-Defined in: core/src/style.ts:31
+Defined in: [core/src/style.ts:31](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/style.ts#L31)
 
 One layer of a [Style](../variables/Style.md): a flat property bag plus optional pseudo
 selectors (`:hover`, `::before`, …) and structured `box-shadow` layers.
@@ -17,7 +17,7 @@ selectors (`:hover`, `::before`, …) and structured `box-shadow` layers.
 
 > `readonly` `optional` **boxShadow?**: readonly [`ShadowLayer`](ShadowLayer.md)[]
 
-Defined in: core/src/style.ts:34
+Defined in: [core/src/style.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/style.ts#L34)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: core/src/style.ts:34
 
 > `readonly` **properties**: `Record`\<`string`, `string`\>
 
-Defined in: core/src/style.ts:32
+Defined in: [core/src/style.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/style.ts#L32)
 
 ***
 
@@ -33,4 +33,4 @@ Defined in: core/src/style.ts:32
 
 > `readonly` `optional` **pseudo?**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: core/src/style.ts:33
+Defined in: [core/src/style.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/style.ts#L33)

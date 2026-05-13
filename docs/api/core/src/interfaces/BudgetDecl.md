@@ -6,7 +6,7 @@
 
 # Interface: BudgetDecl
 
-Defined in: core/src/capsule.ts:33
+Defined in: [core/src/capsule.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L33)
 
 Performance + memory budgets a capsule promises to honor.
 
@@ -16,7 +16,7 @@ Performance + memory budgets a capsule promises to honor.
 
 > `readonly` `optional` **allocClass?**: `"zero"` \| `"bounded"` \| `"unbounded"`
 
-Defined in: core/src/capsule.ts:36
+Defined in: [core/src/capsule.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L36)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/capsule.ts:36
 
 > `readonly` `optional` **memoryMb?**: `number`
 
-Defined in: core/src/capsule.ts:35
+Defined in: [core/src/capsule.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L35)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: core/src/capsule.ts:35
 
 > `readonly` `optional` **p95Ms?**: `number`
 
-Defined in: core/src/capsule.ts:34
+Defined in: [core/src/capsule.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L34)

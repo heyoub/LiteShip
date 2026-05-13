@@ -8,7 +8,7 @@
 
 > `const` **Evaluate**: `object`
 
-Defined in: quantizer/src/evaluate.ts:160
+Defined in: [quantizer/src/evaluate.ts:160](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/evaluate.ts#L160)
 
 Boundary evaluation namespace.
 

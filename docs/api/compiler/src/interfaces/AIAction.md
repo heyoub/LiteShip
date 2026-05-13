@@ -6,7 +6,7 @@
 
 # Interface: AIAction
 
-Defined in: compiler/src/ai-manifest.ts:52
+Defined in: [compiler/src/ai-manifest.ts:52](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L52)
 
 Named action the LLM may invoke via tool calling.
 
@@ -19,7 +19,7 @@ action's side effects (repaint, persist, etc.).
 
 > `readonly` **description**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:58
+Defined in: [compiler/src/ai-manifest.ts:58](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L58)
 
 Human-readable description surfaced to the LLM.
 
@@ -29,7 +29,7 @@ Human-readable description surfaced to the LLM.
 
 > `readonly` **effects**: readonly `string`[]
 
-Defined in: compiler/src/ai-manifest.ts:56
+Defined in: [compiler/src/ai-manifest.ts:56](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L56)
 
 Effect tags produced when this action runs.
 
@@ -39,6 +39,6 @@ Effect tags produced when this action runs.
 
 > `readonly` **params**: `Record`\<`string`, [`AIParamSchema`](AIParamSchema.md)\>
 
-Defined in: compiler/src/ai-manifest.ts:54
+Defined in: [compiler/src/ai-manifest.ts:54](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L54)
 
 Parameter schemas keyed by parameter name.

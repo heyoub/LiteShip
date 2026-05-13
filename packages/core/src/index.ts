@@ -11,7 +11,7 @@
 // the public surface would let consumers forge any brand. Code that
 // genuinely needs to mint a new brand should import from `@czap/core/brands`
 // directly and document the use site.
-export { SignalInput, ThresholdValue, StateName, ContentAddress, TokenRef, Millis } from './brands.js';
+export { SignalInput, ThresholdValue, StateName, ContentAddress, IntegrityDigest, TokenRef, Millis } from './brands.js';
 export type { HLC as HLCBrand } from './brands.js';
 
 // FNV-1a hash utility
@@ -217,6 +217,12 @@ export { CzapValidationError, isValidationError } from './validation-error.js';
 // Diagnostics
 export { Diagnostics } from './diagnostics.js';
 export type { DiagnosticEvent, DiagnosticLevel, DiagnosticPayload, DiagnosticsSink } from './diagnostics.js';
+
+// AddressedDigest + ShipCapsule (ADR-0011)
+// Browser-bundleable: pure type + crypto.subtle hashing. The Node-only
+// release-input manifest helpers (gzip/tar/yaml) live in @czap/cli.
+export { AddressedDigest } from './addressed-digest.js';
+export { ShipCapsule } from './ship-capsule.js';
 
 // Type guards
 import type { Cell as _Cell } from './cell.js';

@@ -6,7 +6,7 @@
 
 # Interface: VideoConfig
 
-Defined in: core/src/video.ts:23
+Defined in: [core/src/video.ts:23](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L23)
 
 Configuration for a [VideoRenderer](../variables/VideoRenderer.md): resolution, target fps, and total duration.
 
@@ -16,7 +16,7 @@ Configuration for a [VideoRenderer](../variables/VideoRenderer.md): resolution, 
 
 > `readonly` **durationMs**: `Millis`
 
-Defined in: core/src/video.ts:27
+Defined in: [core/src/video.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L27)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/video.ts:27
 
 > `readonly` **fps**: `number`
 
-Defined in: core/src/video.ts:24
+Defined in: [core/src/video.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L24)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: core/src/video.ts:24
 
 > `readonly` **height**: `number`
 
-Defined in: core/src/video.ts:26
+Defined in: [core/src/video.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L26)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: core/src/video.ts:26
 
 > `readonly` **width**: `number`
 
-Defined in: core/src/video.ts:25
+Defined in: [core/src/video.ts:25](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L25)

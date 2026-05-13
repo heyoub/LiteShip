@@ -6,7 +6,7 @@
 
 # Interface: CSSContainerRule
 
-Defined in: compiler/src/css.ts:36
+Defined in: [compiler/src/css.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/css.ts#L36)
 
 A `@container` at-rule grouping rules that apply at a given container query.
 
@@ -19,7 +19,7 @@ is derived from the boundary's `input` identifier.
 
 > `readonly` **name**: `string`
 
-Defined in: compiler/src/css.ts:38
+Defined in: [compiler/src/css.ts:38](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/css.ts#L38)
 
 Container name (sanitized from the boundary input).
 
@@ -29,7 +29,7 @@ Container name (sanitized from the boundary input).
 
 > `readonly` **query**: `string`
 
-Defined in: compiler/src/css.ts:40
+Defined in: [compiler/src/css.ts:40](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/css.ts#L40)
 
 Condition text like `(width >= 768px)`.
 
@@ -39,6 +39,6 @@ Condition text like `(width >= 768px)`.
 
 > `readonly` **rules**: readonly [`CSSRule`](CSSRule.md)[]
 
-Defined in: compiler/src/css.ts:42
+Defined in: [compiler/src/css.ts:42](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/css.ts#L42)
 
 Rules evaluated inside the container query.

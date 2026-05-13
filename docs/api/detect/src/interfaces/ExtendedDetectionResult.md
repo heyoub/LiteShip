@@ -6,7 +6,7 @@
 
 # Interface: ExtendedDetectionResult
 
-Defined in: detect/src/detect.ts:142
+Defined in: [detect/src/detect.ts:142](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L142)
 
 Full detection result including design and motion tiers.
 
@@ -24,7 +24,7 @@ and compiler dispatch.
 
 > `readonly` **capabilities**: [`ExtendedDeviceCapabilities`](ExtendedDeviceCapabilities.md)
 
-Defined in: detect/src/detect.ts:144
+Defined in: [detect/src/detect.ts:144](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L144)
 
 Extended capabilities (superset of `DeviceCapabilities`).
 
@@ -38,7 +38,7 @@ Extended capabilities (superset of `DeviceCapabilities`).
 
 > `readonly` **capSet**: [`CapSet`](#)
 
-Defined in: detect/src/detect.ts:108
+Defined in: [detect/src/detect.ts:108](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L108)
 
 Monotone set of every [CapLevel](#) at or below `tier`.
 
@@ -52,7 +52,7 @@ Monotone set of every [CapLevel](#) at or below `tier`.
 
 > `readonly` **confidence**: `number`
 
-Defined in: detect/src/detect.ts:110
+Defined in: [detect/src/detect.ts:110](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L110)
 
 Heuristic confidence in `[0.5, 1]` based on how many probes succeeded.
 
@@ -66,7 +66,7 @@ Heuristic confidence in `[0.5, 1]` based on how many probes succeeded.
 
 > `readonly` **designTier**: [`DesignTier`](../type-aliases/DesignTier.md)
 
-Defined in: detect/src/detect.ts:146
+Defined in: [detect/src/detect.ts:146](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L146)
 
 Visual fidelity tier derived from display metadata.
 
@@ -76,7 +76,7 @@ Visual fidelity tier derived from display metadata.
 
 > `readonly` **motionTier**: `MotionTier`
 
-Defined in: detect/src/detect.ts:148
+Defined in: [detect/src/detect.ts:148](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L148)
 
 Motion complexity tier derived from GPU, cores, and reduced-motion.
 
@@ -86,7 +86,7 @@ Motion complexity tier derived from GPU, cores, and reduced-motion.
 
 > `readonly` **tier**: [`CapLevel`](#)
 
-Defined in: detect/src/detect.ts:106
+Defined in: [detect/src/detect.ts:106](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L106)
 
 Highest [CapLevel](#) the device qualifies for.
 

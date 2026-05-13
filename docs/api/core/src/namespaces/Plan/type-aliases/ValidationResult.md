@@ -8,6 +8,6 @@
 
 > **ValidationResult** = `PlanValidationResult`
 
-Defined in: core/src/plan.ts:312
+Defined in: [core/src/plan.ts:312](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/plan.ts#L312)
 
 Alias for `PlanValidationResult`.

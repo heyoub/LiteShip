@@ -8,7 +8,7 @@
 
 > `const` **ease**: `object`
 
-Defined in: scene/src/sugar/ease.ts:42
+Defined in: [scene/src/sugar/ease.ts:42](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/sugar/ease.ts#L42)
 
 Named easing catalog. Closed set; extend via ADR amendment.
 

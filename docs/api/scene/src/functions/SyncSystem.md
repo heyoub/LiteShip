@@ -8,7 +8,7 @@
 
 > **SyncSystem**(`frameIndex`, `fps?`): `SystemShape`
 
-Defined in: scene/src/systems/sync.ts:30
+Defined in: [scene/src/systems/sync.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/sync.ts#L30)
 
 Build a SyncSystem keyed to a frame index. Resolves the current scene
 time from `frameIndex / fps`, queries the world for `Beat`-tagged

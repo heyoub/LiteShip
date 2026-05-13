@@ -8,7 +8,7 @@
 
 > `const` **Style**: `StyleFactory` & `object`
 
-Defined in: core/src/style.ts:191
+Defined in: [core/src/style.ts:191](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/style.ts#L191)
 
 Style namespace -- adaptive style primitive for constraint-based rendering.
 

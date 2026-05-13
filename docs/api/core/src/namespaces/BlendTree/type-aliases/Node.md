@@ -8,7 +8,7 @@
 
 > **Node**\<`T`\> = `BlendNodeShape`\<`T`\>
 
-Defined in: core/src/blend.ts:134
+Defined in: [core/src/blend.ts:134](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/blend.ts#L134)
 
 Individual leaf/intermediate node in a blend tree.
 

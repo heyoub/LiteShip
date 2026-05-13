@@ -8,7 +8,7 @@
 
 > **Controllable**\<`T`\> = `ControllableSignalShape`\<`T`\>
 
-Defined in: core/src/signal.ts:342
+Defined in: [core/src/signal.ts:342](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/signal.ts#L342)
 
 Structural shape of a seekable, pausable signal — e.g. driven by Remotion or a scrub UI.
 

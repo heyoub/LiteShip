@@ -8,6 +8,6 @@
 
 > `const` **SSE\_RECONNECT\_MAX\_MS**: `30000` = `30_000`
 
-Defined in: core/src/defaults.ts:26
+Defined in: [core/src/defaults.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/defaults.ts#L26)
 
 Default SSE max reconnect delay in ms. Used by: web/stream/sse.ts

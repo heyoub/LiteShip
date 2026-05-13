@@ -6,7 +6,7 @@
 
 # Interface: AttributionDecl
 
-Defined in: core/src/capsule.ts:47
+Defined in: [core/src/capsule.ts:47](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L47)
 
 License and authorship metadata carried for audit receipts.
 
@@ -16,7 +16,7 @@ License and authorship metadata carried for audit receipts.
 
 > `readonly` **author**: `string`
 
-Defined in: core/src/capsule.ts:49
+Defined in: [core/src/capsule.ts:49](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L49)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/capsule.ts:49
 
 > `readonly` **license**: `string`
 
-Defined in: core/src/capsule.ts:48
+Defined in: [core/src/capsule.ts:48](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L48)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: core/src/capsule.ts:48
 
 > `readonly` `optional` **url?**: `string`
 
-Defined in: core/src/capsule.ts:50
+Defined in: [core/src/capsule.ts:50](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L50)

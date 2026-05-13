@@ -6,7 +6,7 @@
 
 # Interface: CapabilityDecl\<_R\>
 
-Defined in: core/src/capsule.ts:26
+Defined in: [core/src/capsule.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L26)
 
 What services a capsule reads / writes. `_R` parameter carried for type-level inference.
 
@@ -22,7 +22,7 @@ What services a capsule reads / writes. `_R` parameter carried for type-level in
 
 > `readonly` `optional` **effects?**: readonly `string`[]
 
-Defined in: core/src/capsule.ts:29
+Defined in: [core/src/capsule.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L29)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: core/src/capsule.ts:29
 
 > `readonly` **reads**: readonly `string`[]
 
-Defined in: core/src/capsule.ts:27
+Defined in: [core/src/capsule.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L27)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: core/src/capsule.ts:27
 
 > `readonly` **writes**: readonly `string`[]
 
-Defined in: core/src/capsule.ts:28
+Defined in: [core/src/capsule.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capsule.ts#L28)

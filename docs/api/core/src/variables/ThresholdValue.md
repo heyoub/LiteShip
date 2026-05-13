@@ -8,7 +8,7 @@
 
 > **ThresholdValue**: (`value`) => `ThresholdValue`
 
-Defined in: core/src/brands.ts:30
+Defined in: [core/src/brands.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/brands.ts#L32)
 
 Wrap a plain number as a ThresholdValue — the one sanctioned cast site for this brand.
 

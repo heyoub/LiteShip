@@ -8,7 +8,7 @@
 
 > `const` **TokenBuffer**: `object`
 
-Defined in: core/src/token-buffer.ts:141
+Defined in: [core/src/token-buffer.ts:141](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/token-buffer.ts#L141)
 
 TokenBuffer — zero-alloc ring buffer that absorbs bursty LLM token arrival
 and hands tokens out at a smooth cadence. Reports stall via `isStalled`

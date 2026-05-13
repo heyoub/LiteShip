@@ -6,7 +6,7 @@
 
 # Interface: CellMeta
 
-Defined in: core/src/protocol.ts:33
+Defined in: [core/src/protocol.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/protocol.ts#L33)
 
 Protocol metadata attached to every [CellEnvelope](CellEnvelope.md): HLC timestamps + monotonic version counter.
 
@@ -16,7 +16,7 @@ Protocol metadata attached to every [CellEnvelope](CellEnvelope.md): HLC timesta
 
 > `readonly` **created**: [`HLCBrand`](HLCBrand.md)
 
-Defined in: core/src/protocol.ts:34
+Defined in: [core/src/protocol.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/protocol.ts#L34)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/protocol.ts:34
 
 > `readonly` **updated**: [`HLCBrand`](HLCBrand.md)
 
-Defined in: core/src/protocol.ts:35
+Defined in: [core/src/protocol.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/protocol.ts#L35)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: core/src/protocol.ts:35
 
 > `readonly` **version**: `number`
 
-Defined in: core/src/protocol.ts:36
+Defined in: [core/src/protocol.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/protocol.ts#L36)

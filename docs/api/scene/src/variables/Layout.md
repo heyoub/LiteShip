@@ -8,7 +8,7 @@
 
 > `const` **Layout**: `object`
 
-Defined in: scene/src/sugar/layout.ts:19
+Defined in: [scene/src/sugar/layout.ts:19](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/sugar/layout.ts#L19)
 
 Layout helpers for multi-track arrangement.
 

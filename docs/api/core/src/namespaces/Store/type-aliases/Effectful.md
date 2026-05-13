@@ -8,7 +8,7 @@
 
 > **Effectful**\<`S`, `Msg`, `E`, `R`\> = `EffectfulStoreShape`\<`S`, `Msg`, `E`, `R`\>
 
-Defined in: core/src/store.ts:76
+Defined in: [core/src/store.ts:76](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/store.ts#L76)
 
 Structural shape of an effectful store; adds error channel `E` and requirements `R`.
 

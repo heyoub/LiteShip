@@ -8,6 +8,6 @@
 
 > **FixedStep** = `FixedStepShape`
 
-Defined in: core/src/scheduler.ts:158
+Defined in: [core/src/scheduler.ts:158](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/scheduler.ts#L158)
 
 Fixed-step scheduler with manual `step()` advancement.

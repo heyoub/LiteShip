@@ -8,7 +8,7 @@
 
 > `const` **Diagnostics**: `object`
 
-Defined in: core/src/diagnostics.ts:158
+Defined in: [core/src/diagnostics.ts:158](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L158)
 
 Diagnostics facade — runtime boundaries call [Diagnostics.warn](#warn) / [Diagnostics.error](#error)
 instead of `console.*` so hosts can redirect or capture every diagnostic via [Diagnostics.setSink](#setsink).

@@ -4,6 +4,29 @@ All notable changes to czap. The format follows [Keep a Changelog](https://keepa
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Pre-1.0
 break policy is intentionally aggressive — minor version bumps may carry breaking changes.
 
+## [0.1.1] — 2026-05-13 (release-automation patch)
+
+First release through the GitHub Actions release pipeline. No runtime
+API changes — this version exists to exercise the release-automation
+substrate end-to-end on a real publish before any code change rides it.
+
+### Release infrastructure
+- `.github/workflows/release.yml` cuts releases on `v*.*.*` tag push.
+  Runs the full gauntlet for release certification, then loops
+  `czap ship --filter @czap/<pkg>` over all 15 packages, then creates
+  the GitHub Release and attaches the ShipCapsules. v0.1.1 authenticates
+  via `NPM_TOKEN` secret (granular access token with `bypass_2fa: true`)
+  while trusted-publisher OIDC setup is pending; v0.2 pivots to OIDC
+  once each package has its trusted-publisher configured at
+  `https://www.npmjs.com/package/@czap/<name>/access`.
+- `czap ship --provenance` flag added (passthrough to `pnpm publish
+  --provenance`); reserved for the v0.2 OIDC pivot.
+
+### Documentation
+- `docs/RELEASING.md` documents the v0.1.1+ release-cutting flow
+  (`git tag -a vX.Y.Z` → workflow auto-fires) and the per-package
+  trusted-publisher form values for the eventual OIDC pivot.
+
 ## [0.1.0] — 2026-05-07 (initial public release)
 
 First public release on npm and GitHub. Pre-release entries below this section

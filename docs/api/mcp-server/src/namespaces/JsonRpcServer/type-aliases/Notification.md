@@ -8,6 +8,6 @@
 
 > **Notification** = [`JsonRpcNotification`](../../../interfaces/JsonRpcNotification.md)
 
-Defined in: mcp-server/src/jsonrpc.ts:234
+Defined in: [mcp-server/src/jsonrpc.ts:234](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L234)
 
 Wire-shape notification (§4.1).

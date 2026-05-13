@@ -8,7 +8,7 @@
 
 > `const` **AVBridge**: `object`
 
-Defined in: core/src/av-bridge.ts:154
+Defined in: [core/src/av-bridge.ts:154](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/av-bridge.ts#L154)
 
 AVBridge -- SharedArrayBuffer-based timeline bridge for audio/video convergence.
 Provides atomic sample counting shared between AudioWorklet and visual compositor.

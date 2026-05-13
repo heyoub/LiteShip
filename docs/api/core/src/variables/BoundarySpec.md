@@ -8,7 +8,7 @@
 
 > **BoundarySpec**: `object`
 
-Defined in: core/src/boundary.ts:316
+Defined in: [core/src/boundary.ts:316](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/boundary.ts#L316)
 
 BoundarySpec namespace — helpers for working with the optional activation filter on a boundary.
 

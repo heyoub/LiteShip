@@ -8,7 +8,7 @@
 
 > **ToWorkerMessage** = `InitMessage` \| `AddQuantizerMessage` \| `BootstrapQuantizersMessage` \| `StartupComputeMessage` \| `BootstrapResolvedStateMessage` \| `ApplyResolvedStateMessage` \| `ApplyUpdatesMessage` \| `RemoveQuantizerMessage` \| `EvaluateMessage` \| `SetBlendMessage` \| `WarmResetMessage` \| `ComputeMessage` \| `StartRenderMessage` \| `StopRenderMessage` \| `TransferCanvasMessage` \| `DisposeMessage`
 
-Defined in: worker/src/messages.ts:198
+Defined in: [worker/src/messages.ts:198](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/messages.ts#L198)
 
 Every message the main thread may send to a compositor/render worker.
 Discriminated on the `type` field.

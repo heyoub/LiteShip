@@ -6,7 +6,7 @@
 
 # Interface: MatchResult
 
-Defined in: web/src/types.ts:285
+Defined in: [web/src/types.ts:285](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L285)
 
 Result of matching two nodes.
 
@@ -16,7 +16,7 @@ Result of matching two nodes.
 
 > `readonly` `optional` **matchedId?**: `string`
 
-Defined in: web/src/types.ts:288
+Defined in: [web/src/types.ts:288](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L288)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:288
 
 > `readonly` **matches**: `boolean`
 
-Defined in: web/src/types.ts:286
+Defined in: [web/src/types.ts:286](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L286)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: web/src/types.ts:286
 
 > `readonly` **priority**: [`MatchPriority`](../type-aliases/MatchPriority.md)
 
-Defined in: web/src/types.ts:287
+Defined in: [web/src/types.ts:287](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L287)

@@ -8,7 +8,7 @@
 
 > **evaluate**\<`B`\>(`boundary`, `value`, `previousState?`): [`EvaluateResult`](../interfaces/EvaluateResult.md)\<`StateUnion`\<`B`\>\>
 
-Defined in: quantizer/src/evaluate.ts:55
+Defined in: [quantizer/src/evaluate.ts:55](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/evaluate.ts#L55)
 
 Find which state a value maps to via binary search over sorted thresholds.
 With hysteresis: if previousState is provided and the value is within the

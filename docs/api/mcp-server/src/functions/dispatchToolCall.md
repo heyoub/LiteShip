@@ -8,7 +8,7 @@
 
 > **dispatchToolCall**(`call`): `Promise`\<[`McpToolResult`](../interfaces/McpToolResult.md)\>
 
-Defined in: mcp-server/src/dispatch.ts:130
+Defined in: [mcp-server/src/dispatch.ts:130](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L130)
 
 Translate a tools/call into argv, run the CLI, capture stdout.
 

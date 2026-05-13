@@ -8,7 +8,7 @@
 
 > `const` **LiveCell**: `object`
 
-Defined in: core/src/live-cell.ts:189
+Defined in: [core/src/live-cell.ts:189](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/live-cell.ts#L189)
 
 LiveCell — bridge between the [Cell](Cell.md) reactive graph and the wire
 protocol. A `LiveCell` wraps a `Cell` with a typed [CellEnvelope](../interfaces/CellEnvelope.md) —

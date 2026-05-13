@@ -6,7 +6,7 @@
 
 # Interface: DecodedVideo
 
-Defined in: assets/src/decoders/video.ts:16
+Defined in: [assets/src/decoders/video.ts:16](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L16)
 
 Decoded video container + codec metadata.
 
@@ -16,7 +16,7 @@ Decoded video container + codec metadata.
 
 > `readonly` `optional` **codec?**: `string`
 
-Defined in: assets/src/decoders/video.ts:18
+Defined in: [assets/src/decoders/video.ts:18](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L18)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: assets/src/decoders/video.ts:18
 
 > `readonly` **container**: `string`
 
-Defined in: assets/src/decoders/video.ts:17
+Defined in: [assets/src/decoders/video.ts:17](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L17)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: assets/src/decoders/video.ts:17
 
 > `readonly` `optional` **durationSec?**: `number`
 
-Defined in: assets/src/decoders/video.ts:21
+Defined in: [assets/src/decoders/video.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L21)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: assets/src/decoders/video.ts:21
 
 > `readonly` `optional` **fps?**: `number`
 
-Defined in: assets/src/decoders/video.ts:22
+Defined in: [assets/src/decoders/video.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L22)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: assets/src/decoders/video.ts:22
 
 > `readonly` `optional` **height?**: `number`
 
-Defined in: assets/src/decoders/video.ts:20
+Defined in: [assets/src/decoders/video.ts:20](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L20)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: assets/src/decoders/video.ts:20
 
 > `readonly` `optional` **width?**: `number`
 
-Defined in: assets/src/decoders/video.ts:19
+Defined in: [assets/src/decoders/video.ts:19](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/decoders/video.ts#L19)

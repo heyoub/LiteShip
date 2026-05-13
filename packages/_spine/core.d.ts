@@ -35,6 +35,7 @@ declare const SignalInputBrand: unique symbol;
 declare const ThresholdValueBrand: unique symbol;
 declare const StateNameBrand: unique symbol;
 declare const ContentAddressBrand: unique symbol;
+declare const IntegrityDigestBrand: unique symbol;
 declare const HLCBrand: unique symbol;
 declare const MillisBrand: unique symbol;
 
@@ -49,6 +50,27 @@ export type StateName<S extends string = string> = S & { readonly [StateNameBran
 
 /** Content-addressed hash (FNV-1a, fnv1a:hex format) */
 export type ContentAddress = string & { readonly [ContentAddressBrand]: true };
+
+/**
+ * Cryptographic content digest. Format: `sha256:<64-hex>` or `blake3:<64-hex>`.
+ * The algorithmic complement to {@link ContentAddress}: same canonical bytes,
+ * stronger hash. Carried by {@link AddressedDigest} on external/release
+ * artifacts where collision resistance matters (see ADR-0011).
+ */
+export type IntegrityDigest = string & { readonly [IntegrityDigestBrand]: true };
+
+/**
+ * A pair of hashes over the same canonical bytes: the ergonomic identity
+ * ({@link ContentAddress}, fnv1a) plus a cryptographic digest
+ * ({@link IntegrityDigest}, sha256 or blake3). Used by external-artifact
+ * carriers like ShipCapsule (ADR-0011). `algo` records which hash family
+ * minted the integrity digest; v0.1.0 emits `sha256`, v0.2 will emit `blake3`.
+ */
+export interface AddressedDigest {
+  readonly display_id: ContentAddress;
+  readonly integrity_digest: IntegrityDigest;
+  readonly algo: 'sha256' | 'blake3';
+}
 
 /**
  * Branded millisecond duration -- forces explicit wrapping of raw numbers at temporal API boundaries.

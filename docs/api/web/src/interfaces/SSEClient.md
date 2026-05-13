@@ -6,7 +6,7 @@
 
 # Interface: SSEClient
 
-Defined in: web/src/stream/sse.ts:21
+Defined in: [web/src/stream/sse.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L21)
 
 SSE client instance.
 
@@ -16,7 +16,7 @@ SSE client instance.
 
 > `readonly` **backpressure**: `Effect`\<[`BackpressureHint`](BackpressureHint.md)\>
 
-Defined in: web/src/stream/sse.ts:27
+Defined in: [web/src/stream/sse.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L27)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/stream/sse.ts:27
 
 > `readonly` **lastEventId**: `Effect`\<`string` \| `null`\>
 
-Defined in: web/src/stream/sse.ts:26
+Defined in: [web/src/stream/sse.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L26)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/stream/sse.ts:26
 
 > `readonly` **messages**: `Stream`\<[`SSEMessage`](../type-aliases/SSEMessage.md)\>
 
-Defined in: web/src/stream/sse.ts:22
+Defined in: [web/src/stream/sse.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L22)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: web/src/stream/sse.ts:22
 
 > `readonly` **state**: `Effect`\<[`SSEState`](../type-aliases/SSEState.md)\>
 
-Defined in: web/src/stream/sse.ts:23
+Defined in: [web/src/stream/sse.ts:23](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L23)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: web/src/stream/sse.ts:23
 
 > **close**(): `Effect`\<`void`\>
 
-Defined in: web/src/stream/sse.ts:24
+Defined in: [web/src/stream/sse.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L24)
 
 #### Returns
 
@@ -60,7 +60,7 @@ Defined in: web/src/stream/sse.ts:24
 
 > **reconnect**(): `Effect`\<`void`\>
 
-Defined in: web/src/stream/sse.ts:25
+Defined in: [web/src/stream/sse.ts:25](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/stream/sse.ts#L25)
 
 #### Returns
 

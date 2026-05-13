@@ -6,7 +6,7 @@
 
 # Interface: BoundaryCache
 
-Defined in: edge/src/kv-cache.ts:41
+Defined in: [edge/src/kv-cache.ts:41](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L41)
 
 Content-addressed cache for boundary compilation results keyed by
 tier combination.
@@ -17,7 +17,7 @@ tier combination.
 
 > **getCompiledOutputs**(`boundaryId`, `tierResult`): `Promise`\<[`CompiledOutputs`](CompiledOutputs.md) \| `null`\>
 
-Defined in: edge/src/kv-cache.ts:42
+Defined in: [edge/src/kv-cache.ts:42](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L42)
 
 #### Parameters
 
@@ -39,7 +39,7 @@ Defined in: edge/src/kv-cache.ts:42
 
 > **putCompiledOutputs**(`boundaryId`, `tierResult`, `outputs`): `Promise`\<`void`\>
 
-Defined in: edge/src/kv-cache.ts:44
+Defined in: [edge/src/kv-cache.ts:44](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L44)
 
 #### Parameters
 

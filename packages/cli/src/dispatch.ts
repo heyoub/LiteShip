@@ -14,6 +14,8 @@ import { assetAnalyze } from './commands/asset-analyze.js';
 import { assetVerify } from './commands/asset-verify.js';
 import { capsuleInspect, capsuleList, capsuleVerify } from './commands/capsule.js';
 import { gauntlet } from './commands/gauntlet.js';
+import { ship } from './commands/ship.js';
+import { verify } from './commands/ship-verify.js';
 import { emitError } from './receipts.js';
 
 /** Run the CLI with the given argv slice. Returns a process exit code. */
@@ -65,6 +67,12 @@ export async function run(argv: readonly string[]): Promise<number> {
     }
     case 'gauntlet': {
       return gauntlet(rest.includes('--dry-run'));
+    }
+    case 'ship': {
+      return ship(rest);
+    }
+    case 'verify': {
+      return verify(rest);
     }
     case 'mcp': {
       const { start } = await import('@czap/mcp-server');

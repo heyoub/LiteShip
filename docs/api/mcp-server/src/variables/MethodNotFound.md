@@ -8,4 +8,4 @@
 
 > `const` **MethodNotFound**: `-32601`
 
-Defined in: mcp-server/src/jsonrpc.ts:68
+Defined in: [mcp-server/src/jsonrpc.ts:68](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L68)

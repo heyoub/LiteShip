@@ -6,7 +6,7 @@
 
 # Interface: PluginConfig
 
-Defined in: vite/src/plugin.ts:35
+Defined in: [vite/src/plugin.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/plugin.ts#L35)
 
 Configuration options for the [plugin](../functions/plugin.md) factory. Every field
 is optional; omitted values use convention-based defaults.
@@ -17,7 +17,7 @@ is optional; omitted values use convention-based defaults.
 
 > `readonly` `optional` **dirs?**: `Partial`\<`Record`\<`"style"` \| `"boundary"` \| `"token"` \| `"theme"`, `string`\>\>
 
-Defined in: vite/src/plugin.ts:37
+Defined in: [vite/src/plugin.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/plugin.ts#L37)
 
 Override source directories for each primitive kind.
 
@@ -27,7 +27,7 @@ Override source directories for each primitive kind.
 
 > `readonly` `optional` **environments?**: readonly (`"browser"` \| `"server"` \| `"shader"`)[]
 
-Defined in: vite/src/plugin.ts:41
+Defined in: [vite/src/plugin.ts:41](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/plugin.ts#L41)
 
 Named Vite environments to configure (browser / server / shader).
 
@@ -37,7 +37,7 @@ Named Vite environments to configure (browser / server / shader).
 
 > `readonly` `optional` **hmr?**: `boolean`
 
-Defined in: vite/src/plugin.ts:39
+Defined in: [vite/src/plugin.ts:39](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/plugin.ts#L39)
 
 Toggle surgical HMR emission (default `true`).
 
@@ -47,7 +47,7 @@ Toggle surgical HMR emission (default `true`).
 
 > `readonly` `optional` **wasm?**: `object`
 
-Defined in: vite/src/plugin.ts:43
+Defined in: [vite/src/plugin.ts:43](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/plugin.ts#L43)
 
 Opt-in WASM runtime configuration.
 

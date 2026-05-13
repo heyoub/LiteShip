@@ -124,6 +124,8 @@ LiteShip is greenfield-first. There is no migration guide for porting an existin
 | Vite / Astro | 8 / 6 | same — no known gap |
 | Browsers | Chromium + Firefox + WebKit | same — no known gap |
 
+**Peer dependency on Effect is currently `>=4.0.0-beta.0`.** Effect 4 is still in beta upstream (the `latest` dist-tag points at Effect 3.x). LiteShip's published packages declare a broad beta range so consumers can pick the beta they want to vendor; the workspace dev-pins `4.0.0-beta.32` as the tested baseline. When Effect 4.0 stable ships, LiteShip will tighten the peer range to `^4.0.0` in a minor release with a documented upgrade path. If your procurement process doesn't accept beta runtime dependencies, this is the load-bearing item to evaluate before adopting LiteShip in production.
+
 **Windows + Linux are tier-1.** Every push and pull request runs the full `gauntlet:full` on Linux (`truth-linux`) and a broad smoke sweep on Windows (`windows-smoke`) via `.github/workflows/ci.yml`. Both jobs are required for merge. Automated regression catches OS-specific drift before it lands. WebCodecs capture and related browser-specific paths are Chromium-first.
 
 **macOS is tier-2: best-effort with a real CI signal.** A `macos-smoke` job runs on every push and pull request via `.github/workflows/ci.yml` (build, typecheck, lint, invariants, test, test:vite/astro/tailwind, test:redteam, package:smoke). The job is `continue-on-error: true` — a macOS regression won't block merge to main, but it surfaces in the PR check list as a real yellow signal, not as silence. Known areas where macOS may differ from the gated paths:
@@ -142,6 +144,7 @@ Both milestones are signal-gated, not promise-gated. Contributors are welcome to
 ## Documentation
 
 - [docs/GETTING-STARTED.md](./docs/GETTING-STARTED.md): clone, install, first boundary, end-to-end
+- [docs/HOSTING.md](./docs/HOSTING.md): host-application first-hour checklist (versions, CSP, Trusted Types, five common failure modes)
 - [docs/ASTRO-STATIC-MENTAL-MODEL.md](./docs/ASTRO-STATIC-MENTAL-MODEL.md): signals to boundaries to named states to outputs, the theory-first authoring frame
 - [docs/AUTHORING-MODEL.md](./docs/AUTHORING-MODEL.md): definition shapes, naming, and composition rules
 - [docs/ASTRO-RUNTIME-MODEL.md](./docs/ASTRO-RUNTIME-MODEL.md): how Astro hosts the runtime, directives, and the escalation path

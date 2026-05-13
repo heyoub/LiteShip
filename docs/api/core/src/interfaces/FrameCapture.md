@@ -6,7 +6,7 @@
 
 # Interface: FrameCapture
 
-Defined in: core/src/capture.ts:35
+Defined in: [core/src/capture.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capture.ts#L35)
 
 Minimal encoder contract: `init` to open the encoder, `capture` per frame,
 `finalize` to flush and return the encoded blob. Implemented by `@czap/web`
@@ -18,7 +18,7 @@ Minimal encoder contract: `init` to open the encoder, `capture` per frame,
 
 > `readonly` **\_tag**: `"FrameCapture"`
 
-Defined in: core/src/capture.ts:36
+Defined in: [core/src/capture.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capture.ts#L36)
 
 ## Methods
 
@@ -26,7 +26,7 @@ Defined in: core/src/capture.ts:36
 
 > **capture**(`frame`): `Promise`\<`void`\>
 
-Defined in: core/src/capture.ts:38
+Defined in: [core/src/capture.ts:38](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capture.ts#L38)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: core/src/capture.ts:38
 
 > **finalize**(): `Promise`\<[`CaptureResult`](CaptureResult.md)\>
 
-Defined in: core/src/capture.ts:39
+Defined in: [core/src/capture.ts:39](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capture.ts#L39)
 
 #### Returns
 
@@ -56,7 +56,7 @@ Defined in: core/src/capture.ts:39
 
 > **init**(`config`): `Promise`\<`void`\>
 
-Defined in: core/src/capture.ts:37
+Defined in: [core/src/capture.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/capture.ts#L37)
 
 #### Parameters
 

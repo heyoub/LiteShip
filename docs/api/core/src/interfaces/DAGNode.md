@@ -6,7 +6,7 @@
 
 # Interface: DAGNode
 
-Defined in: core/src/dag.ts:14
+Defined in: [core/src/dag.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dag.ts#L14)
 
 Single vertex in a [ReceiptDAG](ReceiptDAG.md): an envelope plus its parent and child hashes.
 
@@ -16,7 +16,7 @@ Single vertex in a [ReceiptDAG](ReceiptDAG.md): an envelope plus its parent and 
 
 > `readonly` **children**: readonly `string`[]
 
-Defined in: core/src/dag.ts:17
+Defined in: [core/src/dag.ts:17](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dag.ts#L17)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: core/src/dag.ts:17
 
 > `readonly` **envelope**: [`ReceiptEnvelope`](ReceiptEnvelope.md)
 
-Defined in: core/src/dag.ts:15
+Defined in: [core/src/dag.ts:15](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dag.ts#L15)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: core/src/dag.ts:15
 
 > `readonly` **parents**: readonly `string`[]
 
-Defined in: core/src/dag.ts:16
+Defined in: [core/src/dag.ts:16](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dag.ts#L16)

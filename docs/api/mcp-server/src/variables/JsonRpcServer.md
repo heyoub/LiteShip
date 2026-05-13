@@ -8,7 +8,7 @@
 
 > `const` **JsonRpcServer**: `object`
 
-Defined in: mcp-server/src/jsonrpc.ts:222
+Defined in: [mcp-server/src/jsonrpc.ts:222](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L222)
 
 Namespaced public surface of the kernel.
 

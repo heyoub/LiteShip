@@ -8,7 +8,7 @@
 
 > **detectGPUTier**(): `Effect`\<[`GPUTier`](../type-aliases/GPUTier.md)\>
 
-Defined in: detect/src/detect.ts:524
+Defined in: [detect/src/detect.ts:524](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L524)
 
 Detect GPU tier from WebGL renderer string heuristics.
 Falls back to tier 1 (integrated) when WebGL is unavailable.

@@ -166,6 +166,10 @@ const API_REGISTRY: Record<string, { methods: string[]; values?: string[] }> = {
   // ── Canonical CBOR (RFC 8949 §4.2.1) ─────────────────────────────
   CanonicalCbor: { methods: ['encode'] },
 
+  // ── ShipCapsule (ADR-0011) ────────────────────────────────────────
+  AddressedDigest: { methods: ['of'] },
+  ShipCapsule: { methods: ['make', 'canonicalize', 'decode', 'computeId'] },
+
   // Harness lives at `@czap/core/harness` sub-path — intentionally NOT in
   // the main entry to keep fast-check + code-gen surface out of every
   // consumer's bundle. Verified separately below.
@@ -191,6 +195,10 @@ const STANDALONE_FUNCTIONS = [
   'defineCapsule',
   'getCapsuleCatalog',
   // `resetCapsuleCatalog` lives at `@czap/core/testing` sub-path — see below.
+  // ShipCapsule release-input addressing helpers (tarballManifestAddress,
+  // lockfileAddress, workspaceManifestAddress, normalizedDryRunAddress,
+  // normalizeDryRunOutput) live in @czap/cli per ADR-0011 — they import
+  // node:zlib and must stay out of the browser-bundleable @czap/core.
 ];
 
 // ── Error classes ───────────────────────────────────────────────────
@@ -224,6 +232,7 @@ const BRANDED_CONSTRUCTORS = [
   'ThresholdValue',
   'StateName',
   'ContentAddress',
+  'IntegrityDigest',
   'TokenRef',
   'Millis',
   'EntityId',

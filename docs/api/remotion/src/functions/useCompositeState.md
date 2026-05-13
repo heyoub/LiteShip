@@ -8,7 +8,7 @@
 
 > **useCompositeState**(`frames`): `CompositeState`
 
-Defined in: remotion/src/hooks.ts:92
+Defined in: [remotion/src/hooks.ts:92](https://github.com/heyoub/LiteShip/blob/main/packages/remotion/src/hooks.ts#L92)
 
 Remotion-aware hook that returns the `CompositeState` for the current
 frame. Internally calls Remotion's `useCurrentFrame` and defers to

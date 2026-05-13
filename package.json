@@ -1,6 +1,6 @@
 {
   "name": "czap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Constraint-based adaptive rendering framework — monorepo root",
   "license": "MIT",
@@ -64,7 +64,9 @@
     "test:vite": "pnpm exec tsx scripts/test-vite.ts",
     "test:tailwind": "pnpm exec tsx scripts/test-tailwind.ts",
     "package:smoke": "pnpm run build && pnpm exec tsx scripts/package-smoke.ts",
-    "release:notes": "pnpm exec tsx scripts/extract-changelog-section.ts --version 0.1.0 --out RELEASE_NOTES_v0.1.0.md",
+    "release:notes": "pnpm exec tsx scripts/extract-changelog-section.ts --version 0.1.1 --out RELEASE_NOTES_v0.1.1.md",
+    "ship": "node packages/cli/bin/czap.mjs ship",
+    "verify": "node packages/cli/bin/czap.mjs verify",
     "gauntlet:full": "tsx scripts/gauntlet.ts",
     "gauntlet:serial": "pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run docs:check && pnpm exec tsx scripts/check-invariants.ts && pnpm test && pnpm run test:vite && pnpm run test:astro && pnpm run test:tailwind && pnpm run test:e2e && pnpm run test:e2e:stress && pnpm run test:e2e:stream-stress && pnpm run test:flake && pnpm run test:redteam && pnpm run bench && pnpm run bench:gate && pnpm run bench:trend && pnpm run bench:reality && pnpm run package:smoke && pnpm run coverage:merge && pnpm run report:runtime-seams && pnpm run audit && pnpm run report:satellite-scan && pnpm run feedback:verify && pnpm run runtime:gate && pnpm run flex:verify",
     "demo:remotion": "pnpm run --filter remotion-demo render",

@@ -8,7 +8,7 @@
 
 > `const` **CompositorStatePool**: `object`
 
-Defined in: core/src/compositor-pool.ts:157
+Defined in: [core/src/compositor-pool.ts:157](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/compositor-pool.ts#L157)
 
 CompositorStatePool -- ring buffer of pre-allocated CompositeState objects.
 Zero-allocation hot path: acquire a state, write into it, render, then release.

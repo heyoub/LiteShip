@@ -6,7 +6,7 @@
 
 # Interface: StartOpts
 
-Defined in: mcp-server/src/start.ts:11
+Defined in: [mcp-server/src/start.ts:11](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/start.ts#L11)
 
 Options for `start`.
 
@@ -16,4 +16,4 @@ Options for `start`.
 
 > `readonly` `optional` **http?**: `string`
 
-Defined in: mcp-server/src/start.ts:12
+Defined in: [mcp-server/src/start.ts:12](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/start.ts#L12)

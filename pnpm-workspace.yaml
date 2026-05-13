@@ -7,3 +7,6 @@ allowBuilds:
   esbuild: false
   msgpackr-extract: false
   sharp: false
+shamefullyHoist: false
+strictPeerDependencies: true
+saveWorkspaceProtocol: rolling

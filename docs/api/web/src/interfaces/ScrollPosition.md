@@ -6,7 +6,7 @@
 
 # Interface: ScrollPosition
 
-Defined in: web/src/types.ts:76
+Defined in: [web/src/types.ts:76](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L76)
 
 Scroll position for an element.
 
@@ -16,7 +16,7 @@ Scroll position for an element.
 
 > `readonly` **left**: `number`
 
-Defined in: web/src/types.ts:78
+Defined in: [web/src/types.ts:78](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L78)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: web/src/types.ts:78
 
 > `readonly` **top**: `number`
 
-Defined in: web/src/types.ts:77
+Defined in: [web/src/types.ts:77](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L77)

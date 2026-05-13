@@ -8,6 +8,6 @@
 
 > **IR** = `PlanIR`
 
-Defined in: core/src/plan.ts:304
+Defined in: [core/src/plan.ts:304](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/plan.ts#L304)
 
 Alias for `PlanIR`.

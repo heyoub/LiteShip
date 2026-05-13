@@ -8,7 +8,7 @@
 
 > `const` **CSSCompiler**: `object`
 
-Defined in: compiler/src/css.ts:307
+Defined in: [compiler/src/css.ts:307](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/css.ts#L307)
 
 CSS compiler namespace.
 

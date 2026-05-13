@@ -8,6 +8,6 @@
 
 > **Shape** = `RuntimeCoordinatorShape`
 
-Defined in: core/src/runtime-coordinator.ts:225
+Defined in: [core/src/runtime-coordinator.ts:225](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/runtime-coordinator.ts#L225)
 
 Alias for `RuntimeCoordinatorShape`.

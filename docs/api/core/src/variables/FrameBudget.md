@@ -8,7 +8,7 @@
 
 > `const` **FrameBudget**: `object`
 
-Defined in: core/src/frame-budget.ts:144
+Defined in: [core/src/frame-budget.ts:144](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/frame-budget.ts#L144)
 
 FrameBudget -- rAF-based frame budget manager with priority lanes.
 Tracks remaining time per animation frame and gates work by priority:

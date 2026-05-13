@@ -7,6 +7,7 @@
  */
 
 import { resolve } from 'node:path';
+import type { ContentAddress } from '@czap/core';
 
 /** Base shape carried by every CLI command receipt. */
 export interface BaseReceipt {
@@ -38,6 +39,36 @@ export interface AssetAnalyzeReceipt extends BaseReceipt {
   readonly assetId: string;
   readonly projection: 'beat' | 'onset' | 'waveform';
   readonly markerCount: number;
+}
+
+/** Receipt emitted by `czap ship` for each package whose ShipCapsule was minted. */
+export interface ShipReceipt extends BaseReceipt {
+  readonly command: 'ship';
+  readonly package_name: string;
+  readonly package_version: string;
+  readonly capsule_id: ContentAddress;
+  readonly capsule_path: string;
+  readonly tarball_path: string;
+  readonly generated_at: { readonly wall_ms: number; readonly counter: number; readonly node_id: string };
+  readonly dry_run: boolean;
+}
+
+/** Per-input check outcomes recorded by `czap verify`. Forward-compat fields stay `'skipped'` in v0.1.0. */
+export interface ShipVerifyChecks {
+  readonly tarball_manifest: 'match' | 'mismatch' | 'skipped';
+  readonly lockfile: 'skipped';
+  readonly workspace_manifest: 'skipped';
+  readonly chain_link: 'skipped';
+}
+
+/** Receipt emitted by `czap verify` per ADR-0011. Verdict drives exit code. */
+export interface ShipVerifyReceipt extends BaseReceipt {
+  readonly command: 'verify';
+  readonly verdict: 'Verified' | 'Mismatch' | 'Incomplete' | 'Unknown';
+  readonly tarball: string;
+  readonly capsule_id: ContentAddress | null;
+  readonly checks: ShipVerifyChecks;
+  readonly mismatches: readonly string[];
 }
 
 /** Emit a receipt to stdout as a single JSON line. */

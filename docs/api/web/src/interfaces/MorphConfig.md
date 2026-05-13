@@ -6,7 +6,7 @@
 
 # Interface: MorphConfig
 
-Defined in: web/src/types.ts:121
+Defined in: [web/src/types.ts:121](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L121)
 
 Morph configuration.
 
@@ -16,7 +16,7 @@ Morph configuration.
 
 > `readonly` `optional` **callbacks?**: [`MorphCallbacks`](MorphCallbacks.md)
 
-Defined in: web/src/types.ts:126
+Defined in: [web/src/types.ts:126](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L126)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:126
 
 > `readonly` **morphStyle**: `"innerHTML"` \| `"outerHTML"`
 
-Defined in: web/src/types.ts:125
+Defined in: [web/src/types.ts:125](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L125)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/types.ts:125
 
 > `readonly` **preserveFocus**: `boolean`
 
-Defined in: web/src/types.ts:122
+Defined in: [web/src/types.ts:122](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L122)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: web/src/types.ts:122
 
 > `readonly` **preserveScroll**: `boolean`
 
-Defined in: web/src/types.ts:123
+Defined in: [web/src/types.ts:123](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L123)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: web/src/types.ts:123
 
 > `readonly` **preserveSelection**: `boolean`
 
-Defined in: web/src/types.ts:124
+Defined in: [web/src/types.ts:124](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L124)

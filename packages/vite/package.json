@@ -1,6 +1,6 @@
 {
   "name": "@czap/vite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vite 8 plugin for czap CSS/shader transforms and HMR",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",

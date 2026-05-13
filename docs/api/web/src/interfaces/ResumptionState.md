@@ -6,7 +6,7 @@
 
 # Interface: ResumptionState
 
-Defined in: web/src/types.ts:259
+Defined in: [web/src/types.ts:259](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L259)
 
 Resumption state stored in sessionStorage.
 
@@ -16,7 +16,7 @@ Resumption state stored in sessionStorage.
 
 > `readonly` **artifactId**: `string`
 
-Defined in: web/src/types.ts:262
+Defined in: [web/src/types.ts:262](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L262)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:262
 
 > `readonly` **lastEventId**: `string`
 
-Defined in: web/src/types.ts:260
+Defined in: [web/src/types.ts:260](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L260)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/types.ts:260
 
 > `readonly` **lastSequence**: `number`
 
-Defined in: web/src/types.ts:261
+Defined in: [web/src/types.ts:261](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L261)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: web/src/types.ts:261
 
 > `readonly` **timestamp**: `number`
 
-Defined in: web/src/types.ts:263
+Defined in: [web/src/types.ts:263](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L263)

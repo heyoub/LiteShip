@@ -8,6 +8,6 @@
 
 > **Shape** = `SchedulerShape`
 
-Defined in: core/src/scheduler.ts:156
+Defined in: [core/src/scheduler.ts:156](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/scheduler.ts#L156)
 
 Common structural shape every scheduler variant satisfies.

@@ -8,7 +8,7 @@
 
 > `const` **SemanticId**: `object`
 
-Defined in: web/src/morph/semantic-id.ts:238
+Defined in: [web/src/morph/semantic-id.ts:238](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/morph/semantic-id.ts#L238)
 
 Consolidated namespace export matching the spine contract.
 

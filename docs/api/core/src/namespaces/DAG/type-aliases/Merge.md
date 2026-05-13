@@ -8,6 +8,6 @@
 
 > **Merge** = [`MergeResult`](../../../interfaces/MergeResult.md)
 
-Defined in: core/src/dag.ts:524
+Defined in: [core/src/dag.ts:524](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dag.ts#L524)
 
 Alias for [MergeResult](../../../interfaces/MergeResult.md).

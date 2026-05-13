@@ -8,7 +8,7 @@
 
 > `const` **TransitionConfigSchema**: `Struct`\<\{ `delay`: `optionalKey`\<`Number`\>; `duration`: `Number`; `easing`: `optionalKey`\<`Any`\>; \}\>
 
-Defined in: quantizer/src/schemas.ts:19
+Defined in: [quantizer/src/schemas.ts:19](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/schemas.ts#L19)
 
 Runtime schema for [TransitionConfig](../interfaces/TransitionConfig.md).
 

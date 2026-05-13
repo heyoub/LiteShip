@@ -8,7 +8,7 @@
 
 > `const` **AnimatedQuantizer**: `object`
 
-Defined in: quantizer/src/animated-quantizer.ts:264
+Defined in: [quantizer/src/animated-quantizer.ts:264](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/animated-quantizer.ts#L264)
 
 Animated quantizer namespace.
 

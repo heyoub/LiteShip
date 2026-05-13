@@ -8,7 +8,7 @@
 
 > **SlotPath** = (`value`) => `SlotPath`
 
-Defined in: web/src/types.ts:21
+Defined in: [web/src/types.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L21)
 
 Brand an already-validated slot path string.
 

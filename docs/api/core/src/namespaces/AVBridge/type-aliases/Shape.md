@@ -8,6 +8,6 @@
 
 > **Shape** = `AVBridgeShape`
 
-Defined in: core/src/av-bridge.ts:158
+Defined in: [core/src/av-bridge.ts:158](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/av-bridge.ts#L158)
 
 Structural shape of an AVBridge instance — sample counters, time conversions, reset.

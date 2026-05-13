@@ -8,7 +8,7 @@
 
 > `const` **Wire**: `object`
 
-Defined in: core/src/wire.ts:260
+Defined in: [core/src/wire.ts:260](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/wire.ts#L260)
 
 Wire -- fluent stream wrapper with chainable operators for map, filter,
 scan, debounce, throttle, merge, and more. Wraps Effect Streams.

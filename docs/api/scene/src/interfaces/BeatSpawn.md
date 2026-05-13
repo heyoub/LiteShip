@@ -6,7 +6,7 @@
 
 # Interface: BeatSpawn
 
-Defined in: scene/src/capsules/beat-binding.ts:33
+Defined in: [scene/src/capsules/beat-binding.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L33)
 
 Spawn descriptor returned by the binding — the runtime spawns these into the world.
 
@@ -16,4 +16,4 @@ Spawn descriptor returned by the binding — the runtime spawns these into the w
 
 > `readonly` **components**: [`BeatComponent`](BeatComponent.md)
 
-Defined in: scene/src/capsules/beat-binding.ts:34
+Defined in: [scene/src/capsules/beat-binding.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L34)

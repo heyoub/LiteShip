@@ -8,7 +8,7 @@
 
 > `const` **TokenCSSCompiler**: `object`
 
-Defined in: compiler/src/token-css.ts:137
+Defined in: [compiler/src/token-css.ts:137](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/token-css.ts#L137)
 
 Token CSS compiler namespace.
 

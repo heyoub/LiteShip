@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`\> = `TimelineShape`\<`B`\>
 
-Defined in: core/src/timeline.ts:145
+Defined in: [core/src/timeline.ts:145](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/timeline.ts#L145)
 
 Structural shape of a timeline instance for a given [Boundary](../../../variables/Boundary.md).
 

@@ -6,7 +6,7 @@
 
 # Interface: AIToolDefinition
 
-Defined in: compiler/src/ai-manifest.ts:124
+Defined in: [compiler/src/ai-manifest.ts:124](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L124)
 
 Tool definition in the function-calling format emitted by
 [AIManifestCompiler.generateToolDefinitions](../variables/AIManifestCompiler.md#generatetooldefinitions).
@@ -20,7 +20,7 @@ APIs — fields are a superset of their intersecting requirements.
 
 > `readonly` **description**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:128
+Defined in: [compiler/src/ai-manifest.ts:128](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L128)
 
 Action description (becomes the tool description).
 
@@ -30,7 +30,7 @@ Action description (becomes the tool description).
 
 > `readonly` **name**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:126
+Defined in: [compiler/src/ai-manifest.ts:126](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L126)
 
 Action name.
 
@@ -40,7 +40,7 @@ Action name.
 
 > `readonly` **parameters**: `Record`\<`string`, `unknown`\>
 
-Defined in: compiler/src/ai-manifest.ts:130
+Defined in: [compiler/src/ai-manifest.ts:130](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L130)
 
 JSON Schema for parameters.
 
@@ -50,6 +50,6 @@ JSON Schema for parameters.
 
 > `readonly` **returns**: `Record`\<`string`, `unknown`\>
 
-Defined in: compiler/src/ai-manifest.ts:132
+Defined in: [compiler/src/ai-manifest.ts:132](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L132)
 
 JSON Schema for the return shape.

@@ -8,7 +8,7 @@
 
 > **bindBeats**(`beats`): readonly [`BeatSpawn`](../interfaces/BeatSpawn.md)[]
 
-Defined in: scene/src/capsules/beat-binding.ts:108
+Defined in: [scene/src/capsules/beat-binding.ts:108](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/capsules/beat-binding.ts#L108)
 
 Pure transform: BeatComponent[] → BeatSpawn[]. Each input beat becomes
 one spawn descriptor whose `components` field is suitable for direct

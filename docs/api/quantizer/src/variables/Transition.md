@@ -8,7 +8,7 @@
 
 > **Transition**: `object`
 
-Defined in: quantizer/src/transition.ts:45
+Defined in: [quantizer/src/transition.ts:45](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/transition.ts#L45)
 
 Transition resolver namespace.
 

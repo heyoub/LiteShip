@@ -8,7 +8,7 @@
 
 > **Shape**\<`T`\> = `BlendTreeShape`\<`T`\>
 
-Defined in: core/src/blend.ts:132
+Defined in: [core/src/blend.ts:132](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/blend.ts#L132)
 
 Structural shape of a blend-tree instance: `sample(weights)` over a `Record<string, number>` space.
 

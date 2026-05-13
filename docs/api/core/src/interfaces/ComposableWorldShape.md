@@ -6,7 +6,7 @@
 
 # Interface: ComposableWorldShape\<Schema\>
 
-Defined in: core/src/composable.ts:136
+Defined in: [core/src/composable.ts:136](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L136)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: core/src/composable.ts:136
 
 > **evaluate**\<`T`\>(`entity`, `input`): `Effect`\<`Record`\<`string`, `string`\>\>
 
-Defined in: core/src/composable.ts:140
+Defined in: [core/src/composable.ts:140](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L140)
 
 #### Type Parameters
 
@@ -48,7 +48,7 @@ Defined in: core/src/composable.ts:140
 
 > **query**\<`K`\>(...`componentTypes`): `Effect`\<readonly [`ComposableEntity`](ComposableEntity.md)\<`Pick`\<`Schema`, `K`\>\>[]\>
 
-Defined in: core/src/composable.ts:139
+Defined in: [core/src/composable.ts:139](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L139)
 
 #### Type Parameters
 
@@ -72,7 +72,7 @@ Defined in: core/src/composable.ts:139
 
 > **spawn**\<`T`\>(`components`): `Effect`\<[`ComposableEntity`](ComposableEntity.md)\<`T`\>\>
 
-Defined in: core/src/composable.ts:137
+Defined in: [core/src/composable.ts:137](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L137)
 
 #### Type Parameters
 
@@ -96,7 +96,7 @@ Defined in: core/src/composable.ts:137
 
 > **spawnWith**\<`T`\>(`entity`): `Effect`\<[`ComposableEntity`](ComposableEntity.md)\<`T`\>\>
 
-Defined in: core/src/composable.ts:138
+Defined in: [core/src/composable.ts:138](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L138)
 
 #### Type Parameters
 

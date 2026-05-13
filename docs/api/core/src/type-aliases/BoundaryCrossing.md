@@ -8,7 +8,7 @@
 
 > **BoundaryCrossing**\<`S`\> = `object`
 
-Defined in: core/src/type-utils.ts:26
+Defined in: [core/src/type-utils.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L26)
 
 Discriminated union of boundary crossings
 
@@ -24,7 +24,7 @@ Discriminated union of boundary crossings
 
 > `readonly` **from**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: core/src/type-utils.ts:27
+Defined in: [core/src/type-utils.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L27)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: core/src/type-utils.ts:27
 
 > `readonly` **timestamp**: [`HLCBrand`](../interfaces/HLCBrand.md)
 
-Defined in: core/src/type-utils.ts:29
+Defined in: [core/src/type-utils.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L29)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: core/src/type-utils.ts:29
 
 > `readonly` **to**: [`StateName`](StateName.md)\<`S`\>
 
-Defined in: core/src/type-utils.ts:28
+Defined in: [core/src/type-utils.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L28)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: core/src/type-utils.ts:28
 
 > `readonly` **value**: `number`
 
-Defined in: core/src/type-utils.ts:30
+Defined in: [core/src/type-utils.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L30)

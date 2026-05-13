@@ -8,7 +8,7 @@
 
 > **designTierFromCapabilities**(`caps`): [`DesignTier`](../type-aliases/DesignTier.md)
 
-Defined in: detect/src/tiers.ts:87
+Defined in: [detect/src/tiers.ts:87](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/tiers.ts#L87)
 
 Map extended device capabilities to a design fidelity tier.
 Forced colors / no-update screens get minimal; wide-gamut / HDR screens

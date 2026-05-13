@@ -8,6 +8,6 @@
 
 > **JsonRpcId** = `string` \| `number` \| `null`
 
-Defined in: mcp-server/src/jsonrpc.ts:30
+Defined in: [mcp-server/src/jsonrpc.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L30)
 
 Per §4: `id` is string, number, or null. Absent = notification.

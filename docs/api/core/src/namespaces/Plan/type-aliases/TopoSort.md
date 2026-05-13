@@ -8,6 +8,6 @@
 
 > **TopoSort** = `TopoSortResult`
 
-Defined in: core/src/plan.ts:314
+Defined in: [core/src/plan.ts:314](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/plan.ts#L314)
 
 Alias for `TopoSortResult`.

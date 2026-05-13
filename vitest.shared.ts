@@ -56,6 +56,21 @@ export const coverageExclude = [
   // signals with a non-issue. Excluded so the coverage report only counts
   // files that *can* actually be measured.
   'packages/scene/src/contract.ts',
+  // ship.ts is a subprocess-orchestration command — its body is a sequence
+  // of `git rev-parse`, `pnpm pack`, `pnpm publish --dry-run`, and the
+  // final `pnpm publish` handoff. Vitest cannot meaningfully cover the
+  // subprocess paths in-process; the end-to-end correctness is integration-
+  // tested by the `czap ship --dry-run` flow that runs in every gauntlet
+  // (package:smoke phase). The pure helpers it composes — ship-manifest.ts,
+  // ship-capsule.ts, addressed-digest.ts — are unit-tested directly.
+  // Unit coverage of the subprocess wrapper itself is a v0.1.1 task.
+  'packages/cli/src/commands/ship.ts',
+  // ffmpeg.ts (render-backend) spawns the system `ffmpeg` binary to encode
+  // VideoFrameOutput streams to mp4. Coverage requires ffmpeg on PATH —
+  // tests/smoke/intro-render.test.ts skips when it isn't, so this surface
+  // is structurally 0% on machines without ffmpeg installed. Matches the
+  // audio/processor-bootstrap.ts pattern (host-realm-dependent).
+  'packages/cli/src/render-backend/ffmpeg.ts',
   // spawn-helpers.ts is a re-export shim — its only body is `export {...}
   // from './lib/spawn.js'`. The actual implementation in cli/src/lib/spawn.ts
   // is measured normally; v8 reports 0% on the shim because there are no

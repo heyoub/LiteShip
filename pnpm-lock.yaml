@@ -296,7 +296,7 @@ importers:
         specifier: workspace:*
         version: link:../scene
       effect:
-        specifier: '>=4.0.0-beta.0'
+        specifier: '>=4.0.0-beta.32 <5'
         version: 4.0.0-beta.32
 
   packages/compiler:
@@ -344,13 +344,13 @@ importers:
   packages/mcp-server:
     dependencies:
       '@czap/cli':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../cli
       '@czap/core':
         specifier: workspace:*
         version: link:../core
       effect:
-        specifier: '>=4.0.0-beta.0'
+        specifier: '>=4.0.0-beta.32 <5'
         version: 4.0.0-beta.32
 
   packages/quantizer:

@@ -1,6 +1,6 @@
 {
   "name": "@czap/mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Thin MCP server over czap's capsule factory dispatch",
   "license": "MIT",
   "author": "Eassa Ayoub <eassa@heyoub.dev>",
@@ -49,7 +49,7 @@
     "@czap/core": "workspace:*"
   },
   "peerDependencies": {
-    "@czap/cli": "^0.1.0",
+    "@czap/cli": "workspace:^",
     "effect": ">=4.0.0-beta.32 <5"
   }
 }

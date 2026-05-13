@@ -8,7 +8,7 @@
 
 > **OnsetProjection**(`audioAssetId`): `CapsuleDef`\<`"cachedProjection"`, `unknown`, readonly `number`[], `unknown`\>
 
-Defined in: assets/src/analysis/onsets.ts:53
+Defined in: [assets/src/analysis/onsets.ts:53](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/analysis/onsets.ts#L53)
 
 Build an OnsetProjection cachedProjection capsule for a named audio asset.
 

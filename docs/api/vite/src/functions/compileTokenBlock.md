@@ -8,7 +8,7 @@
 
 > **compileTokenBlock**(`block`, `token`): `string`
 
-Defined in: vite/src/token-transform.ts:98
+Defined in: [vite/src/token-transform.ts:98](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/token-transform.ts#L98)
 
 Compile a parsed [TokenBlock](../interfaces/TokenBlock.md) plus a resolved `TokenDef` into
 CSS custom property declarations. Delegates to the canonical

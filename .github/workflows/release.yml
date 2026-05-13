@@ -1,0 +1,151 @@
+name: Release (NPM_TOKEN auth)
+
+# Triggers on push of a v*.*.* tag. The tag itself is created by the
+# maintainer after a release commit lands on the release branch:
+#   git tag -a v0.1.1 -m "v0.1.1"
+#   git push origin v0.1.1
+#
+# v0.1.x interim auth: the publish step uses the NPM_TOKEN repo secret
+# (a granular access token with bypass_2fa: true). The id-token: write
+# permission and `registry-url` are left in place so that switching to
+# OIDC trusted publishing in v0.2 is a single-commit pivot (drop the
+# .npmrc step + NPM_TOKEN env, add --provenance to the ship call) once
+# all 15 @czap/* packages have a trusted publisher configured at
+# https://www.npmjs.com/package/@czap/<name>/access — see RELEASING.md
+# §v0.1.1+ for the form values.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Mint capsules but skip pnpm publish handoff'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+permissions:
+  contents: write       # creating the GitHub Release + uploading capsule assets
+  id-token: write       # left enabled so v0.2 OIDC pivot is a single edit
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false   # never cancel a release mid-flight
+
+jobs:
+  release-certified:
+    name: Gauntlet (release-certification gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: pnpm run gauntlet:full
+        env:
+          CI: true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gauntlet-artifacts
+          path: |
+            coverage
+            reports
+            benchmarks
+
+  publish:
+    name: Publish 15 @czap/* packages + attach ShipCapsules
+    needs: release-certified
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # czap ship reads git rev-parse HEAD + git status
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build
+
+      # Install the granular access token so pnpm publish picks it up
+      # from ~/.npmrc. NODE_AUTH_TOKEN-only doesn't survive the pnpm
+      # → npm subprocess hop reliably; explicit ~/.npmrc does.
+      - name: Configure npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # ─── per-package ship loop ───────────────────────────────────────
+      # czap ship's bulk mode dies on already-published versions because
+      # its dry-run pre-check errors on "cannot publish over previously
+      # published 0.1.x". Looping per-package skips the bulk dry-run
+      # collision and lets pnpm publish report "already published"
+      # cleanly for any in-flight repeat. v0.1.x workaround until
+      # ship.ts handles this gracefully (ROADMAP §4).
+      - name: czap ship + npm publish (per package)
+        run: |
+          set -euo pipefail
+          DRY_RUN_FLAG=""
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          fi
+          for pkg in _spine core quantizer compiler web detect vite astro edge worker remotion scene assets cli mcp-server; do
+            echo "::group::@czap/$pkg"
+            node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" $DRY_RUN_FLAG
+            echo "::endgroup::"
+          done
+
+      # ─── GitHub Release attachment ────────────────────────────────────
+      - name: Resolve version from tag
+        if: ${{ inputs.dry-run != 'true' }}
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        if: ${{ inputs.dry-run != 'true' }}
+        run: |
+          pnpm exec tsx scripts/extract-changelog-section.ts \
+            --version "${{ steps.ver.outputs.version }}" \
+            --out "RELEASE_NOTES_v${{ steps.ver.outputs.version }}.md"
+
+      - name: Create GitHub Release (if missing)
+        if: ${{ inputs.dry-run != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release create "${GITHUB_REF_NAME}" \
+              --title "${GITHUB_REF_NAME}" \
+              --notes-file "RELEASE_NOTES_v${{ steps.ver.outputs.version }}.md"
+          fi
+
+      - name: Attach ShipCapsules to GitHub Release
+        if: ${{ inputs.dry-run != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${GITHUB_REF_NAME}" \
+            packages/*/czap-*-${{ steps.ver.outputs.version }}.shipcapsule.cbor \
+            --clobber

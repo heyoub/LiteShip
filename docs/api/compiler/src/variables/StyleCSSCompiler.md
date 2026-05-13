@@ -8,7 +8,7 @@
 
 > `const` **StyleCSSCompiler**: `object`
 
-Defined in: compiler/src/style-css.ts:201
+Defined in: [compiler/src/style-css.ts:201](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/style-css.ts#L201)
 
 Style CSS compiler namespace.
 

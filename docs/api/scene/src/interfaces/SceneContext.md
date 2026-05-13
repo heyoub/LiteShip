@@ -6,7 +6,7 @@
 
 # Interface: SceneContext
 
-Defined in: scene/src/context.ts:15
+Defined in: [scene/src/context.ts:15](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/context.ts#L15)
 
 Per-scene compositional state inherited across `Scene.subscene`.
 
@@ -16,7 +16,7 @@ Per-scene compositional state inherited across `Scene.subscene`.
 
 > `readonly` **bpm**: `number`
 
-Defined in: scene/src/context.ts:16
+Defined in: [scene/src/context.ts:16](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/context.ts#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: scene/src/context.ts:16
 
 > `readonly` **fps**: `number`
 
-Defined in: scene/src/context.ts:17
+Defined in: [scene/src/context.ts:17](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/context.ts#L17)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: scene/src/context.ts:17
 
 > `readonly` **rootTimeMs**: `number`
 
-Defined in: scene/src/context.ts:18
+Defined in: [scene/src/context.ts:18](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/context.ts#L18)
