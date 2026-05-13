@@ -8,6 +8,6 @@
 
 > **Id** = [`JsonRpcId`](../../../type-aliases/JsonRpcId.md)
 
-Defined in: mcp-server/src/jsonrpc.ts:242
+Defined in: [mcp-server/src/jsonrpc.ts:242](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L242)
 
 Id type per §4.

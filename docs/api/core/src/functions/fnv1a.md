@@ -8,7 +8,7 @@
 
 > **fnv1a**(`str`): `ContentAddress`
 
-Defined in: core/src/fnv.ts:14
+Defined in: [core/src/fnv.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/fnv.ts#L14)
 
 FNV-1a hash of a string, returned as a ContentAddress.
 

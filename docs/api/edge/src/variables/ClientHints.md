@@ -8,7 +8,7 @@
 
 > `const` **ClientHints**: `object`
 
-Defined in: edge/src/client-hints.ts:326
+Defined in: [edge/src/client-hints.ts:326](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/client-hints.ts#L326)
 
 Client Hints namespace.
 

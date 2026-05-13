@@ -8,7 +8,7 @@
 
 > `const` **pulse**: `object`
 
-Defined in: scene/src/sugar/envelope.ts:42
+Defined in: [scene/src/sugar/envelope.ts:42](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/sugar/envelope.ts#L42)
 
 Pulse constructors.
 

@@ -6,7 +6,7 @@
 
 # Interface: DiagnosticEvent
 
-Defined in: core/src/diagnostics.ts:28
+Defined in: [core/src/diagnostics.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L28)
 
 A [DiagnosticPayload](DiagnosticPayload.md) enriched with severity and an emission timestamp.
 
@@ -20,7 +20,7 @@ A [DiagnosticPayload](DiagnosticPayload.md) enriched with severity and an emissi
 
 > `readonly` `optional` **cause?**: `unknown`
 
-Defined in: core/src/diagnostics.ts:23
+Defined in: [core/src/diagnostics.ts:23](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L23)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: core/src/diagnostics.ts:23
 
 > `readonly` **code**: `string`
 
-Defined in: core/src/diagnostics.ts:21
+Defined in: [core/src/diagnostics.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L21)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: core/src/diagnostics.ts:21
 
 > `readonly` `optional` **detail?**: `unknown`
 
-Defined in: core/src/diagnostics.ts:24
+Defined in: [core/src/diagnostics.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L24)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: core/src/diagnostics.ts:24
 
 > `readonly` **level**: [`DiagnosticLevel`](../type-aliases/DiagnosticLevel.md)
 
-Defined in: core/src/diagnostics.ts:29
+Defined in: [core/src/diagnostics.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L29)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: core/src/diagnostics.ts:29
 
 > `readonly` **message**: `string`
 
-Defined in: core/src/diagnostics.ts:22
+Defined in: [core/src/diagnostics.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L22)
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: core/src/diagnostics.ts:22
 
 > `readonly` **source**: `string`
 
-Defined in: core/src/diagnostics.ts:20
+Defined in: [core/src/diagnostics.ts:20](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L20)
 
 #### Inherited from
 
@@ -88,4 +88,4 @@ Defined in: core/src/diagnostics.ts:20
 
 > `readonly` **timestamp**: `number`
 
-Defined in: core/src/diagnostics.ts:30
+Defined in: [core/src/diagnostics.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L30)

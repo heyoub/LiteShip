@@ -8,7 +8,7 @@
 
 > **Shape**\<`Schema`\> = [`ComposableWorldShape`](../../../interfaces/ComposableWorldShape.md)\<`Schema`\>
 
-Defined in: core/src/composable.ts:324
+Defined in: [core/src/composable.ts:324](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/composable.ts#L324)
 
 Structural shape of the typed world returned by [ComposableWorld.make](../../../variables/ComposableWorld.md#make).
 

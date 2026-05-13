@@ -6,7 +6,7 @@
 
 # Interface: WorkerHostShape
 
-Defined in: worker/src/host.ts:31
+Defined in: [worker/src/host.ts:31](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L31)
 
 Host-facing surface of a worker host. Owns a compositor worker and,
 optionally, a render worker created on demand via
@@ -18,7 +18,7 @@ optionally, a render worker created on demand via
 
 > `readonly` **compositor**: [`CompositorWorkerShape`](CompositorWorkerShape.md)
 
-Defined in: worker/src/host.ts:33
+Defined in: [worker/src/host.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L33)
 
 The compositor worker instance.
 
@@ -28,7 +28,7 @@ The compositor worker instance.
 
 > `readonly` **renderer**: [`RenderWorkerShape`](RenderWorkerShape.md) \| `null`
 
-Defined in: worker/src/host.ts:36
+Defined in: [worker/src/host.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L36)
 
 The render worker instance, or null if no canvas has been attached.
 
@@ -38,7 +38,7 @@ The render worker instance, or null if no canvas has been attached.
 
 > **attachCanvas**(`canvas`): `void`
 
-Defined in: worker/src/host.ts:48
+Defined in: [worker/src/host.ts:48](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L48)
 
 Attach an HTMLCanvasElement for off-thread rendering.
 
@@ -65,7 +65,7 @@ does not allow transferring control multiple times.
 
 > **dispose**(): `void`
 
-Defined in: worker/src/host.ts:63
+Defined in: [worker/src/host.ts:63](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L63)
 
 Dispose both workers and release all resources.
 
@@ -79,7 +79,7 @@ Dispose both workers and release all resources.
 
 > **onState**(`callback`): () => `void`
 
-Defined in: worker/src/host.ts:60
+Defined in: [worker/src/host.ts:60](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L60)
 
 Subscribe to CompositeState updates from the compositor worker.
 Returns an unsubscribe function.
@@ -100,7 +100,7 @@ Returns an unsubscribe function.
 
 > **startRender**(`config`): `void`
 
-Defined in: worker/src/host.ts:51
+Defined in: [worker/src/host.ts:51](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L51)
 
 Start off-thread video rendering with the given configuration.
 
@@ -120,7 +120,7 @@ Start off-thread video rendering with the given configuration.
 
 > **stopRender**(): `void`
 
-Defined in: worker/src/host.ts:54
+Defined in: [worker/src/host.ts:54](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/host.ts#L54)
 
 Stop an in-progress off-thread render.
 

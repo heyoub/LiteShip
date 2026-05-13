@@ -6,7 +6,7 @@
 
 # Interface: AIParamSchema
 
-Defined in: compiler/src/ai-manifest.ts:67
+Defined in: [compiler/src/ai-manifest.ts:67](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L67)
 
 Parameter schema for a single [AIAction](AIAction.md) parameter.
 
@@ -19,7 +19,7 @@ losslessly translatable to both tool-calling and schema validation.
 
 > `readonly` **description**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:79
+Defined in: [compiler/src/ai-manifest.ts:79](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L79)
 
 Human-readable description.
 
@@ -29,7 +29,7 @@ Human-readable description.
 
 > `readonly` `optional` **enum?**: readonly `string`[]
 
-Defined in: compiler/src/ai-manifest.ts:71
+Defined in: [compiler/src/ai-manifest.ts:71](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L71)
 
 Permitted enum values.
 
@@ -39,7 +39,7 @@ Permitted enum values.
 
 > `readonly` `optional` **max?**: `number`
 
-Defined in: compiler/src/ai-manifest.ts:75
+Defined in: [compiler/src/ai-manifest.ts:75](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L75)
 
 Numeric maximum (inclusive).
 
@@ -49,7 +49,7 @@ Numeric maximum (inclusive).
 
 > `readonly` `optional` **min?**: `number`
 
-Defined in: compiler/src/ai-manifest.ts:73
+Defined in: [compiler/src/ai-manifest.ts:73](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L73)
 
 Numeric minimum (inclusive).
 
@@ -59,7 +59,7 @@ Numeric minimum (inclusive).
 
 > `readonly` **required**: `boolean`
 
-Defined in: compiler/src/ai-manifest.ts:77
+Defined in: [compiler/src/ai-manifest.ts:77](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L77)
 
 Whether the parameter must be present.
 
@@ -69,6 +69,6 @@ Whether the parameter must be present.
 
 > `readonly` **type**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:69
+Defined in: [compiler/src/ai-manifest.ts:69](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L69)
 
 JSON Schema type (`'string'` | `'number'` | `'integer'` | `'boolean'` | `'array'` | `'object'`).

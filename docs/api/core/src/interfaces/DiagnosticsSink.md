@@ -6,7 +6,7 @@
 
 # Interface: DiagnosticsSink
 
-Defined in: core/src/diagnostics.ts:34
+Defined in: [core/src/diagnostics.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L34)
 
 Swappable transport that receives [DiagnosticEvent](DiagnosticEvent.md)s from [Diagnostics](../variables/Diagnostics.md).
 
@@ -16,7 +16,7 @@ Swappable transport that receives [DiagnosticEvent](DiagnosticEvent.md)s from [D
 
 > **emit**(`event`): `void`
 
-Defined in: core/src/diagnostics.ts:35
+Defined in: [core/src/diagnostics.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/diagnostics.ts#L35)
 
 #### Parameters
 

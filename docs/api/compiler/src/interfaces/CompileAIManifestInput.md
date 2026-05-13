@@ -6,7 +6,7 @@
 
 # Interface: CompileAIManifestInput
 
-Defined in: compiler/src/ai-manifest.ts:629
+Defined in: [compiler/src/ai-manifest.ts:629](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L629)
 
 Input to [compileAIManifest](../functions/compileAIManifest.md).
 
@@ -21,7 +21,7 @@ with an empty manifest and returns the compile result.
 
 > `readonly` **capsules**: readonly `unknown`[]
 
-Defined in: compiler/src/ai-manifest.ts:633
+Defined in: [compiler/src/ai-manifest.ts:633](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L633)
 
 Capsule catalog — reserved for future use.
 
@@ -31,7 +31,7 @@ Capsule catalog — reserved for future use.
 
 > `readonly` `optional` **commands?**: readonly [`McpCommandDescriptor`](McpCommandDescriptor.md)[]
 
-Defined in: compiler/src/ai-manifest.ts:635
+Defined in: [compiler/src/ai-manifest.ts:635](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L635)
 
 MCP tool descriptors used when `target === 'mcp'`.
 
@@ -41,6 +41,6 @@ MCP tool descriptors used when `target === 'mcp'`.
 
 > `readonly` `optional` **target?**: `"mcp"` \| `"json"`
 
-Defined in: compiler/src/ai-manifest.ts:631
+Defined in: [compiler/src/ai-manifest.ts:631](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L631)
 
 Output target: `'mcp'` emits `{ tools: [...] }`; `'json'` returns the compile result object.

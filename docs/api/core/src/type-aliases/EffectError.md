@@ -8,7 +8,7 @@
 
 > **EffectError**\<`T`\> = `T` *extends* `EffectType.Effect`\<`unknown`, infer E, `unknown`\> ? `E` : `never`
 
-Defined in: core/src/type-utils.ts:37
+Defined in: [core/src/type-utils.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L37)
 
 Extract the error type from an Effect
 

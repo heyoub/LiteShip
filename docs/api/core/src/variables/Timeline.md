@@ -8,7 +8,7 @@
 
 > `const` **Timeline**: `TimelineFactory`
 
-Defined in: core/src/timeline.ts:44
+Defined in: [core/src/timeline.ts:44](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/timeline.ts#L44)
 
 Timeline — scheduler-driven advancement over a [Boundary](Boundary.md).
 Produces a scoped reactive timeline that seeks or plays between boundary

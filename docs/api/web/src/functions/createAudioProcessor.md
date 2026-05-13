@@ -8,7 +8,7 @@
 
 > **createAudioProcessor**(`context`, `bridge`): `Promise`\<[`AudioProcessor`](../interfaces/AudioProcessor.md)\>
 
-Defined in: web/src/audio/processor-bootstrap.ts:70
+Defined in: [web/src/audio/processor-bootstrap.ts:70](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/audio/processor-bootstrap.ts#L70)
 
 Register the inline AV-sync worklet module against `context` and mint
 a connected [AudioProcessor](../interfaces/AudioProcessor.md). Resolves once the worklet module

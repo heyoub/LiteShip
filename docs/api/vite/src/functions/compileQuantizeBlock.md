@@ -8,7 +8,7 @@
 
 > **compileQuantizeBlock**(`block`, `boundary`): `string`
 
-Defined in: vite/src/css-quantize.ts:291
+Defined in: [vite/src/css-quantize.ts:291](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/css-quantize.ts#L291)
 
 Compile a parsed [QuantizeBlock](../interfaces/QuantizeBlock.md) plus its resolved
 [Boundary.Shape](#) into CSS `@container` query rules. Delegates

@@ -6,7 +6,7 @@
 
 # Interface: ThemeCompileConfig
 
-Defined in: edge/src/theme-compiler.ts:24
+Defined in: [edge/src/theme-compiler.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/theme-compiler.ts#L24)
 
 Input to [compileTheme](../functions/compileTheme.md).
 
@@ -20,7 +20,7 @@ bare so consumers can apply their own units downstream.
 
 > `readonly` `optional` **prefix?**: `string`
 
-Defined in: edge/src/theme-compiler.ts:28
+Defined in: [edge/src/theme-compiler.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/theme-compiler.ts#L28)
 
 CSS custom property prefix. Defaults to `'czap'`.
 
@@ -30,6 +30,6 @@ CSS custom property prefix. Defaults to `'czap'`.
 
 > `readonly` **tokens**: `Readonly`\<`Record`\<`string`, `string` \| `number`\>\>
 
-Defined in: edge/src/theme-compiler.ts:26
+Defined in: [edge/src/theme-compiler.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/theme-compiler.ts#L26)
 
 Flat map of token name to value (string or numeric).

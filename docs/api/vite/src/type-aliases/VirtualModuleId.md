@@ -8,6 +8,6 @@
 
 > **VirtualModuleId** = *typeof* `VIRTUAL_IDS`\[`number`\]
 
-Defined in: vite/src/virtual-modules.ts:41
+Defined in: [vite/src/virtual-modules.ts:41](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/virtual-modules.ts#L41)
 
 Recognised virtual module specifiers.

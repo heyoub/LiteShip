@@ -6,7 +6,7 @@
 
 # Interface: MorphHints
 
-Defined in: web/src/types.ts:108
+Defined in: [web/src/types.ts:108](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L108)
 
 Morph hints for fine-grained DOM diffing control.
 
@@ -16,7 +16,7 @@ Morph hints for fine-grained DOM diffing control.
 
 > `readonly` `optional` **idMap?**: `ReadonlyMap`\<`string`, `string`\>
 
-Defined in: web/src/types.ts:111
+Defined in: [web/src/types.ts:111](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L111)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:111
 
 > `readonly` `optional` **preserve?**: readonly `string`[]
 
-Defined in: web/src/types.ts:114
+Defined in: [web/src/types.ts:114](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L114)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/types.ts:114
 
 > `readonly` `optional` **preserveFocus?**: readonly `string`[]
 
-Defined in: web/src/types.ts:112
+Defined in: [web/src/types.ts:112](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L112)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: web/src/types.ts:112
 
 > `readonly` `optional` **preserveIds?**: readonly `string`[]
 
-Defined in: web/src/types.ts:109
+Defined in: [web/src/types.ts:109](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L109)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: web/src/types.ts:109
 
 > `readonly` `optional` **preserveScroll?**: readonly `string`[]
 
-Defined in: web/src/types.ts:113
+Defined in: [web/src/types.ts:113](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L113)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: web/src/types.ts:113
 
 > `readonly` `optional` **remap?**: `Record`\<`string`, `string`\>
 
-Defined in: web/src/types.ts:115
+Defined in: [web/src/types.ts:115](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L115)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: web/src/types.ts:115
 
 > `readonly` `optional` **semanticIds?**: readonly `string`[]
 
-Defined in: web/src/types.ts:110
+Defined in: [web/src/types.ts:110](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L110)

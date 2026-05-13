@@ -8,7 +8,7 @@
 
 > **isValidationError**(`error`): `error is CzapValidationError`
 
-Defined in: core/src/validation-error.ts:32
+Defined in: [core/src/validation-error.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/validation-error.ts#L32)
 
 Type guard for CzapValidationError
 

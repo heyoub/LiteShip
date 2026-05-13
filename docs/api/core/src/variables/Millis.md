@@ -8,7 +8,7 @@
 
 > **Millis**: (`value`) => `Millis`
 
-Defined in: core/src/brands.ts:48
+Defined in: [core/src/brands.ts:59](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/brands.ts#L59)
 
 Wrap a plain number as a Millis — the one sanctioned cast site for this brand.
 

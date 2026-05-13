@@ -8,7 +8,7 @@
 
 > `const` **CompositorWorker**: `object`
 
-Defined in: worker/src/compositor-worker.ts:597
+Defined in: [worker/src/compositor-worker.ts:597](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/compositor-worker.ts#L597)
 
 Factory namespace for the compositor worker.
 

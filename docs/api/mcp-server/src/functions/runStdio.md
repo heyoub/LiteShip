@@ -8,7 +8,7 @@
 
 > **runStdio**(`input?`, `output?`): `Promise`\<`void`\>
 
-Defined in: mcp-server/src/stdio.ts:37
+Defined in: [mcp-server/src/stdio.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/stdio.ts#L37)
 
 Run the MCP stdio loop until the input stream closes. Defaults to
 `process.stdin` / `process.stdout` so the production CLI bootstrap

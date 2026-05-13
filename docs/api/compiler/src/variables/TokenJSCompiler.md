@@ -8,7 +8,7 @@
 
 > `const` **TokenJSCompiler**: `object`
 
-Defined in: compiler/src/token-js.ts:102
+Defined in: [compiler/src/token-js.ts:102](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/token-js.ts#L102)
 
 Token JS compiler namespace.
 

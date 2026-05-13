@@ -8,7 +8,7 @@
 
 > **DeepReadonly**\<`T`\> = `T` *extends* infer U[] ? `ReadonlyArray`\<`DeepReadonly`\<`U`\>\> : `T` *extends* `Record`\<`string`, `unknown`\> ? `{ readonly [K in keyof T]: DeepReadonly<T[K]> }` : `T`
 
-Defined in: core/src/type-utils.ts:44
+Defined in: [core/src/type-utils.ts:44](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/type-utils.ts#L44)
 
 Deep readonly
 

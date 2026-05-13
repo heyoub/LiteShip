@@ -6,7 +6,7 @@
 
 # Interface: ThemeCSSResult
 
-Defined in: compiler/src/theme-css.ts:26
+Defined in: [compiler/src/theme-css.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/theme-css.ts#L26)
 
 Output of [ThemeCSSCompiler.compile](../variables/ThemeCSSCompiler.md#compile).
 
@@ -21,7 +21,7 @@ carries metadata indicating animated switching is desired.
 
 > `readonly` **selectors**: `string`
 
-Defined in: compiler/src/theme-css.ts:28
+Defined in: [compiler/src/theme-css.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/theme-css.ts#L28)
 
 Per-variant `html[data-theme]` selector blocks.
 
@@ -31,6 +31,6 @@ Per-variant `html[data-theme]` selector blocks.
 
 > `readonly` **transitions**: `string`
 
-Defined in: compiler/src/theme-css.ts:30
+Defined in: [compiler/src/theme-css.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/theme-css.ts#L30)
 
 Optional root transition declarations for animated theme swaps.

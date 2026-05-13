@@ -8,7 +8,7 @@
 
 > **isPrivateOrReservedIP**(`hostname`): `boolean`
 
-Defined in: web/src/security/runtime-url.ts:187
+Defined in: [web/src/security/runtime-url.ts:187](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/security/runtime-url.ts#L187)
 
 Return `true` when `hostname` resolves to `localhost`, a private
 RFC 1918 network, link-local, carrier-grade NAT, or a reserved

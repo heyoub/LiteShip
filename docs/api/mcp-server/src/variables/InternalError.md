@@ -8,4 +8,4 @@
 
 > `const` **InternalError**: `-32603`
 
-Defined in: mcp-server/src/jsonrpc.ts:70
+Defined in: [mcp-server/src/jsonrpc.ts:70](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L70)

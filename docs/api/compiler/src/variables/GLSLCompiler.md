@@ -8,7 +8,7 @@
 
 > `const` **GLSLCompiler**: `object`
 
-Defined in: compiler/src/glsl.ts:277
+Defined in: [compiler/src/glsl.ts:277](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/glsl.ts#L277)
 
 GLSL compiler namespace.
 

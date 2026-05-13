@@ -8,7 +8,7 @@
 
 > **CompilerDef** = \{ `_tag`: `"CSSCompiler"`; `boundary`: [`Boundary.Shape`](#); `states`: [`CSSStates`](CSSStates.md); \} \| \{ `_tag`: `"GLSLCompiler"`; `boundary`: [`Boundary.Shape`](#); `states`: [`GLSLStates`](GLSLStates.md); \} \| \{ `_tag`: `"WGSLCompiler"`; `boundary`: [`Boundary.Shape`](#); `states`: [`WGSLStates`](WGSLStates.md); \} \| \{ `_tag`: `"ARIACompiler"`; `boundary`: [`Boundary.Shape`](#); `states`: [`ARIAStates`](../interfaces/ARIAStates.md); \} \| \{ `_tag`: `"AICompiler"`; `manifest`: [`AIManifest`](../interfaces/AIManifest.md); \} \| \{ `_tag`: `"ConfigCompiler"`; `config`: `Config.Shape`; \}
 
-Defined in: compiler/src/dispatch.ts:78
+Defined in: [compiler/src/dispatch.ts:78](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/dispatch.ts#L78)
 
 Tagged discriminated union describing a single compilation request.
 

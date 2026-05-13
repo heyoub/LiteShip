@@ -8,7 +8,7 @@
 
 > **Result**\<`B`\> = `SpeculativeResult`\<`B`\>
 
-Defined in: core/src/speculative.ts:185
+Defined in: [core/src/speculative.ts:185](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/speculative.ts#L185)
 
 Prediction result from `evaluate()` — current state, optional prefetched next state, and confidence.
 

@@ -8,7 +8,7 @@
 
 > `const` **UIQuality**: `object`
 
-Defined in: core/src/ui-quality.ts:93
+Defined in: [core/src/ui-quality.ts:93](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ui-quality.ts#L93)
 
 UIQuality — adaptive-bitrate-style UI fidelity gate.
 

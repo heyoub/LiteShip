@@ -41,6 +41,7 @@ plan graph, ECS, capsule factory).
 - [Receipt](namespaces/Receipt/README.md)
 - [RuntimeCoordinator](namespaces/RuntimeCoordinator/README.md)
 - [Scheduler](namespaces/Scheduler/README.md)
+- [ShipCapsule](namespaces/ShipCapsule/README.md)
 - [Signal](namespaces/Signal/README.md)
 - [SpeculativeEvaluator](namespaces/SpeculativeEvaluator/README.md)
 - [Store](namespaces/Store/README.md)
@@ -112,6 +113,7 @@ plan graph, ECS, capsule factory).
 
 ## Type Aliases
 
+- [AddressedDigest](type-aliases/AddressedDigest.md)
 - [AssemblyKind](type-aliases/AssemblyKind.md)
 - [BoundaryCrossing](type-aliases/BoundaryCrossing.md)
 - [CapLevel](type-aliases/CapLevel.md)
@@ -126,6 +128,7 @@ plan graph, ECS, capsule factory).
 - [EntityId](type-aliases/EntityId.md)
 - [FrameType](type-aliases/FrameType.md)
 - [GapStrategy](type-aliases/GapStrategy.md)
+- [IntegrityDigest](type-aliases/IntegrityDigest.md)
 - [Millis](type-aliases/Millis.md)
 - [MorphStrategy](type-aliases/MorphStrategy.md)
 - [MotionTier](type-aliases/MotionTier.md)
@@ -150,6 +153,7 @@ plan graph, ECS, capsule factory).
 
 ## Variables
 
+- [AddressedDigest](variables/AddressedDigest.md)
 - [Animation](variables/Animation.md)
 - [AVBridge](variables/AVBridge.md)
 - [AVRenderer](variables/AVRenderer.md)
@@ -186,6 +190,7 @@ plan graph, ECS, capsule factory).
 - [FrameBudget](variables/FrameBudget.md)
 - [GenFrame](variables/GenFrame.md)
 - [HLC](variables/HLC.md)
+- [IntegrityDigest](variables/IntegrityDigest.md)
 - [LiveCell](variables/LiveCell.md)
 - [Millis](variables/Millis.md)
 - [MS\_PER\_SEC](variables/MS_PER_SEC.md)
@@ -195,6 +200,7 @@ plan graph, ECS, capsule factory).
 - [Receipt](variables/Receipt.md)
 - [RuntimeCoordinator](variables/RuntimeCoordinator.md)
 - [Scheduler](variables/Scheduler.md)
+- [ShipCapsule](variables/ShipCapsule.md)
 - [Signal](variables/Signal.md)
 - [SignalInput](variables/SignalInput.md)
 - [SpeculativeEvaluator](variables/SpeculativeEvaluator.md)
@@ -238,4 +244,9 @@ plan graph, ECS, capsule factory).
 - [isValidationError](functions/isValidationError.md)
 - [isWire](functions/isWire.md)
 - [isZap](functions/isZap.md)
+- [lockfileAddress](functions/lockfileAddress.md)
+- [normalizedDryRunAddress](functions/normalizedDryRunAddress.md)
+- [normalizeDryRunOutput](functions/normalizeDryRunOutput.md)
+- [tarballManifestAddress](functions/tarballManifestAddress.md)
 - [tupleMap](functions/tupleMap.md)
+- [workspaceManifestAddress](functions/workspaceManifestAddress.md)

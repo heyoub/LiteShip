@@ -6,7 +6,7 @@
 
 # Interface: TokenTailwindResult
 
-Defined in: compiler/src/token-tailwind.ts:24
+Defined in: [compiler/src/token-tailwind.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/token-tailwind.ts#L24)
 
 Output of [TokenTailwindCompiler.compile](../variables/TokenTailwindCompiler.md#compile).
 
@@ -20,6 +20,6 @@ needs the declarations text.
 
 > `readonly` **themeBlock**: `string`
 
-Defined in: compiler/src/token-tailwind.ts:26
+Defined in: [compiler/src/token-tailwind.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/token-tailwind.ts#L26)
 
 Complete `@theme { … }` block ready for a Tailwind v4 entry CSS file.

@@ -6,7 +6,7 @@
 
 # Interface: GLSLUniform
 
-Defined in: compiler/src/glsl.ts:37
+Defined in: [compiler/src/glsl.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/glsl.ts#L37)
 
 A single GLSL uniform declaration produced by [GLSLCompiler.compile](../variables/GLSLCompiler.md#compile).
 
@@ -16,7 +16,7 @@ A single GLSL uniform declaration produced by [GLSLCompiler.compile](../variable
 
 > `readonly` `optional` **comment?**: `string`
 
-Defined in: compiler/src/glsl.ts:43
+Defined in: [compiler/src/glsl.ts:43](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/glsl.ts#L43)
 
 Optional inline comment emitted alongside the declaration.
 
@@ -26,7 +26,7 @@ Optional inline comment emitted alongside the declaration.
 
 > `readonly` **name**: `string`
 
-Defined in: compiler/src/glsl.ts:39
+Defined in: [compiler/src/glsl.ts:39](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/glsl.ts#L39)
 
 Uniform name (prefixed `u_`, snake-case).
 
@@ -36,6 +36,6 @@ Uniform name (prefixed `u_`, snake-case).
 
 > `readonly` **type**: [`GLSLType`](../type-aliases/GLSLType.md)
 
-Defined in: compiler/src/glsl.ts:41
+Defined in: [compiler/src/glsl.ts:41](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/glsl.ts#L41)
 
 Inferred GLSL type; float when any state value is non-integer or negative.

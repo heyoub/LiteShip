@@ -8,7 +8,7 @@
 
 > **resolveWASM**(`projectRoot`, `configPath?`): [`WASMResolution`](../interfaces/WASMResolution.md) \| `null`
 
-Defined in: vite/src/wasm-resolve.ts:29
+Defined in: [vite/src/wasm-resolve.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/vite/src/wasm-resolve.ts#L29)
 
 Resolve the czap-compute WASM binary path.
 

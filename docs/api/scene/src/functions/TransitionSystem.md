@@ -8,7 +8,7 @@
 
 > **TransitionSystem**(`frameIndex`): `SystemShape`
 
-Defined in: scene/src/systems/transition.ts:13
+Defined in: [scene/src/systems/transition.ts:13](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/transition.ts#L13)
 
 Build a TransitionSystem keyed to a frame index.
 

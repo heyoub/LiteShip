@@ -8,7 +8,7 @@
 
 > `const` **Animation**: `object`
 
-Defined in: core/src/animation.ts:93
+Defined in: [core/src/animation.ts:93](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/animation.ts#L93)
 
 Animation — rAF-driven value interpolation exposed as an `Effect.Stream`.
 Pairs a duration and easing with either primitive lerping or the generic

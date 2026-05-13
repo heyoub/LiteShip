@@ -8,7 +8,7 @@
 
 > `const` **DirtyFlags**: `object`
 
-Defined in: core/src/dirty.ts:96
+Defined in: [core/src/dirty.ts:96](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/dirty.ts#L96)
 
 DirtyFlags -- bitmask-based dirty tracking for up to 31 named keys.
 O(1) mark/clear/check operations using bitwise integer operations.

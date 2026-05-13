@@ -8,7 +8,7 @@
 
 > `const` **ComponentCSSCompiler**: `object`
 
-Defined in: compiler/src/component-css.ts:60
+Defined in: [compiler/src/component-css.ts:60](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/component-css.ts#L60)
 
 Component CSS compiler namespace.
 

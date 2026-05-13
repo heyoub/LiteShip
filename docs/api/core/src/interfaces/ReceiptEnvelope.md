@@ -6,7 +6,7 @@
 
 # Interface: ReceiptEnvelope
 
-Defined in: core/src/receipt.ts:25
+Defined in: [core/src/receipt.ts:25](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L25)
 
 Single link in a receipt chain: timestamped, content-addressed, and linked
 to its predecessor(s). Merge envelopes carry an array of `previous` hashes;
@@ -18,7 +18,7 @@ optionally MAC-signed via `Receipt.macEnvelope`.
 
 > `readonly` **hash**: `string`
 
-Defined in: core/src/receipt.ts:30
+Defined in: [core/src/receipt.ts:30](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L30)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: core/src/receipt.ts:30
 
 > `readonly` **kind**: `string`
 
-Defined in: core/src/receipt.ts:26
+Defined in: [core/src/receipt.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L26)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: core/src/receipt.ts:26
 
 > `readonly` **payload**: `TypedRefShape`
 
-Defined in: core/src/receipt.ts:29
+Defined in: [core/src/receipt.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L29)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: core/src/receipt.ts:29
 
 > `readonly` **previous**: `string` \| readonly `string`[]
 
-Defined in: core/src/receipt.ts:31
+Defined in: [core/src/receipt.ts:31](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L31)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: core/src/receipt.ts:31
 
 > `readonly` `optional` **signature?**: `string`
 
-Defined in: core/src/receipt.ts:32
+Defined in: [core/src/receipt.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L32)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: core/src/receipt.ts:32
 
 > `readonly` **subject**: [`ReceiptSubject`](ReceiptSubject.md)
 
-Defined in: core/src/receipt.ts:28
+Defined in: [core/src/receipt.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L28)
 
 ***
 
@@ -66,4 +66,4 @@ Defined in: core/src/receipt.ts:28
 
 > `readonly` **timestamp**: [`HLCBrand`](HLCBrand.md)
 
-Defined in: core/src/receipt.ts:27
+Defined in: [core/src/receipt.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L27)

@@ -6,7 +6,7 @@
 
 # Interface: DenseSystem
 
-Defined in: core/src/ecs.ts:144
+Defined in: [core/src/ecs.ts:144](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L144)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: core/src/ecs.ts:144
 
 > `readonly` **\_denseSystem**: `true`
 
-Defined in: core/src/ecs.ts:147
+Defined in: [core/src/ecs.ts:147](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L147)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: core/src/ecs.ts:147
 
 > `readonly` **name**: `string`
 
-Defined in: core/src/ecs.ts:145
+Defined in: [core/src/ecs.ts:145](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L145)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: core/src/ecs.ts:145
 
 > `readonly` **query**: readonly `string`[]
 
-Defined in: core/src/ecs.ts:146
+Defined in: [core/src/ecs.ts:146](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L146)
 
 ## Methods
 
@@ -38,7 +38,7 @@ Defined in: core/src/ecs.ts:146
 
 > **execute**(`stores`): `Effect`\<`void`\>
 
-Defined in: core/src/ecs.ts:152
+Defined in: [core/src/ecs.ts:152](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L152)
 
 Execute receives dense stores keyed by component name.
 Systems iterate the typed arrays directly -- zero allocation per tick.

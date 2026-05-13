@@ -6,7 +6,7 @@
 
 # Interface: LiveQuantizer\<B, O\>
 
-Defined in: quantizer/src/quantizer.ts:202
+Defined in: [quantizer/src/quantizer.ts:202](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L202)
 
 Runtime-instantiated quantizer with reactive output dispatch.
 
@@ -90,7 +90,7 @@ Defined in: core/dist/quantizer-types.d.ts:25
 
 > `readonly` **config**: [`QuantizerConfig`](QuantizerConfig.md)\<`B`, `O`\>
 
-Defined in: quantizer/src/quantizer.ts:207
+Defined in: [quantizer/src/quantizer.ts:207](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L207)
 
 The config this quantizer was created from.
 
@@ -100,7 +100,7 @@ The config this quantizer was created from.
 
 > `readonly` **currentOutputs**: `Effect`\<`Partial`\<\{ `ai`: `Record`\<`string`, `unknown`\>; `aria`: `Record`\<`string`, `unknown`\>; `css`: `Record`\<`string`, `unknown`\>; `glsl`: `Record`\<`string`, `unknown`\>; `wgsl`: `Record`\<`string`, `unknown`\>; \}\>\>
 
-Defined in: quantizer/src/quantizer.ts:209
+Defined in: [quantizer/src/quantizer.ts:209](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L209)
 
 Read the currently-active per-target output record.
 
@@ -110,7 +110,7 @@ Read the currently-active per-target output record.
 
 > `readonly` **outputChanges**: `Stream`\<`Partial`\<\{ `ai`: `Record`\<`string`, `unknown`\>; `aria`: `Record`\<`string`, `unknown`\>; `css`: `Record`\<`string`, `unknown`\>; `glsl`: `Record`\<`string`, `unknown`\>; `wgsl`: `Record`\<`string`, `unknown`\>; \}\>\>
 
-Defined in: quantizer/src/quantizer.ts:211
+Defined in: [quantizer/src/quantizer.ts:211](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L211)
 
 Stream of per-target output records emitted on each boundary crossing.
 

@@ -8,7 +8,7 @@
 
 > `const` **parse**: (`line`) => [`ParseOutcome`](../type-aliases/ParseOutcome.md) = `_parse`
 
-Defined in: mcp-server/src/jsonrpc.ts:146
+Defined in: [mcp-server/src/jsonrpc.ts:146](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L146)
 
 Parse a single JSON-RPC line. Distinguishes:
 - parse failure → `parse-error` (§4.2)

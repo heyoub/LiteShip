@@ -6,7 +6,7 @@
 
 # Interface: CoreAstroConfig
 
-Defined in: core/src/config.ts:34
+Defined in: [core/src/config.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/config.ts#L34)
 
 Astro-integration slice of a czap [Config.Shape](../namespaces/Config/interfaces/Shape.md).
 
@@ -16,7 +16,7 @@ Astro-integration slice of a czap [Config.Shape](../namespaces/Config/interfaces
 
 > `readonly` `optional` **edgeRuntime?**: `boolean`
 
-Defined in: core/src/config.ts:36
+Defined in: [core/src/config.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/config.ts#L36)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: core/src/config.ts:36
 
 > `readonly` `optional` **satellite?**: `boolean`
 
-Defined in: core/src/config.ts:35
+Defined in: [core/src/config.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/config.ts#L35)

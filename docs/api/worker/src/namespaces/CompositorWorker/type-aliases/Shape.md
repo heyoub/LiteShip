@@ -8,6 +8,6 @@
 
 > **Shape** = [`CompositorWorkerShape`](../../../interfaces/CompositorWorkerShape.md)
 
-Defined in: worker/src/compositor-worker.ts:608
+Defined in: [worker/src/compositor-worker.ts:608](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/compositor-worker.ts#L608)
 
 Public host-side surface returned by [CompositorWorker.create](../../../variables/CompositorWorker.md#create).

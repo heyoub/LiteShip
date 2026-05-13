@@ -8,7 +8,7 @@
 
 > `const` **VideoRenderer**: `object`
 
-Defined in: core/src/video.ts:98
+Defined in: [core/src/video.ts:98](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/video.ts#L98)
 
 VideoRenderer — fixed-step frame generator for deterministic offline rendering.
 Drives a [Compositor](Compositor.md) at the configured fps and optionally seeks a

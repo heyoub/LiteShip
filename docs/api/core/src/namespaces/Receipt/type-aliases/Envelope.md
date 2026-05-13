@@ -8,6 +8,6 @@
 
 > **Envelope** = [`ReceiptEnvelope`](../../../interfaces/ReceiptEnvelope.md)
 
-Defined in: core/src/receipt.ts:441
+Defined in: [core/src/receipt.ts:441](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/receipt.ts#L441)
 
 Alias for [ReceiptEnvelope](../../../interfaces/ReceiptEnvelope.md).

@@ -8,7 +8,7 @@
 
 > `const` **Component**: `ComponentFactory`
 
-Defined in: core/src/component.ts:72
+Defined in: [core/src/component.ts:72](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/component.ts#L72)
 
 Component — the content-addressed unit that binds a [Boundary](Boundary.md), a
 [Style](Style.md), and named slots into a single declaration compilers can

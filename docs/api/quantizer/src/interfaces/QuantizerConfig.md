@@ -6,7 +6,7 @@
 
 # Interface: QuantizerConfig\<B, O\>
 
-Defined in: quantizer/src/quantizer.ts:157
+Defined in: [quantizer/src/quantizer.ts:157](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L157)
 
 Immutable, content-addressed quantizer definition.
 
@@ -31,7 +31,7 @@ fresh [LiveQuantizer](LiveQuantizer.md) within an Effect scope.
 
 > `readonly` **boundary**: `B`
 
-Defined in: quantizer/src/quantizer.ts:159
+Defined in: [quantizer/src/quantizer.ts:159](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L159)
 
 Boundary this config quantizes against.
 
@@ -41,7 +41,7 @@ Boundary this config quantizes against.
 
 > `readonly` **id**: `ContentAddress`
 
-Defined in: quantizer/src/quantizer.ts:163
+Defined in: [quantizer/src/quantizer.ts:163](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L163)
 
 Content-addressed identity (FNV-1a of boundary id + outputs).
 
@@ -51,7 +51,7 @@ Content-addressed identity (FNV-1a of boundary id + outputs).
 
 > `readonly` **outputs**: `O`
 
-Defined in: quantizer/src/quantizer.ts:161
+Defined in: [quantizer/src/quantizer.ts:161](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L161)
 
 Per-target output tables keyed by state.
 
@@ -61,7 +61,7 @@ Per-target output tables keyed by state.
 
 > `readonly` `optional` **spring?**: [`SpringConfig`](SpringConfig.md)
 
-Defined in: quantizer/src/quantizer.ts:167
+Defined in: [quantizer/src/quantizer.ts:167](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L167)
 
 Spring config driving CSS easing injection.
 
@@ -71,7 +71,7 @@ Spring config driving CSS easing injection.
 
 > `readonly` `optional` **tier?**: `MotionTier`
 
-Defined in: quantizer/src/quantizer.ts:165
+Defined in: [quantizer/src/quantizer.ts:165](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L165)
 
 Motion tier gating active targets; see `TIER_TARGETS` (in `@czap/quantizer/testing`).
 
@@ -81,7 +81,7 @@ Motion tier gating active targets; see `TIER_TARGETS` (in `@czap/quantizer/testi
 
 > **create**(): `Effect`\<[`LiveQuantizer`](LiveQuantizer.md)\<`B`, `O`\>, `never`, [`Scope`](#)\>
 
-Defined in: quantizer/src/quantizer.ts:169
+Defined in: [quantizer/src/quantizer.ts:169](https://github.com/heyoub/LiteShip/blob/main/packages/quantizer/src/quantizer.ts#L169)
 
 Instantiate a reactive [LiveQuantizer](LiveQuantizer.md) scoped to an Effect fiber.
 

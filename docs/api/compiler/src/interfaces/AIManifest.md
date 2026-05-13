@@ -6,7 +6,7 @@
 
 # Interface: AIManifest
 
-Defined in: compiler/src/ai-manifest.ts:104
+Defined in: [compiler/src/ai-manifest.ts:104](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L104)
 
 Top-level AI manifest describing the UI surface to an LLM.
 
@@ -19,7 +19,7 @@ definitions, a JSON Schema, and a system prompt in a single pass.
 
 > `readonly` **actions**: `Record`\<`string`, [`AIAction`](AIAction.md)\>
 
-Defined in: compiler/src/ai-manifest.ts:112
+Defined in: [compiler/src/ai-manifest.ts:112](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L112)
 
 Invocable actions.
 
@@ -29,7 +29,7 @@ Invocable actions.
 
 > `readonly` **constraints**: readonly [`AIConstraint`](AIConstraint.md)[]
 
-Defined in: compiler/src/ai-manifest.ts:114
+Defined in: [compiler/src/ai-manifest.ts:114](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L114)
 
 Cross-cutting invariants.
 
@@ -39,7 +39,7 @@ Cross-cutting invariants.
 
 > `readonly` **dimensions**: `Record`\<`string`, [`AIDimension`](AIDimension.md)\>
 
-Defined in: compiler/src/ai-manifest.ts:108
+Defined in: [compiler/src/ai-manifest.ts:108](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L108)
 
 State-space dimensions.
 
@@ -49,7 +49,7 @@ State-space dimensions.
 
 > `readonly` **slots**: `Record`\<`string`, [`AISlot`](AISlot.md)\>
 
-Defined in: compiler/src/ai-manifest.ts:110
+Defined in: [compiler/src/ai-manifest.ts:110](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L110)
 
 Content slots.
 
@@ -59,6 +59,6 @@ Content slots.
 
 > `readonly` **version**: `string`
 
-Defined in: compiler/src/ai-manifest.ts:106
+Defined in: [compiler/src/ai-manifest.ts:106](https://github.com/heyoub/LiteShip/blob/main/packages/compiler/src/ai-manifest.ts#L106)
 
 Manifest schema version.

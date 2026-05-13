@@ -8,7 +8,7 @@
 
 > `const` **Theme**: `ThemeFactory` & `object`
 
-Defined in: core/src/theme.ts:99
+Defined in: [core/src/theme.ts:99](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/theme.ts#L99)
 
 Theme namespace -- theme primitive for constraint-based adaptive rendering.
 

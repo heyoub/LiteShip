@@ -8,7 +8,7 @@
 
 > **fnv1aBytes**(`bytes`): `ContentAddress`
 
-Defined in: core/src/fnv.ts:24
+Defined in: [core/src/fnv.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/fnv.ts#L24)
 
 FNV-1a hash of raw bytes, returned as a ContentAddress.
 

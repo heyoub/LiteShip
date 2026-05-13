@@ -6,7 +6,7 @@
 
 # Interface: SlotEntry
 
-Defined in: web/src/types.ts:40
+Defined in: [web/src/types.ts:40](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L40)
 
 Slot registry entry -- maps a slot path to its DOM element.
 
@@ -16,7 +16,7 @@ Slot registry entry -- maps a slot path to its DOM element.
 
 > `readonly` **element**: `Element`
 
-Defined in: web/src/types.ts:42
+Defined in: [web/src/types.ts:42](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L42)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:42
 
 > `readonly` **mode**: [`IslandMode`](../type-aliases/IslandMode.md)
 
-Defined in: web/src/types.ts:43
+Defined in: [web/src/types.ts:43](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L43)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/types.ts:43
 
 > `readonly` **mounted**: `boolean`
 
-Defined in: web/src/types.ts:44
+Defined in: [web/src/types.ts:44](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L44)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: web/src/types.ts:44
 
 > `readonly` **path**: [`SlotPath`](../type-aliases/SlotPath.md)
 
-Defined in: web/src/types.ts:41
+Defined in: [web/src/types.ts:41](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L41)

@@ -14,11 +14,11 @@ LiteShip / CZAP / `@czap/*` naming: [GLOSSARY.md](./GLOSSARY.md).
 
 ```bash
 git clone https://github.com/heyoub/LiteShip.git
-cd czap
+cd LiteShip
 pnpm install
 ```
 
-The remote path still reads `czap` on GitHub; LiteShip is the product name, CZAP the engine, `@czap/*` the packages ([GLOSSARY.md](./GLOSSARY.md)).
+LiteShip is the product name, CZAP the engine, `@czap/*` the packages ([GLOSSARY.md](./GLOSSARY.md)).
 
 The first install pulls workspace dependencies and Playwright browsers. A minute or two; subsequent installs are seconds.
 

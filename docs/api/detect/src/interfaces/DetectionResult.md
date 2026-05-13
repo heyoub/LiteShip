@@ -6,7 +6,7 @@
 
 # Interface: DetectionResult
 
-Defined in: detect/src/detect.ts:102
+Defined in: [detect/src/detect.ts:102](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L102)
 
 Result of a single detection sweep.
 
@@ -24,7 +24,7 @@ many probes returned real values (vs. defaults).
 
 > `readonly` **capabilities**: [`DeviceCapabilities`](DeviceCapabilities.md)
 
-Defined in: detect/src/detect.ts:104
+Defined in: [detect/src/detect.ts:104](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L104)
 
 The probed capabilities.
 
@@ -34,7 +34,7 @@ The probed capabilities.
 
 > `readonly` **capSet**: [`CapSet`](#)
 
-Defined in: detect/src/detect.ts:108
+Defined in: [detect/src/detect.ts:108](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L108)
 
 Monotone set of every [CapLevel](#) at or below `tier`.
 
@@ -44,7 +44,7 @@ Monotone set of every [CapLevel](#) at or below `tier`.
 
 > `readonly` **confidence**: `number`
 
-Defined in: detect/src/detect.ts:110
+Defined in: [detect/src/detect.ts:110](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L110)
 
 Heuristic confidence in `[0.5, 1]` based on how many probes succeeded.
 
@@ -54,6 +54,6 @@ Heuristic confidence in `[0.5, 1]` based on how many probes succeeded.
 
 > `readonly` **tier**: [`CapLevel`](#)
 
-Defined in: detect/src/detect.ts:106
+Defined in: [detect/src/detect.ts:106](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L106)
 
 Highest [CapLevel](#) the device qualifies for.

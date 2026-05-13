@@ -8,7 +8,7 @@
 
 > **Shape**\<`T`, `E`\> = `WireShape`\<`T`, `E`\>
 
-Defined in: core/src/wire.ts:273
+Defined in: [core/src/wire.ts:273](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/wire.ts#L273)
 
 Structural shape of a [Wire](../../../variables/Wire.md): a fluent wrapper over `Stream.Stream<T, E>`.
 

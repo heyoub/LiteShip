@@ -8,7 +8,7 @@
 
 > **AssetRef**(`id`): `string`
 
-Defined in: assets/src/contract.ts:50
+Defined in: [assets/src/contract.ts:50](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/contract.ts#L50)
 
 Resolve an asset id to itself after confirming it's registered. Throws on unknown ids.
 

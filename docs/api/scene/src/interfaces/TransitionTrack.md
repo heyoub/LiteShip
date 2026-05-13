@@ -6,7 +6,7 @@
 
 # Interface: TransitionTrack
 
-Defined in: scene/src/contract.ts:47
+Defined in: [scene/src/contract.ts:47](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L47)
 
 Transition track — blends two video tracks across a frame window.
 
@@ -16,7 +16,7 @@ Transition track — blends two video tracks across a frame window.
 
 > `readonly` **between**: readonly \[[`TrackId`](../type-aliases/TrackId.md)\<`"video"`\>, [`TrackId`](../type-aliases/TrackId.md)\<`"video"`\>\]
 
-Defined in: scene/src/contract.ts:53
+Defined in: [scene/src/contract.ts:53](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L53)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: scene/src/contract.ts:53
 
 > `readonly` **from**: `number`
 
-Defined in: scene/src/contract.ts:50
+Defined in: [scene/src/contract.ts:50](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L50)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: scene/src/contract.ts:50
 
 > `readonly` **id**: [`TrackId`](../type-aliases/TrackId.md)\<`"transition"`\>
 
-Defined in: scene/src/contract.ts:49
+Defined in: [scene/src/contract.ts:49](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L49)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: scene/src/contract.ts:49
 
 > `readonly` **kind**: `"transition"`
 
-Defined in: scene/src/contract.ts:48
+Defined in: [scene/src/contract.ts:48](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L48)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: scene/src/contract.ts:48
 
 > `readonly` **to**: `number`
 
-Defined in: scene/src/contract.ts:51
+Defined in: [scene/src/contract.ts:51](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L51)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: scene/src/contract.ts:51
 
 > `readonly` **transitionKind**: `"crossfade"` \| `"swipe.left"` \| `"swipe.right"` \| `"zoom.in"` \| `"zoom.out"` \| `"cut"`
 
-Defined in: scene/src/contract.ts:52
+Defined in: [scene/src/contract.ts:52](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L52)

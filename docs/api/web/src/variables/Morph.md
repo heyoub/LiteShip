@@ -8,7 +8,7 @@
 
 > `const` **Morph**: `object`
 
-Defined in: web/src/morph/diff.ts:138
+Defined in: [web/src/morph/diff.ts:138](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/morph/diff.ts#L138)
 
 DOM morph namespace.
 

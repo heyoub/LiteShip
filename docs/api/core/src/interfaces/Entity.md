@@ -6,7 +6,7 @@
 
 # Interface: Entity
 
-Defined in: core/src/ecs.ts:21
+Defined in: [core/src/ecs.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L21)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: core/src/ecs.ts:21
 
 > `readonly` **components**: `ReadonlyMap`\<`string`, `unknown`\>
 
-Defined in: core/src/ecs.ts:23
+Defined in: [core/src/ecs.ts:23](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L23)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: core/src/ecs.ts:23
 
 > `readonly` **id**: [`EntityId`](../type-aliases/EntityId.md)
 
-Defined in: core/src/ecs.ts:22
+Defined in: [core/src/ecs.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ecs.ts#L22)

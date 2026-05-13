@@ -8,6 +8,6 @@
 
 > **ThresholdValue** = `_ThresholdValue`
 
-Defined in: core/src/brands.ts:30
+Defined in: [core/src/brands.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/brands.ts#L32)
 
 Branded threshold number on a boundary. Finite number on the signal's continuous range.

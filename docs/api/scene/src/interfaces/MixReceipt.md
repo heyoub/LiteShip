@@ -6,7 +6,7 @@
 
 # Interface: MixReceipt
 
-Defined in: scene/src/systems/pass-through-mixer.ts:14
+Defined in: [scene/src/systems/pass-through-mixer.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/pass-through-mixer.ts#L14)
 
 Mix receipt shape emitted by PassThroughMixer per entity per tick.
 
@@ -16,7 +16,7 @@ Mix receipt shape emitted by PassThroughMixer per entity per tick.
 
 > `readonly` **entity**: `string`
 
-Defined in: scene/src/systems/pass-through-mixer.ts:16
+Defined in: [scene/src/systems/pass-through-mixer.ts:16](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/pass-through-mixer.ts#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: scene/src/systems/pass-through-mixer.ts:16
 
 > `readonly` **frame**: `number`
 
-Defined in: scene/src/systems/pass-through-mixer.ts:15
+Defined in: [scene/src/systems/pass-through-mixer.ts:15](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/pass-through-mixer.ts#L15)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: scene/src/systems/pass-through-mixer.ts:15
 
 > `readonly` **pan**: `number`
 
-Defined in: scene/src/systems/pass-through-mixer.ts:18
+Defined in: [scene/src/systems/pass-through-mixer.ts:18](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/pass-through-mixer.ts#L18)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: scene/src/systems/pass-through-mixer.ts:18
 
 > `readonly` **volume**: `number`
 
-Defined in: scene/src/systems/pass-through-mixer.ts:17
+Defined in: [scene/src/systems/pass-through-mixer.ts:17](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/systems/pass-through-mixer.ts#L17)

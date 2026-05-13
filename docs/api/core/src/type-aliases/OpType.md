@@ -8,7 +8,7 @@
 
 > **OpType** = \{ `fn?`: `string`; `type`: `"pure"`; \} \| \{ `fn?`: `string`; `type`: `"effect"`; \} \| \{ `key`: `string`; `spec`: `Record`\<`string`, `unknown`\>; `type`: `"spawn"`; \} \| \{ `domain`: `string`; `op`: `string`; `type`: `"domain"`; \} \| \{ `condition`: `unknown`; `type`: `"choice"`; \} \| \{ `type`: `"noop"`; \}
 
-Defined in: core/src/plan.ts:15
+Defined in: [core/src/plan.ts:15](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/plan.ts#L15)
 
 Discriminated union describing the kind of work a `PlanStep` performs.
 

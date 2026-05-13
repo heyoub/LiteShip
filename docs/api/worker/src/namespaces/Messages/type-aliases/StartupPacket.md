@@ -8,6 +8,6 @@
 
 > **StartupPacket** = `StartupComputePacket`
 
-Defined in: worker/src/messages.ts:340
+Defined in: [worker/src/messages.ts:340](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/messages.ts#L340)
 
 Full startup packet flushed once during worker boot.

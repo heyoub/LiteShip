@@ -8,6 +8,6 @@
 
 > **Handle** = [`SceneRuntimeHandle`](../../../interfaces/SceneRuntimeHandle.md)
 
-Defined in: scene/src/runtime.ts:284
+Defined in: [scene/src/runtime.ts:284](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/runtime.ts#L284)
 
 Live runtime handle — see [SceneRuntimeHandle](../../../interfaces/SceneRuntimeHandle.md).

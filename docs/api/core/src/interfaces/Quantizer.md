@@ -6,7 +6,7 @@
 
 # Interface: Quantizer\<B\>
 
-Defined in: core/src/quantizer-types.ts:21
+Defined in: [core/src/quantizer-types.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L21)
 
 Quantizer contract — the live evaluator that binds a [Boundary](../variables/Boundary.md) to a signal source.
 
@@ -27,7 +27,7 @@ builder; consumers interact only via this structural interface.
 
 > `readonly` **\_tag**: `"Quantizer"`
 
-Defined in: core/src/quantizer-types.ts:22
+Defined in: [core/src/quantizer-types.ts:22](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L22)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: core/src/quantizer-types.ts:22
 
 > `readonly` **boundary**: `B`
 
-Defined in: core/src/quantizer-types.ts:23
+Defined in: [core/src/quantizer-types.ts:23](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L23)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: core/src/quantizer-types.ts:23
 
 > `readonly` **changes**: `Stream`\<[`BoundaryCrossing`](../type-aliases/BoundaryCrossing.md)\<[`StateUnion`](../type-aliases/StateUnion.md)\<`B`\>\>\>
 
-Defined in: core/src/quantizer-types.ts:27
+Defined in: [core/src/quantizer-types.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L27)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: core/src/quantizer-types.ts:27
 
 > `readonly` **state**: `Effect`\<[`StateUnion`](../type-aliases/StateUnion.md)\<`B`\>\>
 
-Defined in: core/src/quantizer-types.ts:24
+Defined in: [core/src/quantizer-types.ts:24](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L24)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: core/src/quantizer-types.ts:24
 
 > `readonly` `optional` **stateSync?**: () => [`StateUnion`](../type-aliases/StateUnion.md)\<`B`\>
 
-Defined in: core/src/quantizer-types.ts:26
+Defined in: [core/src/quantizer-types.ts:26](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L26)
 
 Synchronous state accessor for hot paths (avoids Effect overhead).
 
@@ -73,7 +73,7 @@ Synchronous state accessor for hot paths (avoids Effect overhead).
 
 > **evaluate**(`value`): [`StateUnion`](../type-aliases/StateUnion.md)\<`B`\>
 
-Defined in: core/src/quantizer-types.ts:28
+Defined in: [core/src/quantizer-types.ts:28](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/quantizer-types.ts#L28)
 
 #### Parameters
 

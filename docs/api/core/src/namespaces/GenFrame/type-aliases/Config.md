@@ -8,6 +8,6 @@
 
 > **Config** = `GenFrameConfig`
 
-Defined in: core/src/gen-frame.ts:226
+Defined in: [core/src/gen-frame.ts:226](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/gen-frame.ts#L226)
 
 Configuration accepted by [GenFrame.make](../../../variables/GenFrame.md#make).

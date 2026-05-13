@@ -8,7 +8,7 @@
 
 > **FromWorkerMessage** = `ReadyMessage` \| `StateMessage` \| `ResolvedStateAckMessage` \| `FrameMessage` \| `RenderCompleteMessage` \| `ErrorMessage` \| `MetricsMessage`
 
-Defined in: worker/src/messages.ts:289
+Defined in: [worker/src/messages.ts:289](https://github.com/heyoub/LiteShip/blob/main/packages/worker/src/messages.ts#L289)
 
 Every message a worker may send back to the main thread. Discriminated
 on the `type` field. Includes readiness, state updates, frame output,

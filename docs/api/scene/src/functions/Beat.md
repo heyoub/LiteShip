@@ -8,7 +8,7 @@
 
 > **Beat**(`count`): [`BeatHandle`](../interfaces/BeatHandle.md)
 
-Defined in: scene/src/sugar/beat.ts:18
+Defined in: [scene/src/sugar/beat.ts:18](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/sugar/beat.ts#L18)
 
 Build a beat handle with the given count (may be fractional).
 

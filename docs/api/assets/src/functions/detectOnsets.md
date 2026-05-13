@@ -8,7 +8,7 @@
 
 > **detectOnsets**(`audio`): readonly `number`[]
 
-Defined in: assets/src/analysis/onsets.ts:14
+Defined in: [assets/src/analysis/onsets.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/assets/src/analysis/onsets.ts#L14)
 
 Detect note-attack onsets as an ordered array of sample indices.
 

@@ -6,7 +6,7 @@
 
 # Interface: EdgeTierResult
 
-Defined in: edge/src/edge-tier.ts:25
+Defined in: [edge/src/edge-tier.ts:25](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/edge-tier.ts#L25)
 
 Outcome of an edge-side tier detection sweep.
 
@@ -20,7 +20,7 @@ code paths from `@czap/detect`.
 
 > `readonly` **capLevel**: [`CapLevel`](#)
 
-Defined in: edge/src/edge-tier.ts:27
+Defined in: [edge/src/edge-tier.ts:27](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/edge-tier.ts#L27)
 
 Highest [CapLevel](#) the device qualifies for.
 
@@ -30,7 +30,7 @@ Highest [CapLevel](#) the device qualifies for.
 
 > `readonly` **designTier**: `DesignTier`
 
-Defined in: edge/src/edge-tier.ts:31
+Defined in: [edge/src/edge-tier.ts:31](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/edge-tier.ts#L31)
 
 Visual fidelity tier permitted for this device.
 
@@ -40,6 +40,6 @@ Visual fidelity tier permitted for this device.
 
 > `readonly` **motionTier**: `MotionTier`
 
-Defined in: edge/src/edge-tier.ts:29
+Defined in: [edge/src/edge-tier.ts:29](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/edge-tier.ts#L29)
 
 Motion complexity tier permitted for this device.

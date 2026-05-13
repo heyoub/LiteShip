@@ -8,7 +8,7 @@
 
 > `const` **Signal**: `object`
 
-Defined in: core/src/signal.ts:336
+Defined in: [core/src/signal.ts:336](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/signal.ts#L336)
 
 Signal namespace -- live data feeds from the browser environment.
 

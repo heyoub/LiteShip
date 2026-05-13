@@ -6,7 +6,7 @@
 
 # Interface: CompiledOutputs
 
-Defined in: edge/src/kv-cache.ts:31
+Defined in: [edge/src/kv-cache.ts:31](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L31)
 
 Precompiled CSS outputs for a single boundary at a given tier.
 
@@ -16,7 +16,7 @@ Precompiled CSS outputs for a single boundary at a given tier.
 
 > `readonly` **containerQueries**: `string`
 
-Defined in: edge/src/kv-cache.ts:34
+Defined in: [edge/src/kv-cache.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L34)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: edge/src/kv-cache.ts:34
 
 > `readonly` **css**: `string`
 
-Defined in: edge/src/kv-cache.ts:32
+Defined in: [edge/src/kv-cache.ts:32](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L32)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: edge/src/kv-cache.ts:32
 
 > `readonly` **propertyRegistrations**: `string`
 
-Defined in: edge/src/kv-cache.ts:33
+Defined in: [edge/src/kv-cache.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/edge/src/kv-cache.ts#L33)

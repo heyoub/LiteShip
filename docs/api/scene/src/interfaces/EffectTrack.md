@@ -6,7 +6,7 @@
 
 # Interface: EffectTrack
 
-Defined in: scene/src/contract.ts:57
+Defined in: [scene/src/contract.ts:57](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L57)
 
 Effect track — applies an intensity curve to a target video track, optionally synced to audio.
 
@@ -16,7 +16,7 @@ Effect track — applies an intensity curve to a target video track, optionally 
 
 > `readonly` **effectKind**: `"pulse"` \| `"glow"` \| `"shake"` \| `"zoom"` \| `"desaturate"`
 
-Defined in: scene/src/contract.ts:62
+Defined in: [scene/src/contract.ts:62](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L62)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: scene/src/contract.ts:62
 
 > `readonly` **from**: `number`
 
-Defined in: scene/src/contract.ts:60
+Defined in: [scene/src/contract.ts:60](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L60)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: scene/src/contract.ts:60
 
 > `readonly` **id**: [`TrackId`](../type-aliases/TrackId.md)\<`"effect"`\>
 
-Defined in: scene/src/contract.ts:59
+Defined in: [scene/src/contract.ts:59](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L59)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: scene/src/contract.ts:59
 
 > `readonly` **kind**: `"effect"`
 
-Defined in: scene/src/contract.ts:58
+Defined in: [scene/src/contract.ts:58](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L58)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: scene/src/contract.ts:58
 
 > `readonly` `optional` **syncTo?**: `object`
 
-Defined in: scene/src/contract.ts:64
+Defined in: [scene/src/contract.ts:64](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L64)
 
 #### anchor
 
@@ -64,7 +64,7 @@ Defined in: scene/src/contract.ts:64
 
 > `readonly` **target**: [`TrackId`](../type-aliases/TrackId.md)\<`"video"`\>
 
-Defined in: scene/src/contract.ts:63
+Defined in: [scene/src/contract.ts:63](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L63)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: scene/src/contract.ts:63
 
 > `readonly` **to**: `number`
 
-Defined in: scene/src/contract.ts:61
+Defined in: [scene/src/contract.ts:61](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L61)

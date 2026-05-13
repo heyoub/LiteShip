@@ -8,7 +8,7 @@
 
 > **TrackId**\<`K`\> = `_TrackId`\<`K`\>
 
-Defined in: scene/src/contract.ts:20
+Defined in: [scene/src/contract.ts:20](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L20)
 
 Phantom-kinded track identifier — `K` discriminates between video,
 audio, transition, and effect. Cross-kind assignment fails at compile

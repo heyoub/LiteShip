@@ -8,7 +8,7 @@
 
 > `const` **Config**: `object`
 
-Defined in: core/src/config.ts:49
+Defined in: [core/src/config.ts:49](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/config.ts#L49)
 
 Config namespace — the single hub that every czap adapter (Vite, Astro, test
 runners, edge runtime) projects from. [Config.make](#make) produces a frozen,

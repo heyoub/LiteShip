@@ -8,6 +8,6 @@
 
 > `const` **MS\_PER\_SEC**: `1000` = `1000`
 
-Defined in: core/src/defaults.ts:14
+Defined in: [core/src/defaults.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/defaults.ts#L14)
 
 Milliseconds per second. Used by: frame-budget.ts, easing.ts

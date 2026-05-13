@@ -6,7 +6,7 @@
 
 # Interface: SSEConfig
 
-Defined in: web/src/types.ts:202
+Defined in: [web/src/types.ts:202](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L202)
 
 SSE client configuration.
 
@@ -16,7 +16,7 @@ SSE client configuration.
 
 > `readonly` `optional` **artifactId?**: `string`
 
-Defined in: web/src/types.ts:204
+Defined in: [web/src/types.ts:204](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L204)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: web/src/types.ts:204
 
 > `readonly` `optional` **heartbeatInterval?**: `Millis`
 
-Defined in: web/src/types.ts:207
+Defined in: [web/src/types.ts:207](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L207)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: web/src/types.ts:207
 
 > `readonly` `optional` **lastEventId?**: `string`
 
-Defined in: web/src/types.ts:205
+Defined in: [web/src/types.ts:205](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L205)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: web/src/types.ts:205
 
 > `readonly` `optional` **reconnect?**: [`ReconnectConfig`](ReconnectConfig.md)
 
-Defined in: web/src/types.ts:206
+Defined in: [web/src/types.ts:206](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L206)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: web/src/types.ts:206
 
 > `readonly` **url**: `string`
 
-Defined in: web/src/types.ts:203
+Defined in: [web/src/types.ts:203](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L203)

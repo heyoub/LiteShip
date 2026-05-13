@@ -8,6 +8,6 @@
 
 > **Shape** = `FrameCapture`
 
-Defined in: web/src/capture/webcodecs.ts:243
+Defined in: [web/src/capture/webcodecs.ts:243](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/capture/webcodecs.ts#L243)
 
 Structural type of a frame-capture surface.

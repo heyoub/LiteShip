@@ -8,7 +8,7 @@
 
 > **GPUTier** = `0` \| `1` \| `2` \| `3`
 
-Defined in: detect/src/detect.ts:53
+Defined in: [detect/src/detect.ts:53](https://github.com/heyoub/LiteShip/blob/main/packages/detect/src/detect.ts#L53)
 
 Coarse GPU fidelity bucket inferred from the WebGL renderer string.
 

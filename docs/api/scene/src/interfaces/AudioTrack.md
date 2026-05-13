@@ -6,7 +6,7 @@
 
 # Interface: AudioTrack
 
-Defined in: scene/src/contract.ts:33
+Defined in: [scene/src/contract.ts:33](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L33)
 
 Audio track — plays an asset with optional mix metadata.
 
@@ -16,7 +16,7 @@ Audio track — plays an asset with optional mix metadata.
 
 > `readonly` **from**: `number`
 
-Defined in: scene/src/contract.ts:36
+Defined in: [scene/src/contract.ts:36](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L36)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: scene/src/contract.ts:36
 
 > `readonly` **id**: [`TrackId`](../type-aliases/TrackId.md)\<`"audio"`\>
 
-Defined in: scene/src/contract.ts:35
+Defined in: [scene/src/contract.ts:35](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L35)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: scene/src/contract.ts:35
 
 > `readonly` **kind**: `"audio"`
 
-Defined in: scene/src/contract.ts:34
+Defined in: [scene/src/contract.ts:34](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L34)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: scene/src/contract.ts:34
 
 > `readonly` `optional` **mix?**: `object`
 
-Defined in: scene/src/contract.ts:39
+Defined in: [scene/src/contract.ts:39](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L39)
 
 #### pan?
 
@@ -64,7 +64,7 @@ Defined in: scene/src/contract.ts:39
 
 > `readonly` **source**: `string`
 
-Defined in: scene/src/contract.ts:38
+Defined in: [scene/src/contract.ts:38](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L38)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: scene/src/contract.ts:38
 
 > `readonly` **to**: `number`
 
-Defined in: scene/src/contract.ts:37
+Defined in: [scene/src/contract.ts:37](https://github.com/heyoub/LiteShip/blob/main/packages/scene/src/contract.ts#L37)

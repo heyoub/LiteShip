@@ -8,7 +8,7 @@
 
 > **SlotPath** = `` `/${string}` `` & `object`
 
-Defined in: web/src/types.ts:21
+Defined in: [web/src/types.ts:21](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/types.ts#L21)
 
 Slot path is a forward-slash prefixed branded path string.
 Used to address regions within the DOM.

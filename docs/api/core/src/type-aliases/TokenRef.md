@@ -8,7 +8,7 @@
 
 > **TokenRef**\<`N`\> = `_TokenRef`\<`N`\>
 
-Defined in: core/src/brands.ts:42
+Defined in: [core/src/brands.ts:53](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/brands.ts#L53)
 
 Branded token reference name
 
