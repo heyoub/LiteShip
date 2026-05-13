@@ -300,6 +300,7 @@ export async function ship(args: readonly string[]): Promise<number> {
 
   // Per-package emission loop. Any failure aborts before we hand off to
   // `pnpm publish` — we never publish without a capsule.
+  const mintedNames: string[] = [];
   for (let i = 0; i < targets.length; i++) {
     const pkg = targets[i]!;
     const name = pkg.packageJson.name;
@@ -421,19 +422,23 @@ export async function ship(args: readonly string[]): Promise<number> {
       dry_run: opts.dryRun,
     };
     emit(receipt);
+    mintedNames.push(name);
   }
 
   if (opts.dryRun) return 0;
 
-  // Hand off to pnpm publish. Forward the user's filter so the same set
-  // of packages we addressed are the ones we upload. `--access public`
-  // is required for scoped packages on a free npm org; `--no-git-checks`
-  // matches the documented release workflow (we publish from a release
-  // branch, not main).
-  const publishArgs = ['publish', '--access', 'public', '--no-git-checks'];
-  if (opts.filter !== undefined) {
-    publishArgs.push('--filter', opts.filter);
+  if (mintedNames.length === 0) {
+    emitError('ship', 'no packages were minted; nothing to publish');
+    return 1;
   }
+
+  // Hand off to pnpm publish — publish exactly the packages we just
+  // addressed by passing each as a global --filter, plus -r to make
+  // pnpm iterate. `--access public` is required for scoped packages
+  // on a free npm org; `--no-git-checks` matches the documented release
+  // workflow (we publish from a release branch, not main).
+  const filterArgs = mintedNames.flatMap((n) => ['--filter', n]);
+  const publishArgs = [...filterArgs, '-r', 'publish', '--access', 'public', '--no-git-checks'];
   const publishRes = await spawnArgv('pnpm', publishArgs);
   if (publishRes.exitCode !== 0) {
     emitError('ship', `pnpm publish exited ${publishRes.exitCode}${publishRes.stderrTail ? `: ${publishRes.stderrTail.trim()}` : ''}`);

@@ -29,14 +29,22 @@ gh release create v0.1.0 --title "v0.1.0" --notes-file RELEASE_NOTES_v0.1.0.md
 
 ## Publish packages
 
-Publish via `czap ship`, which mints a `ShipCapsule` for every `packages/*` workspace before handing the tarballs to `pnpm publish` (ADR-0011). Dry-run first so the receipts and `pnpm publish --dry-run` outputs are both observable without uploading:
+Publish via `czap ship`, which mints a `ShipCapsule` for every non-private `packages/*` workspace, then hands the matching tarballs to `pnpm publish` (ADR-0011). The default (no filter) is every publishable workspace package; the publish handoff passes one `--filter <pkg>` per minted package plus `-r` so pnpm publishes exactly the set we addressed.
+
+Dry-run first so the receipts and `pnpm publish --dry-run` outputs are both observable without uploading:
 
 ```bash
-pnpm exec czap ship --filter "./packages/*" --dry-run
-pnpm exec czap ship --filter "./packages/*"
+pnpm run ship -- --dry-run
+pnpm run ship
 ```
 
-The dry-run still writes `<pkg>-<version>.shipcapsule.cbor` next to each `<pkg>-<version>.tgz` in the package directories. Inspect either with `pnpm exec czap verify <tarball> --capsule <cbor>` before going live.
+The dry-run still writes `<pkg>-<version>.shipcapsule.cbor` next to each `<pkg>-<version>.tgz` in the package directories. Inspect either with:
+
+```bash
+pnpm run verify -- <tarball> --capsule <cbor>
+```
+
+To publish a single package (e.g. a hotfix), pass its name or path: `pnpm run ship -- --filter @czap/cli`.
 
 ## Attach ShipCapsules to the GitHub Release
 
@@ -57,9 +65,9 @@ rm -f packages/*/czap-*-0.1.0.tgz
 Anyone with the published `.tgz` and the GitHub-attached `.shipcapsule.cbor` can verify locally:
 
 ```bash
-pnpm pack @czap/core@0.1.0   # or download the .tgz from npm directly
+npm pack @czap/core@0.1.0   # or download the .tgz from npm directly
 gh release download v0.1.0 -p 'czap-core-0.1.0.shipcapsule.cbor'
-pnpm exec czap verify czap-core-0.1.0.tgz --capsule czap-core-0.1.0.shipcapsule.cbor
+npx @czap/cli verify czap-core-0.1.0.tgz --capsule czap-core-0.1.0.shipcapsule.cbor
 ```
 
 Verdicts and exit codes:
