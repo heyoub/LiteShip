@@ -8,7 +8,7 @@
 
 > **createHtmlFragment**(`html`, `options?`): `DocumentFragment`
 
-Defined in: [web/src/security/html-trust.ts:236](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/security/html-trust.ts#L236)
+Defined in: [web/src/security/html-trust.ts:233](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/security/html-trust.ts#L233)
 
 Parse `html` under `options.policy` and return a `DocumentFragment`
 ready to be appended to the live DOM. Dangerous elements

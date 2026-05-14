@@ -86,7 +86,7 @@ Defined in: [core/src/capsule.ts:69](https://github.com/heyoub/LiteShip/blob/mai
 
 > `readonly` **id**: `ContentAddress`
 
-Defined in: [core/src/assembly.ts:18](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/assembly.ts#L18)
+Defined in: [core/src/assembly.ts:17](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/assembly.ts#L17)
 
 #### Overrides
 

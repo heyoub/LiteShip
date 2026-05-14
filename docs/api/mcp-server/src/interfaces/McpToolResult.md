@@ -6,7 +6,7 @@
 
 # Interface: McpToolResult
 
-Defined in: [mcp-server/src/dispatch.ts:60](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L60)
+Defined in: [mcp-server/src/dispatch.ts:63](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L63)
 
 MCP tools/call result envelope.
 
@@ -16,7 +16,7 @@ MCP tools/call result envelope.
 
 > `readonly` **content**: readonly `object`[]
 
-Defined in: [mcp-server/src/dispatch.ts:61](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L61)
+Defined in: [mcp-server/src/dispatch.ts:64](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L64)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [mcp-server/src/dispatch.ts:61](https://github.com/heyoub/LiteShip/b
 
 > `readonly` **isError**: `boolean`
 
-Defined in: [mcp-server/src/dispatch.ts:62](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L62)
+Defined in: [mcp-server/src/dispatch.ts:65](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/dispatch.ts#L65)

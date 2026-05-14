@@ -8,4 +8,6 @@
 
 > **Shape** = `ShipCapsuleShape`
 
-Defined in: [core/src/ship-capsule.ts:187](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ship-capsule.ts#L187)
+Defined in: [core/src/ship-capsule.ts:191](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/ship-capsule.ts#L191)
+
+Decoded capsule shape returned by [ShipCapsule.make](../../../variables/ShipCapsule.md#make) and [ShipCapsule.decode](../../../variables/ShipCapsule.md#decode).

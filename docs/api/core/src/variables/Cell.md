@@ -8,7 +8,7 @@
 
 > `const` **Cell**: `object`
 
-Defined in: [core/src/cell.ts:116](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/cell.ts#L116)
+Defined in: [core/src/cell.ts:118](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/cell.ts#L118)
 
 Cell — mutable reactive primitive backed by `SubscriptionRef`.
 The workhorse of czap's reactive graph: `get` for a snapshot, `set` to

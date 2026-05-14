@@ -8,7 +8,9 @@
 
 > **AddressedDigest**: `object`
 
-Defined in: [core/src/addressed-digest.ts:13](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/addressed-digest.ts#L13)
+Defined in: [core/src/addressed-digest.ts:14](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/addressed-digest.ts#L14)
+
+Namespace surface: call [AddressedDigest.of](#of) to mint a digest pair from raw bytes.
 
 ## Type Declaration
 

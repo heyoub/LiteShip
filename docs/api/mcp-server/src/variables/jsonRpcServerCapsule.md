@@ -8,7 +8,7 @@
 
 > `const` **jsonRpcServerCapsule**: `CapsuleDef`\<`"pureTransform"`, `string`, \{ `kind`: `string`; \}, `unknown`\>
 
-Defined in: [mcp-server/src/jsonrpc.ts:170](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L170)
+Defined in: [mcp-server/src/jsonrpc.ts:163](https://github.com/heyoub/LiteShip/blob/main/packages/mcp-server/src/jsonrpc.ts#L163)
 
 Capsule definition for the kernel — placed in the catalog under the
 `pureTransform` arm so the factory compiler emits a generated test +
