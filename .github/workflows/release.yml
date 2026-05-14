@@ -39,9 +39,15 @@ concurrency:
 
 jobs:
   release-certified:
-    name: Gauntlet (release-certification gate)
+    name: Release certification (publishability gate)
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 30
+    # The full gauntlet (gauntlet:full — bench / coverage / e2e /
+    # timing-sensitive lanes) runs on every PR and on main via
+    # .github/workflows/ci.yml > truth-linux. By the time a v*.*.* tag
+    # is pushed, main has already cleared that bar. This job's job is
+    # the narrower question: are the tarballs publishable RIGHT NOW.
+    # Slim, stable, CI-deterministic.
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -50,19 +56,15 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
-      - run: pnpm run gauntlet:full
+      - run: pnpm run build
+      - run: pnpm run typecheck
+      - run: pnpm run lint
+      - run: pnpm test
         env:
           CI: true
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: gauntlet-artifacts
-          path: |
-            coverage
-            reports
-            benchmarks
+      - run: pnpm run package:smoke
+        env:
+          CI: true
 
   publish:
     name: Publish 15 @czap/* packages + attach ShipCapsules
