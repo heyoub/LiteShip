@@ -82,7 +82,12 @@ jobs:
           cache: pnpm
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm install -g npm@latest
+      # npm self-upgrade dropped: the bundled npm 10.x is sufficient
+      # for NPM_TOKEN auth (v0.1.x). When we pivot to OIDC trusted
+      # publishing in v0.2 we'll need npm >= 11.5.1; reintroduce the
+      # upgrade then via a more robust path (e.g. setup-node's
+      # always-auth + scope-url combo rather than a self-replacing
+      # global install that corrupts mid-flight in CI).
 
       - run: pnpm install --frozen-lockfile
 
