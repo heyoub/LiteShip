@@ -20,7 +20,7 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { Effect } from 'effect';
@@ -34,7 +34,7 @@ import {
 import { tarballManifestAddress } from '../../packages/cli/src/ship-manifest.js';
 import { verify } from '../../packages/cli/src/commands/ship-verify.js';
 
-const REPO_ROOT = '/home/heyoub/Documents/code/LiteShip';
+const REPO_ROOT = resolve(import.meta.dirname, '..', '..');
 const run = <A, E>(eff: Effect.Effect<A, E>) => Effect.runPromise(eff);
 
 interface CapturedReceipt {
