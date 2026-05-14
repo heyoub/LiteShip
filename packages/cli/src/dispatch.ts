@@ -35,7 +35,7 @@ export async function run(argv: readonly string[]): Promise<number> {
       if (sub === 'render') {
         const scene = subRest[0] ?? '';
         const outputIdx = subRest.indexOf('-o');
-        const outputDirect = outputIdx >= 0 ? subRest[outputIdx + 1] ?? '' : undefined;
+        const outputDirect = outputIdx >= 0 ? (subRest[outputIdx + 1] ?? '') : undefined;
         const outputFlag = parseFlag(subRest, '--output');
         const force = subRest.includes('--force');
         return sceneRender(scene, outputDirect ?? outputFlag ?? '', force);
@@ -49,7 +49,10 @@ export async function run(argv: readonly string[]): Promise<number> {
       if (sub === 'analyze') {
         const id = subRest[0] ?? '';
         const projection = parseFlag(subRest, '--projection') as 'beat' | 'onset' | 'waveform' | undefined;
-        if (!projection) { emitError('asset.analyze', 'missing --projection'); return 1; }
+        if (!projection) {
+          emitError('asset.analyze', 'missing --projection');
+          return 1;
+        }
         const force = subRest.includes('--force');
         return assetAnalyze(id, projection, force);
       }

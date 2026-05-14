@@ -23,10 +23,7 @@ export interface SceneContext {
  * over inherited parent fields. Missing override fields fall through
  * to the parent — explicit `undefined` is treated as "no override".
  */
-export function inheritContext(
-  parent: SceneContext,
-  overrides?: Partial<SceneContext>,
-): SceneContext {
+export function inheritContext(parent: SceneContext, overrides?: Partial<SceneContext>): SceneContext {
   return {
     bpm: overrides?.bpm ?? parent.bpm,
     fps: overrides?.fps ?? parent.fps,

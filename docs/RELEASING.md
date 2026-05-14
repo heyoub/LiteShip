@@ -143,7 +143,7 @@ workflow and add `--provenance` — future releases will need zero auth setup.
    git push origin v0.1.1
    ```
 5. The `Release (NPM_TOKEN auth)` workflow auto-fires on the tag. It runs
-   the release-certification gate (build / typecheck / lint / vitest /
+   the release-certification gate (`build` / `typecheck` / `lint` / `test` /
    `package:smoke`), then idempotently ships all 15 packages, then creates
    the GitHub Release and attaches the ShipCapsules.
 
@@ -155,7 +155,7 @@ tab. Toggle `dry-run: true` to mint capsules without uploading.
 ### Why the release gate is slim
 
 The release-certification job in `release.yml` runs the publishability
-subset — build, typecheck, lint, vitest, `package:smoke` — not
+subset — `build` / `typecheck` / `lint` / `test` / `package:smoke` — not
 `pnpm run gauntlet:full`. The full gauntlet (bench, e2e, stream-stress,
 flake, redteam, bench-gate / trend / reality, runtime-seams audit, coverage
 merge, flex:verify) runs on every PR and on `main` via

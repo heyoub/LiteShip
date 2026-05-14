@@ -107,11 +107,7 @@ function encodeFloat64(value: number): Uint8Array {
 }
 
 function encodeNumber(value: number): Uint8Array {
-  if (
-    Number.isInteger(value) &&
-    value >= Number.MIN_SAFE_INTEGER &&
-    value <= Number.MAX_SAFE_INTEGER
-  ) {
+  if (Number.isInteger(value) && value >= Number.MIN_SAFE_INTEGER && value <= Number.MAX_SAFE_INTEGER) {
     return encodeInteger(value);
   }
   return encodeFloat64(value);

@@ -13,16 +13,13 @@ import { CanonicalCbor } from './cbor.js';
 import { Diagnostics } from './diagnostics.js';
 
 /** A capsule declaration plus its content-addressed id. */
-export interface CapsuleDef<K extends AssemblyKind, In, Out, R>
-  extends CapsuleContract<K, In, Out, R> {
+export interface CapsuleDef<K extends AssemblyKind, In, Out, R> extends CapsuleContract<K, In, Out, R> {
   readonly id: ContentAddress;
 }
 
 const catalog: CapsuleDef<AssemblyKind, unknown, unknown, unknown>[] = [];
 
-function computeId(
-  contract: Omit<CapsuleContract<AssemblyKind, unknown, unknown, unknown>, 'id'>,
-): ContentAddress {
+function computeId(contract: Omit<CapsuleContract<AssemblyKind, unknown, unknown, unknown>, 'id'>): ContentAddress {
   // ADR-0003: route through CanonicalCbor to obtain a deterministic byte
   // sequence (RFC 8949 §4.2.1) before hashing. Stable across key order,
   // platform endianness, and stringification quirks.

@@ -153,9 +153,19 @@ describe('browser RenderWorker with real Worker and OffscreenCanvas', () => {
     const seen: number[] = [];
     let stopIssued = false;
 
-    const done = new Promise<void>((resolve) => {
-      worker.onComplete(() => resolve());
-      setTimeout(resolve, 5000); // hard ceiling so a regression can't hang the suite
+    // The worker is contract-bound to post `render-complete` after the loop
+    // exits (whether by natural finish or by `stopRequested` break). If it
+    // doesn't fire within the ceiling we fail loud rather than passing on
+    // a silent stop-flow regression.
+    const done = new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(
+        () => reject(new Error('Timed out waiting for render-complete after stopRender()')),
+        5000,
+      );
+      worker.onComplete(() => {
+        clearTimeout(timer);
+        resolve();
+      });
     });
 
     worker.onFrame((output) => {

@@ -91,7 +91,8 @@ const COMMANDS: readonly CommandDescriptor[] = [
   { name: 'gauntlet', description: 'Run the full gauntlet', args: {}, outputs: 'GauntletReceipt' },
   {
     name: 'ship',
-    description: 'Mint ShipCapsule(s) for one or more packages and (unless --dry-run) hand off to pnpm publish (ADR-0011)',
+    description:
+      'Mint ShipCapsule(s) for one or more packages and (unless --dry-run) hand off to pnpm publish (ADR-0011)',
     args: {
       filter: 'string (optional, package path or @scope/name)',
       'dry-run': 'boolean (optional, write capsules + .tgz only, do not publish)',

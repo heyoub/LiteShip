@@ -88,9 +88,8 @@ const encodeIdentityBearing = (capsule: ShipCapsuleInput): Uint8Array =>
     previous_ship_capsule: capsule.previous_ship_capsule,
   });
 
-const computeId = (
-  capsuleWithoutIdentity: ShipCapsuleInput,
-): Effect.Effect<AddressedDigest, Error> => AddressedDigestNs.of(encodeIdentityBearing(capsuleWithoutIdentity));
+const computeId = (capsuleWithoutIdentity: ShipCapsuleInput): Effect.Effect<AddressedDigest, Error> =>
+  AddressedDigestNs.of(encodeIdentityBearing(capsuleWithoutIdentity));
 
 const make = (input: ShipCapsuleInput): Effect.Effect<ShipCapsuleShape, Error> =>
   Effect.gen(function* () {
@@ -156,9 +155,7 @@ const validateShape = (value: unknown): value is ShipCapsuleShape => {
   return true;
 };
 
-const decode = (
-  bytes: Uint8Array,
-): Effect.Effect<ShipCapsuleShape, ShipCapsuleDecodeError> =>
+const decode = (bytes: Uint8Array): Effect.Effect<ShipCapsuleShape, ShipCapsuleDecodeError> =>
   Effect.gen(function* () {
     let decoded: unknown;
     try {
@@ -181,11 +178,21 @@ const decode = (
     return decoded;
   });
 
+/**
+ * Public namespace for ShipCapsule (ADR-0011). `make` builds a capsule from
+ * input, `canonicalize` encodes it as canonical CBOR for transport / hashing,
+ * `decode` round-trips canonical bytes and rejects non-canonical encodings,
+ * `computeId` mints the fnv1a label over the canonicalized payload.
+ */
 export const ShipCapsule = { make, canonicalize, decode, computeId };
 
 export declare namespace ShipCapsule {
+  /** Decoded capsule shape returned by {@link ShipCapsule.make} and {@link ShipCapsule.decode}. */
   export type Shape = ShipCapsuleShape;
+  /** Constructor input accepted by {@link ShipCapsule.make} (capsule without `id` / `integrity`). */
   export type Input = ShipCapsuleInput;
+  /** Tagged failure variants {@link ShipCapsule.decode} can produce. */
   export type DecodeError = ShipCapsuleDecodeError;
+  /** Node / pnpm / OS / arch tuple captured in the capsule's `build_env`. */
   export type BuildEnv = ShipCapsuleBuildEnv;
 }

@@ -31,7 +31,10 @@ import {
  * (Internal error).
  */
 class InvalidParamsError extends Error {
-  constructor(message: string, readonly detail?: unknown) {
+  constructor(
+    message: string,
+    readonly detail?: unknown,
+  ) {
     super(message);
     this.name = 'InvalidParamsError';
   }
@@ -70,9 +73,7 @@ export interface McpToolResult {
  * response. Internal handler exceptions are caught and surfaced as
  * `-32603 Internal error` per §5.1.
  */
-export async function dispatch(
-  msg: JsonRpcRequest | JsonRpcNotification,
-): Promise<JsonRpcResponse | null> {
+export async function dispatch(msg: JsonRpcRequest | JsonRpcNotification): Promise<JsonRpcResponse | null> {
   const isNotification = !('id' in msg);
   const id = isNotification ? null : (msg as JsonRpcRequest).id;
 
@@ -96,9 +97,7 @@ export async function dispatch(
 }
 
 /** Internal: dispatch result shape. */
-type InvokeResult =
-  | { readonly kind: 'ok'; readonly value: unknown }
-  | { readonly kind: 'method-not-found' };
+type InvokeResult = { readonly kind: 'ok'; readonly value: unknown } | { readonly kind: 'method-not-found' };
 
 function ok(value: unknown): InvokeResult {
   return { kind: 'ok', value };
@@ -113,10 +112,7 @@ async function invoke(msg: JsonRpcRequest | JsonRpcNotification): Promise<Invoke
       if (!params || typeof params.name !== 'string') {
         // Per §5.1, malformed params → -32602. InvalidParamsError sentinel
         // is mapped to InvalidParams in dispatch's catch block.
-        throw new InvalidParamsError(
-          'tools/call requires { name: string, arguments: object }',
-          { received: params },
-        );
+        throw new InvalidParamsError('tools/call requires { name: string, arguments: object }', { received: params });
       }
       const result = await dispatchToolCall(params);
       return ok(result);
@@ -131,10 +127,10 @@ export async function dispatchToolCall(call: McpToolCall): Promise<McpToolResult
   const args = buildArgv(call);
   const originalWrite = process.stdout.write.bind(process.stdout);
   let captured = '';
-  (process.stdout as unknown as { write: unknown }).write = ((chunk: string | Uint8Array) => {
+  (process.stdout as unknown as { write: unknown }).write = (chunk: string | Uint8Array) => {
     captured += typeof chunk === 'string' ? chunk : Buffer.from(chunk).toString();
     return true;
-  });
+  };
   try {
     const run = await getRun();
     const code = await run(args);
@@ -163,15 +159,63 @@ function buildArgv(call: McpToolCall): string[] {
 /** Static list of MCP tools produced by czap's CLI. */
 export function listTools(): ReadonlyArray<{ name: string; description: string; inputSchema: object }> {
   return [
-    { name: 'describe', description: 'Dump capsule catalog schema', inputSchema: { type: 'object', properties: { format: { type: 'string', enum: ['json', 'mcp'] } } } },
-    { name: 'scene.compile', description: 'Compile a scene capsule', inputSchema: { type: 'object', required: ['scene'], properties: { scene: { type: 'string' } } } },
-    { name: 'scene.render', description: 'Render scene to mp4', inputSchema: { type: 'object', required: ['scene', 'output'], properties: { scene: { type: 'string' }, output: { type: 'string' } } } },
-    { name: 'scene.verify', description: 'Run scene generated tests', inputSchema: { type: 'object', required: ['scene'], properties: { scene: { type: 'string' } } } },
-    { name: 'asset.analyze', description: 'Run cachedProjection on asset', inputSchema: { type: 'object', required: ['asset', 'projection'], properties: { asset: { type: 'string' }, projection: { type: 'string', enum: ['beat', 'onset', 'waveform'] } } } },
-    { name: 'asset.verify', description: 'Verify asset capsule', inputSchema: { type: 'object', required: ['asset'], properties: { asset: { type: 'string' } } } },
-    { name: 'capsule.inspect', description: 'Inspect a capsule manifest entry', inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string' } } } },
-    { name: 'capsule.verify', description: 'Verify capsule generated tests', inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string' } } } },
-    { name: 'capsule.list', description: 'List capsules filtered by kind', inputSchema: { type: 'object', properties: { kind: { type: 'string' } } } },
-    { name: 'gauntlet', description: 'Run the full gauntlet', inputSchema: { type: 'object', properties: { 'dry-run': { type: 'boolean' } } } },
+    {
+      name: 'describe',
+      description: 'Dump capsule catalog schema',
+      inputSchema: { type: 'object', properties: { format: { type: 'string', enum: ['json', 'mcp'] } } },
+    },
+    {
+      name: 'scene.compile',
+      description: 'Compile a scene capsule',
+      inputSchema: { type: 'object', required: ['scene'], properties: { scene: { type: 'string' } } },
+    },
+    {
+      name: 'scene.render',
+      description: 'Render scene to mp4',
+      inputSchema: {
+        type: 'object',
+        required: ['scene', 'output'],
+        properties: { scene: { type: 'string' }, output: { type: 'string' } },
+      },
+    },
+    {
+      name: 'scene.verify',
+      description: 'Run scene generated tests',
+      inputSchema: { type: 'object', required: ['scene'], properties: { scene: { type: 'string' } } },
+    },
+    {
+      name: 'asset.analyze',
+      description: 'Run cachedProjection on asset',
+      inputSchema: {
+        type: 'object',
+        required: ['asset', 'projection'],
+        properties: { asset: { type: 'string' }, projection: { type: 'string', enum: ['beat', 'onset', 'waveform'] } },
+      },
+    },
+    {
+      name: 'asset.verify',
+      description: 'Verify asset capsule',
+      inputSchema: { type: 'object', required: ['asset'], properties: { asset: { type: 'string' } } },
+    },
+    {
+      name: 'capsule.inspect',
+      description: 'Inspect a capsule manifest entry',
+      inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string' } } },
+    },
+    {
+      name: 'capsule.verify',
+      description: 'Verify capsule generated tests',
+      inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string' } } },
+    },
+    {
+      name: 'capsule.list',
+      description: 'List capsules filtered by kind',
+      inputSchema: { type: 'object', properties: { kind: { type: 'string' } } },
+    },
+    {
+      name: 'gauntlet',
+      description: 'Run the full gauntlet',
+      inputSchema: { type: 'object', properties: { 'dry-run': { type: 'boolean' } } },
+    },
   ];
 }

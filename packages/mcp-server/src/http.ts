@@ -30,9 +30,7 @@ import {
  * real HTTP server (Windows can't deliver SIGINT to subprocess for the
  * full integration path).
  */
-export async function respond(
-  outcome: ParseOutcome,
-): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
+export async function respond(outcome: ParseOutcome): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
   switch (outcome.kind) {
     case 'parse-error':
       return errorResponse(null, ParseError, 'Parse error');
@@ -62,9 +60,7 @@ export async function respond(
  * request path; extracted so unit tests cover every parse-outcome branch
  * without spawning a server process.
  */
-export async function handleRequest(
-  body: string,
-): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
+export async function handleRequest(body: string): Promise<JsonRpcResponse | readonly JsonRpcResponse[] | null> {
   const outcome = JsonRpcServer.parse(body);
   return respond(outcome);
 }

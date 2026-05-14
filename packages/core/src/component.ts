@@ -77,7 +77,13 @@ export const Component: ComponentFactory = {
     readonly slots: { readonly [K in SN[number]]: SlotConfig };
     readonly defaultSlot?: SN[number];
   }): ComponentDef<B, SN> {
-    const id = deterministicId<SN>(config.name, config.boundary?.id, config.styles.id, config.slots, config.defaultSlot);
+    const id = deterministicId<SN>(
+      config.name,
+      config.boundary?.id,
+      config.styles.id,
+      config.slots,
+      config.defaultSlot,
+    );
 
     const def: ComponentDef<B, SN> = {
       _tag: 'ComponentDef',

@@ -33,8 +33,14 @@ import { emit, emitError } from '../receipts.js';
 import type { ShipReceipt } from '../receipts.js';
 import { ShipEmit } from '../capsules/ship-emit.js';
 
-interface EffectOk<A> { readonly ok: true; readonly value: A }
-interface EffectErr<E> { readonly ok: false; readonly error: E }
+interface EffectOk<A> {
+  readonly ok: true;
+  readonly value: A;
+}
+interface EffectErr<E> {
+  readonly ok: false;
+  readonly error: E;
+}
 type EffectResult<A, E> = EffectOk<A> | EffectErr<E>;
 
 /**
@@ -54,7 +60,14 @@ async function runEffect<A, E>(effect: Effect.Effect<A, E>): Promise<EffectResul
   // `as unknown as E` cast is the one sanctioned shape break here: callers
   // observe a structured E in 99.9% of cases; this is the never-happens
   // fallback for impossible defects (no Fail reasons in the Cause chain).
-  return { ok: false, error: new Error(Cause.prettyErrors(exit.cause).map((e) => e.message).join('; ')) as unknown as E };
+  return {
+    ok: false,
+    error: new Error(
+      Cause.prettyErrors(exit.cause)
+        .map((e) => e.message)
+        .join('; '),
+    ) as unknown as E,
+  };
 }
 
 const LIFECYCLE_KEYS = ['prepack', 'prepare', 'prepublishOnly', 'prepublish'] as const;
@@ -279,7 +292,9 @@ export async function ship(args: readonly string[]): Promise<number> {
   }
   const workspaceManifestAddr = wsAddrResult.value;
 
-  const rootPkg = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')) as PackageJsonLite & { packageManager?: string };
+  const rootPkg = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')) as PackageJsonLite & {
+    packageManager?: string;
+  };
   const pmVersion = readPackageManagerVersion(rootPkg);
   let buildEnv: ShipCapsule.BuildEnv;
   try {
@@ -350,11 +365,9 @@ export async function ship(args: readonly string[]): Promise<number> {
     // line goes to stdout. Both are part of the observed dry-run; the
     // normalizer redacts repo-root + timestamps so two clean publishes
     // produce byte-identical canonical text.
-    const dryRes = await spawnArgvCapture(
-      'pnpm',
-      ['publish', '--dry-run', '--no-git-checks'],
-      { cwd: pkg.absolutePath },
-    );
+    const dryRes = await spawnArgvCapture('pnpm', ['publish', '--dry-run', '--no-git-checks'], {
+      cwd: pkg.absolutePath,
+    });
     if (dryRes.exitCode !== 0) {
       emitError(
         'ship',
@@ -363,9 +376,7 @@ export async function ship(args: readonly string[]): Promise<number> {
       return 1;
     }
     const dryRunRaw = `${dryRes.stderr}\n${dryRes.stdout}`;
-    const dryAddrResult = await runEffect(
-      normalizedDryRunAddress(dryRunRaw, { repo_root_absolute_path: cwd }),
-    );
+    const dryAddrResult = await runEffect(normalizedDryRunAddress(dryRunRaw, { repo_root_absolute_path: cwd }));
     if (!dryAddrResult.ok) {
       emitError('ship', `normalizedDryRunAddress failed for ${pkg.relativePath}: ${dryAddrResult.error.message}`);
       return 1;
@@ -405,7 +416,10 @@ export async function ship(args: readonly string[]): Promise<number> {
     try {
       ShipEmit.run({ capsule, capsule_path: capsulePath });
     } catch (e) {
-      emitError('ship', `ship-emit capsule failed for ${pkg.relativePath}: ${e instanceof Error ? e.message : String(e)}`);
+      emitError(
+        'ship',
+        `ship-emit capsule failed for ${pkg.relativePath}: ${e instanceof Error ? e.message : String(e)}`,
+      );
       return 1;
     }
 
@@ -447,7 +461,10 @@ export async function ship(args: readonly string[]): Promise<number> {
   }
   const publishRes = await spawnArgv('pnpm', publishArgs);
   if (publishRes.exitCode !== 0) {
-    emitError('ship', `pnpm publish exited ${publishRes.exitCode}${publishRes.stderrTail ? `: ${publishRes.stderrTail.trim()}` : ''}`);
+    emitError(
+      'ship',
+      `pnpm publish exited ${publishRes.exitCode}${publishRes.stderrTail ? `: ${publishRes.stderrTail.trim()}` : ''}`,
+    );
     return 2;
   }
   return 0;

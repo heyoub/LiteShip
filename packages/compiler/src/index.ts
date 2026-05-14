@@ -32,7 +32,15 @@ export type {
 } from './ai-manifest.js';
 
 export { dispatch } from './dispatch.js';
-export type { CompileResult, CompilerDef, CSSStates, GLSLStates, WGSLStates, ARIAStates, ConfigTemplateResult } from './dispatch.js';
+export type {
+  CompileResult,
+  CompilerDef,
+  CSSStates,
+  GLSLStates,
+  WGSLStates,
+  ARIAStates,
+  ConfigTemplateResult,
+} from './dispatch.js';
 
 export { TokenCSSCompiler } from './token-css.js';
 export type { TokenCSSResult } from './token-css.js';

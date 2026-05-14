@@ -74,8 +74,7 @@ export function compileScene(scene: SceneContract): CompiledScene {
 
   // Defensive copy: callers may freeze, mutate, or reuse the input
   // beats array; the compiled descriptor owns its own sequence.
-  const beats: readonly BeatBinding.Component[] =
-    scene.beats !== undefined ? scene.beats.map((b) => ({ ...b })) : [];
+  const beats: readonly BeatBinding.Component[] = scene.beats !== undefined ? scene.beats.map((b) => ({ ...b })) : [];
 
   return {
     name: scene.name,

@@ -117,10 +117,7 @@ function getTrustedTypesPolicy(): { createHTML(input: string): string } | null {
 }
 
 interface TrustedTypePolicyFactoryLike {
-  createPolicy?(
-    name: string,
-    rules: { createHTML: (input: string) => string },
-  ): { createHTML(input: string): string };
+  createPolicy?(name: string, rules: { createHTML: (input: string) => string }): { createHTML(input: string): string };
   getPolicy?(name: string): { createHTML(input: string): string } | null;
 }
 

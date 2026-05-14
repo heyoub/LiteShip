@@ -25,8 +25,14 @@ import { tarballManifestAddress } from '../ship-manifest.js';
 import { emit, emitError } from '../receipts.js';
 import type { ShipVerifyChecks, ShipVerifyReceipt } from '../receipts.js';
 
-interface EffectOk<A> { readonly ok: true; readonly value: A }
-interface EffectErr<E> { readonly ok: false; readonly error: E }
+interface EffectOk<A> {
+  readonly ok: true;
+  readonly value: A;
+}
+interface EffectErr<E> {
+  readonly ok: false;
+  readonly error: E;
+}
 type EffectResult<A, E> = EffectOk<A> | EffectErr<E>;
 
 async function runEffect<A, E>(effect: Effect.Effect<A, E>): Promise<EffectResult<A, E>> {
@@ -35,7 +41,14 @@ async function runEffect<A, E>(effect: Effect.Effect<A, E>): Promise<EffectResul
   const found = Cause.findError(exit.cause);
   if (Result.isSuccess(found)) return { ok: false, error: Result.getOrThrow(found) as E };
   // Defect fallback — see ship.ts for the matching rationale.
-  return { ok: false, error: new Error(Cause.prettyErrors(exit.cause).map((e) => e.message).join('; ')) as unknown as E };
+  return {
+    ok: false,
+    error: new Error(
+      Cause.prettyErrors(exit.cause)
+        .map((e) => e.message)
+        .join('; '),
+    ) as unknown as E,
+  };
 }
 
 const TIMESTAMP = (): string => new Date().toISOString();
@@ -102,13 +115,7 @@ export async function verify(args: readonly string[]): Promise<number> {
 
   // Unknown — no capsule supplied. Doctrinally correct: we cannot tell.
   if (parsed.capsule === undefined) {
-    emitReceipt(
-      tarballPath,
-      null,
-      'Unknown',
-      { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE },
-      [],
-    );
+    emitReceipt(tarballPath, null, 'Unknown', { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE }, []);
     return 4;
   }
 
@@ -134,26 +141,18 @@ export async function verify(args: readonly string[]): Promise<number> {
   const decoded = await runEffect(ShipCapsule.decode(capsuleBytes));
   if (!decoded.ok) {
     // All three decode errors collapse to Incomplete per ADR-0011 §Decision.
-    emitReceipt(
-      tarballPath,
-      null,
-      'Incomplete',
-      { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE },
-      [`decode:${decoded.error}`],
-    );
+    emitReceipt(tarballPath, null, 'Incomplete', { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE }, [
+      `decode:${decoded.error}`,
+    ]);
     return 3;
   }
   const capsule = decoded.value;
 
   const recomputed = await runEffect(tarballManifestAddress(tarballBytes));
   if (!recomputed.ok) {
-    emitReceipt(
-      tarballPath,
-      capsule.id,
-      'Incomplete',
-      { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE },
-      [`recompute:${recomputed.error.message}`],
-    );
+    emitReceipt(tarballPath, capsule.id, 'Incomplete', { tarball_manifest: 'skipped', ...SKIPPED_CHECKS_BASE }, [
+      `recompute:${recomputed.error.message}`,
+    ]);
     return 3;
   }
 
@@ -177,12 +176,6 @@ export async function verify(args: readonly string[]): Promise<number> {
     return 2;
   }
 
-  emitReceipt(
-    tarballPath,
-    capsule.id,
-    'Verified',
-    { tarball_manifest: 'match', ...SKIPPED_CHECKS_BASE },
-    [],
-  );
+  emitReceipt(tarballPath, capsule.id, 'Verified', { tarball_manifest: 'match', ...SKIPPED_CHECKS_BASE }, []);
   return 0;
 }

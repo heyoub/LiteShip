@@ -21,7 +21,7 @@ import { AIManifestCompiler } from './ai-manifest.js';
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Per-state CSS property maps keyed by state name (values are CSS strings). */
-export type CSSStates  = Readonly<Record<string, Readonly<Record<string, string>>>>;
+export type CSSStates = Readonly<Record<string, Readonly<Record<string, string>>>>;
 /** Per-state GLSL uniform values keyed by state name (numeric only). */
 export type GLSLStates = Readonly<Record<string, Readonly<Record<string, number>>>>;
 /** Per-state WGSL uniform values keyed by state name (numeric only). */
@@ -76,11 +76,11 @@ const ConfigTemplateCompiler = {
  * - `ConfigCompiler` — a `Config.Shape` → pretty-printed JSON template.
  */
 export type CompilerDef =
-  | { readonly _tag: 'CSSCompiler';    readonly boundary: Boundary.Shape; readonly states: CSSStates }
-  | { readonly _tag: 'GLSLCompiler';   readonly boundary: Boundary.Shape; readonly states: GLSLStates }
-  | { readonly _tag: 'WGSLCompiler';   readonly boundary: Boundary.Shape; readonly states: WGSLStates }
-  | { readonly _tag: 'ARIACompiler';   readonly boundary: Boundary.Shape; readonly states: ARIAStates }
-  | { readonly _tag: 'AICompiler';     readonly manifest: AIManifest }
+  | { readonly _tag: 'CSSCompiler'; readonly boundary: Boundary.Shape; readonly states: CSSStates }
+  | { readonly _tag: 'GLSLCompiler'; readonly boundary: Boundary.Shape; readonly states: GLSLStates }
+  | { readonly _tag: 'WGSLCompiler'; readonly boundary: Boundary.Shape; readonly states: WGSLStates }
+  | { readonly _tag: 'ARIACompiler'; readonly boundary: Boundary.Shape; readonly states: ARIAStates }
+  | { readonly _tag: 'AICompiler'; readonly manifest: AIManifest }
   | { readonly _tag: 'ConfigCompiler'; readonly config: Config.Shape };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -94,11 +94,11 @@ export type CompilerDef =
  * casts. The mapping is 1:1 with the arms of {@link CompilerDef}.
  */
 export type CompileResult =
-  | { readonly target: 'css';    readonly result: CSSCompileResult }
-  | { readonly target: 'glsl';   readonly result: GLSLCompileResult }
-  | { readonly target: 'wgsl';   readonly result: WGSLCompileResult }
-  | { readonly target: 'aria';   readonly result: ARIACompileResult }
-  | { readonly target: 'ai';     readonly result: AIManifestCompileResult }
+  | { readonly target: 'css'; readonly result: CSSCompileResult }
+  | { readonly target: 'glsl'; readonly result: GLSLCompileResult }
+  | { readonly target: 'wgsl'; readonly result: WGSLCompileResult }
+  | { readonly target: 'aria'; readonly result: ARIACompileResult }
+  | { readonly target: 'ai'; readonly result: AIManifestCompileResult }
   | { readonly target: 'config'; readonly result: ConfigTemplateResult };
 
 // ─────────────────────────────────────────────────────────────────────────────

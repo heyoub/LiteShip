@@ -43,8 +43,8 @@ function _make<T extends Record<string, number>>(): Effect.Effect<BlendTreeShape
     const pubsub = yield* PubSub.unbounded<T>();
 
     // The computed result is a Record<string, number> whose keys match T's keys by
-     // construction (we only write keys copied from node.value, which is T). TS can't
-     // track that structural promise, so we contain one cast in a named helper.
+    // construction (we only write keys copied from node.value, which is T). TS can't
+    // track that structural promise, so we contain one cast in a named helper.
     const finalizeBlend = (record: Record<string, number>): T => record as unknown as T;
 
     function computeBlend(): T {

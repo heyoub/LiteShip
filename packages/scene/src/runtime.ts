@@ -144,10 +144,7 @@ export interface SceneRuntimeHandle {
  * canonical topological order — this matches ADR-0009's
  * ECS-as-scene-substrate discipline.
  */
-async function build(
-  compiled: CompiledScene,
-  opts: SceneRuntimeOptions = {},
-): Promise<SceneRuntimeHandle> {
+async function build(compiled: CompiledScene, opts: SceneRuntimeOptions = {}): Promise<SceneRuntimeHandle> {
   const sampleRate = opts.sampleRate ?? 48_000;
   // Bounded ring for the default sink — long renders would otherwise grow
   // `collected` without limit. Custom sinks bypass the ring entirely.
@@ -193,22 +190,16 @@ async function build(
   // semantics intact (each factory builds a `System` keyed to a frame
   // index) without re-registering systems on every frame.
   const wrapped: readonly System[] = [
-    wrapForFrame('VideoSystem', ['VideoSource', 'FrameRange'], () =>
-      VideoSystem(ctx.frameIndex),
-    ),
+    wrapForFrame('VideoSystem', ['VideoSource', 'FrameRange'], () => VideoSystem(ctx.frameIndex)),
     wrapForFrame('AudioSystem', ['AudioSource', 'FrameRange'], () =>
       AudioSystem(ctx.frameIndex, compiled.fps, sampleRate),
     ),
     wrapForFrame('TransitionSystem', ['TransitionKind', 'FrameRange', 'Between'], () =>
       TransitionSystem(ctx.frameIndex),
     ),
-    wrapForFrame('EffectSystem', ['EffectKind', 'FrameRange'], () =>
-      EffectSystem(ctx.frameIndex),
-    ),
+    wrapForFrame('EffectSystem', ['EffectKind', 'FrameRange'], () => EffectSystem(ctx.frameIndex)),
     wrapForFrame('SyncSystem', ['SyncAnchor'], () => SyncSystem(ctx.frameIndex, compiled.fps)),
-    wrapForFrame('PassThroughMixer', ['AudioSource', 'Volume', 'Pan'], () =>
-      PassThroughMixer(ctx.frameIndex, mixSink),
-    ),
+    wrapForFrame('PassThroughMixer', ['AudioSource', 'Volume', 'Pan'], () => PassThroughMixer(ctx.frameIndex, mixSink)),
   ];
 
   for (const sys of wrapped) {
@@ -247,11 +238,7 @@ async function build(
  * The wrapper preserves the factory's `name` and `query`, but rebuilds
  * the inner system every tick so it sees the current frame index.
  */
-function wrapForFrame(
-  name: string,
-  query: readonly string[],
-  factory: () => System,
-): System {
+function wrapForFrame(name: string, query: readonly string[], factory: () => System): System {
   return {
     name,
     query,

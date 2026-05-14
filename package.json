@@ -72,9 +72,9 @@
     "demo:remotion": "pnpm run --filter remotion-demo render",
     "docs:build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" pnpm exec typedoc",
     "docs:check": "pnpm exec tsx scripts/docs-check.ts",
-    "lint": "eslint --max-warnings 0 packages/*/src/**/*.ts tests/**/*.ts scripts/**/*.ts",
-    "format": "prettier --write packages/*/src/**/*.ts",
-    "format:check": "prettier --check packages/*/src/**/*.ts",
+    "lint": "eslint --max-warnings 0 \"packages/*/src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.ts\"",
+    "format": "prettier --write \"packages/*/src/**/*.ts\"",
+    "format:check": "prettier --check \"packages/*/src/**/*.ts\"",
     "cover": "pnpm run coverage",
     "prepare": "pnpm exec tsx scripts/link-pre-commit.ts"
   },

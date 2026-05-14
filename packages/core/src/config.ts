@@ -50,43 +50,42 @@ export const Config = {
   /** Build a frozen, content-addressed {@link Config.Shape} from raw input. */
   make(input: Config.Input): Config.Shape {
     // Sort named collection keys so insertion order doesn't affect the hash.
-    const sortKeys = <V>(obj: Record<string, V>): Record<string, V> =>
-      Object.fromEntries(Object.entries(obj).sort());
+    const sortKeys = <V>(obj: Record<string, V>): Record<string, V> => Object.fromEntries(Object.entries(obj).sort());
     const canonical = JSON.stringify({
       boundaries: sortKeys(input.boundaries ?? {}),
-      tokens:     sortKeys(input.tokens     ?? {}),
-      themes:     sortKeys(input.themes     ?? {}),
-      styles:     sortKeys(input.styles     ?? {}),
-      vite:       input.vite,
-      astro:      input.astro,
+      tokens: sortKeys(input.tokens ?? {}),
+      themes: sortKeys(input.themes ?? {}),
+      styles: sortKeys(input.styles ?? {}),
+      vite: input.vite,
+      astro: input.astro,
     });
     const id = fnv1a(canonical);
     return Object.freeze({
-      _tag:       'ConfigDef' as const,
+      _tag: 'ConfigDef' as const,
       id,
       boundaries: input.boundaries ?? {},
-      tokens:     input.tokens     ?? {},
-      themes:     input.themes     ?? {},
-      styles:     input.styles     ?? {},
-      vite:       input.vite,
-      astro:      input.astro,
+      tokens: input.tokens ?? {},
+      themes: input.themes ?? {},
+      styles: input.styles ?? {},
+      vite: input.vite,
+      astro: input.astro,
     });
   },
 
   /** Project the Vite-plugin slice of a config for `@czap/vite`. */
   toViteConfig(cfg: Config.Shape): PluginConfig {
     return {
-      ...(cfg.vite?.dirs         !== undefined && { dirs:         cfg.vite.dirs }),
-      ...(cfg.vite?.hmr          !== undefined && { hmr:          cfg.vite.hmr }),
+      ...(cfg.vite?.dirs !== undefined && { dirs: cfg.vite.dirs }),
+      ...(cfg.vite?.hmr !== undefined && { hmr: cfg.vite.hmr }),
       ...(cfg.vite?.environments !== undefined && { environments: cfg.vite.environments }),
-      ...(cfg.vite?.wasm         !== undefined && { wasm:         cfg.vite.wasm }),
+      ...(cfg.vite?.wasm !== undefined && { wasm: cfg.vite.wasm }),
     };
   },
 
   /** Project the Astro-integration slice of a config for `@czap/astro`. */
   toAstroConfig(cfg: Config.Shape): AstroConfig {
     return {
-      ...(cfg.astro?.satellite   !== undefined && { satellite:   cfg.astro.satellite }),
+      ...(cfg.astro?.satellite !== undefined && { satellite: cfg.astro.satellite }),
       ...(cfg.astro?.edgeRuntime !== undefined && { edgeRuntime: cfg.astro.edgeRuntime }),
     };
   },
@@ -100,29 +99,29 @@ export const Config = {
     // resolver matches the first prefix in iteration order, so e.g.
     // `@czap/core/testing` would be intercepted by `@czap/core` if listed first.
     return {
-      '@czap/core/testing':        r('packages/core/src/testing.ts'),
-      '@czap/core/harness':        r('packages/core/src/harness/index.ts'),
-      '@czap/core':                r('packages/core/src/index.ts'),
-      '@czap/quantizer/testing':   r('packages/quantizer/src/testing.ts'),
-      '@czap/quantizer':           r('packages/quantizer/src/index.ts'),
-      '@czap/compiler':            r('packages/compiler/src/index.ts'),
-      '@czap/web/lite':            r('packages/web/src/lite.ts'),
-      '@czap/web':                 r('packages/web/src/index.ts'),
-      '@czap/detect':              r('packages/detect/src/index.ts'),
+      '@czap/core/testing': r('packages/core/src/testing.ts'),
+      '@czap/core/harness': r('packages/core/src/harness/index.ts'),
+      '@czap/core': r('packages/core/src/index.ts'),
+      '@czap/quantizer/testing': r('packages/quantizer/src/testing.ts'),
+      '@czap/quantizer': r('packages/quantizer/src/index.ts'),
+      '@czap/compiler': r('packages/compiler/src/index.ts'),
+      '@czap/web/lite': r('packages/web/src/lite.ts'),
+      '@czap/web': r('packages/web/src/index.ts'),
+      '@czap/detect': r('packages/detect/src/index.ts'),
       '@czap/vite/html-transform': r('packages/vite/src/html-transform.ts'),
-      '@czap/vite':                r('packages/vite/src/index.ts'),
-      '@czap/astro/runtime':       r('packages/astro/src/runtime/index.ts'),
-      '@czap/astro':               r('packages/astro/src/index.ts'),
-      '@czap/remotion':            r('packages/remotion/src/index.ts'),
-      '@czap/scene/dev':           r('packages/scene/src/dev/server.ts'),
-      '@czap/scene':               r('packages/scene/src/index.ts'),
-      '@czap/assets/testing':      r('packages/assets/src/testing.ts'),
-      '@czap/assets':              r('packages/assets/src/index.ts'),
-      '@czap/cli':                 r('packages/cli/src/index.ts'),
-      '@czap/mcp-server':          r('packages/mcp-server/src/index.ts'),
-      '@czap/edge':                r('packages/edge/src/index.ts'),
-      '@czap/worker':              r('packages/worker/src/index.ts'),
-      '@czap/_spine':              r('packages/_spine'),
+      '@czap/vite': r('packages/vite/src/index.ts'),
+      '@czap/astro/runtime': r('packages/astro/src/runtime/index.ts'),
+      '@czap/astro': r('packages/astro/src/index.ts'),
+      '@czap/remotion': r('packages/remotion/src/index.ts'),
+      '@czap/scene/dev': r('packages/scene/src/dev/server.ts'),
+      '@czap/scene': r('packages/scene/src/index.ts'),
+      '@czap/assets/testing': r('packages/assets/src/testing.ts'),
+      '@czap/assets': r('packages/assets/src/index.ts'),
+      '@czap/cli': r('packages/cli/src/index.ts'),
+      '@czap/mcp-server': r('packages/mcp-server/src/index.ts'),
+      '@czap/edge': r('packages/edge/src/index.ts'),
+      '@czap/worker': r('packages/worker/src/index.ts'),
+      '@czap/_spine': r('packages/_spine'),
     };
   },
 };

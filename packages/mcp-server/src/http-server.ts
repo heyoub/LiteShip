@@ -23,7 +23,11 @@ export async function runHttp(bind: string): Promise<void> {
   const port = Number(m?.[2] ?? bind);
 
   const server = createServer(async (req, res) => {
-    if (req.method !== 'POST') { res.statusCode = 405; res.end(); return; }
+    if (req.method !== 'POST') {
+      res.statusCode = 405;
+      res.end();
+      return;
+    }
     let body = '';
     for await (const chunk of req) body += String(chunk);
 
@@ -46,7 +50,8 @@ export async function runHttp(bind: string): Promise<void> {
   const boundPort = typeof addr === 'object' && addr ? addr.port : port;
   process.stdout.write(
     JSON.stringify({
-      status: 'ok', command: 'mcp',
+      status: 'ok',
+      command: 'mcp',
       transport: 'http',
       url: `http://${host}:${boundPort}/`,
     }) + '\n',
@@ -60,7 +65,11 @@ export async function runHttp(bind: string): Promise<void> {
   });
 }
 
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('http-server.ts') || process.argv[1]?.endsWith('http.ts')) {
+if (
+  import.meta.url === `file://${process.argv[1]}` ||
+  process.argv[1]?.endsWith('http-server.ts') ||
+  process.argv[1]?.endsWith('http.ts')
+) {
   const bind = process.argv[2] ?? ':0';
   runHttp(bind).catch((err: unknown) => {
     process.stderr.write(JSON.stringify({ error: String(err) }) + '\n');

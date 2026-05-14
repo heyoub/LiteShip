@@ -121,6 +121,21 @@ jobs:
           if [ "${{ inputs.dry-run }}" = "true" ]; then
             DRY_RUN_FLAG="--dry-run"
           fi
+
+          # Drift guard: the per-package loop below carries an explicit list
+          # so publish order is reviewable in PR. If a non-private package is
+          # added or removed in packages/, this assertion fails loud rather
+          # than silently skipping the new one. Update both the EXPECTED
+          # count and the loop list in the same commit.
+          EXPECTED_PUBLISHABLE=15
+          ACTUAL_PUBLISHABLE=$(find packages -maxdepth 2 -name package.json -print0 \
+            | xargs -0 -I {} jq -r 'select(.private != true) | .name' {} \
+            | wc -l)
+          if [ "$ACTUAL_PUBLISHABLE" -ne "$EXPECTED_PUBLISHABLE" ]; then
+            echo "::error::Workspace has $ACTUAL_PUBLISHABLE publishable packages but release.yml's loop expects $EXPECTED_PUBLISHABLE. Update the EXPECTED count and the explicit pkg list together."
+            exit 1
+          fi
+
           OUTLOG=$(mktemp)
           FAILED=()
           for pkg in _spine core quantizer compiler web detect vite astro edge worker remotion scene assets cli mcp-server; do
