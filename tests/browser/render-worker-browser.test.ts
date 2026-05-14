@@ -120,14 +120,13 @@ describe('browser RenderWorker with real Worker and OffscreenCanvas', () => {
     worker.dispose();
   });
 
-  // Browser-env skip: relies on setTimeout(100) firing within ~100ms,
-  // which fast headless chromium under load can outrace, finishing all
-  // 300 frames before the timer fires and tripping the < 300 assertion.
-  // v0.1.2 should rewrite to wait on a frame-count signal rather than
-  // wall clock — see ROADMAP §4. (Can't gate on process.env.CI here
-  // because this file runs in a browser realm where `process` is
-  // undefined.)
-  test.skip('stopRender halts an in-progress render early', async () => {
+  // Anchored on a frame event rather than wall clock: the worker yields
+  // every 10 frames (render-worker.ts: `if (i % 10 === 9)`), and a stop
+  // posted during one of those yield windows is processed before the
+  // next iteration. Issuing stop after frame 3 deterministically lands
+  // in the yield at frame 9, so we get ~10 frames out of a 300-frame
+  // request regardless of how fast the realm is.
+  test('stopRender halts an in-progress render early', async () => {
     if (typeof OffscreenCanvas === 'undefined') {
       return;
     }
@@ -148,26 +147,38 @@ describe('browser RenderWorker with real Worker and OffscreenCanvas', () => {
     const offscreen = canvas.transferControlToOffscreen();
     worker.transferCanvas(offscreen);
 
-    const frames: unknown[] = [];
-    worker.onFrame((output) => {
-      frames.push(output);
+    const TOTAL_FRAMES_REQUESTED = 300; // 30 fps × 10_000 ms / 1000
+    const STOP_AT_FRAME = 3;
+
+    const seen: number[] = [];
+    let stopIssued = false;
+
+    const done = new Promise<void>((resolve) => {
+      worker.onComplete(() => resolve());
+      setTimeout(resolve, 5000); // hard ceiling so a regression can't hang the suite
     });
 
-    // Start a long render
+    worker.onFrame((output) => {
+      const frameNum = (output as { frame: number }).frame;
+      seen.push(frameNum);
+      if (!stopIssued && frameNum >= STOP_AT_FRAME) {
+        stopIssued = true;
+        worker.stopRender();
+      }
+    });
+
     worker.startRender({
       fps: 30,
       width: 16,
       height: 16,
-      durationMs: 10000 as never, // Would produce 300 frames
+      durationMs: 10000 as never,
     });
 
-    // Stop quickly
-    await new Promise<void>((r) => setTimeout(r, 100));
-    worker.stopRender();
-    await new Promise<void>((r) => setTimeout(r, 200));
+    await done;
 
-    // Should have fewer than all 300 frames
-    expect(frames.length).toBeLessThan(300);
+    expect(stopIssued).toBe(true);
+    expect(seen.length).toBeLessThan(TOTAL_FRAMES_REQUESTED);
+    expect(seen.length).toBeGreaterThanOrEqual(STOP_AT_FRAME + 1);
 
     worker.dispose();
   });

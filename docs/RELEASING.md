@@ -99,16 +99,23 @@ Untracking a file does not remove old blobs. See [HISTORY_SCRUB.md](./HISTORY_SC
 `import()`); add `@czap/mcp-server` when you use MCP mode. Ship matching versions
 whenever you publish either package.
 
-## v0.1.1+ — OIDC trusted publishing from GitHub Actions
+## v0.1.1+ — releases from GitHub Actions
 
 The v0.1.0 publish above was a manual local run because the packages didn't
 exist on npm yet (npm requires a package to exist before you can configure a
 trusted publisher). From v0.1.1 onward, releases run through
-`.github/workflows/release.yml`. No tokens. No `--otp`. No `~/.npmrc` auth.
-npm trusts the OIDC identity attestation that GitHub Actions issues to the
-workflow.
+`.github/workflows/release.yml`.
 
-### One-time trusted-publisher setup (per package, after v0.1.0 lands)
+v0.1.1 authenticates via the `NPM_TOKEN` repo secret — a granular access
+token with `bypass_2fa: true`, installed into `~/.npmrc` before the
+`czap ship` step. v0.2 pivots to OIDC trusted publishing: drop the
+`~/.npmrc` step and the `NPM_TOKEN` env, add `--provenance` to the
+`czap ship` call. The `id-token: write` permission and `registry-url`
+are already in the workflow so the pivot is a single edit. The
+prerequisite is configuring a trusted publisher per package, form values
+below.
+
+### One-time trusted-publisher setup (per package, before v0.2)
 
 For each of the 15 `@czap/*` packages, open
 `https://www.npmjs.com/package/@czap/<name>/access` and add a trusted publisher
@@ -122,8 +129,8 @@ with these exact values:
 | Workflow filename | `release.yml` |
 | Environment name | (leave blank) |
 
-Once all 15 have the trusted publisher configured, the workflow can publish
-any future version with zero auth setup.
+Once all 15 have the trusted publisher configured, drop `NPM_TOKEN` from the
+workflow and add `--provenance` — future releases will need zero auth setup.
 
 ### Cutting a release
 
@@ -135,16 +142,33 @@ any future version with zero auth setup.
    git tag -a v0.1.1 -m "v0.1.1"
    git push origin v0.1.1
    ```
-5. The `Release (OIDC trusted publish)` workflow auto-fires on the tag. It runs
-   the full gauntlet first, then ships all 15 packages with `--provenance`,
-   then creates/updates the GitHub Release and attaches the ShipCapsules.
+5. The `Release (NPM_TOKEN auth)` workflow auto-fires on the tag. It runs
+   the release-certification gate (build / typecheck / lint / vitest /
+   `package:smoke`), then idempotently ships all 15 packages, then creates
+   the GitHub Release and attaches the ShipCapsules.
 
 ### Hotfix or partial publish
 
 `workflow_dispatch` lets you run the release flow manually from the Actions
 tab. Toggle `dry-run: true` to mint capsules without uploading.
 
-### Why provenance
+### Why the release gate is slim
+
+The release-certification job in `release.yml` runs the publishability
+subset — build, typecheck, lint, vitest, `package:smoke` — not
+`pnpm run gauntlet:full`. The full gauntlet (bench, e2e, stream-stress,
+flake, redteam, bench-gate / trend / reality, runtime-seams audit, coverage
+merge, flex:verify) runs on every PR and on `main` via
+`.github/workflows/ci.yml`. By the time a `v*.*.*` tag is pushed, `main`
+has already cleared that bar — re-running it on the tag added ~20 minutes
+of CI time without adding signal, and the timing-sensitive lanes flaked
+intermittently in the GHA runner under different load than the local box.
+The original v0.1.1 release ate six failed runs before this split landed.
+The release pipeline's job is the narrower question: *are the tarballs
+publishable right now*. Whole-system regression is `ci.yml`'s job and runs
+on the merge that produced the tag, not on the tag itself.
+
+### Why provenance (future, v0.2)
 
 `npm publish --provenance` writes a signed attestation linking the published
 artifact to the GitHub Actions run that built it. Consumers (and Sentinel,
