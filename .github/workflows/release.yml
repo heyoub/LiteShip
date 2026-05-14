@@ -104,18 +104,34 @@ jobs:
       # collision and lets pnpm publish report "already published"
       # cleanly for any in-flight repeat. v0.1.x workaround until
       # ship.ts handles this gracefully (ROADMAP §4).
-      - name: czap ship + npm publish (per package)
+      #
+      # Already-published is treated as success (idempotent re-runs are
+      # safe — the package already on npm matches the canonical state).
+      - name: czap ship + npm publish (per package, idempotent)
         run: |
-          set -euo pipefail
+          set -uo pipefail
           DRY_RUN_FLAG=""
           if [ "${{ inputs.dry-run }}" = "true" ]; then
             DRY_RUN_FLAG="--dry-run"
           fi
+          OUTLOG=$(mktemp)
+          FAILED=()
           for pkg in _spine core quantizer compiler web detect vite astro edge worker remotion scene assets cli mcp-server; do
             echo "::group::@czap/$pkg"
-            node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" $DRY_RUN_FLAG
+            if node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" $DRY_RUN_FLAG 2>&1 | tee "$OUTLOG"; then
+              echo "✅ @czap/$pkg published"
+            elif grep -qE "previously published|cannot publish over|EPUBLISHCONFLICT|You cannot publish over" "$OUTLOG"; then
+              echo "✅ @czap/$pkg already at this version on npm (idempotent skip)"
+            else
+              echo "❌ @czap/$pkg failed for non-idempotency reason"
+              FAILED+=("@czap/$pkg")
+            fi
             echo "::endgroup::"
           done
+          if [ ${#FAILED[@]} -gt 0 ]; then
+            echo "::error::Publish failed for: ${FAILED[*]}"
+            exit 1
+          fi
 
       # ─── GitHub Release attachment ────────────────────────────────────
       - name: Resolve version from tag
