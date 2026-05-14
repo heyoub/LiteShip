@@ -11,13 +11,7 @@
  * @module
  */
 
-import type {
-  VideoTrack,
-  AudioTrack,
-  TransitionTrack,
-  EffectTrack,
-  TrackId,
-} from './contract.js';
+import type { VideoTrack, AudioTrack, TransitionTrack, EffectTrack, TrackId } from './contract.js';
 
 /** Mint a video TrackId — the one sanctioned cast site for the 'video' brand. */
 const videoId = (id: string): TrackId<'video'> => id as TrackId<'video'>;
@@ -29,10 +23,7 @@ const transitionId = (id: string): TrackId<'transition'> => id as TrackId<'trans
 const effectId = (id: string): TrackId<'effect'> => id as TrackId<'effect'>;
 
 /** Build a VideoTrack referencing a quantizer source, with optional layer. */
-const video = (
-  id: string,
-  opts: { from: number; to: number; source: unknown; layer?: number },
-): VideoTrack => ({
+const video = (id: string, opts: { from: number; to: number; source: unknown; layer?: number }): VideoTrack => ({
   kind: 'video',
   id: videoId(id),
   from: opts.from,
@@ -42,10 +33,7 @@ const video = (
 });
 
 /** Build an AudioTrack referencing an asset id, with default mix { volume: 0, pan: 0 }. */
-const audio = (
-  id: string,
-  opts: { from: number; to: number; source: string; mix?: AudioTrack['mix'] },
-): AudioTrack => {
+const audio = (id: string, opts: { from: number; to: number; source: string; mix?: AudioTrack['mix'] }): AudioTrack => {
   const mix: AudioTrack['mix'] = {
     volume: opts.mix?.volume ?? 0,
     pan: opts.mix?.pan ?? 0,

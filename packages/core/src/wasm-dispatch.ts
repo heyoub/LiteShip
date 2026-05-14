@@ -77,10 +77,7 @@ const validateWASMExports = (exports: WebAssembly.Exports): WASMExports => {
   }
   const mem = exports['memory'];
   const isMemoryShape =
-    mem !== null &&
-    typeof mem === 'object' &&
-    'buffer' in mem &&
-    Reflect.get(mem, 'buffer') instanceof ArrayBuffer;
+    mem !== null && typeof mem === 'object' && 'buffer' in mem && Reflect.get(mem, 'buffer') instanceof ArrayBuffer;
   /* v8 ignore next 5 — sanctioned cast containment: the czap-compute WASM module always
      exports `memory` as a WebAssembly.Memory (whose `.buffer` is an ArrayBuffer); this
      guard exists only so the cast to WASMExports stays runtime-safe if a caller ever

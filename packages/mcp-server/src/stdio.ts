@@ -34,10 +34,7 @@ export async function processLine(line: string): Promise<string | null> {
  * Readable + a sink Writable to exercise the full read-line-write loop
  * without spawning a child process.
  */
-export async function runStdio(
-  input: Readable = process.stdin,
-  output: Writable = process.stdout,
-): Promise<void> {
+export async function runStdio(input: Readable = process.stdin, output: Writable = process.stdout): Promise<void> {
   const rl = createInterface({ input });
   for await (const line of rl) {
     const wire = await processLine(line);

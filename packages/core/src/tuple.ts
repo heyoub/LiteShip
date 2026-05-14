@@ -15,5 +15,4 @@
 export const tupleMap = <T extends readonly unknown[], U>(
   tuple: T,
   fn: (element: T[number], index: number) => U,
-): { readonly [K in keyof T]: U } =>
-  tuple.map(fn) as { readonly [K in keyof T]: U };
+): { readonly [K in keyof T]: U } => tuple.map(fn) as { readonly [K in keyof T]: U };

@@ -28,11 +28,13 @@ export type { PrimitiveKind };
  * Map a {@link PrimitiveKind} to the structural type of the primitive
  * it resolves (`Boundary.Shape`, `Token.Shape`, ...).
  */
-export type PrimitiveShape<K extends PrimitiveKind> =
-  K extends 'boundary' ? Boundary.Shape :
-  K extends 'token' ? Token.Shape :
-  K extends 'theme' ? Theme.Shape :
-  Style.Shape;
+export type PrimitiveShape<K extends PrimitiveKind> = K extends 'boundary'
+  ? Boundary.Shape
+  : K extends 'token'
+    ? Token.Shape
+    : K extends 'theme'
+      ? Theme.Shape
+      : Style.Shape;
 
 /**
  * A successful primitive resolution: the loaded primitive plus the
@@ -50,9 +52,9 @@ export interface PrimitiveResolution<K extends PrimitiveKind> {
  */
 export const KIND_META: Record<PrimitiveKind, { file: string; suffix: string; tag: string }> = {
   boundary: { file: 'boundaries.ts', suffix: '.boundaries.ts', tag: 'BoundaryDef' },
-  token:    { file: 'tokens.ts',     suffix: '.tokens.ts',     tag: 'TokenDef'    },
-  theme:    { file: 'themes.ts',     suffix: '.themes.ts',     tag: 'ThemeDef'    },
-  style:    { file: 'styles.ts',     suffix: '.styles.ts',     tag: 'StyleDef'    },
+  token: { file: 'tokens.ts', suffix: '.tokens.ts', tag: 'TokenDef' },
+  theme: { file: 'themes.ts', suffix: '.themes.ts', tag: 'ThemeDef' },
+  style: { file: 'styles.ts', suffix: '.styles.ts', tag: 'StyleDef' },
 };
 
 /**
@@ -86,18 +88,14 @@ export async function resolvePrimitive<K extends PrimitiveKind>(
     // Try direct convention file: boundaries.ts / tokens.ts / etc.
     const directFile = path.join(dir, file);
     if (fileExists(directFile, diagnosticSource)) {
-      const result = await tryImportNamed<PrimitiveShape<K>>(
-        directFile, name, tag, diagnosticSource, kind,
-      );
+      const result = await tryImportNamed<PrimitiveShape<K>>(directFile, name, tag, diagnosticSource, kind);
       if (result !== undefined) return { primitive: result, source: directFile };
     }
 
     // Try wildcard files: *.boundaries.ts / *.tokens.ts / etc.
     const wildcardFiles = findConventionFiles(dir, suffix, diagnosticSource);
     for (const wildcardFile of wildcardFiles) {
-      const result = await tryImportNamed<PrimitiveShape<K>>(
-        wildcardFile, name, tag, diagnosticSource, kind,
-      );
+      const result = await tryImportNamed<PrimitiveShape<K>>(wildcardFile, name, tag, diagnosticSource, kind);
       if (result !== undefined) return { primitive: result, source: wildcardFile };
     }
   }

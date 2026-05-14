@@ -8,7 +8,7 @@
 
 > **resolveHtmlString**(`html`, `options?`): `string`
 
-Defined in: [web/src/security/html-trust.ts:256](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/security/html-trust.ts#L256)
+Defined in: [web/src/security/html-trust.ts:253](https://github.com/heyoub/LiteShip/blob/main/packages/web/src/security/html-trust.ts#L253)
 
 Serialise `html` back to string form after applying the effective
 policy. Useful for host code that must hand cleaned markup to another

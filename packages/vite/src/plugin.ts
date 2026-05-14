@@ -286,7 +286,13 @@ export function plugin(config?: PluginConfig): Plugin {
           let boundary: Boundary.Shape | null | undefined = boundaryCache.get(cacheKey);
 
           if (boundary === undefined) {
-            const resolution = await resolvePrimitive('boundary', block.boundaryName, id, projectRoot, config?.dirs?.boundary);
+            const resolution = await resolvePrimitive(
+              'boundary',
+              block.boundaryName,
+              id,
+              projectRoot,
+              config?.dirs?.boundary,
+            );
             boundary = resolution?.primitive ?? null;
             boundaryCache.set(cacheKey, boundary);
           }

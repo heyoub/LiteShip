@@ -31,8 +31,7 @@ const sha256HexRaw = (bytes: Uint8Array): Effect.Effect<string> =>
       const buffer = await crypto.subtle.digest('SHA-256', bytes as BufferSource);
       return bytesToHex(new Uint8Array(buffer));
     },
-    catch: (error) =>
-      new Error(`SHA-256 hash failed: ${error instanceof Error ? error.message : String(error)}`),
+    catch: (error) => new Error(`SHA-256 hash failed: ${error instanceof Error ? error.message : String(error)}`),
   }).pipe(Effect.orDie);
 
 interface TarEntry {
@@ -64,7 +63,10 @@ const parseTar = (bytes: Uint8Array): TarEntry[] => {
     const header = bytes.subarray(offset, offset + 512);
     let allZero = true;
     for (let i = 0; i < 512; i++) {
-      if (header[i] !== 0) { allZero = false; break; }
+      if (header[i] !== 0) {
+        allZero = false;
+        break;
+      }
     }
     if (allZero) break;
 
@@ -97,9 +99,7 @@ const parseTar = (bytes: Uint8Array): TarEntry[] => {
         if (key === 'path') pendingLongPath = val;
       }
     } else if (typeflag === '0' || typeflag === '\x00' || typeflag === '7') {
-      const fullPath = pendingLongPath !== null
-        ? pendingLongPath
-        : prefix.length > 0 ? `${prefix}/${name}` : name;
+      const fullPath = pendingLongPath !== null ? pendingLongPath : prefix.length > 0 ? `${prefix}/${name}` : name;
       pendingLongPath = null;
       entries.push({ path: fullPath, size, bytes: new Uint8Array(data) });
     } else {
@@ -154,9 +154,7 @@ export const workspaceManifestAddress = (
       const sha256 = yield* sha256HexRaw(item.package_json_bytes);
       rows.push({ relative_path: item.relative_path, sha256 });
     }
-    rows.sort((a, b) =>
-      a.relative_path < b.relative_path ? -1 : a.relative_path > b.relative_path ? 1 : 0,
-    );
+    rows.sort((a, b) => (a.relative_path < b.relative_path ? -1 : a.relative_path > b.relative_path ? 1 : 0));
     const canonical = CanonicalCbor.encode(rows);
     return yield* AddressedDigest.of(canonical);
   });

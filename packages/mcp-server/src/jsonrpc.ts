@@ -114,9 +114,7 @@ function _classify(raw: unknown): ParseOutcome {
   const obj = raw as Record<string, unknown>;
   if (obj.jsonrpc !== '2.0' || typeof obj.method !== 'string') {
     const id =
-      typeof obj.id === 'string' || typeof obj.id === 'number' || obj.id === null
-        ? (obj.id as JsonRpcId)
-        : null;
+      typeof obj.id === 'string' || typeof obj.id === 'number' || obj.id === null ? (obj.id as JsonRpcId) : null;
     return { kind: 'invalid-request', id };
   }
   if (!('id' in obj) || obj.id === undefined) {
@@ -126,12 +124,7 @@ function _classify(raw: unknown): ParseOutcome {
 }
 
 /** Construct a -32700 / -32600 / -32601 / -32602 / -32603 error response. */
-function _errorResponse(
-  id: JsonRpcId,
-  code: number,
-  message: string,
-  data?: unknown,
-): JsonRpcErrorResponse {
+function _errorResponse(id: JsonRpcId, code: number, message: string, data?: unknown): JsonRpcErrorResponse {
   return data !== undefined
     ? { jsonrpc: '2.0', id, error: { code, message, data } }
     : { jsonrpc: '2.0', id, error: { code, message } };

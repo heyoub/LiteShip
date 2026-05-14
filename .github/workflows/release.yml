@@ -39,9 +39,15 @@ concurrency:
 
 jobs:
   release-certified:
-    name: Gauntlet (release-certification gate)
+    name: Release certification (publishability gate)
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 30
+    # The full gauntlet (gauntlet:full — bench / coverage / e2e /
+    # timing-sensitive lanes) runs on every PR and on main via
+    # .github/workflows/ci.yml > truth-linux. By the time a v*.*.* tag
+    # is pushed, main has already cleared that bar. This job's job is
+    # the narrower question: are the tarballs publishable RIGHT NOW.
+    # Slim, stable, CI-deterministic.
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -50,19 +56,15 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
-      - run: pnpm run gauntlet:full
+      - run: pnpm run build
+      - run: pnpm run typecheck
+      - run: pnpm run lint
+      - run: pnpm test
         env:
           CI: true
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: gauntlet-artifacts
-          path: |
-            coverage
-            reports
-            benchmarks
+      - run: pnpm run package:smoke
+        env:
+          CI: true
 
   publish:
     name: Publish 15 @czap/* packages + attach ShipCapsules
@@ -82,7 +84,12 @@ jobs:
           cache: pnpm
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm install -g npm@latest
+      # npm self-upgrade dropped: the bundled npm 10.x is sufficient
+      # for NPM_TOKEN auth (v0.1.x). When we pivot to OIDC trusted
+      # publishing in v0.2 we'll need npm >= 11.5.1; reintroduce the
+      # upgrade then via a more robust path (e.g. setup-node's
+      # always-auth + scope-url combo rather than a self-replacing
+      # global install that corrupts mid-flight in CI).
 
       - run: pnpm install --frozen-lockfile
 
@@ -104,18 +111,49 @@ jobs:
       # collision and lets pnpm publish report "already published"
       # cleanly for any in-flight repeat. v0.1.x workaround until
       # ship.ts handles this gracefully (ROADMAP §4).
-      - name: czap ship + npm publish (per package)
+      #
+      # Already-published is treated as success (idempotent re-runs are
+      # safe — the package already on npm matches the canonical state).
+      - name: czap ship + npm publish (per package, idempotent)
         run: |
-          set -euo pipefail
+          set -uo pipefail
           DRY_RUN_FLAG=""
           if [ "${{ inputs.dry-run }}" = "true" ]; then
             DRY_RUN_FLAG="--dry-run"
           fi
+
+          # Drift guard: the per-package loop below carries an explicit list
+          # so publish order is reviewable in PR. If a non-private package is
+          # added or removed in packages/, this assertion fails loud rather
+          # than silently skipping the new one. Update both the EXPECTED
+          # count and the loop list in the same commit.
+          EXPECTED_PUBLISHABLE=15
+          ACTUAL_PUBLISHABLE=$(find packages -maxdepth 2 -name package.json -print0 \
+            | xargs -0 -I {} jq -r 'select(.private != true) | .name' {} \
+            | wc -l)
+          if [ "$ACTUAL_PUBLISHABLE" -ne "$EXPECTED_PUBLISHABLE" ]; then
+            echo "::error::Workspace has $ACTUAL_PUBLISHABLE publishable packages but release.yml's loop expects $EXPECTED_PUBLISHABLE. Update the EXPECTED count and the explicit pkg list together."
+            exit 1
+          fi
+
+          OUTLOG=$(mktemp)
+          FAILED=()
           for pkg in _spine core quantizer compiler web detect vite astro edge worker remotion scene assets cli mcp-server; do
             echo "::group::@czap/$pkg"
-            node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" $DRY_RUN_FLAG
+            if node packages/cli/bin/czap.mjs ship --filter "@czap/$pkg" $DRY_RUN_FLAG 2>&1 | tee "$OUTLOG"; then
+              echo "✅ @czap/$pkg published"
+            elif grep -qE "previously published|cannot publish over|EPUBLISHCONFLICT|You cannot publish over" "$OUTLOG"; then
+              echo "✅ @czap/$pkg already at this version on npm (idempotent skip)"
+            else
+              echo "❌ @czap/$pkg failed for non-idempotency reason"
+              FAILED+=("@czap/$pkg")
+            fi
             echo "::endgroup::"
           done
+          if [ ${#FAILED[@]} -gt 0 ]; then
+            echo "::error::Publish failed for: ${FAILED[*]}"
+            exit 1
+          fi
 
       # ─── GitHub Release attachment ────────────────────────────────────
       - name: Resolve version from tag

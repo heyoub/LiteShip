@@ -56,16 +56,18 @@ const _fromStream = <T>(initial: T, source: Stream.Stream<T>): Effect.Effect<Cel
  * preserving, `Effect.all` with an array input preserves positional order and
  * arity, so the resulting values are `T` by construction.
  */
-export const readAllCellValues = <T extends readonly unknown[]>(
-  cells: { readonly [K in keyof T]: CellShape<T[K]> },
-): Effect.Effect<T> => {
+export const readAllCellValues = <T extends readonly unknown[]>(cells: {
+  readonly [K in keyof T]: CellShape<T[K]>;
+}): Effect.Effect<T> => {
   const gets = tupleMap(cells, (cell) => cell.get);
   return Effect.all(gets, { concurrency: 'unbounded' }) as unknown as Effect.Effect<T>;
 };
 
-const _all = <const T extends readonly unknown[]>(
-  cells: { readonly [K in keyof T]: CellShape<T[K]> },
-): Effect.Effect<CellShape<T>, never, Scope.Scope> => {
+const _all = <const T extends readonly unknown[]>(cells: { readonly [K in keyof T]: CellShape<T[K]> }): Effect.Effect<
+  CellShape<T>,
+  never,
+  Scope.Scope
+> => {
   const readAll = readAllCellValues(cells);
 
   return Effect.gen(function* () {

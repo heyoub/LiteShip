@@ -11,7 +11,11 @@
 
 import { runStdio } from './stdio.js';
 
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('stdio-server.ts') || process.argv[1]?.endsWith('stdio.ts')) {
+if (
+  import.meta.url === `file://${process.argv[1]}` ||
+  process.argv[1]?.endsWith('stdio-server.ts') ||
+  process.argv[1]?.endsWith('stdio.ts')
+) {
   runStdio().catch((err: unknown) => {
     process.stderr.write(JSON.stringify({ error: String(err) }) + '\n');
     process.exit(1);

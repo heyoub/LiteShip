@@ -8,7 +8,7 @@
 
 > **Shape**\<`B`, `SN`\> = `ComponentDef`\<`B`, `SN`\>
 
-Defined in: [core/src/component.ts:98](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/component.ts#L98)
+Defined in: [core/src/component.ts:104](https://github.com/heyoub/LiteShip/blob/main/packages/core/src/component.ts#L104)
 
 Structural shape of a component definition, parameterized by its boundary and slot names.
 

@@ -37,10 +37,7 @@ export const Scene = {
    * Lightweight — no Effect Context.Tag is introduced. If/when more
    * threaded state appears, the merged shape is the seam to promote.
    */
-  subscene(
-    parent: { readonly bpm: number; readonly fps: number },
-    partial: SceneSubscenePartial,
-  ): SceneContract {
+  subscene(parent: { readonly bpm: number; readonly fps: number }, partial: SceneSubscenePartial): SceneContract {
     return {
       ...partial,
       bpm: partial.bpm ?? parent.bpm,
@@ -55,8 +52,7 @@ export const Scene = {
 } as const;
 
 /** Re-prefix a phantom-kinded TrackId. The brand is preserved across the cast. */
-const prefixed = <K extends TrackKind>(prefix: string, id: TrackId<K>): TrackId<K> =>
-  `${prefix}/${id}` as TrackId<K>;
+const prefixed = <K extends TrackKind>(prefix: string, id: TrackId<K>): TrackId<K> => `${prefix}/${id}` as TrackId<K>;
 
 function shift(t: Track, prefix: string, offset: number): Track {
   if (t.kind === 'transition') {
@@ -75,10 +71,7 @@ function shift(t: Track, prefix: string, offset: number): Track {
       from: t.from + offset,
       to: t.to + offset,
       target: prefixed(prefix, t.target),
-      syncTo:
-        t.syncTo !== undefined
-          ? { ...t.syncTo, anchor: prefixed(prefix, t.syncTo.anchor) }
-          : undefined,
+      syncTo: t.syncTo !== undefined ? { ...t.syncTo, anchor: prefixed(prefix, t.syncTo.anchor) } : undefined,
     };
   }
   if (t.kind === 'audio') {

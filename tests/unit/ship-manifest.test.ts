@@ -12,7 +12,7 @@
 import { describe, it, expect } from 'vitest';
 import { spawnArgv } from '../../scripts/lib/spawn.js';
 import { cpSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { Effect } from 'effect';
@@ -25,7 +25,7 @@ import {
 } from '../../packages/cli/src/ship-manifest.js';
 
 const run = <A, E>(eff: Effect.Effect<A, E>) => Effect.runPromise(eff);
-const REPO_ROOT = '/home/heyoub/Documents/code/LiteShip';
+const REPO_ROOT = resolve(import.meta.dirname, '..', '..');
 
 describe('tarballManifestAddress', () => {
   it('is deterministic across gzip wrappers carrying identical inner-tar content', async () => {

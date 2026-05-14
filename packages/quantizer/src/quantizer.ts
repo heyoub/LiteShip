@@ -21,13 +21,7 @@ import type {
   HLCBrand,
 } from '@czap/core';
 import type { MotionTier } from '@czap/core';
-import {
-  ContentAddress as mkContentAddress,
-  StateName as mkStateName,
-  TypedRef,
-  Easing,
-  fnv1aBytes,
-} from '@czap/core';
+import { ContentAddress as mkContentAddress, StateName as mkStateName, TypedRef, Easing, fnv1aBytes } from '@czap/core';
 import { evaluate } from './evaluate.js';
 import type { EvaluateResult } from './evaluate.js';
 import { MemoCache } from './memo-cache.js';
