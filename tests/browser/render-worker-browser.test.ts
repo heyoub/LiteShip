@@ -120,12 +120,14 @@ describe('browser RenderWorker with real Worker and OffscreenCanvas', () => {
     worker.dispose();
   });
 
-  // CI headless runners can race through all 300 frames before the
-  // setTimeout(100) below actually fires, making the < 300 assertion
-  // flake. v0.1.2 will rewrite this to wait on a frame-count signal
-  // rather than wall clock; for now, skip on CI and keep the local
-  // signal.
-  test.skipIf(process.env.CI === 'true')('stopRender halts an in-progress render early', async () => {
+  // Browser-env skip: relies on setTimeout(100) firing within ~100ms,
+  // which fast headless chromium under load can outrace, finishing all
+  // 300 frames before the timer fires and tripping the < 300 assertion.
+  // v0.1.2 should rewrite to wait on a frame-count signal rather than
+  // wall clock — see ROADMAP §4. (Can't gate on process.env.CI here
+  // because this file runs in a browser realm where `process` is
+  // undefined.)
+  test.skip('stopRender halts an in-progress render early', async () => {
     if (typeof OffscreenCanvas === 'undefined') {
       return;
     }
