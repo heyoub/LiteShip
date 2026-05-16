@@ -6,6 +6,9 @@
  */
 
 import { describe as describeCmd } from './commands/describe.js';
+import { doctor } from './commands/doctor.js';
+import { glossary } from './commands/glossary.js';
+import { help } from './commands/help.js';
 import { sceneCompile } from './commands/scene-compile.js';
 import { sceneDev } from './commands/scene-dev.js';
 import { sceneRender } from './commands/scene-render.js';
@@ -16,13 +19,25 @@ import { capsuleInspect, capsuleList, capsuleVerify } from './commands/capsule.j
 import { gauntlet } from './commands/gauntlet.js';
 import { ship } from './commands/ship.js';
 import { verify } from './commands/ship-verify.js';
+import { version } from './commands/version.js';
 import { emitError } from './receipts.js';
 
 /** Run the CLI with the given argv slice. Returns a process exit code. */
 export async function run(argv: readonly string[]): Promise<number> {
-  const [cmd, ...rest] = argv;
+  const [rawCmd, ...rest] = argv;
+  const cmd = normalizeTopLevel(rawCmd);
 
   switch (cmd) {
+    case 'help':
+      return help();
+    case 'version':
+      return version();
+    case 'doctor':
+      return doctor();
+    case 'glossary': {
+      const term = rest[0] && !rest[0].startsWith('-') ? rest[0] : null;
+      return glossary(term);
+    }
     case 'describe': {
       const format = parseFlag(rest, '--format') as 'json' | 'mcp' | undefined;
       process.stdout.write(JSON.stringify(describeCmd({ format })) + '\n');
@@ -84,9 +99,25 @@ export async function run(argv: readonly string[]): Promise<number> {
       return 0;
     }
     default:
-      process.stderr.write(JSON.stringify({ error: 'unknown_command', command: cmd }) + '\n');
+      // No command + no flags: friendly help on stdout, exit 0.
+      if (rawCmd === undefined) return help();
+      // Friendly text first; structured JSON envelope last so machine
+      // consumers can read it as the trailing line of stderr.
+      process.stderr.write(`Unknown command: ${rawCmd}\nRun \`czap help\` to see usage.\n`);
+      process.stderr.write(JSON.stringify({ error: 'unknown_command', command: rawCmd }) + '\n');
       return 1;
   }
+}
+
+/**
+ * Normalize top-level argv[0]. Standard help/version flags fold into
+ * their verb counterparts so `czap --help` and `czap -h` behave like
+ * `czap help`. Returns the input unchanged otherwise.
+ */
+function normalizeTopLevel(raw: string | undefined): string | undefined {
+  if (raw === '--help' || raw === '-h') return 'help';
+  if (raw === '--version' || raw === '-V' || raw === '-v') return 'version';
+  return raw;
 }
 
 /** Parse a `--flag=value` style option out of the argv tail. Returns undefined if absent. */

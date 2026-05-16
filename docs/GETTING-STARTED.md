@@ -20,7 +20,15 @@ pnpm install
 
 LiteShip is the product name, CZAP the engine, `@czap/*` the packages ([GLOSSARY.md](./GLOSSARY.md)).
 
-The first install pulls workspace dependencies and Playwright browsers. A minute or two; subsequent installs are seconds.
+The first install pulls workspace dependencies and Playwright browsers. A minute or two; subsequent installs are seconds. When the install finishes you'll see a short banner with the next-step verbs.
+
+If something looks off — wrong Node, missing dist, unlinked git hook — run the rig-check before you keep going:
+
+```bash
+pnpm run doctor   # quantizes env signals into ok/warn/fail bearings
+```
+
+Or skip ahead to the one-command shake-down (`pnpm setup`) below.
 
 ## 2. Build everything
 
@@ -165,6 +173,22 @@ The `client:satellite` directive hydrates only the boundary evaluator (not a who
 - [docs/api/](./api): generated API reference for every package
 - [docs/DOCS.md](./DOCS.md): full documentation map
 - [CONTRIBUTING.md](../CONTRIBUTING.md): how to develop in the repo, the gauntlet, PR conventions
+
+## Shortcut menu
+
+For dev-loop ergonomics:
+
+```bash
+pnpm setup            # first-run aggregate (doctor + build + test)
+pnpm run doctor       # preflight rig-check on demand
+pnpm dev              # vitest watch mode
+pnpm run clean        # wipe build/test artifacts (dry-dock)
+pnpm scripts          # categorized index of all dev scripts
+pnpm run glossary     # CLI lookup into docs/GLOSSARY.md
+```
+
+After `pnpm run build`, the same lookup is available as `czap glossary <term>`,
+`czap doctor`, `czap help`, `czap version`.
 
 ## Troubleshooting
 

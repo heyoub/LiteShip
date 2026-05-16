@@ -75,8 +75,16 @@
     "lint": "eslint --max-warnings 0 \"packages/*/src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.ts\"",
     "format": "prettier --write \"packages/*/src/**/*.ts\"",
     "format:check": "prettier --check \"packages/*/src/**/*.ts\"",
+    "fix": "pnpm run format && pnpm run lint --fix",
     "cover": "pnpm run coverage",
-    "prepare": "pnpm exec tsx scripts/link-pre-commit.ts"
+    "setup": "pnpm exec tsx scripts/setup.ts",
+    "doctor": "pnpm exec tsx scripts/doctor.ts",
+    "dev": "vitest --config vitest.config.ts",
+    "clean": "pnpm exec tsx scripts/clean.ts",
+    "scripts": "pnpm exec tsx scripts/scripts-index.ts",
+    "glossary": "pnpm exec tsx scripts/glossary.ts",
+    "prepare": "pnpm exec tsx scripts/link-pre-commit.ts",
+    "postinstall": "pnpm exec tsx scripts/postinstall.ts"
   },
   "devDependencies": {
     "@czap/astro": "workspace:*",
