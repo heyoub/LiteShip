@@ -39,7 +39,93 @@ describe('doctor command', () => {
     expect(ids).toContain('core.built');
     expect(ids).toContain('cli.built');
     expect(ids).toContain('git.hooks');
+    expect(ids).toContain('git.config');
     expect(ids).toContain('playwright.installed');
+  });
+
+  it('includes wasm.toolchain when crates/ is present (skipped otherwise)', async () => {
+    const { stdout } = await captureCli(() => doctor({ pretty: false }));
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    const ids = new Set<string>(receipt.checks.map((c: { id: string }) => c.id));
+    // Repo has crates/czap-compute, so the probe should fire.
+    expect(ids).toContain('wasm.toolchain');
+  });
+
+  it('omits wasm.toolchain in a workspace without crates/', async () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'czap-doctor-nocrates-'));
+    try {
+      mkdirSync(resolve(tmp, 'packages/core'), { recursive: true });
+      const { stdout } = await captureCli(() => doctor({ pretty: false, cwd: tmp }));
+      const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+      const ids = new Set<string>(receipt.checks.map((c: { id: string }) => c.id));
+      expect(ids.has('wasm.toolchain')).toBe(false);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it('git.config probe returns ok when running outside a git worktree', async () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'czap-doctor-nogit-'));
+    try {
+      mkdirSync(resolve(tmp, 'packages/core'), { recursive: true });
+      const { stdout } = await captureCli(() => doctor({ pretty: false, cwd: tmp }));
+      const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+      const gitCfg = receipt.checks.find((c: { id: string }) => c.id === 'git.config');
+      expect(gitCfg.status).toBe('ok');
+      expect(gitCfg.detail).toContain('not a worktree');
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it('--ci escalates caution to exit 1 while keeping the verdict honest', async () => {
+    // Build a sandbox with node_modules satisfied but no dist/ — that's a
+    // pure-warn workspace (caution verdict). Without --ci this exits 0.
+    const tmp = mkdtempSync(join(tmpdir(), 'czap-doctor-caution-'));
+    try {
+      mkdirSync(resolve(tmp, 'packages/core/dist'), { recursive: true });
+      mkdirSync(resolve(tmp, 'packages/cli/dist'), { recursive: true });
+      mkdirSync(resolve(tmp, 'node_modules'), { recursive: true });
+      // Touch the freshness sentinel so workspace.installed reads as ok.
+      writeFileSync(resolve(tmp, 'node_modules/.modules.yaml'), 'lockfile: stub\n');
+      // Built dist sentinel — index.js must exist.
+      writeFileSync(resolve(tmp, 'packages/core/dist/index.js'), '// stub\n');
+      writeFileSync(resolve(tmp, 'packages/cli/dist/index.js'), '// stub\n');
+      // No .git here, so git.hooks/git.config probes return ok-with-no-worktree.
+      // The only non-ok will be Playwright (no node_modules/@playwright/test) — a warn.
+
+      const { exit: exitWithoutCi, stdout: stdoutWithoutCi } = await captureCli(() =>
+        doctor({ pretty: false, cwd: tmp }),
+      );
+      const receiptWithout = JSON.parse(stdoutWithoutCi.trim().split('\n').pop()!);
+      expect(receiptWithout.verdict).toBe('caution');
+      expect(exitWithoutCi).toBe(0);
+      expect('strict' in receiptWithout).toBe(false);
+
+      const { exit: exitWithCi, stdout: stdoutWithCi } = await captureCli(() =>
+        doctor({ pretty: false, ci: true, cwd: tmp }),
+      );
+      const receiptWith = JSON.parse(stdoutWithCi.trim().split('\n').pop()!);
+      expect(receiptWith.verdict).toBe('caution');
+      expect(receiptWith.status).toBe('failed');
+      expect(receiptWith.strict).toBe(true);
+      expect(exitWithCi).toBe(1);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it('--ci stays exit 0 when verdict is ready (no warnings)', async () => {
+    // Run against the live, healthy workspace — should be ready (or close to it).
+    // We don't assume strictly ready (Playwright/git-config may warn on some
+    // dev machines), so we only assert that if verdict is ready, --ci exits 0.
+    const { exit: exitNoCi, stdout } = await captureCli(() => doctor({ pretty: false }));
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    if (receipt.verdict === 'ready') {
+      const { exit: exitCi } = await captureCli(() => doctor({ pretty: false, ci: true }));
+      expect(exitCi).toBe(0);
+      expect(exitNoCi).toBe(0);
+    }
   });
 
   it('reports `blocked` and exit 1 when workspace is uninstalled in a sandbox', async () => {

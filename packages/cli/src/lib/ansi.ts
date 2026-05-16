@@ -3,6 +3,7 @@
  *
  *  - `NO_COLOR`        — disables color regardless of TTY state
  *  - `FORCE_COLOR=1+`  — enables color even without a TTY (CI logs)
+ *  - `CI=true`         — most CI providers render ANSI in build logs
  *  - default           — color when the target stream is a TTY
  *
  * Colors never go to stdout (JSON receipt stream stays raw); pretty
@@ -16,6 +17,7 @@
 export function colorEnabled(stream: NodeJS.WritableStream & { isTTY?: boolean } = process.stderr): boolean {
   if (process.env.NO_COLOR !== undefined && process.env.NO_COLOR !== '') return false;
   if (process.env.FORCE_COLOR !== undefined && process.env.FORCE_COLOR !== '0') return true;
+  if (process.env.CI === 'true' || process.env.CI === '1') return true;
   return Boolean(stream.isTTY);
 }
 

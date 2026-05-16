@@ -11,16 +11,20 @@ const ESC = '\x1b';
 describe('ansi helper', () => {
   const origNoColor = process.env.NO_COLOR;
   const origForceColor = process.env.FORCE_COLOR;
+  const origCi = process.env.CI;
 
   beforeEach(() => {
     delete process.env.NO_COLOR;
     delete process.env.FORCE_COLOR;
+    delete process.env.CI;
   });
   afterEach(() => {
     if (origNoColor === undefined) delete process.env.NO_COLOR;
     else process.env.NO_COLOR = origNoColor;
     if (origForceColor === undefined) delete process.env.FORCE_COLOR;
     else process.env.FORCE_COLOR = origForceColor;
+    if (origCi === undefined) delete process.env.CI;
+    else process.env.CI = origCi;
   });
 
   it('colorEnabled returns false when NO_COLOR is set', () => {
@@ -31,6 +35,22 @@ describe('ansi helper', () => {
   it('colorEnabled returns true when FORCE_COLOR is set (even without TTY)', () => {
     process.env.FORCE_COLOR = '1';
     expect(colorEnabled({ isTTY: false } as never)).toBe(true);
+  });
+
+  it('colorEnabled returns true when CI=true (CI logs almost always render ANSI)', () => {
+    process.env.CI = 'true';
+    expect(colorEnabled({ isTTY: false } as never)).toBe(true);
+  });
+
+  it('colorEnabled returns true when CI=1 (alternate truthy form)', () => {
+    process.env.CI = '1';
+    expect(colorEnabled({ isTTY: false } as never)).toBe(true);
+  });
+
+  it('colorEnabled gives NO_COLOR precedence over CI', () => {
+    process.env.CI = 'true';
+    process.env.NO_COLOR = '1';
+    expect(colorEnabled({ isTTY: true } as never)).toBe(false);
   });
 
   it('colorEnabled honors isTTY when neither env var is set', () => {

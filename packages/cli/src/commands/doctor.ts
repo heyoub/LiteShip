@@ -51,10 +51,54 @@ export interface DoctorReceipt {
   readonly verdict: DoctorVerdict;
   readonly checks: readonly DoctorCheck[];
   readonly fixed?: readonly DoctorFix[];
+  /** Present when `--ci` was passed — warns escalate to exit 1. */
+  readonly strict?: true;
 }
 
-const MIN_NODE_MAJOR = 22;
-const MIN_PNPM_MAJOR = 10;
+/** Engine minima read from root package.json `engines`. Fallback to safe defaults. */
+interface EngineMinima {
+  readonly node: number;
+  readonly pnpm: number;
+}
+
+function parseEngineMajor(s: string | undefined): number | null {
+  if (!s) return null;
+  const m = s.match(/(\d+)/);
+  return m ? Number(m[1]) : null;
+}
+
+function loadEngineMinima(cwd: string): EngineMinima {
+  const DEFAULTS: EngineMinima = { node: 22, pnpm: 10 };
+  try {
+    const pkgPath = resolve(cwd, 'package.json');
+    if (!existsSync(pkgPath)) return DEFAULTS;
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as { engines?: { node?: string; pnpm?: string } };
+    return {
+      node: parseEngineMajor(pkg.engines?.node) ?? DEFAULTS.node,
+      pnpm: parseEngineMajor(pkg.engines?.pnpm) ?? DEFAULTS.pnpm,
+    };
+  } catch {
+    return DEFAULTS;
+  }
+}
+
+/**
+ * Read the build-script's package list out of root package.json so the
+ * doctor and the build never drift. Falls back to a static list if
+ * package.json is unreadable.
+ */
+function loadBuiltPackages(cwd: string): readonly string[] {
+  try {
+    const pkgPath = resolve(cwd, 'package.json');
+    if (!existsSync(pkgPath)) return [];
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as { scripts?: { build?: string } };
+    const build = pkg.scripts?.build ?? '';
+    const matches = Array.from(build.matchAll(/packages\/([\w-]+)/g));
+    return matches.flatMap((m) => (m[1] ? [m[1]] : []));
+  } catch {
+    return [];
+  }
+}
 
 /** Parse `vMAJOR.MINOR.PATCH` (or `MAJOR.MINOR.PATCH`) into a major-version number. */
 function parseMajor(version: string): number | null {
@@ -64,7 +108,7 @@ function parseMajor(version: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function probeNode(): DoctorCheck {
+function probeNode(minima: EngineMinima): DoctorCheck {
   const version = process.versions.node;
   const major = parseMajor(version);
   if (major === null) {
@@ -73,22 +117,22 @@ function probeNode(): DoctorCheck {
       label: 'Node.js',
       status: 'fail',
       detail: `unrecognized version string: ${version}`,
-      hint: `Lay in Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
+      hint: `Lay in Node.js ${minima.node}+ from https://nodejs.org`,
     };
   }
-  if (major < MIN_NODE_MAJOR) {
+  if (major < minima.node) {
     return {
       id: 'node.version',
       label: 'Node.js',
       status: 'fail',
-      detail: `${version} (need >= ${MIN_NODE_MAJOR})`,
-      hint: `Lay in Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
+      detail: `${version} (need >= ${minima.node})`,
+      hint: `Lay in Node.js ${minima.node}+ from https://nodejs.org`,
     };
   }
   return { id: 'node.version', label: 'Node.js', status: 'ok', detail: version };
 }
 
-async function probePnpm(): Promise<DoctorCheck> {
+async function probePnpm(minima: EngineMinima): Promise<DoctorCheck> {
   const r = await spawnArgvCapture('pnpm', ['--version']).catch(() => null);
   if (!r || r.exitCode !== 0) {
     return {
@@ -96,7 +140,7 @@ async function probePnpm(): Promise<DoctorCheck> {
       label: 'pnpm',
       status: 'fail',
       detail: 'pnpm not on PATH',
-      hint: `Lay in pnpm ${MIN_PNPM_MAJOR}+: corepack enable && corepack prepare pnpm@latest --activate`,
+      hint: `Lay in pnpm ${minima.pnpm}+: corepack enable && corepack prepare pnpm@latest --activate`,
     };
   }
   const version = r.stdout.trim();
@@ -109,12 +153,12 @@ async function probePnpm(): Promise<DoctorCheck> {
       detail: `unrecognized version: ${version}`,
     };
   }
-  if (major < MIN_PNPM_MAJOR) {
+  if (major < minima.pnpm) {
     return {
       id: 'pnpm.version',
       label: 'pnpm',
       status: 'fail',
-      detail: `${version} (need >= ${MIN_PNPM_MAJOR})`,
+      detail: `${version} (need >= ${minima.pnpm})`,
       hint: 'Re-rig pnpm: corepack prepare pnpm@latest --activate',
     };
   }
@@ -186,15 +230,64 @@ function probePlaywright(cwd: string): DoctorCheck {
   return { id: 'playwright.installed', label: 'Playwright', status: 'ok', detail: 'package present' };
 }
 
+async function probeGitConfig(cwd: string): Promise<DoctorCheck> {
+  const gitDir = resolve(cwd, '.git');
+  if (!existsSync(gitDir)) {
+    return { id: 'git.config', label: 'git config', status: 'ok', detail: 'no .git (not a worktree)' };
+  }
+  const [email, name] = await Promise.all([
+    spawnArgvCapture('git', ['config', '--get', 'user.email'], { cwd }).catch(() => null),
+    spawnArgvCapture('git', ['config', '--get', 'user.name'], { cwd }).catch(() => null),
+  ]);
+  const haveEmail = !!email && email.exitCode === 0 && email.stdout.trim().length > 0;
+  const haveName = !!name && name.exitCode === 0 && name.stdout.trim().length > 0;
+  if (haveEmail && haveName) {
+    return { id: 'git.config', label: 'git config', status: 'ok', detail: 'user.email + user.name set' };
+  }
+  const missing = [!haveName ? 'user.name' : null, !haveEmail ? 'user.email' : null].filter(Boolean).join(', ');
+  return {
+    id: 'git.config',
+    label: 'git config',
+    status: 'warn',
+    detail: `unset: ${missing}`,
+    hint: 'Sign the manifest: git config user.email "<you>" && git config user.name "<you>"',
+  };
+}
+
+/**
+ * WASM toolchain probe — only meaningful when this workspace has a Rust
+ * `crates/` directory. On Rust-free clones returns null so the probe is
+ * skipped entirely (no false-positive warnings on docs-only branches).
+ */
+async function probeWasmToolchain(cwd: string): Promise<DoctorCheck | null> {
+  const cratesDir = resolve(cwd, 'crates');
+  if (!existsSync(cratesDir)) return null;
+  const r = await spawnArgvCapture('cargo', ['--version']).catch(() => null);
+  if (!r || r.exitCode !== 0) {
+    return {
+      id: 'wasm.toolchain',
+      label: 'WASM toolchain',
+      status: 'warn',
+      detail: 'cargo not on PATH (crates/ present; WASM build will not run)',
+      hint: 'Stow Rust: https://rustup.rs',
+    };
+  }
+  return { id: 'wasm.toolchain', label: 'WASM toolchain', status: 'ok', detail: r.stdout.trim() };
+}
+
 async function runAllProbes(cwd: string): Promise<readonly DoctorCheck[]> {
+  const minima = loadEngineMinima(cwd);
+  const wasm = await probeWasmToolchain(cwd);
   return [
-    probeNode(),
-    await probePnpm(),
+    probeNode(minima),
+    await probePnpm(minima),
     probeWorkspaceInstalled(cwd),
     probeBuilt(cwd, 'core', '@czap/core build'),
     probeBuilt(cwd, 'cli', '@czap/cli build'),
     probeGitHooks(cwd),
+    await probeGitConfig(cwd),
     probePlaywright(cwd),
+    ...(wasm ? [wasm] : []),
   ];
 }
 
@@ -254,24 +347,12 @@ async function applyFixes(checks: readonly DoctorCheck[], cwd: string): Promise<
   // missing-but-tsbuildinfo-claims-up-to-date.
   const needsBuild = checks.some((c) => (c.id === 'core.built' || c.id === 'cli.built') && c.status === 'warn');
   if (needsBuild) {
-    for (const pkg of [
-      'core',
-      'quantizer',
-      'compiler',
-      'web',
-      'detect',
-      'edge',
-      'worker',
-      'vite',
-      'astro',
-      'remotion',
-      'scene',
-      'assets',
-      'cli',
-      'mcp-server',
-    ]) {
+    // Package list is read from root package.json's build script, so adding a
+    // new package to the build never silently desyncs this loop. `force:true`
+    // closes the TOCTOU window between existsSync and rmSync.
+    for (const pkg of loadBuiltPackages(cwd)) {
       const info = resolve(cwd, `packages/${pkg}/tsconfig.tsbuildinfo`);
-      if (existsSync(info)) rmSync(info);
+      rmSync(info, { force: true });
     }
     const r = await spawnArgv('pnpm', ['run', 'build'], { stdio: 'inherit', cwd }).catch(() => ({
       exitCode: 1,
@@ -311,9 +392,14 @@ async function applyFixes(checks: readonly DoctorCheck[], cwd: string): Promise<
  *   TTY.
  * @param opts.fix - when true, attempt cheap local remediation (rebuild
  *   stale dist, link missing git hook) and re-probe after.
- * @returns process exit code: 0 unless verdict is `blocked`.
+ * @param opts.ci - when true, treat any `warn` as exit-failing too. The
+ *   verdict in the receipt stays honest (`caution`); only the exit code
+ *   escalates. Use in CI workflows that should refuse to merge on warnings.
+ * @returns process exit code: 0 when ready (and, without --ci, also caution).
  */
-export async function doctor(opts: { pretty?: boolean; fix?: boolean; cwd?: string } = {}): Promise<number> {
+export async function doctor(
+  opts: { pretty?: boolean; fix?: boolean; ci?: boolean; cwd?: string } = {},
+): Promise<number> {
   const cwd = opts.cwd ?? process.cwd();
   let checks = await runAllProbes(cwd);
 
@@ -324,7 +410,8 @@ export async function doctor(opts: { pretty?: boolean; fix?: boolean; cwd?: stri
   }
 
   const verdict = aggregate(checks);
-  const status: 'ok' | 'failed' = verdict === 'blocked' ? 'failed' : 'ok';
+  const exitCode = verdict === 'blocked' || (opts.ci && verdict === 'caution') ? 1 : 0;
+  const status: 'ok' | 'failed' = exitCode === 0 ? 'ok' : 'failed';
 
   const receipt: DoctorReceipt = {
     status,
@@ -333,6 +420,7 @@ export async function doctor(opts: { pretty?: boolean; fix?: boolean; cwd?: stri
     verdict,
     checks,
     ...(fixes && fixes.length > 0 ? { fixed: fixes } : {}),
+    ...(opts.ci ? { strict: true as const } : {}),
   };
   emit(receipt);
 
@@ -341,7 +429,7 @@ export async function doctor(opts: { pretty?: boolean; fix?: boolean; cwd?: stri
     process.stderr.write(prettySummary(checks, verdict, fixes));
   }
 
-  return verdict === 'blocked' ? 1 : 0;
+  return exitCode;
 }
 
 /** Read the @czap/cli package version off disk. Used by `czap version`. */

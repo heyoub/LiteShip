@@ -140,6 +140,66 @@ const ENTRIES: readonly GlossaryEntry[] = [
     definition:
       'Clean state. `pnpm clean` wipes dist/, coverage/, reports/, .tsbuildinfo so the next build starts from a known empty deck.',
   },
+  {
+    term: 'hull',
+    category: 'translator-note',
+    definition:
+      'The built `dist/` artifact of a package. "Hull not yet laid" = no dist/ on disk; "Hull check" = the rolled-up status emitted by `czap doctor`.',
+    seeAlso: ['keel', 'shake-down'],
+  },
+  {
+    term: 'keel',
+    category: 'translator-note',
+    definition:
+      '`tsc --build` output. "Lay the keel" = run `pnpm run build`. The first thing you put down before anything else floats.',
+    seeAlso: ['hull'],
+  },
+  {
+    term: 'cast off',
+    category: 'translator-note',
+    definition:
+      'Begin the run: leave the dock. Used for first actions after install ("Cast off with: pnpm setup") and for non-blocking states ("you can cast off") in `czap doctor`.',
+    seeAlso: ['moored'],
+  },
+  {
+    term: 'moored',
+    category: 'translator-note',
+    definition:
+      'Installed but not yet underway. The state immediately after `pnpm install` — node_modules present, but build/test not run. Postinstall says "LiteShip — moored."',
+    seeAlso: ['cast off', 'shake-down'],
+  },
+  {
+    term: 'deck plan',
+    category: 'translator-note',
+    definition:
+      'The npm-scripts catalogue (`pnpm scripts`). Lists every script grouped by purpose. The chart for inner-loop operations.',
+    seeAlso: ['chart'],
+  },
+  {
+    term: 'chart',
+    category: 'translator-note',
+    definition: 'The verb table (`czap help`). The map of CLI bearings — what verb does what, grouped by phase.',
+    seeAlso: ['deck plan'],
+  },
+  {
+    term: 'quay',
+    category: 'translator-note',
+    definition:
+      'The release surface. Where a package ties up before being shipped to npm. (Reserved register; not yet wired into CLI strings — added here so we can use it consistently when it lands.)',
+  },
+  {
+    term: 'rig (verb)',
+    category: 'translator-note',
+    definition:
+      'Install or wire a piece of infrastructure into place. "Rig the pre-commit hook" = link `.git/hooks/pre-commit`. Distinct from the noun "rig" (the boundary system).',
+    seeAlso: ['rig'],
+  },
+  {
+    term: 'stow',
+    category: 'translator-note',
+    definition:
+      'Pack a downloaded artifact into its expected location. "Stow the browsers" = `pnpm exec playwright install`. "Stow Rust" = install via rustup.',
+  },
 ] as const;
 
 /** Receipt shape emitted by `czap glossary`. */

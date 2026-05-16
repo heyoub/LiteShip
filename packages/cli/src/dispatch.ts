@@ -35,7 +35,7 @@ export async function run(argv: readonly string[]): Promise<number> {
     case 'version':
       return version();
     case 'doctor':
-      return doctor({ fix: rest.includes('--fix') });
+      return doctor({ fix: rest.includes('--fix'), ci: rest.includes('--ci') });
     case 'glossary': {
       const term = rest[0] && !rest[0].startsWith('-') ? rest[0] : null;
       return glossary(term);
