@@ -10,6 +10,7 @@
 
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { color, colorEnabled, header } from '../packages/cli/src/lib/ansi.js';
 
 interface CategorySpec {
   readonly name: string;
@@ -134,16 +135,18 @@ const widest = Math.max(
   ...CATEGORIES.flatMap((c) => c.scripts.map((s) => s.length)),
 );
 
-process.stdout.write('LiteShip — npm scripts\n\n');
+const on = colorEnabled(process.stdout);
+
+process.stdout.write(`${header('LiteShip', on)} — the deck plan (npm scripts)\n\n`);
 
 for (const cat of CATEGORIES) {
   const present = cat.scripts.filter((s) => s in all);
   if (present.length === 0) continue;
-  process.stdout.write(`${cat.name}\n  ${cat.description}\n`);
+  process.stdout.write(`${color('cyan', cat.name, on)}\n  ${color('dim', cat.description, on)}\n`);
   for (const s of present) {
     const cmd = all[s] ?? '';
     const truncated = cmd.length > 80 ? cmd.slice(0, 77) + '...' : cmd;
-    process.stdout.write(`  pnpm ${s.padEnd(widest, ' ')}  ${truncated}\n`);
+    process.stdout.write(`  pnpm ${s.padEnd(widest, ' ')}  ${color('dim', truncated, on)}\n`);
   }
   process.stdout.write('\n');
 }
@@ -151,13 +154,15 @@ for (const cat of CATEGORIES) {
 // Surface uncategorized scripts so the index stays honest as the manifest grows.
 const other = Object.keys(all).filter((s) => !known.has(s) && s !== 'prepare' && s !== 'postinstall');
 if (other.length > 0) {
-  process.stdout.write('other (uncategorized — consider adding to scripts/scripts-index.ts)\n');
+  process.stdout.write(`${color('yellow', 'other', on)} ${color('dim', '(uncategorized — consider adding to scripts/scripts-index.ts)', on)}\n`);
   for (const s of other) {
     const cmd = all[s] ?? '';
     const truncated = cmd.length > 80 ? cmd.slice(0, 77) + '...' : cmd;
-    process.stdout.write(`  pnpm ${s.padEnd(widest, ' ')}  ${truncated}\n`);
+    process.stdout.write(`  pnpm ${s.padEnd(widest, ' ')}  ${color('dim', truncated, on)}\n`);
   }
   process.stdout.write('\n');
 }
 
-process.stdout.write('Tip: `czap help` lists CLI commands, `czap glossary` looks up ontology terms.\n');
+process.stdout.write(
+  `${color('dim', 'Tip:', on)} \`${color('cyan', 'czap help', on)}\` is the chart; \`${color('cyan', 'czap glossary', on)}\` is the ontology.\n`,
+);

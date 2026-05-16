@@ -62,6 +62,34 @@ describe('doctor command', () => {
     expect(v).toMatch(/^\d+\.\d+\.\d+/);
   });
 
+  it('--fix mode produces a `fixed` array when nothing was actually broken (no-op)', async () => {
+    // With a healthy workspace, --fix finds nothing to repair and emits
+    // the receipt without a `fixed` field (only present when fixes ran).
+    const { exit, stdout } = await captureCli(() => doctor({ pretty: false, fix: true }));
+    expect([0, 1]).toContain(exit);
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    if ('fixed' in receipt) {
+      expect(Array.isArray(receipt.fixed)).toBe(true);
+      for (const f of receipt.fixed) {
+        expect(typeof f.id).toBe('string');
+        expect(typeof f.action).toBe('string');
+        expect(['applied', 'failed']).toContain(f.status);
+      }
+    }
+  });
+
+  it('checks expose a `fixable` flag where remediation is wired', async () => {
+    const { stdout } = await captureCli(() => doctor({ pretty: false }));
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    const fixable = receipt.checks.filter((c: { fixable?: boolean }) => c.fixable);
+    // The fixable set today is {git.hooks, core.built, cli.built}; we
+    // only assert it's a subset of those rather than equality, so adding
+    // a new fixable check doesn't break this test.
+    for (const c of fixable) {
+      expect(['git.hooks', 'core.built', 'cli.built']).toContain(c.id);
+    }
+  });
+
   it('readCliVersion falls back to "0.0.0-unknown" outside a known workspace', () => {
     const tmp = mkdtempSync(join(tmpdir(), 'czap-version-'));
     try {

@@ -5,12 +5,17 @@
  * verdict — `ready` / `caution` / `blocked`. Emits a JSON receipt to
  * stdout; pretty TTY summary to stderr when attached to a terminal.
  *
+ * `doctor({ fix: true })` attempts the cheap, local fixes (link git
+ * hooks; rebuild stale dist) and re-probes afterwards. The receipt
+ * records which fixes ran via the `fixed` array.
+ *
  * @module
  */
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { spawnArgvCapture } from '../lib/spawn.js';
+import { arrow, bearingGlyph, color, colorEnabled, header } from '../lib/ansi.js';
+import { spawnArgv, spawnArgvCapture } from '../lib/spawn.js';
 import { emit } from '../receipts.js';
 
 /** Bearing for a single probe — quantized from a continuous "is it set up?" signal. */
@@ -26,6 +31,16 @@ export interface DoctorCheck {
   readonly status: DoctorBearing;
   readonly detail: string;
   readonly hint?: string;
+  /** Whether `doctor --fix` knows how to remediate this check. */
+  readonly fixable?: boolean;
+}
+
+/** One applied fix, recorded in the receipt. */
+export interface DoctorFix {
+  readonly id: string;
+  readonly action: string;
+  readonly status: 'applied' | 'failed';
+  readonly detail?: string;
 }
 
 /** Receipt shape emitted by `czap doctor`. */
@@ -35,6 +50,7 @@ export interface DoctorReceipt {
   readonly timestamp: string;
   readonly verdict: DoctorVerdict;
   readonly checks: readonly DoctorCheck[];
+  readonly fixed?: readonly DoctorFix[];
 }
 
 const MIN_NODE_MAJOR = 22;
@@ -57,7 +73,7 @@ function probeNode(): DoctorCheck {
       label: 'Node.js',
       status: 'fail',
       detail: `unrecognized version string: ${version}`,
-      hint: `Install Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
+      hint: `Lay in Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
     };
   }
   if (major < MIN_NODE_MAJOR) {
@@ -66,7 +82,7 @@ function probeNode(): DoctorCheck {
       label: 'Node.js',
       status: 'fail',
       detail: `${version} (need >= ${MIN_NODE_MAJOR})`,
-      hint: `Install Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
+      hint: `Lay in Node.js ${MIN_NODE_MAJOR}+ from https://nodejs.org`,
     };
   }
   return { id: 'node.version', label: 'Node.js', status: 'ok', detail: version };
@@ -80,7 +96,7 @@ async function probePnpm(): Promise<DoctorCheck> {
       label: 'pnpm',
       status: 'fail',
       detail: 'pnpm not on PATH',
-      hint: `Install pnpm ${MIN_PNPM_MAJOR}+: corepack enable && corepack prepare pnpm@latest --activate`,
+      hint: `Lay in pnpm ${MIN_PNPM_MAJOR}+: corepack enable && corepack prepare pnpm@latest --activate`,
     };
   }
   const version = r.stdout.trim();
@@ -99,7 +115,7 @@ async function probePnpm(): Promise<DoctorCheck> {
       label: 'pnpm',
       status: 'fail',
       detail: `${version} (need >= ${MIN_PNPM_MAJOR})`,
-      hint: 'Upgrade pnpm: corepack prepare pnpm@latest --activate',
+      hint: 'Re-rig pnpm: corepack prepare pnpm@latest --activate',
     };
   }
   return { id: 'pnpm.version', label: 'pnpm', status: 'ok', detail: version };
@@ -113,7 +129,7 @@ function probeWorkspaceInstalled(cwd: string): DoctorCheck {
       label: 'workspace install',
       status: 'fail',
       detail: 'node_modules missing or stale',
-      hint: 'Run: pnpm install',
+      hint: 'Cast off: pnpm install',
     };
   }
   return { id: 'workspace.installed', label: 'workspace install', status: 'ok', detail: 'node_modules present' };
@@ -126,11 +142,12 @@ function probeBuilt(cwd: string, pkg: string, label: string): DoctorCheck {
       id: `${pkg}.built`,
       label,
       status: 'warn',
-      detail: 'dist/ not built',
-      hint: 'Run: pnpm run build',
+      detail: 'dist/ not laid',
+      hint: 'Lay the keel with: pnpm run build',
+      fixable: true,
     };
   }
-  return { id: `${pkg}.built`, label, status: 'ok', detail: 'dist/ present' };
+  return { id: `${pkg}.built`, label, status: 'ok', detail: 'dist/ laid' };
 }
 
 function probeGitHooks(cwd: string): DoctorCheck {
@@ -144,11 +161,12 @@ function probeGitHooks(cwd: string): DoctorCheck {
       id: 'git.hooks',
       label: 'git hooks',
       status: 'warn',
-      detail: 'pre-commit hook not linked',
-      hint: 'Run: pnpm exec tsx scripts/link-pre-commit.ts',
+      detail: 'pre-commit hook not rigged',
+      hint: 'Rig it: pnpm exec tsx scripts/link-pre-commit.ts',
+      fixable: true,
     };
   }
-  return { id: 'git.hooks', label: 'git hooks', status: 'ok', detail: 'pre-commit linked' };
+  return { id: 'git.hooks', label: 'git hooks', status: 'ok', detail: 'pre-commit rigged' };
 }
 
 function probePlaywright(cwd: string): DoctorCheck {
@@ -162,58 +180,14 @@ function probePlaywright(cwd: string): DoctorCheck {
       label: 'Playwright',
       status: 'warn',
       detail: '@playwright/test not in node_modules (e2e tests will not run)',
-      hint: 'Run: pnpm install && pnpm exec playwright install',
+      hint: 'Stow the browsers: pnpm install && pnpm exec playwright install',
     };
   }
   return { id: 'playwright.installed', label: 'Playwright', status: 'ok', detail: 'package present' };
 }
 
-function aggregate(checks: readonly DoctorCheck[]): DoctorVerdict {
-  if (checks.some((c) => c.status === 'fail')) return 'blocked';
-  if (checks.some((c) => c.status === 'warn')) return 'caution';
-  return 'ready';
-}
-
-const BEARING_GLYPH: Record<DoctorBearing, string> = {
-  ok: 'OK  ',
-  warn: 'WARN',
-  fail: 'FAIL',
-};
-
-const VERDICT_SENTENCE: Record<DoctorVerdict, string> = {
-  ready: 'Hull check: ready to sail.',
-  caution: 'Hull check: caution — non-blocking warnings.',
-  blocked: 'Hull check: blocked — fix the failures before sailing.',
-};
-
-function prettySummary(checks: readonly DoctorCheck[], verdict: DoctorVerdict): string {
-  const lines: string[] = [];
-  lines.push('czap doctor — preflight rig check');
-  lines.push('');
-  const widest = Math.max(...checks.map((c) => c.label.length));
-  for (const c of checks) {
-    const pad = c.label.padEnd(widest, ' ');
-    lines.push(`  [${BEARING_GLYPH[c.status]}] ${pad}  ${c.detail}`);
-    if (c.hint && c.status !== 'ok') {
-      lines.push(`            ${' '.repeat(widest)}  -> ${c.hint}`);
-    }
-  }
-  lines.push('');
-  lines.push(VERDICT_SENTENCE[verdict]);
-  return lines.join('\n') + '\n';
-}
-
-/**
- * Run all probes, emit a JSON receipt, optionally print a TTY summary.
- *
- * @param opts.pretty - when true, also write a human-readable summary to
- *   stderr. When omitted, pretty output is enabled whenever stderr is a
- *   TTY.
- * @returns process exit code: 0 unless verdict is `blocked`.
- */
-export async function doctor(opts: { pretty?: boolean; cwd?: string } = {}): Promise<number> {
-  const cwd = opts.cwd ?? process.cwd();
-  const checks: readonly DoctorCheck[] = [
+async function runAllProbes(cwd: string): Promise<readonly DoctorCheck[]> {
+  return [
     probeNode(),
     await probePnpm(),
     probeWorkspaceInstalled(cwd),
@@ -222,6 +196,133 @@ export async function doctor(opts: { pretty?: boolean; cwd?: string } = {}): Pro
     probeGitHooks(cwd),
     probePlaywright(cwd),
   ];
+}
+
+function aggregate(checks: readonly DoctorCheck[]): DoctorVerdict {
+  if (checks.some((c) => c.status === 'fail')) return 'blocked';
+  if (checks.some((c) => c.status === 'warn')) return 'caution';
+  return 'ready';
+}
+
+const VERDICT_SENTENCE: Record<DoctorVerdict, string> = {
+  ready: 'Hull check: ready to sail.',
+  caution: 'Hull check: caution — non-blocking warnings, but you can cast off.',
+  blocked: 'Hull check: blocked — fix the failures before sailing.',
+};
+
+const VERDICT_COLOR: Record<DoctorVerdict, 'green' | 'yellow' | 'red'> = {
+  ready: 'green',
+  caution: 'yellow',
+  blocked: 'red',
+};
+
+function prettySummary(checks: readonly DoctorCheck[], verdict: DoctorVerdict, fixes?: readonly DoctorFix[]): string {
+  const on = colorEnabled();
+  const lines: string[] = [];
+  lines.push(header('czap doctor — preflight rig check', on));
+  lines.push('');
+  const widest = Math.max(...checks.map((c) => c.label.length));
+  for (const c of checks) {
+    const glyph = bearingGlyph(c.status, on);
+    const pad = c.label.padEnd(widest, ' ');
+    const detail = c.status === 'ok' ? color('dim', c.detail, on) : c.detail;
+    lines.push(`  ${glyph}  ${pad}  ${detail}`);
+    if (c.hint && c.status !== 'ok') {
+      lines.push(`      ${' '.repeat(widest)}  ${arrow(on)} ${color('dim', c.hint, on)}`);
+    }
+  }
+  if (fixes && fixes.length > 0) {
+    lines.push('');
+    lines.push(color('cyan', `Applied ${fixes.length} fix(es):`, on));
+    for (const f of fixes) {
+      const glyph = bearingGlyph(f.status === 'applied' ? 'ok' : 'fail', on);
+      lines.push(`  ${glyph}  ${f.id}: ${f.action}${f.detail ? color('dim', `  (${f.detail})`, on) : ''}`);
+    }
+  }
+  lines.push('');
+  lines.push(color(VERDICT_COLOR[verdict], VERDICT_SENTENCE[verdict], on));
+  return lines.join('\n') + '\n';
+}
+
+/** Attempt the cheap, local fixes for whatever checks are fixable. */
+async function applyFixes(checks: readonly DoctorCheck[], cwd: string): Promise<readonly DoctorFix[]> {
+  const fixes: DoctorFix[] = [];
+
+  // Rebuild stale dist/ — covers both core.built and cli.built in one shot.
+  // tsc --build trusts tsbuildinfo more than the filesystem, so invalidate
+  // the per-package tsbuildinfo first; otherwise tsc no-ops when dist/ is
+  // missing-but-tsbuildinfo-claims-up-to-date.
+  const needsBuild = checks.some((c) => (c.id === 'core.built' || c.id === 'cli.built') && c.status === 'warn');
+  if (needsBuild) {
+    for (const pkg of [
+      'core',
+      'quantizer',
+      'compiler',
+      'web',
+      'detect',
+      'edge',
+      'worker',
+      'vite',
+      'astro',
+      'remotion',
+      'scene',
+      'assets',
+      'cli',
+      'mcp-server',
+    ]) {
+      const info = resolve(cwd, `packages/${pkg}/tsconfig.tsbuildinfo`);
+      if (existsSync(info)) rmSync(info);
+    }
+    const r = await spawnArgv('pnpm', ['run', 'build'], { stdio: 'inherit', cwd }).catch(() => ({
+      exitCode: 1,
+      stderrTail: 'spawn failed',
+    }));
+    fixes.push({
+      id: 'build',
+      action: 'pnpm run build (after invalidating tsbuildinfo)',
+      status: r.exitCode === 0 ? 'applied' : 'failed',
+      detail: r.exitCode === 0 ? undefined : `exit ${r.exitCode}`,
+    });
+  }
+
+  // Link the pre-commit hook.
+  const needsHook = checks.some((c) => c.id === 'git.hooks' && c.status === 'warn');
+  if (needsHook) {
+    const r = await spawnArgv('pnpm', ['exec', 'tsx', 'scripts/link-pre-commit.ts'], {
+      stdio: 'inherit',
+      cwd,
+    }).catch(() => ({ exitCode: 1, stderrTail: 'spawn failed' }));
+    fixes.push({
+      id: 'git.hooks',
+      action: 'link pre-commit',
+      status: r.exitCode === 0 ? 'applied' : 'failed',
+      detail: r.exitCode === 0 ? undefined : `exit ${r.exitCode}`,
+    });
+  }
+
+  return fixes;
+}
+
+/**
+ * Run all probes, emit a JSON receipt, optionally print a TTY summary.
+ *
+ * @param opts.pretty - when true, also write a human-readable summary to
+ *   stderr. When omitted, pretty output is enabled whenever stderr is a
+ *   TTY.
+ * @param opts.fix - when true, attempt cheap local remediation (rebuild
+ *   stale dist, link missing git hook) and re-probe after.
+ * @returns process exit code: 0 unless verdict is `blocked`.
+ */
+export async function doctor(opts: { pretty?: boolean; fix?: boolean; cwd?: string } = {}): Promise<number> {
+  const cwd = opts.cwd ?? process.cwd();
+  let checks = await runAllProbes(cwd);
+
+  let fixes: readonly DoctorFix[] | undefined;
+  if (opts.fix) {
+    fixes = await applyFixes(checks, cwd);
+    if (fixes.length > 0) checks = await runAllProbes(cwd);
+  }
+
   const verdict = aggregate(checks);
   const status: 'ok' | 'failed' = verdict === 'blocked' ? 'failed' : 'ok';
 
@@ -231,12 +332,13 @@ export async function doctor(opts: { pretty?: boolean; cwd?: string } = {}): Pro
     timestamp: new Date().toISOString(),
     verdict,
     checks,
+    ...(fixes && fixes.length > 0 ? { fixed: fixes } : {}),
   };
   emit(receipt);
 
   const wantPretty = opts.pretty ?? Boolean(process.stderr.isTTY);
   if (wantPretty) {
-    process.stderr.write(prettySummary(checks, verdict));
+    process.stderr.write(prettySummary(checks, verdict, fixes));
   }
 
   return verdict === 'blocked' ? 1 : 0;

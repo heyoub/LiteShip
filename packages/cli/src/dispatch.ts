@@ -5,10 +5,12 @@
  * @module
  */
 
+import { completion } from './commands/completion.js';
 import { describe as describeCmd } from './commands/describe.js';
 import { doctor } from './commands/doctor.js';
 import { glossary } from './commands/glossary.js';
 import { help } from './commands/help.js';
+import { color, colorEnabled } from './lib/ansi.js';
 import { sceneCompile } from './commands/scene-compile.js';
 import { sceneDev } from './commands/scene-dev.js';
 import { sceneRender } from './commands/scene-render.js';
@@ -33,10 +35,13 @@ export async function run(argv: readonly string[]): Promise<number> {
     case 'version':
       return version();
     case 'doctor':
-      return doctor();
+      return doctor({ fix: rest.includes('--fix') });
     case 'glossary': {
       const term = rest[0] && !rest[0].startsWith('-') ? rest[0] : null;
       return glossary(term);
+    }
+    case 'completion': {
+      return completion(rest[0]);
     }
     case 'describe': {
       const format = parseFlag(rest, '--format') as 'json' | 'mcp' | undefined;
@@ -103,7 +108,10 @@ export async function run(argv: readonly string[]): Promise<number> {
       if (rawCmd === undefined) return help();
       // Friendly text first; structured JSON envelope last so machine
       // consumers can read it as the trailing line of stderr.
-      process.stderr.write(`Unknown command: ${rawCmd}\nRun \`czap help\` to see usage.\n`);
+      const on = colorEnabled();
+      process.stderr.write(
+        `${color('red', 'No such bearing:', on)} \`${rawCmd}\`.\nTry \`${color('cyan', 'czap help', on)}\` for the chart.\n`,
+      );
       process.stderr.write(JSON.stringify({ error: 'unknown_command', command: rawCmd }) + '\n');
       return 1;
   }

@@ -11,14 +11,15 @@ const USAGE = `czap — LiteShip CLI
 Usage:
   czap <command> [args]
 
-Common commands:
-  doctor                  Preflight rig-check (Node, pnpm, build, hooks)
+Cast off (dev experience):
+  doctor [--fix]          Preflight rig-check; --fix relays the cheap repairs
   describe [--format=mcp] Schema of capsule catalog + commands (AI surface)
   glossary [term]         Look up a LiteShip / CZAP term from the ontology
   version                 Print czap, Node, and pnpm versions
-  help                    This message
+  completion <shell>      Emit shell completion (bash | zsh | fish)
+  help                    This chart
 
-Scene + asset:
+Compose + render (scene + asset):
   scene compile <id>      Compile a scene capsule
   scene render <id> -o    Render scene to mp4
   scene verify <id>       Run scene generated tests
@@ -26,12 +27,12 @@ Scene + asset:
   asset analyze <id> --projection=<beat|onset|waveform>
   asset verify <id>
 
-Capsule manifest:
+Manifest (capsule):
   capsule inspect <id>
   capsule list [--kind=<kind>]
   capsule verify <id>
 
-Release:
+Ship out (release):
   ship [--filter=<pkg>] [--dry-run]
   verify <tarball.tgz> --capsule=<path>
   gauntlet [--dry-run]
@@ -39,10 +40,11 @@ Release:
 Servers:
   mcp [--http=<port>]     Start MCP server (stdio default)
 
-Hints:
-  - First time? Run \`pnpm setup\` from the repo root.
-  - Stuck? Run \`czap doctor\` to triage your environment.
-  - All commands emit JSON receipts to stdout; errors go to stderr.
+Hints (a working deck):
+  - First time? Run \`pnpm setup\` for the full shakedown.
+  - Stuck? \`czap doctor\` triages your environment; \`czap doctor --fix\` repairs.
+  - All commands emit JSON receipts on stdout; pretty output is on stderr.
+  - Suppress color: NO_COLOR=1.  Force color in CI logs: FORCE_COLOR=1.
 
 Docs:
   https://github.com/heyoub/LiteShip

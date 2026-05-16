@@ -6,6 +6,7 @@
  * @module
  */
 
+import { color, colorEnabled } from '../lib/ansi.js';
 import { emit, emitError } from '../receipts.js';
 
 /** One ontology term. Mirrors a row in docs/GLOSSARY.md. */
@@ -159,10 +160,13 @@ function matchEntries(query: string | null): readonly GlossaryEntry[] {
   return ENTRIES.filter((e) => e.term.toLowerCase().includes(q) || e.definition.toLowerCase().includes(q));
 }
 
-function prettyEntry(e: GlossaryEntry): string {
-  const head = `${e.term}  (${e.category})`;
+function prettyEntry(e: GlossaryEntry, on: boolean): string {
+  const head = `${color('cyan', e.term, on)}  ${color('dim', `(${e.category})`, on)}`;
   const body = e.definition;
-  const seeAlso = e.seeAlso && e.seeAlso.length > 0 ? `  see also: ${e.seeAlso.join(', ')}\n` : '';
+  const seeAlso =
+    e.seeAlso && e.seeAlso.length > 0
+      ? `  ${color('dim', 'see also:', on)} ${e.seeAlso.map((s) => color('cyan', s, on)).join(', ')}\n`
+      : '';
   return `${head}\n  ${body}\n${seeAlso}`;
 }
 
@@ -189,8 +193,9 @@ export async function glossary(term: string | null, opts: { pretty?: boolean } =
 
   const wantPretty = opts.pretty ?? Boolean(process.stderr.isTTY);
   if (wantPretty) {
+    const on = colorEnabled();
     process.stderr.write('\n');
-    for (const e of entries) process.stderr.write(prettyEntry(e) + '\n');
+    for (const e of entries) process.stderr.write(prettyEntry(e, on) + '\n');
   }
   return 0;
 }

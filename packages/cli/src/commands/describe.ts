@@ -59,6 +59,12 @@ const COMMANDS: readonly CommandDescriptor[] = [
     outputs: 'GlossaryReceipt',
   },
   {
+    name: 'completion',
+    description: 'Emit shell completion script (bash / zsh / fish) for sourcing into a shell rc',
+    args: { shell: "'bash' | 'zsh' | 'fish'" },
+    outputs: 'completion script on stdout (not a receipt)',
+  },
+  {
     name: 'scene.compile',
     description: 'Compile a scene capsule',
     args: { scene: 'string' },

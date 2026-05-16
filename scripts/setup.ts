@@ -1,7 +1,7 @@
 /**
  * Shake-down — first-run aggregate. Sequence:
  *   1. doctor (preflight rig-check)
- *   2. build (tsc across compiled packages)
+ *   2. build (lay the keel)
  *   3. test (fast inner loop)
  *
  * Stops on the first failure. Each phase prints a banner so the human
@@ -10,6 +10,7 @@
  * @module
  */
 
+import { color, colorEnabled, header } from '../packages/cli/src/lib/ansi.js';
 import { spawnArgv } from './lib/spawn.js';
 
 interface Phase {
@@ -20,17 +21,17 @@ interface Phase {
 
 const PHASES: readonly Phase[] = [
   {
-    name: 'doctor',
+    name: 'rig-check',
     cmd: ['pnpm', 'run', 'doctor'],
-    hint: 'Preflight rig-check. Use `pnpm run doctor` to re-run in isolation.',
+    hint: 'Preflight signals -> bearings. `pnpm run doctor` to re-run in isolation.',
   },
   {
-    name: 'build',
+    name: 'lay the keel',
     cmd: ['pnpm', 'run', 'build'],
     hint: 'tsc --build across 14 packages.',
   },
   {
-    name: 'test',
+    name: 'shakedown trials',
     cmd: ['pnpm', 'test'],
     hint: 'Fast inner loop — unit + component + property + integration (~75s).',
   },
@@ -38,14 +39,17 @@ const PHASES: readonly Phase[] = [
 
 let failed = 0;
 const start = Date.now();
+const on = colorEnabled();
 
 for (const phase of PHASES) {
-  process.stderr.write(`\n==> czap setup: ${phase.name}\n`);
-  if (phase.hint) process.stderr.write(`    ${phase.hint}\n`);
+  process.stderr.write(`\n${header(`-- shakedown: ${phase.name} --`, on)}\n`);
+  if (phase.hint) process.stderr.write(`    ${color('dim', phase.hint, on)}\n`);
   const r = await spawnArgv(phase.cmd[0]!, phase.cmd.slice(1), { stdio: 'inherit' });
   if (r.exitCode !== 0) {
-    process.stderr.write(`\nczap setup: ${phase.name} failed (exit ${r.exitCode}).\n`);
-    process.stderr.write(`Re-run with: ${phase.cmd.join(' ')}\n`);
+    process.stderr.write(
+      `\n${color('red', `Shakedown aborted at ${phase.name}`, on)} (exit ${r.exitCode}).\n`,
+    );
+    process.stderr.write(`Re-run with: ${color('cyan', phase.cmd.join(' '), on)}\n`);
     failed = r.exitCode;
     break;
   }
@@ -55,7 +59,7 @@ const elapsedSec = Math.round((Date.now() - start) / 1000);
 
 if (failed === 0) {
   process.stderr.write(
-    `\nczap setup: all phases passed (${elapsedSec}s). Hull is shaken down — ready to sail.\n`,
+    `\n${color('green', 'Hull is shaken down — ready to sail.', on)} ${color('dim', `(${elapsedSec}s)`, on)}\n`,
   );
   process.exit(0);
 } else {

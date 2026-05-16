@@ -13,9 +13,10 @@ const distEntry = resolve(here, '../dist/index.js');
 
 if (!existsSync(distEntry)) {
   process.stderr.write(
-    'czap: the CLI has not been built yet (packages/cli/dist/ is missing).\n' +
-      '  From the LiteShip repo, run: pnpm run build\n' +
-      '  Or, for a one-shot probe without building: pnpm run doctor\n',
+    'czap: Hull not yet laid (packages/cli/dist/ is missing).\n' +
+      '  Lay the keel with: pnpm run build\n' +
+      '  Or, for a one-shot rig-check without building: pnpm run doctor\n' +
+      '  Or, for the full shakedown:                    pnpm setup\n',
   );
   process.exit(127);
 }

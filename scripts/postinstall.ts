@@ -9,6 +9,7 @@
 
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { color, colorEnabled, header } from '../packages/cli/src/lib/ansi.js';
 
 const repoRoot = resolve(import.meta.dirname, '..');
 
@@ -21,29 +22,32 @@ function main(): void {
   const corePackaged = existsSync(resolve(repoRoot, 'packages/core/dist/index.js'));
   const cliPackaged = existsSync(resolve(repoRoot, 'packages/cli/dist/index.js'));
   const firstTime = !corePackaged && !cliPackaged;
+  const on = colorEnabled(process.stdout);
 
   const lines: string[] = [];
   lines.push('');
-  lines.push('  LiteShip — install complete.');
+  lines.push(`  ${header('LiteShip', on)} — moored.`);
   if (firstTime) {
     lines.push('');
-    lines.push('  First time here? One command runs the whole shake-down:');
+    lines.push('  First time aboard? One command runs the whole shakedown:');
     lines.push('');
-    lines.push('    pnpm setup           # rig-check + build + test');
+    lines.push(`    ${color('cyan', 'pnpm setup', on)}           ${color('dim', '# rig-check + build + test', on)}`);
     lines.push('');
     lines.push('  Or step through it yourself:');
     lines.push('');
-    lines.push('    pnpm run doctor      # preflight rig-check only');
-    lines.push('    pnpm run build       # tsc across 14 packages');
-    lines.push('    pnpm test            # fast inner loop (~75s)');
+    lines.push(`    ${color('cyan', 'pnpm run doctor', on)}      ${color('dim', '# preflight rig-check only', on)}`);
+    lines.push(`    ${color('cyan', 'pnpm run build', on)}       ${color('dim', '# lay the keel (tsc across 14 packages)', on)}`);
+    lines.push(`    ${color('cyan', 'pnpm test', on)}            ${color('dim', '# fast inner loop (~75s)', on)}`);
     lines.push('');
-    lines.push('  More:');
-    lines.push('    pnpm scripts         # categorized catalog of all dev scripts');
-    lines.push('    pnpm run glossary    # look up a LiteShip / CZAP term');
+    lines.push('  Bearings & sugar:');
+    lines.push(`    ${color('cyan', 'pnpm scripts', on)}         ${color('dim', '# categorized catalog of all dev scripts', on)}`);
+    lines.push(`    ${color('cyan', 'pnpm run glossary', on)}    ${color('dim', '# look up a LiteShip / CZAP term', on)}`);
   } else {
     lines.push('');
-    lines.push('  Common next steps:');
-    lines.push('    pnpm run build       pnpm test       pnpm run doctor       pnpm scripts');
+    lines.push('  Cast off with:');
+    lines.push(
+      `    ${color('cyan', 'pnpm run build', on)}   ${color('cyan', 'pnpm test', on)}   ${color('cyan', 'pnpm run doctor', on)}   ${color('cyan', 'pnpm scripts', on)}`,
+    );
   }
   lines.push('');
 

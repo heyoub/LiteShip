@@ -72,10 +72,35 @@ describe('czap dispatch — dev-experience verbs', () => {
     expect(receipt.entries[0].term).toBe('boundary');
   });
 
-  it('unknown command prints a friendly hint and exits 1', async () => {
+  it('`czap completion bash` writes a bash completion script to stdout', async () => {
+    const { exit, stdout } = await captureCli(() => run(['completion', 'bash']));
+    expect(exit).toBe(0);
+    expect(stdout).toContain('_czap_completion');
+    expect(stdout).toContain('complete -F _czap_completion czap');
+  });
+
+  it('`czap completion zsh` writes a zsh completion script to stdout', async () => {
+    const { exit, stdout } = await captureCli(() => run(['completion', 'zsh']));
+    expect(exit).toBe(0);
+    expect(stdout).toContain('compdef _czap czap');
+  });
+
+  it('`czap completion fish` writes a fish completion script to stdout', async () => {
+    const { exit, stdout } = await captureCli(() => run(['completion', 'fish']));
+    expect(exit).toBe(0);
+    expect(stdout).toContain('complete -c czap');
+  });
+
+  it('`czap completion` with no shell errors and exits 1', async () => {
+    const { exit, stderr } = await captureCli(() => run(['completion']));
+    expect(exit).toBe(1);
+    expect(stderr).toContain('expected shell');
+  });
+
+  it('unknown command prints a friendly hint (in-register) and exits 1', async () => {
     const { exit, stderr } = await captureCli(() => run(['nonsense-verb']));
     expect(exit).toBe(1);
-    expect(stderr).toContain('Unknown command');
+    expect(stderr).toContain('No such bearing');
     expect(stderr).toContain('czap help');
   });
 });

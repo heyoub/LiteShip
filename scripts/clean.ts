@@ -17,6 +17,7 @@
 
 import { existsSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { color, colorEnabled, header } from '../packages/cli/src/lib/ansi.js';
 
 const repoRoot = resolve(import.meta.dirname, '..');
 
@@ -58,9 +59,10 @@ cleanRoot();
 
 const quiet = process.env.CZAP_QUIET_INSTALL || process.env.CI;
 if (!quiet) {
-  process.stderr.write(`czap clean: removed ${removed.length} artifact(s).\n`);
-  for (const r of removed) process.stderr.write(`  - ${r}\n`);
+  const on = colorEnabled();
+  process.stderr.write(`${header('Dry-dock', on)}: ${color('cyan', String(removed.length), on)} artifact(s) cleared.\n`);
+  for (const r of removed) process.stderr.write(`  ${color('dim', '-', on)} ${r}\n`);
   if (removed.length === 0) {
-    process.stderr.write('  Deck was already clear.\n');
+    process.stderr.write(`  ${color('dim', 'Deck was already clear; nothing to scrape.', on)}\n`);
   }
 }
