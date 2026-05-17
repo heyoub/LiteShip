@@ -217,3 +217,109 @@ describe('czap verify verdicts', () => {
     expect(receipt!.checks.tarball_manifest).toBe('skipped');
   });
 });
+
+describe('czap verify error and edge paths', () => {
+  it('parses --capsule=path equals form (Verified)', async () => {
+    const tmAddr = await run(tarballManifestAddress(tarballBytes));
+    const capsule = await run(ShipCapsule.make(buildCapsuleInput(tmAddr, 1_715_500_000_010)));
+    const capsulePath = join(workDir, 'equals-form.shipcapsule.cbor');
+    writeFileSync(capsulePath, ShipCapsule.canonicalize(capsule));
+
+    const { exit, receipt } = await captureVerify([tarballPath, `--capsule=${capsulePath}`]);
+    expect(exit).toBe(0);
+    expect(receipt!.verdict).toBe('Verified');
+  });
+
+  it('exit 1 (emitError) when --capsule is provided but the positional tarball is missing', async () => {
+    const tmAddr = await run(tarballManifestAddress(tarballBytes));
+    const capsule = await run(ShipCapsule.make(buildCapsuleInput(tmAddr, 1_715_500_000_011)));
+    const capsulePath = join(workDir, 'missing-tarball.shipcapsule.cbor');
+    writeFileSync(capsulePath, ShipCapsule.canonicalize(capsule));
+
+    const { exit, stderr } = await captureVerify(['--capsule', capsulePath]);
+    expect(exit).toBe(1);
+    const lines = stderr.split('\n').filter((l) => l.trim().length > 0);
+    const err = JSON.parse(lines[lines.length - 1]!) as { status: string; command: string; error: string };
+    expect(err.status).toBe('failed');
+    expect(err.command).toBe('verify');
+    expect(err.error).toBe('missing positional <tarball>');
+  });
+
+  it('exit 1 (emitError) when the tarball file does not exist on disk', async () => {
+    const tmAddr = await run(tarballManifestAddress(tarballBytes));
+    const capsule = await run(ShipCapsule.make(buildCapsuleInput(tmAddr, 1_715_500_000_012)));
+    const capsulePath = join(workDir, 'tarball-not-found.shipcapsule.cbor');
+    writeFileSync(capsulePath, ShipCapsule.canonicalize(capsule));
+
+    const ghostTarball = join(workDir, 'does-not-exist.tgz');
+    const { exit, stderr } = await captureVerify([ghostTarball, '--capsule', capsulePath]);
+    expect(exit).toBe(1);
+    const lines = stderr.split('\n').filter((l) => l.trim().length > 0);
+    const err = JSON.parse(lines[lines.length - 1]!) as { error: string };
+    expect(err.error).toMatch(/^tarball not found:/);
+  });
+
+  it('exit 1 (emitError) when the capsule file does not exist on disk', async () => {
+    const ghostCapsule = join(workDir, 'does-not-exist.shipcapsule.cbor');
+    const { exit, stderr } = await captureVerify([tarballPath, '--capsule', ghostCapsule]);
+    expect(exit).toBe(1);
+    const lines = stderr.split('\n').filter((l) => l.trim().length > 0);
+    const err = JSON.parse(lines[lines.length - 1]!) as { error: string };
+    expect(err.error).toMatch(/^capsule not found:/);
+  });
+
+  it('Incomplete (exit 3) with recompute: prefix when the tarball bytes are not valid gzip', async () => {
+    const tmAddr = await run(tarballManifestAddress(tarballBytes));
+    const capsule = await run(ShipCapsule.make(buildCapsuleInput(tmAddr, 1_715_500_000_013)));
+    const capsulePath = join(workDir, 'recompute-fail.shipcapsule.cbor');
+    writeFileSync(capsulePath, ShipCapsule.canonicalize(capsule));
+
+    const notGzipPath = join(workDir, 'not-a-tarball.tgz');
+    writeFileSync(notGzipPath, Buffer.from('this is plain text, not gzip-framed bytes'));
+
+    const { exit, receipt } = await captureVerify([notGzipPath, '--capsule', capsulePath]);
+    expect(exit).toBe(3);
+    expect(receipt!.verdict).toBe('Incomplete');
+    expect(receipt!.checks.tarball_manifest).toBe('skipped');
+    expect(receipt!.mismatches.some((m) => m.startsWith('recompute:'))).toBe(true);
+  });
+
+  it('Incomplete (exit 3) with decode:invalid_shape when the capsule CBOR decodes but is the wrong shape', async () => {
+    // Valid canonical CBOR for `{ "hello": "world" }` — decodes cleanly via
+    // cborg, fails validateShape because it lacks _kind / schema_version / …
+    // Exercises the third ShipCapsuleDecodeError tag (the existing tests
+    // cover malformed_cbor and non_canonical).
+    const wrongShape = new Uint8Array([
+      0xa1, // map(1)
+      0x65, 0x68, 0x65, 0x6c, 0x6c, 0x6f, // text(5) "hello"
+      0x65, 0x77, 0x6f, 0x72, 0x6c, 0x64, // text(5) "world"
+    ]);
+    const capsulePath = join(workDir, 'invalid-shape.shipcapsule.cbor');
+    writeFileSync(capsulePath, wrongShape);
+
+    const { exit, receipt } = await captureVerify([tarballPath, '--capsule', capsulePath]);
+    expect(exit).toBe(3);
+    expect(receipt!.verdict).toBe('Incomplete');
+    expect(receipt!.mismatches.some((m) => m === 'decode:invalid_shape')).toBe(true);
+  });
+
+  it('Mismatch (exit 2) when only integrity_digest differs (display_id matches) — each arm pushed independently', async () => {
+    // Construct an AddressedDigest by hand that shares display_id with the
+    // real tarball but has a deliberately-wrong integrity_digest. Exercises
+    // the lines 164–165 arm in isolation from the lines 161–162 arm.
+    const realAddr = await run(tarballManifestAddress(tarballBytes));
+    const onlyDigestDiffers: AddressedDigest = {
+      display_id: realAddr.display_id,
+      integrity_digest: IntegrityDigest('sha256:' + 'f'.repeat(64)),
+      algo: 'sha256',
+    };
+    const capsule = await run(ShipCapsule.make(buildCapsuleInput(onlyDigestDiffers, 1_715_500_000_014)));
+    const capsulePath = join(workDir, 'digest-only-mismatch.shipcapsule.cbor');
+    writeFileSync(capsulePath, ShipCapsule.canonicalize(capsule));
+
+    const { exit, receipt } = await captureVerify([tarballPath, '--capsule', capsulePath]);
+    expect(exit).toBe(2);
+    expect(receipt!.verdict).toBe('Mismatch');
+    expect(receipt!.mismatches).toEqual(['tarball_manifest_address.integrity_digest']);
+  });
+});
