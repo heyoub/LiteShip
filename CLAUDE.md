@@ -11,7 +11,7 @@ Naming for prose: [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 ### Build / test / typecheck
 
 - `pnpm run build` -- TypeScript build (`tsc --build` across 14 compiled packages; `@czap/_spine` is type-only)
-- `pnpm test` -- Run all tests (vitest; last green main: ~237 files / ~3052 tests — always trust local `pnpm test` output)
+- `pnpm test` -- Run all tests (vitest; last green main: ~241 files / ~3098 tests — always trust local `pnpm test` output)
 - `pnpm run typecheck` -- Type check without emit
 - `pnpm run bench` -- Run benchmarks (tinybench)
 

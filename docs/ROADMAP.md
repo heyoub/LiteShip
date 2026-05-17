@@ -82,8 +82,9 @@ The v0.1.0 ShipCapsule slice landed with sub-85% coverage on
 `capsules/ship-emit.ts` (44%), `commands/ship-verify.ts` (82%), and
 `ship-manifest.ts` (75%), and the per-package override at
 `scripts/merge-coverage.ts` PACKAGE_THRESHOLD_OVERRIDES.cli temporarily
-lowered the thresholds to 75/75/78/60. v0.1.1 closed the gap across
-seven targeted commits on `claude/improve-dev-experience-7f0as`:
+lowered the thresholds to 75/75/78/60. Post-v0.1.1 (v0.1.2 candidate)
+closed the gap across eight targeted commits on
+`claude/improve-dev-experience-7f0as`:
 
 - `ship-emit-branches.test.ts` lifted `capsules/ship-emit.ts` to 100%
   across lines/branches/functions/statements via direct invocation of

@@ -48,13 +48,13 @@ Every command emits a JSON receipt to stdout. Pretty TTY summaries (when stderr 
 | `czap capsule inspect <id>` | Inspect a capsule's schema + dispatch. |
 | `czap capsule verify <path>` | Verify a capsule definition. |
 
-### Ship out (release)
+### Ship out (quay-side, release)
 
 | Verb | What it does |
 | --- | --- |
 | `czap gauntlet` | Run the release-grade gate (32 phases). |
-| `czap ship <pkg>` | Publish a package to npm (idempotent). |
-| `czap verify` | Post-ship verification. |
+| `czap ship <pkg>` | Publish a package to npm (idempotent). `czap ship` ties packages up at the quay; `czap verify` checks the receipt before they sail. |
+| `czap verify` | Post-ship verification (ADR-0011 four-verdict local verifier). |
 
 The `mcp` subcommand dynamically imports `@czap/mcp-server`. Install `@czap/mcp-server` alongside `@czap/cli` when you need MCP mode, and keep both on the same semver line.
 
