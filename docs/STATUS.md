@@ -510,6 +510,52 @@ Merged thresholds currently enforced:
 E2E reference render verified (intro-bed scene compiles, ticks, and
 emits stable mix receipts end-to-end through the SceneRuntime).
 
+## Done — Dev-experience layer (2026-05-16)
+
+First-run developer experience built on top of the existing CLI dispatch:
+
+- **`czap doctor`** — preflight rig check with 9 probes (Node, pnpm,
+  workspace install, core/cli built, git hooks, git config, Playwright,
+  WASM toolchain). Emits JSON receipt on stdout + colored TTY summary on
+  stderr. Three bearings (`ok`/`warn`/`fail`) aggregate to one verdict
+  (`ready`/`caution`/`blocked`).
+- **`czap doctor --fix`** — cheap, local remediation: invalidates
+  tsbuildinfo and rebuilds when dist/ is missing-but-tsconfig-thinks-fresh;
+  re-links pre-commit hook. Receipt records `fixed: DoctorFix[]`.
+- **`czap doctor --ci`** — escalates `caution` to exit 1 (warnings block
+  CI). Verdict stays honest; only exit code escalates. Records
+  `strict: true` in the receipt.
+- **`czap glossary [term]`** — terminal access to the prose register
+  (LiteShip / CZAP / @czap/* naming + maritime CLI ontology).
+- **`czap help`** — verb table grouped by phase (cast off, describe + MCP,
+  compose + render, manifest, ship out).
+- **`czap completion <bash|zsh|fish>`** — shell tab-completion scripts.
+  Drift-guarded by `tests/unit/cli/commands/completion.test.ts` parsing
+  dispatch.ts.
+- **`pnpm setup`** — guided shakedown: doctor → install (if needed) →
+  build → test. Phase-by-phase progress with maritime ontology.
+- **`scripts/postinstall.ts`** — mooring receipt on `pnpm install`,
+  points to `pnpm setup` for the shakedown.
+- **`scripts/clean.ts`** — dry-dock cleaner with named-bearing receipt.
+- **`scripts/scripts-index.ts`** — the deck plan (`pnpm scripts`).
+- **Engines minima dynamic** — doctor reads `engines.node` /
+  `engines.pnpm` from root package.json instead of duplicating constants.
+- **Package list dynamic** — doctor's tsbuildinfo invalidation loop
+  parses the build script out of root package.json; can't drift.
+- **Glossary-lint** — `tests/unit/cli/glossary-lint.test.ts` scans CLI
+  source for maritime register terms and asserts each is defined in both
+  `docs/GLOSSARY.md` and `czap glossary`. Future ontology additions can't
+  land without their glossary entry.
+- **`SKIP_PRECOMMIT=1`** escape hatch in pre-commit hook (with re-run
+  reminder banner).
+- **`CI=true` color** — `colorEnabled()` now honors the CI convention so
+  CI build logs render ANSI properly.
+- **Dependabot** — weekly grouped npm updates (typescript-stack,
+  vitest-stack, lint-stack, framework-stack) + monthly github-actions.
+
+Receipts on stdout stay machine-clean; colored output goes to stderr only,
+so `czap doctor | jq` and MCP-mode usage keep working.
+
 ## Decided (Closed)
 
 ### B.1: DECIDED -- examples/remotion-demo is standalone
