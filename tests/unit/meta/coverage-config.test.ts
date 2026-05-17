@@ -52,13 +52,13 @@ describe('coverage config drift guard', () => {
     // Ensure both core and web functions: 97 overrides are present.
     const ninetySevenCount = (block!.match(/functions: 97/g) ?? []).length;
     expect(ninetySevenCount).toBe(2);
-    // v0.1.0 release-prep override for cli; v0.1.1 raises this back to
-    // package defaults (85/85/85/75). See merge-coverage.ts comment.
-    expect(block).toContain("cli: {");
-    expect(block).toContain("lines: 75");
-    expect(block).toContain("statements: 75");
-    expect(block).toContain("functions: 78");
-    expect(block).toContain("branches: 60");
+    // The v0.1.0 cli override (lines/statements: 75, functions: 78,
+    // branches: 60) was retired in ROADMAP Epic #4 once the cli
+    // aggregate cleared package defaults (85/85/85/75). The lint
+    // below asserts cli no longer appears in the override block —
+    // future regressions surface in this drift guard before they
+    // ship instead of being silently masked.
+    expect(block).not.toContain("cli: {");
   });
 
   it('merge-coverage.ts TOTAL_THRESHOLDS are pinned', () => {
