@@ -32,7 +32,7 @@ Manifest (capsule):
   capsule list [--kind=<kind>]
   capsule verify <id>
 
-Ship out (release):
+Ship out (quay-side, release):
   ship [--filter=<pkg>] [--dry-run]
   verify <tarball.tgz> --capsule=<path>
   gauntlet [--dry-run]
@@ -45,6 +45,7 @@ Hints (a working deck):
   - Stuck? \`czap doctor\` triages your environment; \`czap doctor --fix\` repairs.
   - All commands emit JSON receipts on stdout; pretty output is on stderr.
   - Suppress color: NO_COLOR=1.  Force color in CI logs: FORCE_COLOR=1.
+  - Releasing? \`czap ship\` ties packages up at the quay; \`czap verify\` checks the receipt before they sail.
 
 Docs:
   https://github.com/heyoub/LiteShip

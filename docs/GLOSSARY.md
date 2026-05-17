@@ -53,7 +53,7 @@ User-facing CLI strings (`czap doctor`, `pnpm setup`, postinstall, clean, dispat
 | **chart** | The CLI verb table (`czap help`). Map of bearings — what verb does what. | `czap help` header; dispatch unknown-command error |
 | **rig** *(verb)* | Install or wire infrastructure into place. "Rig the pre-commit hook" = link `.git/hooks/pre-commit`. Distinct from the noun "rig" (the boundary system). | `czap doctor` git-hook hint |
 | **stow** | Pack a downloaded artifact into its expected location. "Stow the browsers" = `pnpm exec playwright install`. "Stow Rust" = install via rustup. | `czap doctor` Playwright / WASM hints |
-| **quay** | The release surface. Where a package ties up before shipping to npm. *Reserved register* — defined here so it can be wired consistently when added to the ship / publish flow. | (future) |
+| **quay** | The release surface. Where a package ties up before shipping to npm. "Tied up at the quay" = packed and capsule written, awaiting `npm publish`. | `czap help` "Ship out (quay-side, release)" section + release hint |
 | **bearing** *(verdict sense)* | One of `ok` / `warn` / `fail` for a probe; or `ready` / `caution` / `blocked` for the rolled-up verdict. Same metaphor as the boundary-bearing primitive — a discrete state projected from a continuous signal. | `czap doctor` receipts |
 
 ## Drift check

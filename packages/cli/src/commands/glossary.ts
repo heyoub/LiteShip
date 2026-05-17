@@ -185,7 +185,8 @@ const ENTRIES: readonly GlossaryEntry[] = [
     term: 'quay',
     category: 'translator-note',
     definition:
-      'The release surface. Where a package ties up before being shipped to npm. (Reserved register; not yet wired into CLI strings — added here so we can use it consistently when it lands.)',
+      'The release surface. Where a package ties up before being shipped to npm. "Tied up at the quay" = the package is packed and the capsule is written, awaiting `npm publish`. Used in `czap help` "Ship out (quay-side, release)" and in the release-flow hint.',
+    seeAlso: ['gauntlet'],
   },
   {
     term: 'rig (verb)',

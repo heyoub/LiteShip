@@ -40,6 +40,7 @@ const MARITIME_TERMS: ReadonlyArray<{ term: string; pattern: RegExp }> = [
   { term: 'rig', pattern: /\b[Rr]ig (?:the|it|in)\b/ },
   { term: 'stow', pattern: /\b[Ss]tow\b/ },
   { term: 'bearing', pattern: /\b[Bb]earing\b/ },
+  { term: 'quay', pattern: /\b[Qq]uay\b/ },
 ];
 
 function walk(dir: string, ext: readonly string[] = ['.ts', '.mjs', '.sh']): string[] {
