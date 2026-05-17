@@ -53,4 +53,26 @@ describe('glossary command', () => {
       expect(['naming', 'primitive', 'translator-note']).toContain(e.category);
     }
   });
+
+  it('pretty mode emits formatted entries on stderr (covers prettyEntry: header + body + seeAlso line)', async () => {
+    const { exit, stderr } = await captureCli(() => glossary('boundary', { pretty: true }));
+    expect(exit).toBe(0);
+    // boundary has a definition and seeAlso list — exercises both the body
+    // branch and the seeAlso-non-empty arm of the prettyEntry ternary.
+    expect(stderr).toContain('boundary');
+    expect(stderr).toContain('(primitive)');
+    expect(stderr).toContain('see also:');
+    expect(stderr).toContain('bearing');
+  });
+
+  it('pretty mode handles an entry without seeAlso (covers the empty-seeAlso arm)', async () => {
+    // `gauntlet` has no seeAlso field — exercises the ternary's empty arm
+    // so prettyEntry's `seeAlso=''` path is hit at least once.
+    const { exit, stderr } = await captureCli(() => glossary('gauntlet', { pretty: true }));
+    expect(exit).toBe(0);
+    expect(stderr).toContain('gauntlet');
+    // No 'see also:' line for this entry.
+    const gauntletBlock = stderr.split('\n').slice(stderr.split('\n').findIndex((l) => l.includes('gauntlet'))).join('\n');
+    expect(gauntletBlock).not.toContain('see also:');
+  });
 });

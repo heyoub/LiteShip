@@ -20,4 +20,13 @@ describe('version command', () => {
     // pnpm may be null in some environments; just check the shape.
     expect(['string', 'object']).toContain(typeof receipt.pnpm);
   });
+
+  it('pretty mode writes a one-liner to stderr', async () => {
+    const { exit, stderr } = await captureCli(() => version({ pretty: true }));
+    expect(exit).toBe(0);
+    // Format: `czap <semver>  (Node <ver>, pnpm <ver-or-not-found>)\n`
+    expect(stderr).toMatch(/^czap \d+\.\d+\.\d+/);
+    expect(stderr).toContain('Node ' + process.versions.node);
+    expect(stderr).toMatch(/pnpm (\d+\.\d+|not found)/);
+  });
 });
