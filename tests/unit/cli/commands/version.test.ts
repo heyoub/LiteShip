@@ -29,4 +29,23 @@ describe('version command', () => {
     expect(stderr).toContain('Node ' + process.versions.node);
     expect(stderr).toMatch(/pnpm (\d+\.\d+|not found)/);
   });
+
+  it('receipt has pnpm=null when pnpm cannot be located on PATH', async () => {
+    // Covers probePnpmVersion's catch arm (spawnArgvCapture rejects with
+    // ENOENT) and the `!r` branch of the `if (!r || r.exitCode !== 0)`
+    // guard. Restoring PATH in finally so this can't leak to peers in
+    // the same worker — vitest isolates test files into separate worker
+    // processes so other files are unaffected regardless.
+    const origPath = process.env.PATH;
+    process.env.PATH = '/this-path-deliberately-has-no-pnpm-binary';
+    try {
+      const { exit, stdout } = await captureCli(() => version({ pretty: false }));
+      expect(exit).toBe(0);
+      const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+      expect(receipt.pnpm).toBeNull();
+    } finally {
+      if (origPath === undefined) delete process.env.PATH;
+      else process.env.PATH = origPath;
+    }
+  });
 });

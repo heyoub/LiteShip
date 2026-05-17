@@ -40,4 +40,44 @@ describe('czap asset analyze', () => {
     const { exit } = await captureCli(() => run(['asset', 'analyze', 'intro-bed']));
     expect(exit).toBe(1);
   });
+
+  // The three projection arms in asset-analyze.ts:67–69 are
+  // `if (projection === 'beat') ... else if (projection === 'onset') ...
+  // else (waveform)`. The beat case has its own happy-path test above.
+  // These two cover the remaining arms so all three projections run
+  // at least once. Also runs each command twice in series — the second
+  // call exercises the tryReadCache hit arm at line 48 (`cached: true`
+  // receipt). Capsule compile is shared across the file so the cost
+  // is paid once.
+  it('runs onset projection and emits markerCount; the second call comes from cache', async () => {
+    const r = await spawnArgv('pnpm', ['run', 'capsule:compile'], { stdio: ['ignore', 'pipe', 'pipe'] });
+    if (r.exitCode !== 0) throw new Error(`capsule:compile failed: ${r.stderrTail}`);
+
+    const first = await captureCli(() => run(['asset', 'analyze', 'intro-bed', '--projection=onset', '--force']));
+    expect(first.exit).toBe(0);
+    const firstReceipt = JSON.parse(first.stdout.trim().split('\n').pop()!);
+    expect(firstReceipt.projection).toBe('onset');
+    expect(typeof firstReceipt.markerCount).toBe('number');
+    expect(firstReceipt.cached).toBe(false);
+
+    const second = await captureCli(() => run(['asset', 'analyze', 'intro-bed', '--projection=onset']));
+    expect(second.exit).toBe(0);
+    const secondReceipt = JSON.parse(second.stdout.trim().split('\n').pop()!);
+    expect(secondReceipt.cached).toBe(true);
+  }, 120_000);
+
+  it('runs waveform projection and emits markerCount (covers the else arm)', async () => {
+    const r = await spawnArgv('pnpm', ['run', 'capsule:compile'], { stdio: ['ignore', 'pipe', 'pipe'] });
+    if (r.exitCode !== 0) throw new Error(`capsule:compile failed: ${r.stderrTail}`);
+
+    const { exit, stdout } = await captureCli(() =>
+      run(['asset', 'analyze', 'intro-bed', '--projection=waveform', '--force']),
+    );
+    expect(exit).toBe(0);
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    expect(receipt.projection).toBe('waveform');
+    expect(typeof receipt.markerCount).toBe('number');
+    // waveform computes 512 bins, so markerCount should be > 0.
+    expect(receipt.markerCount).toBeGreaterThan(0);
+  }, 120_000);
 });
