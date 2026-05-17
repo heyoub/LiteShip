@@ -148,6 +148,27 @@ describe('doctor command', () => {
     expect(v).toMatch(/^\d+\.\d+\.\d+/);
   });
 
+  it('readCliVersion resolves the CLI package.json by module location, not cwd', () => {
+    // Regression for PR #3 Codex P2: previously `readCliVersion()` only
+    // looked at `<cwd>/packages/cli/package.json` and `<cwd>/package.json`,
+    // so `czap version` reported '0.0.0-unknown' whenever the user wasn't
+    // sitting in the repo root (e.g., a globally-installed czap run from
+    // an arbitrary project). The fix tries `import.meta.url`-relative
+    // first, so this test asserts the version resolves correctly even
+    // when cwd has no @czap-shaped package.json on disk.
+    const origCwd = process.cwd();
+    const stranger = mkdtempSync(join(tmpdir(), 'czap-version-cwd-'));
+    try {
+      process.chdir(stranger);
+      const v = readCliVersion();
+      expect(v).toMatch(/^\d+\.\d+\.\d+/);
+      expect(v).not.toBe('0.0.0-unknown');
+    } finally {
+      process.chdir(origCwd);
+      rmSync(stranger, { recursive: true, force: true });
+    }
+  });
+
   it('--fix mode produces a `fixed` array when nothing was actually broken (no-op)', async () => {
     // With a healthy workspace, --fix finds nothing to repair and emits
     // the receipt without a `fixed` field (only present when fixes ran).
@@ -176,12 +197,21 @@ describe('doctor command', () => {
     }
   });
 
-  it('readCliVersion falls back to "0.0.0-unknown" outside a known workspace', () => {
+  it('readCliVersion ignores a cwd whose package.json is not @czap/cli (module-relative wins)', () => {
+    // After PR #3 Codex P2 fix, module-relative resolution finds the
+    // real @czap/cli package.json regardless of cwd. The cwd-relative
+    // candidates are only consulted as a fallback. This test asserts
+    // that the module-relative resolution dominates: a non-@czap/cli
+    // package.json under cwd does NOT shadow the real version.
     const tmp = mkdtempSync(join(tmpdir(), 'czap-version-'));
     try {
       writeFileSync(resolve(tmp, 'package.json'), JSON.stringify({ name: 'not-czap', version: '9.9.9' }));
       const v = readCliVersion(tmp);
-      expect(v).toBe('0.0.0-unknown');
+      // Real CLI version, NOT '9.9.9' (the imposter under cwd) or
+      // '0.0.0-unknown' (the pre-fix bug behavior).
+      expect(v).toMatch(/^\d+\.\d+\.\d+/);
+      expect(v).not.toBe('9.9.9');
+      expect(v).not.toBe('0.0.0-unknown');
     } finally {
       rmSync(tmp, { recursive: true, force: true });
     }

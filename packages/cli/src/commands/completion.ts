@@ -34,12 +34,12 @@ export const TOP_LEVEL_VERBS = [
 ] as const;
 
 /** Subcommands by verb. Empty array means the verb takes no subcommand. */
-export const SUBCOMMANDS: Readonly<Record<string, readonly string[]>> = {
+export const SUBCOMMANDS = {
   scene: ['compile', 'render', 'verify', 'dev'],
   asset: ['analyze', 'verify'],
   capsule: ['inspect', 'list', 'verify'],
   completion: ['bash', 'zsh', 'fish'],
-};
+} as const satisfies Readonly<Record<string, readonly string[]>>;
 
 type Shell = 'bash' | 'zsh' | 'fish';
 
@@ -49,10 +49,10 @@ function isShell(s: string | undefined): s is Shell {
 
 function bashScript(): string {
   const verbs = TOP_LEVEL_VERBS.join(' ');
-  const sceneSubs = SUBCOMMANDS['scene']!.join(' ');
-  const assetSubs = SUBCOMMANDS['asset']!.join(' ');
-  const capsuleSubs = SUBCOMMANDS['capsule']!.join(' ');
-  const shellSubs = SUBCOMMANDS['completion']!.join(' ');
+  const sceneSubs = SUBCOMMANDS.scene.join(' ');
+  const assetSubs = SUBCOMMANDS.asset.join(' ');
+  const capsuleSubs = SUBCOMMANDS.capsule.join(' ');
+  const shellSubs = SUBCOMMANDS.completion.join(' ');
   return `# czap bash completion
 _czap_completion() {
   local cur prev
@@ -75,10 +75,10 @@ complete -F _czap_completion czap
 
 function zshScript(): string {
   const verbs = TOP_LEVEL_VERBS.join(' ');
-  const sceneSubs = SUBCOMMANDS['scene']!.join(' ');
-  const assetSubs = SUBCOMMANDS['asset']!.join(' ');
-  const capsuleSubs = SUBCOMMANDS['capsule']!.join(' ');
-  const shellSubs = SUBCOMMANDS['completion']!.join(' ');
+  const sceneSubs = SUBCOMMANDS.scene.join(' ');
+  const assetSubs = SUBCOMMANDS.asset.join(' ');
+  const capsuleSubs = SUBCOMMANDS.capsule.join(' ');
+  const shellSubs = SUBCOMMANDS.completion.join(' ');
   return `# czap zsh completion
 _czap() {
   local -a verbs

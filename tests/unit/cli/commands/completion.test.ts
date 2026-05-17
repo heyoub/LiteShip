@@ -62,7 +62,10 @@ describe('completion command', () => {
   it('drift: every dispatch case is in TOP_LEVEL_VERBS', () => {
     const dispatchPath = resolve(__dirname, '../../../../packages/cli/src/dispatch.ts');
     const source = readFileSync(dispatchPath, 'utf8');
-    const matches = source.matchAll(/^\s{4}case '([a-z][a-z-]*)':/gm);
+    // Indentation-agnostic so formatting-only changes in dispatch.ts
+    // (e.g., a reformat that re-indents the switch) can't trip this
+    // routing-drift guard.
+    const matches = source.matchAll(/^\s*case '([a-z][a-z-]*)':/gm);
     const dispatchVerbs = [...matches].map((m) => m[1]!);
     for (const v of dispatchVerbs) {
       expect(TOP_LEVEL_VERBS, `dispatch verb '${v}' missing from TOP_LEVEL_VERBS`).toContain(v);

@@ -24,7 +24,7 @@ Naming for prose: [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 - `pnpm exec czap glossary [term]` -- Ontology lookup (maritime register + product naming).
 - `pnpm exec czap completion <bash|zsh|fish>` -- Emit a shell tab-completion script.
 
-JSON receipts on every CLI command (`status`, `command`, `timestamp`, plus command-specific fields). Pretty TTY summaries go to stderr only; receipts on stdout stay machine-clean.
+JSON receipts on every CLI command (`status`, `command`, `timestamp`, plus command-specific fields). Pretty TTY summaries go to stderr only; receipts on stdout stay machine-clean. Exception: `czap completion <shell>` emits a raw shell-completion script to stdout (no JSON wrapper) so `eval "$(czap completion bash)"` works directly.
 
 ## Package Structure
 

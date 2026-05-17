@@ -188,7 +188,7 @@ Pre-1.0 break policy is aggressive on purpose. If an API or internal contract is
 
 ```bash
 pnpm install
-pnpm setup                # first-run aggregate: rig-check + build + test
+pnpm setup                # first-run aggregate: doctor → install → build → test
 # ...or step through it yourself:
 pnpm run doctor           # preflight rig-check (Node, pnpm, build, hooks)
 pnpm run build

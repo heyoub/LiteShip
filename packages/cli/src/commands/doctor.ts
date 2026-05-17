@@ -12,8 +12,9 @@
  * @module
  */
 
-import { existsSync, readFileSync, rmSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readFileSync, rmSync, statSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { arrow, bearingGlyph, color, colorEnabled, header } from '../lib/ansi.js';
 import { spawnArgv, spawnArgvCapture } from '../lib/spawn.js';
 import { emit } from '../receipts.js';
@@ -194,12 +195,44 @@ function probeBuilt(cwd: string, pkg: string, label: string): DoctorCheck {
   return { id: `${pkg}.built`, label, status: 'ok', detail: 'dist/ laid' };
 }
 
+/**
+ * Resolve the `.git/hooks` directory for `cwd`. In a normal clone this is
+ * just `<cwd>/.git/hooks`; in a git worktree, `<cwd>/.git` is a file
+ * containing `gitdir: <path>` pointing at the real gitdir (which itself
+ * contains a `commondir` file pointing at the main repo's gitdir, where
+ * the hooks live). Returns null when no `.git` is present.
+ */
+function resolveGitHooksDir(cwd: string): string | null {
+  const dotGit = resolve(cwd, '.git');
+  if (!existsSync(dotGit)) return null;
+  try {
+    if (statSync(dotGit).isDirectory()) {
+      return resolve(dotGit, 'hooks');
+    }
+    // Worktree: `.git` is a file like `gitdir: /abs/path/.git/worktrees/foo`.
+    const pointer = readFileSync(dotGit, 'utf8');
+    const m = pointer.match(/^gitdir:\s*(.+)\s*$/m);
+    if (!m) return null;
+    const worktreeGitDir = resolve(cwd, m[1]!);
+    // Hooks live in the main repo's gitdir, not the per-worktree one.
+    // `commondir` (relative to worktreeGitDir) points there.
+    const commondirFile = resolve(worktreeGitDir, 'commondir');
+    if (existsSync(commondirFile)) {
+      const commondir = resolve(worktreeGitDir, readFileSync(commondirFile, 'utf8').trim());
+      return resolve(commondir, 'hooks');
+    }
+    return resolve(worktreeGitDir, 'hooks');
+  } catch {
+    return null;
+  }
+}
+
 function probeGitHooks(cwd: string): DoctorCheck {
-  const gitDir = resolve(cwd, '.git');
-  if (!existsSync(gitDir)) {
+  const hooksDir = resolveGitHooksDir(cwd);
+  if (hooksDir === null) {
     return { id: 'git.hooks', label: 'git hooks', status: 'ok', detail: 'no .git (not a worktree)' };
   }
-  const hook = resolve(cwd, '.git/hooks/pre-commit');
+  const hook = resolve(hooksDir, 'pre-commit');
   if (!existsSync(hook)) {
     return {
       id: 'git.hooks',
@@ -432,9 +465,30 @@ export async function doctor(
   return exitCode;
 }
 
-/** Read the @czap/cli package version off disk. Used by `czap version`. */
-export function readCliVersion(cwd: string = process.cwd()): string {
-  const candidates = [resolve(cwd, 'packages/cli/package.json'), resolve(cwd, 'package.json')];
+/**
+ * Read the @czap/cli package version off disk. Used by `czap version`.
+ *
+ * Resolution order:
+ *   1. Module-relative — `packages/cli/{src,dist}/commands/doctor.{ts,js}`
+ *      back to the cli package.json is `../../package.json` either way.
+ *      Works from any cwd (monorepo subdir, global install, external project).
+ *   2. cwd-relative fallback — for test seams that pass a synthesized cwd
+ *      containing a `packages/cli/package.json` or root `package.json`.
+ *
+ * Returns `'0.0.0-unknown'` only if every candidate fails (unusual: would
+ * indicate the package was unpacked without its own package.json).
+ */
+export function readCliVersion(cwd?: string): string {
+  const candidates: string[] = [];
+  try {
+    const moduleDir = dirname(fileURLToPath(import.meta.url));
+    candidates.push(resolve(moduleDir, '../../package.json'));
+  } catch {
+    // import.meta.url may be unavailable in odd contexts; fall through.
+  }
+  const root = cwd ?? process.cwd();
+  candidates.push(resolve(root, 'packages/cli/package.json'));
+  candidates.push(resolve(root, 'package.json'));
   for (const path of candidates) {
     if (!existsSync(path)) continue;
     const pkg = JSON.parse(readFileSync(path, 'utf8')) as { name?: string; version?: string };

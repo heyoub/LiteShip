@@ -10,7 +10,7 @@ pnpm add -D @czap/cli
 
 ## Verbs
 
-Every command emits a JSON receipt to stdout. Pretty TTY summaries (when stderr is a terminal) go to stderr only — receipts on stdout stay machine-clean so they pipe cleanly into `jq`, MCP, or CI annotators.
+Every command emits a JSON receipt to stdout. Pretty TTY summaries (when stderr is a terminal) go to stderr only — receipts on stdout stay machine-clean so they pipe cleanly into `jq`, MCP, or CI annotators. Exception: `czap completion <shell>` writes a raw shell-completion script to stdout (no JSON wrapper) so `eval "$(czap completion bash)"` and friends work directly.
 
 ### Cast off (dev experience)
 

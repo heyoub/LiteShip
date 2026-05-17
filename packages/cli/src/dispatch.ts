@@ -103,7 +103,7 @@ export async function run(argv: readonly string[]): Promise<number> {
       await start(httpFlag !== undefined ? { http: httpFlag } : {});
       return 0;
     }
-    default:
+    default: {
       // No command + no flags: friendly help on stdout, exit 0.
       if (rawCmd === undefined) return help();
       // Friendly text first; structured JSON envelope last so machine
@@ -114,6 +114,7 @@ export async function run(argv: readonly string[]): Promise<number> {
       );
       process.stderr.write(JSON.stringify({ error: 'unknown_command', command: rawCmd }) + '\n');
       return 1;
+    }
   }
 }
 

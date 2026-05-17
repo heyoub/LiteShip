@@ -4,7 +4,7 @@
  * compiles. Because doctor now reads the list dynamically out of root
  * package.json's `build` script, this test pins that contract:
  *
- *   1. The build script string must still parse via /packages\/(\w+)/g.
+ *   1. The build script string must still parse via /packages\/([\w-]+)/g.
  *   2. The parsed list must equal exactly the 14 published, compiled
  *      packages currently in `packages/` (excluding `_spine`, which is
  *      type-only and has no dist/).

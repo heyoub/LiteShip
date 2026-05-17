@@ -117,30 +117,27 @@ describe('czap dispatch — dev-experience verbs', () => {
  * stay uncovered or be exercised via dedicated smoke tests instead.
  */
 describe('czap dispatch — verb-routing coverage', () => {
-  it('`czap scene compile` (no arg) routes to sceneCompile (which throws or exits non-zero — either proves dispatch ran)', async () => {
-    // sceneCompile('') tries to import a file at cwd; the dynamic import
-    // rejects with ERR_UNSUPPORTED_DIR_IMPORT. Catching the rejection
-    // is fine — what we're asserting is that dispatch entered the
-    // sceneCompile arm, which it did to even reach the throw.
-    let dispatched = false;
-    try {
-      await captureCli(() => run(['scene', 'compile']));
-      dispatched = true;
-    } catch {
-      dispatched = true;
-    }
-    expect(dispatched).toBe(true);
+  it('`czap scene compile <bad-path>` routes to sceneCompile, which emits a scene.compile error receipt', async () => {
+    // Use a deliberately-bad absolute path so sceneCompile hits its
+    // `existsSync` guard at scene-compile.ts:40 and emits a clean
+    // emitError shape — proves dispatch routed to sceneCompile (not
+    // the scene-unknown-sub fallback whose error.command would be
+    // 'scene', not 'scene.compile').
+    const { exit, stderr } = await captureCli(() => run(['scene', 'compile', '/__czap-nonexistent__.ts']));
+    expect(exit).toBe(1);
+    const lines = stderr.trim().split('\n').filter((l) => l.startsWith('{'));
+    const err = JSON.parse(lines[lines.length - 1]!);
+    expect(err.command).toBe('scene.compile');
+    expect(err.error).toMatch(/scene file not found/);
   });
 
-  it('`czap scene verify` (no arg) routes to sceneVerify', async () => {
-    let dispatched = false;
-    try {
-      await captureCli(() => run(['scene', 'verify']));
-      dispatched = true;
-    } catch {
-      dispatched = true;
-    }
-    expect(dispatched).toBe(true);
+  it('`czap scene verify <bad-path>` routes to sceneVerify, which emits a scene.verify error receipt', async () => {
+    const { exit, stderr } = await captureCli(() => run(['scene', 'verify', '/__czap-nonexistent__.ts']));
+    expect(exit).toBe(1);
+    const lines = stderr.trim().split('\n').filter((l) => l.startsWith('{'));
+    const err = JSON.parse(lines[lines.length - 1]!);
+    expect(err.command).toBe('scene.verify');
+    expect(err.error).toMatch(/scene not found/);
   });
 
   it('`czap scene unknown-sub` emits an emitError shape', async () => {

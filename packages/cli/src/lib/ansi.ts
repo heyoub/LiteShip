@@ -15,7 +15,11 @@
 
 /** Detect color support for a given stream. Defaults to stderr. */
 export function colorEnabled(stream: NodeJS.WritableStream & { isTTY?: boolean } = process.stderr): boolean {
-  if (process.env.NO_COLOR !== undefined && process.env.NO_COLOR !== '') return false;
+  // NO_COLOR spec (https://no-color.org): the variable is treated as "set"
+  // when present, regardless of value — including the empty string. Earlier
+  // versions of this check excluded `NO_COLOR=`, which silently re-enabled
+  // color when callers exported the variable with no value.
+  if (process.env.NO_COLOR !== undefined) return false;
   if (process.env.FORCE_COLOR !== undefined && process.env.FORCE_COLOR !== '0') return true;
   if (process.env.CI === 'true' || process.env.CI === '1') return true;
   return Boolean(stream.isTTY);
