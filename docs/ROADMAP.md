@@ -75,36 +75,51 @@ Keep enforcing the same source of truth everywhere:
 Success condition:
 - local truth, CI truth, and release/package truth stop drifting
 
-### 4. Raise `@czap/cli` coverage back to package defaults
+## Completed Since Last Revision (2026-05-17)
 
-v0.1.0 introduced ADR-0011 ShipCapsule and its CLI surface (`czap ship`,
-`czap verify`) under publish-day time pressure. The orchestrator
-`packages/cli/src/commands/ship.ts` (subprocess-style) is excluded from
-coverage matching the existing `bin.ts` / `http-server.ts` pattern, but
-the supporting modules — `capsules/ship-emit.ts`, `commands/ship-verify.ts`,
-`ship-manifest.ts` — landed with sub-85% coverage and dragged the
-`@czap/cli` aggregate below the package default. A temporary override
-in `scripts/merge-coverage.ts` PACKAGE_THRESHOLD_OVERRIDES lowers the
-cli thresholds (lines 75 / statements 75 / functions 78 / branches 60).
+**Epic #4 — `@czap/cli` coverage back to package defaults (closed 2026-05-17).**
+The v0.1.0 ShipCapsule slice landed with sub-85% coverage on
+`capsules/ship-emit.ts` (44%), `commands/ship-verify.ts` (82%), and
+`ship-manifest.ts` (75%), and the per-package override at
+`scripts/merge-coverage.ts` PACKAGE_THRESHOLD_OVERRIDES.cli temporarily
+lowered the thresholds to 75/75/78/60. Post-v0.1.1 (v0.1.2 candidate)
+closed the gap across eight targeted commits on
+`claude/improve-dev-experience-7f0as`:
 
-v0.1.1 work:
-- write targeted unit tests for the four-verdict verify paths beyond
-  the existing `ship-verify-verdicts.test.ts` set
-- exercise `capsules/ship-emit.ts` schema-validation + write-path
-  branches directly (currently only invoked through `commands/ship.ts`)
-- add `parseTar` PAX-header + GNU long-name edge cases in
-  `tests/unit/ship-manifest.test.ts` (currently only the common case
-  is exercised)
-- when the cli aggregate is back above 85/85/85/75, remove the
-  `cli` entry from PACKAGE_THRESHOLD_OVERRIDES and update the
-  drift guard at `tests/unit/meta/coverage-config.test.ts`
+- `ship-emit-branches.test.ts` lifted `capsules/ship-emit.ts` to 100%
+  across lines/branches/functions/statements via direct invocation of
+  the capsule (schema validation, write-path, invariant `check` arms)
+  rather than going through the orchestrator.
+- `ship-manifest.test.ts` gained hand-crafted tar fixtures covering
+  parseTar PAX header (typeflag `'x'`), GNU long-name (typeflag `'L'`),
+  and USTAR `prefix`-field path-reassembly arms — lifting line coverage
+  from 75.63% → 95.79%, branches 51.06% → 76.59%.
+- `ship-verify-verdicts.test.ts` extended with the `--capsule=` equals
+  form, three exit-1 emitError arms (missing tarball, tarball-not-found,
+  capsule-not-found), the recompute-failure → Incomplete arm, the
+  third `ShipCapsuleDecodeError` tag (`invalid_shape`), and the
+  individual mismatch arms tested in isolation — lifting `ship-verify.ts`
+  to 96.82% lines / 91.66% branches.
+- New `tests/unit/cli/commands/ship.test.ts` + `verify.test.ts` filled
+  the canonical-location gap so every dispatch verb has a peer smoke
+  test alongside doctor/glossary/help/completion/version.
+- New `tests/unit/cli/idempotency.test.ts` covered the `tryReadCache`
+  force-bypass and file-present arms without going through the
+  ffmpeg-gated integration test.
+- glossary/version pretty-mode tests covered `prettyEntry` and the
+  stderr one-liner.
+- dispatch-sugar gained a verb-routing block covering scene / asset /
+  capsule case arms + the `verify` (no-args Unknown verdict) path.
+- asset-analyze covered the `onset` + `waveform` projections + the
+  cache-hit arm.
 
-Success condition:
-- `@czap/cli` aggregate ≥ package defaults again
-- override removed from `scripts/merge-coverage.ts`
-- drift guard reverted to "core + web only" pattern
+Final cli aggregate: 85.64% lines / 85.06% statements / 86.84% functions
+/ 77.06% branches — all above the 85/85/85/75 package default. The
+`cli` override was removed from `scripts/merge-coverage.ts` and the
+drift guard at `tests/unit/meta/coverage-config.test.ts` was tightened
+to assert the override no longer appears.
 
-## Completed Since Last Revision (2026-04-23)
+## Earlier Completed Work (2026-04-23)
 
 Spec `2026-04-23-capsule-factory-video-stack-design.md` shipped with 5 atomic phases:
 

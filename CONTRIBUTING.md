@@ -12,11 +12,13 @@ git clone https://github.com/heyoub/LiteShip.git
 cd LiteShip
 pnpm install
 
-# Build everything
-pnpm run build
+# First-run shake-down: rig-check + build + test
+pnpm setup
 
-# Fast inner loop (~75s)
-pnpm test
+# Or step through it manually:
+pnpm run doctor       # preflight rig-check (Node, pnpm, build, hooks)
+pnpm run build        # tsc --build across 14 packages
+pnpm test             # fast inner loop (~75s)
 
 # Full release-grade gate (~22min)
 pnpm run gauntlet:full
@@ -25,6 +27,33 @@ pnpm run gauntlet:full
 Required versions: Node.js 22+, pnpm 10+. The repo runs on Windows + Linux,
 PowerShell + bash. WebKit/Firefox/Chromium tests run on the system Playwright
 install (`pnpm exec playwright install` if needed).
+
+## Dev-experience shortcuts
+
+Discoverable verbs at the workspace root:
+
+```bash
+pnpm setup            # rig-check + build + test (first-run aggregate)
+pnpm run doctor       # preflight rig-check, emits JSON receipt + TTY summary
+pnpm dev              # vitest in watch mode (the inner loop)
+pnpm run clean        # dry-dock: wipe dist/, coverage/, reports/, .tsbuildinfo
+pnpm scripts          # categorized index of every dev script
+pnpm run glossary     # look up a LiteShip / CZAP term (e.g. `pnpm run glossary boundary`)
+pnpm fix              # prettier --write + eslint --fix
+```
+
+The CLI mirrors the same surface once built:
+
+```bash
+czap help             # usage
+czap doctor           # preflight rig-check
+czap version          # czap + Node + pnpm versions
+czap glossary cast    # ontology lookup
+czap describe         # AI-facing schema (also: --format=mcp)
+```
+
+`pnpm install` runs a postinstall banner with the same hints. Suppress it
+in CI with `CI=1` (already standard) or `CZAP_QUIET_INSTALL=1`.
 
 ## The gauntlet, your release gate
 

@@ -35,6 +35,36 @@ const COMMANDS: readonly CommandDescriptor[] = [
     outputs: 'DescribeReceipt',
   },
   {
+    name: 'doctor',
+    description: 'Preflight rig-check: Node, pnpm, workspace, build artifacts, git hooks',
+    args: {},
+    outputs: 'DoctorReceipt',
+  },
+  {
+    name: 'help',
+    description: 'Print usage text (also: --help, -h, no args)',
+    args: {},
+    outputs: 'plain text on stdout (not a receipt)',
+  },
+  {
+    name: 'version',
+    description: 'Print czap, Node, and pnpm versions (also: --version, -V)',
+    args: {},
+    outputs: 'VersionReceipt',
+  },
+  {
+    name: 'glossary',
+    description: 'Look up a LiteShip / CZAP term from the prose register',
+    args: { term: 'string (optional, omit for full list)' },
+    outputs: 'GlossaryReceipt',
+  },
+  {
+    name: 'completion',
+    description: 'Emit shell completion script (bash / zsh / fish) for sourcing into a shell rc',
+    args: { shell: "'bash' | 'zsh' | 'fish'" },
+    outputs: 'completion script on stdout (not a receipt)',
+  },
+  {
     name: 'scene.compile',
     description: 'Compile a scene capsule',
     args: { scene: 'string' },

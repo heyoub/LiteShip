@@ -63,7 +63,11 @@ export const coverageExclude = [
   // tested by the `czap ship --dry-run` flow that runs in every gauntlet
   // (package:smoke phase). The pure helpers it composes — ship-manifest.ts,
   // ship-capsule.ts, addressed-digest.ts — are unit-tested directly.
-  // Unit coverage of the subprocess wrapper itself is a v0.1.1 task.
+  // Unit coverage of the subprocess wrapper itself is a post-v0.1.1
+  // task: ROADMAP Epic #4 (closed 2026-05-17) covered the helpers
+  // composed by ship.ts (ship-emit, ship-manifest, ship-verify) but
+  // ship.ts itself stays excluded as long as it's pure orchestration
+  // of git + pnpm + npm subprocesses.
   'packages/cli/src/commands/ship.ts',
   // ffmpeg.ts (render-backend) spawns the system `ffmpeg` binary to encode
   // VideoFrameOutput streams to mp4. Coverage requires ffmpeg on PATH —

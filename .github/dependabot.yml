@@ -1,0 +1,55 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    groups:
+      runtime-minor-patch:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      dev-minor-patch:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+        patterns:
+          - '*'
+      typescript-stack:
+        patterns:
+          - typescript
+          - tsx
+          - tslib
+          - '@types/*'
+      vitest-stack:
+        patterns:
+          - vitest
+          - '@vitest/*'
+          - fast-check
+      lint-stack:
+        patterns:
+          - eslint
+          - '@typescript-eslint/*'
+          - prettier
+          - eslint-config-prettier
+      framework-stack:
+        patterns:
+          - vite
+          - astro
+          - '@astrojs/*'
+          - effect
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - ci

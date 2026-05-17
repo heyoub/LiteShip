@@ -8,10 +8,23 @@ Naming for prose: [docs/GLOSSARY.md](./docs/GLOSSARY.md).
 
 ## Commands
 
+### Build / test / typecheck
+
 - `pnpm run build` -- TypeScript build (`tsc --build` across 14 compiled packages; `@czap/_spine` is type-only)
-- `pnpm test` -- Run all tests (vitest; last green main: ~225 files / ~2942 tests — always trust local `pnpm test` output)
+- `pnpm test` -- Run all tests (vitest; last green main: ~241 files / ~3098 tests — always trust local `pnpm test` output)
 - `pnpm run typecheck` -- Type check without emit
 - `pnpm run bench` -- Run benchmarks (tinybench)
+
+### Dev experience (cast off / discovery)
+
+- `pnpm setup` -- Guided shakedown: doctor → install (if needed) → build → test. First-run aggregate.
+- `pnpm run doctor` (or `pnpm exec czap doctor`) -- Preflight rig check. JSON receipt + pretty TTY summary. Add `--fix` to auto-remediate the cheap cases (rebuild stale dist, link missing git hook), or `--ci` to fail on warnings.
+- `pnpm scripts` -- The deck plan: every npm script grouped by purpose.
+- `pnpm exec czap help` -- The chart: CLI verb table grouped by phase.
+- `pnpm exec czap glossary [term]` -- Ontology lookup (maritime register + product naming).
+- `pnpm exec czap completion <bash|zsh|fish>` -- Emit a shell tab-completion script.
+
+JSON receipts on every CLI command (`status`, `command`, `timestamp`, plus command-specific fields). Pretty TTY summaries go to stderr only; receipts on stdout stay machine-clean. Exception: `czap completion <shell>` emits a raw shell-completion script to stdout (no JSON wrapper) so `eval "$(czap completion bash)"` works directly.
 
 ## Package Structure
 

@@ -188,11 +188,16 @@ Pre-1.0 break policy is aggressive on purpose. If an API or internal contract is
 
 ```bash
 pnpm install
+pnpm setup                # first-run aggregate: doctor → install → build → test
+# ...or step through it yourself:
+pnpm run doctor           # preflight rig-check (Node, pnpm, build, hooks)
 pnpm run build
 pnpm run typecheck
 pnpm test                 # unit + component + property + integration (~75s)
 pnpm run gauntlet:full    # full release-grade gate (~22min)
 ```
+
+Dev-loop ergonomics: `pnpm dev` (vitest watch), `pnpm run clean` (dry-dock), `pnpm scripts` (categorized script index), `pnpm run glossary <term>` (CLI lookup into the ontology), `pnpm fix` (prettier + eslint --fix). The CLI mirrors the same surface: `czap doctor`, `czap help`, `czap version`, `czap glossary cast`.
 
 Other lanes (`test:vite`, `test:astro`, `test:tailwind`, `test:e2e`, `test:e2e:stress`, `test:e2e:stream-stress`, `test:redteam`, `package:smoke`, `bench`, `bench:gate`, `bench:reality`, `coverage:merge`, `report:runtime-seams`, `audit`, `report:satellite-scan`, `feedback:verify`) are documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
