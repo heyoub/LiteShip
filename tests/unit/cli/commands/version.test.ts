@@ -2,11 +2,17 @@
  * Unit tests for `czap version`. Emits a JSON receipt with czap, Node,
  * and (best-effort) pnpm versions.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { version } from '../../../../packages/cli/src/commands/version.js';
 import { captureCli } from '../../../integration/cli/capture.js';
 
 describe('version command', () => {
+  afterEach(() => {
+    // Any test in this file that calls vi.stubEnv(...) gets a guaranteed
+    // restore. Idempotent: a no-op for tests that didn't stub.
+    vi.unstubAllEnvs();
+  });
+
   it('emits a receipt with czap + node versions', async () => {
     const { exit, stdout } = await captureCli(() => version({ pretty: false }));
     expect(exit).toBe(0);
@@ -33,19 +39,12 @@ describe('version command', () => {
   it('receipt has pnpm=null when pnpm cannot be located on PATH', async () => {
     // Covers probePnpmVersion's catch arm (spawnArgvCapture rejects with
     // ENOENT) and the `!r` branch of the `if (!r || r.exitCode !== 0)`
-    // guard. Restoring PATH in finally so this can't leak to peers in
-    // the same worker — vitest isolates test files into separate worker
-    // processes so other files are unaffected regardless.
-    const origPath = process.env.PATH;
-    process.env.PATH = '/this-path-deliberately-has-no-pnpm-binary';
-    try {
-      const { exit, stdout } = await captureCli(() => version({ pretty: false }));
-      expect(exit).toBe(0);
-      const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
-      expect(receipt.pnpm).toBeNull();
-    } finally {
-      if (origPath === undefined) delete process.env.PATH;
-      else process.env.PATH = origPath;
-    }
+    // guard. vi.stubEnv auto-restores via the file-level afterEach,
+    // so this can't leak to peers even if the test itself throws.
+    vi.stubEnv('PATH', '/this-path-deliberately-has-no-pnpm-binary');
+    const { exit, stdout } = await captureCli(() => version({ pretty: false }));
+    expect(exit).toBe(0);
+    const receipt = JSON.parse(stdout.trim().split('\n').pop()!);
+    expect(receipt.pnpm).toBeNull();
   });
 });

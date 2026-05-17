@@ -16,6 +16,8 @@ export interface IdempotencyCtx {
   readonly command: string;
   readonly inputs: Record<string, unknown>;
   readonly force: boolean;
+  /** Cache root. Defaults to `process.cwd()` when omitted. */
+  readonly cwd?: string;
 }
 
 /** Hash the command + inputs into a short hex slug. */
@@ -26,22 +28,22 @@ export function hashInputs(ctx: IdempotencyCtx): string {
   return createHash('sha256').update(canonical).digest('hex').slice(0, 16);
 }
 
-/** Path where the cached receipt lives (relative to cwd). */
-export function cachePath(hash: string): string {
-  return join('.czap', 'cache', `${hash}.json`);
+/** Path where the cached receipt lives (relative to `cwd`, or process cwd). */
+export function cachePath(hash: string, cwd: string = process.cwd()): string {
+  return join(cwd, '.czap', 'cache', `${hash}.json`);
 }
 
 /** Return a cached receipt for this invocation, or null if absent / forced. */
 export function tryReadCache(ctx: IdempotencyCtx): unknown | null {
   if (ctx.force) return null;
-  const path = cachePath(hashInputs(ctx));
+  const path = cachePath(hashInputs(ctx), ctx.cwd);
   if (!existsSync(path)) return null;
   return JSON.parse(readFileSync(path, 'utf8')) as unknown;
 }
 
 /** Write the fresh receipt to the cache for future identical invocations. */
 export function writeCache(ctx: IdempotencyCtx, receipt: unknown): void {
-  const path = cachePath(hashInputs(ctx));
+  const path = cachePath(hashInputs(ctx), ctx.cwd);
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, JSON.stringify(receipt, null, 2), 'utf8');
 }

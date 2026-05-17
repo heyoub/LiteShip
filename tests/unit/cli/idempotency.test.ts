@@ -4,8 +4,8 @@
  * end-to-end via `czap scene render`, but it's gated on ffmpeg being
  * on $PATH and skips on bare CI images — leaving tryReadCache's force
  * arm and the file-present arm un-covered in the merged report. These
- * unit tests close that gap with a tmpdir-based fixture so they run
- * unconditionally.
+ * unit tests close that gap with a tmpdir-via-ctx-cwd fixture so they
+ * run unconditionally and never mutate process.cwd().
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
@@ -20,25 +20,22 @@ import {
   type IdempotencyCtx,
 } from '../../../packages/cli/src/idempotency.js';
 
-const baseCtx = (overrides: Partial<IdempotencyCtx> = {}): IdempotencyCtx => ({
-  command: 'test:cmd',
-  inputs: { a: 1, b: 'two' },
-  force: false,
-  ...overrides,
-});
-
 describe('cli idempotency helpers', () => {
   let workDir: string;
-  let prevCwd: string;
+
+  const baseCtx = (overrides: Partial<IdempotencyCtx> = {}): IdempotencyCtx => ({
+    command: 'test:cmd',
+    inputs: { a: 1, b: 'two' },
+    force: false,
+    cwd: workDir,
+    ...overrides,
+  });
 
   beforeEach(() => {
     workDir = mkdtempSync(join(tmpdir(), 'czap-idem-'));
-    prevCwd = process.cwd();
-    process.chdir(workDir);
   });
 
   afterEach(() => {
-    process.chdir(prevCwd);
     rmSync(workDir, { recursive: true, force: true });
   });
 
@@ -49,29 +46,33 @@ describe('cli idempotency helpers', () => {
     expect(h1).toMatch(/^[0-9a-f]{16}$/);
   });
 
-  it('cachePath always lives under .czap/cache/<hash>.json (relative to cwd)', () => {
+  it('cachePath joins under <cwd>/.czap/cache/<hash>.json', () => {
+    const p = cachePath('deadbeefdeadbeef', workDir);
+    expect(p).toBe(join(workDir, '.czap', 'cache', 'deadbeefdeadbeef.json'));
+  });
+
+  it('cachePath defaults to process.cwd() when no cwd is given (back-compat)', () => {
     const p = cachePath('deadbeefdeadbeef');
-    expect(p).toBe(join('.czap', 'cache', 'deadbeefdeadbeef.json'));
+    expect(p).toBe(join(process.cwd(), '.czap', 'cache', 'deadbeefdeadbeef.json'));
   });
 
   it('tryReadCache returns null when force=true even if a cached receipt exists', () => {
     const ctx = baseCtx();
     writeCache(ctx, { hello: 'world' });
-    expect(existsSync(cachePath(hashInputs(ctx)))).toBe(true);
+    expect(existsSync(cachePath(hashInputs(ctx), workDir))).toBe(true);
     // Negative control: same ctx without force returns the cached receipt.
     expect(tryReadCache(ctx)).toEqual({ hello: 'world' });
-    // The force arm: should bypass even though the file is on disk.
+    // The force arm: bypass even though the file is on disk.
     expect(tryReadCache(baseCtx({ force: true }))).toBeNull();
   });
 
   it('tryReadCache returns the parsed JSON receipt when the cache file is present', () => {
     const ctx = baseCtx();
-    // writeCache creates the directory tree.
     writeCache(ctx, { command: 'test:cmd', status: 'ok', value: 42 });
     const cached = tryReadCache(ctx);
     expect(cached).toEqual({ command: 'test:cmd', status: 'ok', value: 42 });
     // Bytes are pretty-printed JSON, not CBOR — sanity check the format on disk.
-    const raw = readFileSync(cachePath(hashInputs(ctx)), 'utf8');
+    const raw = readFileSync(cachePath(hashInputs(ctx), workDir), 'utf8');
     expect(raw).toContain('\n  "command": "test:cmd"');
   });
 
@@ -93,9 +94,9 @@ describe('cli idempotency helpers', () => {
 
   it('manually-placed cache file (no writeCache) is still picked up by tryReadCache', () => {
     const ctx = baseCtx({ inputs: { z: 99 } });
-    const path = cachePath(hashInputs(ctx));
+    const path = cachePath(hashInputs(ctx), workDir);
     mkdirSync(join(workDir, '.czap', 'cache'), { recursive: true });
-    writeFileSync(join(workDir, path), JSON.stringify({ manual: true }), 'utf8');
+    writeFileSync(path, JSON.stringify({ manual: true }), 'utf8');
     expect(tryReadCache(ctx)).toEqual({ manual: true });
   });
 });
